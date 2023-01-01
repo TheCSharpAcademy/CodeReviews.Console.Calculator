@@ -27,7 +27,6 @@ static string GetValidOption()
     return op;
 }
 
-
 // Declare variables and then initialize to zero.
 double num1 = 0; double num2 = 0;
 
