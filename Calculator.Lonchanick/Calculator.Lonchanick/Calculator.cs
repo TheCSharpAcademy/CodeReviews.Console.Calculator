@@ -12,19 +12,28 @@ namespace Calculator.Lonchanick
     {
         JsonWriter writer;
         public Calculator() {
+            string path = "D:/.NET FOLDER/C# ACADEMY/Lonchanick9427.Calculator" +
+                "/Calculator.Lonchanick/Calculator.Lonchanick/bin/Debug/net6.0/calculatorlog.json";
 
-            StreamWriter logFile = File.CreateText("calculatorlog.json");
-            logFile.AutoFlush = true;
-            writer = new JsonTextWriter(logFile);
-            writer.Formatting = Formatting.Indented;
+            if(File.Exists(path)) 
+            {
+                StreamWriter logFile = File.AppendText(path);
+                logFile.AutoFlush = true;
+                writer = new JsonTextWriter(logFile);
+                writer.Formatting = Formatting.Indented;
+                writer.WriteStartArray();
+            }
+
+            
+            /*
             writer.WriteStartObject();
             writer.WritePropertyName("Operations");
-            writer.WriteStartArray();
+            writer.WriteStartArray();*/
         }
         public void Finish()
         {
             writer.WriteEndArray();
-            writer.WriteEndObject();
+            //writer.WriteEndObject();
             writer.Close();
         }
         public void DoOperation(double num1, double num2, string op)
