@@ -23,12 +23,13 @@ namespace Calculator.Lonchanick
         public static string GetValidOption()
         {
             //this mean option can't be more than one char and an option that is not allowed
-            string ops = "asmd";
+            string ops = "asmdlx";
             string op = "";
             bool wh = true;
             while (wh)
             {
                 op = Console.ReadLine();
+                if(op=="") { op = "_"; }
                 if (ops.IndexOf(op[0]) == -1 | op.Length > 1)
                     Console.WriteLine("No es una opcion valida try again: ");
                 else
