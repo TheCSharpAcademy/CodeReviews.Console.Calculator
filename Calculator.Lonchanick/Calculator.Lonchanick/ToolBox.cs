@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace Calculator.Lonchanick
+﻿namespace Calculator.Lonchanick
 {
     public class ToolBox
     {
