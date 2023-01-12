@@ -4,7 +4,7 @@ namespace Habit_Logger
 {
     class Program
     {
-        static DatabaseManagement database = new DatabaseManagement(userRecord);
+        static DatabaseManagement database = new();
         static void Main(string[] args)
         {
             MainMenu();
@@ -14,59 +14,63 @@ namespace Habit_Logger
             Console.Clear();
             bool endApp = false;
 
-            while(!endApp)
+            while (!endApp)
             {
                 Console.Clear();
                 Console.WriteLine("\n-------------------------------\n");
                 Console.WriteLine("\tHABIT LOGGER 1.0");
                 Console.WriteLine("\n-------------------------------\n");
-                Console.WriteLine($"CURRENT RECORD: {userRecord.Replace("_"," ").ToUpper()} RECORD!");
+                Console.WriteLine($"CURRENT RECORD: {database.Name.Replace("_", " ").ToUpper()} RECORD!");
                 Console.WriteLine("\nType 0 to Close Application.");
                 Console.WriteLine("Type 1 to View All Records.");
                 Console.WriteLine("Type 2 to Insert Records.");
                 Console.WriteLine("Type 3 to Delete Records.");
                 Console.WriteLine("Type 4 to Update Records.");
+                Console.WriteLine("Type 5 to see your record REPORT. ");
                 Console.WriteLine("-------------------------------");
-                Console.WriteLine("Type 5 to CREATE YOUR HABIT LOGGER !");
+                Console.WriteLine("Type 6 to CREATE YOUR HABIT LOGGER !");
                 Console.WriteLine("-------------------------------\n");
-                 
+
                 Console.Write("Your option: ");
 
 
-                string commandInput = Console.ReadLine();
+                string? commandInput = Console.ReadLine();
 
-                switch(commandInput)
+                switch (commandInput)
                 {
                     case "0":
                         Console.WriteLine("\nGoodbye!\n");
-                        Thread.Sleep(2000);
+                        Thread.Sleep(1500);
                         endApp = true;
                         Environment.Exit(0);
                         break;
                     case "1":
-                        database.GetAllRecords(userRecord);
+                        database.GetAllRecords(database.Name);
                         break;
-                    case "2":                        
-                        database.Insert(userRecord);
+                    case "2":
+                        database.Insert(database.Name);
                         break;
                     case "3":
-                        database.Delete(userRecord);
+                        database.Delete(database.Name);
                         break;
                     case "4":
-                        database.Update(userRecord);
+                        database.Update(database.Name);
                         break;
                     case "5":
-                         
+                        database.Report(database.Name);
+                        break;
+                    case "6":
+
 
                         Console.Clear();
                         Console.Write("Name of habit you want to track: ");
 
-                        string newHabit = Console.ReadLine();
+                        string? newHabit = Console.ReadLine();
 
-                        while(newHabit == null)
+                        while (newHabit == null)
                         {
-                        Console.Write("Invalid input please try again: ");
-                        newHabit = Console.ReadLine();
+                            Console.Write("Invalid input please try again: ");
+                            newHabit = Console.ReadLine();
                         }
                         newHabit = newHabit.Replace(" ", "_");
 
@@ -74,18 +78,18 @@ namespace Habit_Logger
                         Console.WriteLine("Only in quantity (Distance, Quantity, Calories, Laps, e.g.)");
                         Console.Write("Name of the the value you want to track: ");
 
-                        string newUserValue = Console.ReadLine();
+                        string? newUserValue = Console.ReadLine();
 
-                        while(newUserValue == null)
+                        while (newUserValue == null)
                         {
-                        Console.Write("Invalid input please try again: ");
-                        newUserValue = Console.ReadLine();
+                            Console.Write("Invalid input please try again: ");
+                            newUserValue = Console.ReadLine();
                         }
 
                         newUserValue = newUserValue.Replace(" ", "_");
- 
 
-                        userRecord = database.CreateNewRecord(newHabit, newUserValue);                
+
+                        database.Name = database.CreateNewRecord(newHabit, newUserValue);
 
                         MainMenu();
                         break;
@@ -93,7 +97,7 @@ namespace Habit_Logger
                         Console.WriteLine("\nInvalid Command. Please type a number from 0 to 5.\n");
                         MainMenu();
                         break;
-                } 
+                }
             }
         }
     }
