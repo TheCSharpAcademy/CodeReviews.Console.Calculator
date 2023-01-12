@@ -47,25 +47,6 @@ namespace Calculator.Lonchanick
             calc.CloseLog();
         }
 
-        static void ShowCurrentOperations()
-        {
-            string path = "D:/.NET FOLDER/C# ACADEMY/Lonchanick9427.Calculator" +
-                "/Calculator.Lonchanick/Calculator.Lonchanick/bin/Debug/net6.0/calculatorlog.json";
-
-            if(File.Exists(path)) 
-            { 
-                string content = File.ReadAllText(path);
-                Console.WriteLine(content);
-            } else 
-            { 
-                Console.WriteLine("Error: File does not exist! (But it was just created!");
-                StreamWriter logFile = File.CreateText("calculatorlog.json");
-                logFile.AutoFlush = true;
-                logFile.Close();
-            }
-
-        }
-
         static void Main(string[] args)
         {
             //JsonSerializer();
