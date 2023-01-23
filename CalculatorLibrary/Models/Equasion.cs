@@ -12,4 +12,15 @@ public class Equasion
     required public string Operation { get; set; }
     public double Result { get; set; } = double.NaN;
 
+    public override string ToString()
+    {
+        var sign = Operation switch
+        {
+            "Add" => '+',
+            "Subtract" => '-',
+            "Multiply" => '*',
+            "Divide" => '/'
+        };
+        return $"{A} {sign} {B} = {Result}";
+    }
 }
