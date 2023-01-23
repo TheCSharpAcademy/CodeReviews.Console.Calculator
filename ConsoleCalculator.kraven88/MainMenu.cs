@@ -10,6 +10,7 @@ internal static class MainMenu
 {
     internal static void SelectionScreen(Calculator calculator)
     {
+        GreetingMessage();
         var calc = calculator;
         var isRunning = true;
 
@@ -22,20 +23,17 @@ internal static class MainMenu
                 '2' => PreviousEquasions(calc),
                 'q' => false,
             };
-
         }
-
     }
 
 
     private static bool NewEquasion(Calculator calculator)
     {
         var nextEquasion = true;
-        var counter = 0;  // Number of times the Calculator has been used
 
         while (nextEquasion)
         {
-
+            Console.Clear();
             // Declare variables and initialize with zero;
             var numText1 = "";
             var numText2 = "";
@@ -81,8 +79,8 @@ internal static class MainMenu
                     Console.WriteLine("This operation will result in mathematical error.\n");
                 else
                 {
-                    counter++;
-                    Console.WriteLine($"Your result: {result:0.##}. You used the Calculator {CountFormatter(counter)}\n");
+                    calculator.counter++;
+                    Console.WriteLine($"Your result: {result:0.##}. You used the Calculator {CountFormatter(calculator.counter)}\n");
                 }
             }
             catch (Exception ex)
@@ -105,11 +103,17 @@ internal static class MainMenu
 
     private static bool PreviousEquasions(Calculator calculator)
     {
+        Console.Clear();
         Console.WriteLine("List of previous equasions");
         Console.WriteLine("--------------------------");
         foreach (var eq in calculator.equasions)
         {
             Console.WriteLine(eq);
+        }
+        Console.WriteLine("\nType 'delete' to clear the list, or any key to go back\n");
+        if (Console.ReadLine()!.ToUpper() == "DELETE")
+        {
+            calculator.DeleteEquasions();
         }
 
         return true;
@@ -128,6 +132,7 @@ internal static class MainMenu
 
     private static void DisplayMenuItems()
     {
+        Console.Clear();
         Console.WriteLine("What would you like to do?");
         Console.WriteLine("\t1 - New equasion");
         Console.WriteLine("\t2 - Previous equasions");
