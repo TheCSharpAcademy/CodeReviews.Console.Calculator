@@ -7,6 +7,7 @@ internal class Program
     private static void Main(string[] args)
     {
         var endApp = false;
+        var counter = 0;  // Number of times the Calculator has been used
         var calculator = new Calculator();
 
         // Display title as the C# console calculator app;
@@ -59,7 +60,11 @@ internal class Program
 
                 if (double.IsNaN(result))
                     Console.WriteLine("This operation will result in mathematical error.\n");
-                else Console.WriteLine($"Your result: {result:0.##}\n");
+                else
+                {
+                    counter++;
+                    Console.WriteLine($"Your result: {result:0.##}. You used the Calculator {CountFormatter(counter)}\n");
+                }
             }
             catch (Exception ex)
             {
@@ -80,5 +85,12 @@ internal class Program
         calculator.Finish();
 
         return;
+    }
+
+    private static string CountFormatter(int count)
+    {
+        var output = $"{count} time";
+        if (count > 1) output += "s";
+        return output;
     }
 }
