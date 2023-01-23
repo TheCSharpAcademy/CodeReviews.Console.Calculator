@@ -1,66 +1,60 @@
-﻿using Newtonsoft.Json;
-using System.Diagnostics;
+﻿using CalculatorLibrary.Models;
+using Newtonsoft.Json;
 
 namespace CalculatorLibrary;
 
 public class Calculator
 {
-    JsonWriter writer;
+    List<Equasion> equasions = new();
+    string filePath = "CalculatorLog.json";
 
     public Calculator()
     {
-        var logFile = File.CreateText("calculatorLog.json");
-        logFile.AutoFlush= true;
-        writer = new JsonTextWriter(logFile);
-        writer.Formatting = Formatting.Indented;
-        writer.WriteStartObject();
-        writer.WritePropertyName("Operations");
-        writer.WriteStartArray();
+        if (File.Exists(filePath))
+        {
+            var json = File.ReadAllText(filePath);
+            equasions = JsonConvert.DeserializeObject<List<Equasion>>(json);
+        }
     }
     public double DoOperation(double num1, double num2, string operation)
     {
-        var result = double.NaN;
-        writer.WriteStartObject();
-        writer.WritePropertyName("Operand1");
-        writer.WriteValue(num1);
-        writer.WritePropertyName("Operand2");
-        writer.WriteValue(num2);
-        writer.WritePropertyName("Operation");
+        var eq = new Equasion()
+        {
+            A= num1,
+            B= num2,
+            Operation = operation switch
+            {
+                "a" => "Add",
+                "s" => "Subtract",
+                "m" => "Multiply",
+                "d" => "Divide"
+            }
+        };
 
         // Use switch statement to do the math;
         switch (operation)
         {
             case "a":
-                result = num1 + num2;
-                writer.WriteValue("Add");
+                eq.Result = num1 + num2;
                 break;
             case "s":
-                result = num1 - num2;
-                writer.WriteValue("Subtract");
+                eq.Result = num1 - num2;
                 break;
             case "m":
-                result = num1 * num2;
-                writer.WriteValue("Multiply");
+                eq.Result = num1 * num2;
                 break;
             case "d":
                 if (num2 != 0)
-                    result = num1 / num2;
-                    writer.WriteValue("Divide");
+                    eq.Result = num1 / num2;
                 break;
             default:
                 break;
         }
-        writer.WritePropertyName("Result");
-        writer.WriteValue(result);
-        writer.WriteEndObject();
 
-        return result;
-    }
+        equasions.Add(eq);
+        var equsionsJson = JsonConvert.SerializeObject(equasions);
+        File.WriteAllText(filePath, equsionsJson);
 
-    public void Finish()
-    {
-        writer.WriteEndArray();
-        writer.WriteEndObject();
-        writer.Close();
+        return eq.Result;
     }
 }
