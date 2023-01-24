@@ -89,7 +89,17 @@ internal class MainMenu
             Console.WriteLine("\ts - Subtract");
             Console.WriteLine("\tm - Multiply");
             Console.WriteLine("\td - Divide");
-            Console.Write("Your choice: ");
+
+            Console.WriteLine();
+            Console.WriteLine("\tp - A to the power of B");
+            Console.WriteLine("\tr - Ath root of B");
+
+            Console.WriteLine();
+            Console.WriteLine("\tsin - Sine of A");
+            Console.WriteLine("\tcos - Cosine of A and B");
+            Console.WriteLine("\ttg - Tangent of A and B");
+            Console.WriteLine("\tctg - Cotangent of A and B");
+            Console.Write("\nYour choice: ");
 
             var operation = Console.ReadLine()!.Trim();
 
@@ -141,7 +151,6 @@ internal class MainMenu
         Console.WriteLine("------------------------------");
 
         var selected = Console.ReadLine()!.ToUpper();
-        var number = double.Parse(selected.Substring(2));
         if (selected == "DELETE")
         {
             DataAccess.DeleteEquasions(equasions, filePath);

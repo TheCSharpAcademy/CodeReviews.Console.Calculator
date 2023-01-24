@@ -23,10 +23,16 @@ public class Calculator
             B= num2,
             Operation = operation switch
             {
-                "a" => "Add",
-                "s" => "Subtract",
-                "m" => "Multiply",
-                "d" => "Divide"
+                "a"     => "Add",
+                "s"     => "Subtract",
+                "m"     => "Multiply",
+                "d"     => "Divide",
+                "p"     => "Power",
+                "r"     => "Root",
+                "sin"   => "Sine",
+                "cos"   => "Cosine",
+                "tg"    => "Tangent",
+                "ctg"   => "Cotangent",
             }
         };
 
@@ -45,6 +51,24 @@ public class Calculator
             case "d":
                 if (num2 != 0)
                     eq.Result = num1 / num2;
+                break;
+            case "p":
+                eq.Result = Math.Pow(num1, num2);
+                break;
+            case "r":
+                eq.Result = Math.Pow(num2, 1.0 / num1);
+                break;
+            case "sin":
+                eq.Result = Math.Sin(num1);
+                break;
+            case "cos":
+                eq.Result = Math.Cos(num1);
+                break;
+            case "tg":
+                eq.Result = Math.Tan(num1);
+                break;
+            case "ctg":
+                eq.Result = (Math.Cos(num1) / Math.Sin(num1));
                 break;
             default:
                 break;

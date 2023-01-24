@@ -16,11 +16,21 @@ public class Equasion
     {
         var sign = Operation switch
         {
-            "Add" => '+',
-            "Subtract" => '-',
-            "Multiply" => '*',
-            "Divide" => '/'
+            "Add" => "+",
+            "Subtract" => "-",
+            "Multiply" => "*",
+            "Divide" => "/",
+            "Power" => "^",
+            "Root" => "\u221A",
+            "Sine" => "sin",
+            "Cosine" => "cos",
+            "Tangent" => "tg",
+            "Cotangent" => "ctg"
         };
+        if (sign.Length > 1)
+        {
+            return $"{sign} {A} = {Result:0.##}";
+        }
         return $"{A} {sign} {B} = {Result:0.##}";
     }
 }
