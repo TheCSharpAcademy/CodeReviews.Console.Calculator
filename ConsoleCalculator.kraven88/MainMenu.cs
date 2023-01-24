@@ -12,6 +12,7 @@ internal class MainMenu
     string filePath;
     List<Equasion> equasions;
     Calculator calc;
+    double memory = double.NaN;
 
     public MainMenu(string filePath, List<Equasion> equasions, Calculator calc)
     {
@@ -38,7 +39,7 @@ internal class MainMenu
     }
 
 
-    private bool NewEquasion(Calculator calculator)
+    private bool NewEquasion(Calculator calculator)     // This method remains largely unchanged from the original MS tutorial. On purpose. No, I don't like it.
     {
         var nextEquasion = true;
 
@@ -51,8 +52,13 @@ internal class MainMenu
             var result = 0.0;
 
             // Ask the user to type the first number;
-            Console.Write("Type a number, then press Enter: ");
+            Console.Write("Type a number, then press Enter. ");
+            if (double.IsNaN(memory) == false) 
+                Console.Write("Type MR to recall from memory. ");
+
             numText1 = Console.ReadLine()!.Trim();
+            if (numText1.ToUpper() == "MR")
+                numText1 = memory.ToString();
 
             var num1 = 0.0;
             while (double.TryParse(numText1, out num1) == false)
@@ -62,8 +68,13 @@ internal class MainMenu
             }
 
             // Ask the user to type the second number;
-            Console.Write("Type another number, then press Enter: ");
+            Console.Write("Type another number, then press Enter. ");
+            if (double.IsNaN(memory) == false)
+                Console.Write("Type MR to recall from memory. ");
+
             numText2 = Console.ReadLine()!.Trim();
+            if (numText2.ToUpper() == "MR")
+                numText2 = memory.ToString();
 
             var num2 = 0.0;
             while (double.TryParse(numText2, out num2) == false)
@@ -117,14 +128,27 @@ internal class MainMenu
         Console.Clear();
         Console.WriteLine("List of previous equasions");
         Console.WriteLine("--------------------------");
-        foreach (var eq in equasions)
+        for (int i = 0; i < equasions.Count; i++)
         {
-            Console.WriteLine(eq);
+            Console.WriteLine($"  {i + 1}.\t{equasions[i].ToString()}");
         }
-        Console.WriteLine("\nType 'delete' to clear the list, or any key to go back\n");
-        if (Console.ReadLine()!.ToUpper() == "DELETE")
+
+        Console.WriteLine("\nType to select the option:");
+        Console.WriteLine("  delete     - Deletes all previous equasions");
+        Console.WriteLine("  M+[number] - Add the result of a specific equasion to memory, ex: M+1");
+
+        Console.WriteLine("\n  Any other key to go back");
+        Console.WriteLine("------------------------------");
+
+        var selected = Console.ReadLine()!.ToUpper();
+        var number = double.Parse(selected.Substring(2));
+        if (selected == "DELETE")
         {
             DataAccess.DeleteEquasions(equasions, filePath);
+        }
+        else if (selected.StartsWith("M+") && int.TryParse(selected.Substring(2), out int i))
+        {
+            memory = equasions[i - 1].Result;
         }
 
         return true;

@@ -21,6 +21,6 @@ public class Equasion
             "Multiply" => '*',
             "Divide" => '/'
         };
-        return $"{A} {sign} {B} = {Result}";
+        return $"{A} {sign} {B} = {Result:0.##}";
     }
 }
