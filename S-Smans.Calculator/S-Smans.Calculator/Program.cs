@@ -1,4 +1,4 @@
-﻿using S_Smans.Calculator;
+﻿using CalculatorLibrary;
 
 bool endApp = false;
 Calculator calculator = new Calculator();
@@ -19,7 +19,7 @@ while (!endApp)
     while (!double.TryParse(numInput1, out cleanNum1))
     {
         Console.Write("This is not valid input. Please enter an integer value: ");
-        numInput1= Console.ReadLine();
+        numInput1 = Console.ReadLine();
     }
 
     Console.Write("Type another number, and then press Enter: ");
@@ -65,3 +65,5 @@ while (!endApp)
 
     Console.WriteLine("\n");
 }
+
+calculator.Finish();
