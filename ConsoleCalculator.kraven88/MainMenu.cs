@@ -107,8 +107,8 @@ internal class MainMenu
                     Console.WriteLine("This operation will result in mathematical error.\n");
                 else
                 {
-                    calculator.counter++;
-                    Console.WriteLine($"Your result: {result:0.##}. You used the Calculator {CountFormatter(calculator.counter)}\n");
+                    calculator.calulatorUseCount++;
+                    Console.WriteLine($"Your result: {result:0.##}. You used the Calculator {CountFormatter(calculator.calulatorUseCount)}\n");
                 }
             }
             catch (Exception ex)
