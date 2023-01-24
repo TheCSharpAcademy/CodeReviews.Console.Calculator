@@ -1,6 +1,6 @@
 ﻿namespace CalculatorLibrary.Models;
 
-public class Equasion
+public class Equation
 {
     required public double A { get; set; }
     required public double B { get; set; }

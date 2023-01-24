@@ -4,19 +4,19 @@ namespace CalculatorLibrary;
 
 public class Calculator
 {
-    private List<Equasion> equasions;
+    private List<Equation> equations;
     private string filePath;
     public int counter = 0;    // Number of times the Calculator has been used
 
-    public Calculator(List<Equasion> equasions, string filePath)
+    public Calculator(List<Equation> equations, string filePath)
     {
-        this.equasions= equasions;
+        this.equations= equations;
         this.filePath = filePath;
     }
 
     public double DoOperation(double num1, double num2, string operation)
     {
-        var eq = new Equasion()
+        var eq = new Equation()
         {
             A= num1,
             B= num2,
@@ -73,8 +73,8 @@ public class Calculator
                 break;
         }
 
-        equasions.Add(eq);
-        DataAccess.SaveEquasions(equasions, filePath);
+        equations.Add(eq);
+        DataAccess.SaveEquations(equations, filePath);
 
         return eq.Result;
     }

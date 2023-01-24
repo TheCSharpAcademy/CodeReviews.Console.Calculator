@@ -6,14 +6,14 @@ namespace ConsoleCalculator.kraven88;
 internal class MainMenu
 {
     string filePath;
-    List<Equasion> equasions;
+    List<Equation> equations;
     Calculator calc;
     double memory = double.NaN;
 
-    public MainMenu(string filePath, List<Equasion> equasions, Calculator calc)
+    public MainMenu(string filePath, List<Equation> equations, Calculator calc)
     {
         this.filePath = filePath;
-        this.equasions = equasions;
+        this.equations = equations;
         this.calc = calc;
     }
 
@@ -28,7 +28,7 @@ internal class MainMenu
             isRunning = TakeUserInput("12q") switch
             {
                 '1' => NewEquasion(calc),
-                '2' => PreviousEquasions(calc),
+                '2' => PreviousEquations(calc),
                 'q' => false,
             };
         }
@@ -119,7 +119,7 @@ internal class MainMenu
             Console.WriteLine("------------------------\n");
 
             // Wait for the user to respond before closing the app;
-            Console.Write("Do you want another equasion? (Y/N): ");
+            Console.Write("Do you want another equation? (Y/N): ");
             if (Console.ReadLine().ToLower() == "n")
                 nextEquasion = false;
 
@@ -129,20 +129,20 @@ internal class MainMenu
         return true;
     }
 
-    private bool PreviousEquasions(Calculator calculator)
+    private bool PreviousEquations(Calculator calculator)
     {
         Console.Clear();
-        Console.WriteLine("List of previous equasions");
+        Console.WriteLine("List of previous equations");
         Console.WriteLine("--------------------------");
 
-        for (int i = 0; i < equasions.Count; i++)
+        for (int i = 0; i < equations.Count; i++)
         {
-            Console.WriteLine($"  {i + 1}.\t{equasions[i].ToString()}");
+            Console.WriteLine($"  {i + 1}.\t{equations[i].ToString()}");
         }
 
         Console.WriteLine("\nType to select the option:");
-        Console.WriteLine("  delete     - Deletes all previous equasions");
-        Console.WriteLine("  M+[number] - Add the result of a specific equasion to memory, ex: M+1");
+        Console.WriteLine("  delete     - Deletes all previous equations");
+        Console.WriteLine("  M+[number] - Add the result of a specific equation to memory, ex: M+1");
 
         Console.WriteLine("\n  Any other key to go back");
         Console.WriteLine("------------------------------");
@@ -150,11 +150,11 @@ internal class MainMenu
         var selected = Console.ReadLine()!.ToUpper();
         if (selected == "DELETE")
         {
-            DataAccess.DeleteEquasions(equasions, filePath);
+            DataAccess.DeleteEquations(equations, filePath);
         }
         else if (selected.StartsWith("M+") && int.TryParse(selected.Substring(2), out int i))
         {
-            memory = equasions[i - 1].Result;
+            memory = equations[i - 1].Result;
         }
 
         return true;
@@ -175,8 +175,8 @@ internal class MainMenu
     {
         Console.Clear();
         Console.WriteLine("What would you like to do?");
-        Console.WriteLine("\t1 - New equasion");
-        Console.WriteLine("\t2 - Previous equasions");
+        Console.WriteLine("\t1 - New equation");
+        Console.WriteLine("\t2 - Previous equations");
         Console.WriteLine("\tQ - Quit");
         Console.WriteLine();
     }

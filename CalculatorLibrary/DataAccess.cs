@@ -5,28 +5,28 @@ namespace CalculatorLibrary;
 
 public static class DataAccess
 {
-    public static List<Equasion> LoadEquasions(string filePath)
+    public static List<Equation> LoadEquations(string filePath)
     {
-        var equasions = new List<Equasion>();
+        var equations = new List<Equation>();
 
         if (File.Exists(filePath))
         {
             var json = File.ReadAllText(filePath);
-            equasions = JsonConvert.DeserializeObject<List<Equasion>>(json);
+            equations = JsonConvert.DeserializeObject<List<Equation>>(json);
         }
 
-        return equasions;
+        return equations;
     }
 
-    public static void SaveEquasions(List<Equasion> equasions, string filePath)
+    public static void SaveEquations(List<Equation> equations, string filePath)
     {
-        var equsionsJson = JsonConvert.SerializeObject(equasions, Formatting.Indented);
+        var equsionsJson = JsonConvert.SerializeObject(equations, Formatting.Indented);
         File.WriteAllText(filePath, equsionsJson);
     }
 
-    public static void DeleteEquasions(List<Equasion> equasions, string filePath)
+    public static void DeleteEquations(List<Equation> equations, string filePath)
     {
-        equasions.Clear();
-        SaveEquasions(equasions, filePath);
+        equations.Clear();
+        SaveEquations(equations, filePath);
     }
 }

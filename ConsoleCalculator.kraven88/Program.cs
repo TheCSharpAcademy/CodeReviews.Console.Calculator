@@ -12,10 +12,10 @@ internal class Program
         Console.OutputEncoding = Encoding.Unicode;  // This makes the root sign to properly display in Console window.
 
         string filePath = "CalculatorLog.json";
-        List<Equasion> equasions = DataAccess.LoadEquasions(filePath);
-        Calculator calc = new Calculator(equasions, filePath);
+        List<Equation> equations = DataAccess.LoadEquations(filePath);
+        Calculator calc = new Calculator(equations, filePath);
 
-        var menu = new MainMenu(filePath, equasions, calc);
+        var menu = new MainMenu(filePath, equations, calc);
 
         menu.SelectionScreen();
     }
