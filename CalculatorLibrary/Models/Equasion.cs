@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace CalculatorLibrary.Models;
 
-namespace CalculatorLibrary.Models;
 public class Equasion
 {
     required public double A { get; set; }
@@ -21,16 +16,16 @@ public class Equasion
             "Multiply" => "*",
             "Divide" => "/",
             "Power" => "^",
-            "Root" => "\u221A",
+            "Root" => "√",
             "Sine" => "sin",
             "Cosine" => "cos",
             "Tangent" => "tg",
             "Cotangent" => "ctg"
         };
+
         if (sign.Length > 1)
-        {
-            return $"{sign} {A} = {Result:0.##}";
-        }
+            return $"{sign} {A}° = {Result:0.##}";
+
         return $"{A} {sign} {B} = {Result:0.##}";
     }
 }

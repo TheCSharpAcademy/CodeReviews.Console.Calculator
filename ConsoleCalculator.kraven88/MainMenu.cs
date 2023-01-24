@@ -1,12 +1,8 @@
 ﻿using CalculatorLibrary;
 using CalculatorLibrary.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ConsoleCalculator.kraven88;
+
 internal class MainMenu
 {
     string filePath;
@@ -37,9 +33,9 @@ internal class MainMenu
             };
         }
     }
-
-
-    private bool NewEquasion(Calculator calculator)     // This method remains largely unchanged from the original MS tutorial. On purpose. No, I don't like it.
+    
+    // This method remains largely unchanged from the original MS tutorial. On purpose. No, I don't like it.
+    private bool NewEquasion(Calculator calculator)     
     {
         var nextEquasion = true;
 
@@ -138,6 +134,7 @@ internal class MainMenu
         Console.Clear();
         Console.WriteLine("List of previous equasions");
         Console.WriteLine("--------------------------");
+
         for (int i = 0; i < equasions.Count; i++)
         {
             Console.WriteLine($"  {i + 1}.\t{equasions[i].ToString()}");
@@ -188,7 +185,8 @@ internal class MainMenu
     {
         Console.WriteLine("--------------------------------------------");
         Console.WriteLine("Wecome to Console Calculator App by kraven88");
-        Console.WriteLine("--------------------------------------------\n");
+        Console.WriteLine("--------------------------------------------");
+        Console.ReadLine();
     }
 
     private string CountFormatter(int count)

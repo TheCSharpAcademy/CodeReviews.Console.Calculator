@@ -1,5 +1,4 @@
 ﻿using CalculatorLibrary.Models;
-using Newtonsoft.Json;
 
 namespace CalculatorLibrary;
 
@@ -59,16 +58,16 @@ public class Calculator
                 eq.Result = Math.Pow(num2, 1.0 / num1);
                 break;
             case "sin":
-                eq.Result = Math.Sin(num1);
+                eq.Result = Math.Sin((num1 * (Math.PI * 2)) / 360);     // This converts degrees to radians, so that Math.Sin() will work as intended
                 break;
             case "cos":
-                eq.Result = Math.Cos(num1);
+                eq.Result = Math.Cos((num1 * (Math.PI * 2)) / 360);
                 break;
             case "tg":
-                eq.Result = Math.Tan(num1);
+                eq.Result = Math.Tan((num1 * (Math.PI * 2)) / 360);
                 break;
             case "ctg":
-                eq.Result = (Math.Cos(num1) / Math.Sin(num1));
+                eq.Result = (Math.Cos((num1 * (Math.PI * 2)) / 360) / Math.Sin((num1 * (Math.PI * 2)) / 360)); // Oddly, there is no Math method for cotangent
                 break;
             default:
                 break;
@@ -79,6 +78,4 @@ public class Calculator
 
         return eq.Result;
     }
-
-    
 }
