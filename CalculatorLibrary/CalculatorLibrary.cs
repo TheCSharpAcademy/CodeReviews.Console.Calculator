@@ -5,14 +5,16 @@ namespace CalculatorLibrary;
 
 public class Calculator
 {
+    private List<Equasion> equasions;
+    private string filePath;
     public int counter = 0;    // Number of times the Calculator has been used
-    private string filePath = "CalculatorLog.json";
-    public List<Equasion> equasions;
 
-    public Calculator()
+    public Calculator(List<Equasion> equasions, string filePath)
     {
-        equasions = LoadEquasions(filePath);
+        this.equasions= equasions;
+        this.filePath = filePath;
     }
+
     public double DoOperation(double num1, double num2, string operation)
     {
         var eq = new Equasion()
@@ -49,31 +51,10 @@ public class Calculator
         }
 
         equasions.Add(eq);
-        SaveEquasions(equasions);
+        DataAccess.SaveEquasions(equasions, filePath);
 
         return eq.Result;
     }
 
-    private List<Equasion> LoadEquasions(string filePath)
-    {
-        var equasions = new List<Equasion>();
-
-        if (File.Exists(filePath))
-        {
-            var json = File.ReadAllText(filePath);
-            equasions = JsonConvert.DeserializeObject<List<Equasion>>(json);
-        }
-
-        return equasions;
-    }
-    private void SaveEquasions(List<Equasion> equasions)
-    {
-        var equsionsJson = JsonConvert.SerializeObject(equasions, Formatting.Indented);
-        File.WriteAllText(filePath, equsionsJson);
-    }
-    public void DeleteEquasions()
-    {
-        equasions.Clear();
-        SaveEquasions(equasions);
-    }
+    
 }

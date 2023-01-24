@@ -1,4 +1,5 @@
 ﻿using CalculatorLibrary;
+using CalculatorLibrary.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,12 +7,22 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace ConsoleCalculator.kraven88;
-internal static class MainMenu
+internal class MainMenu
 {
-    internal static void SelectionScreen(Calculator calculator)
+    string filePath;
+    List<Equasion> equasions;
+    Calculator calc;
+
+    public MainMenu(string filePath, List<Equasion> equasions, Calculator calc)
+    {
+        this.filePath = filePath;
+        this.equasions = equasions;
+        this.calc = calc;
+    }
+
+    internal void SelectionScreen()
     {
         GreetingMessage();
-        var calc = calculator;
         var isRunning = true;
 
         while (isRunning)
@@ -27,7 +38,7 @@ internal static class MainMenu
     }
 
 
-    private static bool NewEquasion(Calculator calculator)
+    private bool NewEquasion(Calculator calculator)
     {
         var nextEquasion = true;
 
@@ -101,25 +112,25 @@ internal static class MainMenu
         return true;
     }
 
-    private static bool PreviousEquasions(Calculator calculator)
+    private bool PreviousEquasions(Calculator calculator)
     {
         Console.Clear();
         Console.WriteLine("List of previous equasions");
         Console.WriteLine("--------------------------");
-        foreach (var eq in calculator.equasions)
+        foreach (var eq in equasions)
         {
             Console.WriteLine(eq);
         }
         Console.WriteLine("\nType 'delete' to clear the list, or any key to go back\n");
         if (Console.ReadLine()!.ToUpper() == "DELETE")
         {
-            calculator.DeleteEquasions();
+            DataAccess.DeleteEquasions(equasions, filePath);
         }
 
         return true;
     }
 
-    private static char TakeUserInput(string availableOptions)
+    private char TakeUserInput(string availableOptions)
     {
         var input = Console.ReadKey(true).KeyChar;
         if (availableOptions.Contains(input) == false)
@@ -130,7 +141,7 @@ internal static class MainMenu
         return input;
     }
 
-    private static void DisplayMenuItems()
+    private void DisplayMenuItems()
     {
         Console.Clear();
         Console.WriteLine("What would you like to do?");
@@ -140,14 +151,14 @@ internal static class MainMenu
         Console.WriteLine();
     }
 
-    internal static void GreetingMessage()
+    internal void GreetingMessage()
     {
         Console.WriteLine("--------------------------------------------");
         Console.WriteLine("Wecome to Console Calculator App by kraven88");
         Console.WriteLine("--------------------------------------------\n");
     }
 
-    private static string CountFormatter(int count)
+    private string CountFormatter(int count)
     {
         var output = $"{count} time";
         if (count > 1) output += "s";
