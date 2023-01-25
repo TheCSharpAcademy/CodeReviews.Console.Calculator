@@ -10,11 +10,11 @@ internal class MainMenu
     Calculator calc;
     double memory = double.NaN;
 
-    public MainMenu(string filePath, List<Equation> equations, Calculator calc)
+    public MainMenu(string FilePath, List<Equation> Equations, Calculator Calc)
     {
-        this.filePath = filePath;
-        this.equations = equations;
-        this.calc = calc;
+        filePath = FilePath;
+        equations = Equations;
+        calc = Calc;
     }
 
     internal void SelectionScreen()
@@ -28,7 +28,7 @@ internal class MainMenu
             isRunning = TakeUserInput("12q") switch
             {
                 '1' => NewEquasion(calc),
-                '2' => PreviousEquations(calc),
+                '2' => PreviousEquations(),
                 'q' => false,
             };
         }
@@ -129,7 +129,7 @@ internal class MainMenu
         return true;
     }
 
-    private bool PreviousEquations(Calculator calculator)
+    private bool PreviousEquations()
     {
         Console.Clear();
         Console.WriteLine("List of previous equations");
@@ -137,7 +137,7 @@ internal class MainMenu
 
         for (int i = 0; i < equations.Count; i++)
         {
-            Console.WriteLine($"  {i + 1}.\t{equations[i].ToString()}");
+            Console.WriteLine($"  {i + 1}.\t{equations[i]}");
         }
 
         Console.WriteLine("\nType to select the option:");
