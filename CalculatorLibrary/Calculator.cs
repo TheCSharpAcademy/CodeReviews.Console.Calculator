@@ -6,7 +6,7 @@ public class Calculator
 {
     private List<Equation> equations;
     private string filePath;
-    public int counter = 0;    // Number of times the Calculator has been used
+    public int calulatorUseCount = 0;
 
     public Calculator(List<Equation> equations, string filePath)
     {
