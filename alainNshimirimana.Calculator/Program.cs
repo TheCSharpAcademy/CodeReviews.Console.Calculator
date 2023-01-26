@@ -1,9 +1,4 @@
-﻿using System;
-using System.Buffers;
-using System.Collections.Generic;
-using System.Security.Cryptography.X509Certificates;
-
-string response1;
+﻿string response1;
 string response2;
 double num1;
 double num2;
