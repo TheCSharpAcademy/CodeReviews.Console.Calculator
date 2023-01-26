@@ -1,13 +1,15 @@
 ﻿using System;
 using System.Buffers;
 using System.Collections.Generic;
+using System.Security.Cryptography.X509Certificates;
 
+string response1;
+string response2;
 double num1;
 double num2;
 double result;
 int numGames = 0;
 string selection;
-string operationType;
 
 Console.WriteLine(" CALCULATOR APP ");
 Console.WriteLine(" ------------- ");
@@ -26,7 +28,6 @@ void MainMenu()
     Console.WriteLine("M. Multiplication");
     Console.WriteLine("R. Square Root");
     Console.WriteLine("P. Raise to a power");
-    Console.WriteLine("V. View History (not functional at the moment)");
     Console.WriteLine("E. Exit");
     Console.Write("> ");
     Console.ResetColor();
@@ -47,21 +48,45 @@ void MainMenu()
     switch (selection)
     {
         case "A":
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.WriteLine("ADDITION");
+            Console.ResetColor();
+            Console.WriteLine("--------");
             Addition();
             break;
         case "S":
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.WriteLine("SUBTRACTION");
+            Console.ResetColor();
+            Console.WriteLine("--------");
             Subtraction();
             break;
         case "D":
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.WriteLine("DIVISION");
+            Console.ResetColor();
+            Console.WriteLine("--------");
             Division();
             break;
         case "M":
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.WriteLine("MULTIPLICATION");
+            Console.ResetColor();
+            Console.WriteLine("--------");
             Multiplication();
             break;
         case "R":
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.WriteLine("SQUARE ROOT");
+            Console.ResetColor();
+            Console.WriteLine("--------");
             SquareRoot();
             break;
         case "P":
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.WriteLine("POWER");
+            Console.ResetColor();
+            Console.WriteLine("--------");
             Power();
             break;
         default:
@@ -71,100 +96,118 @@ void MainMenu()
 
 void Power()
 {
-    operationType = "Power";
-    Console.ForegroundColor = ConsoleColor.Cyan;
-    Console.WriteLine("POWER");
-    Console.ResetColor();
-    Console.WriteLine("--------");
     Console.Write("Base: ");
-    num1 = double.Parse(Console.ReadLine());
+    response1 = Console.ReadLine();
     Console.Write("Power: ");
-    num2 = double.Parse(Console.ReadLine());
-    result = Math.Pow(num1, num2);
-    Console.WriteLine($"{num1} ^ {num2} = {result}");
-    numGames++;
-    MainMenu();
+    response2 = Console.ReadLine();
+    if (Double.TryParse(response1, out num1) && Double.TryParse(response2, out num2))
+    {
+        result = Math.Pow(num1, num2);
+        Console.WriteLine($"{num1} ^ {num2} = {result}");
+        numGames++;
+        MainMenu();
+    }
+    else
+    {
+        Console.WriteLine("ERROR!: Please input NUMBERS only");
+        Power();
+    }    
 }
 
 void SquareRoot()
 {
-    operationType = "Square Root";
-    Console.ForegroundColor = ConsoleColor.Cyan;
-    Console.WriteLine("SQUARE ROOT");
-    Console.ResetColor();
-    Console.WriteLine("--------");
     Console.Write("Enter a number: ");
-    num1 = double.Parse(Console.ReadLine());
-    result = Math.Sqrt(num1);
-    Console.WriteLine($"√{num1} = {result}");
-    numGames++;
-    MainMenu();
+    response1 = Console.ReadLine();
+    if (Double.TryParse(response1, out num1))
+    {
+        result = Math.Sqrt(num1);
+        Console.WriteLine($"√{num1} = {result}");
+        numGames++;
+        MainMenu();
+    }
+    else
+    {
+        Console.WriteLine("ERROR!: Please input a NUMBER");
+        SquareRoot();
+    }
 }
 
 void Multiplication()
 {
-    operationType = "Multiplication";
-    Console.ForegroundColor = ConsoleColor.Cyan;
-    Console.WriteLine("MULTIPLICATION");
-    Console.ResetColor();
-    Console.WriteLine("--------");
     Console.Write("First number: ");
-    num1 = double.Parse(Console.ReadLine());
+    response1 = Console.ReadLine();
     Console.Write("Second number: ");
-    num2 = double.Parse(Console.ReadLine());
-    result = num1 * num2;
-    Console.WriteLine($"{num1} × {num2} = {result:0.00}");
-    numGames++;
-    MainMenu();
+    response2 = Console.ReadLine();
+    if (Double.TryParse(response1, out num1) && Double.TryParse(response2, out num2))
+    {
+        result = num1 * num2;
+        Console.WriteLine($"{num1} × {num2} = {result}");
+        numGames++;
+        MainMenu();
+    }
+    else
+    {
+        Console.WriteLine("ERROR!: Please input NUMBERS only");
+        Multiplication();
+    }
 }
 
 void Division()
-{
-    operationType = "Division";
-    Console.ForegroundColor = ConsoleColor.Cyan;
-    Console.WriteLine("DIVISION");
-    Console.ResetColor();
-    Console.WriteLine("--------");
+{    
     Console.Write("First number: ");
-    num1 = double.Parse(Console.ReadLine());
+    response1 = Console.ReadLine();
     Console.Write("Second number: ");
-    num2 = double.Parse(Console.ReadLine());
-    result = num1 / num2;
-    Console.WriteLine($"{num1} ÷ {num2} = {result:0.00}");
-    numGames++;
-    MainMenu();
+    response2 = Console.ReadLine();
+    if (Double.TryParse(response1, out num1) && Double.TryParse(response2, out num2))
+    {
+        result = num1 / num2;
+        Console.WriteLine($"{num1} ÷ {num2} = {result}");
+        numGames++;
+        MainMenu();
+    }
+    else
+    {
+        Console.WriteLine("ERROR!: Please input NUMBERS only");
+        Division();
+    }
 }
 
 void Subtraction()
 {
-    operationType = "Subtraction";
-    Console.ForegroundColor = ConsoleColor.Cyan;
-    Console.WriteLine("SUBTRACTION");
-    Console.ResetColor();
-    Console.WriteLine("--------");
     Console.Write("First number: ");
-    num1 = double.Parse(Console.ReadLine());
+    response1 = Console.ReadLine();
     Console.Write("Second number: ");
-    num2 = double.Parse(Console.ReadLine());
-    result = num1 - num2;
-    Console.WriteLine($"{num1} - {num2} = {result:0.00}");
-    numGames++;
-    MainMenu();
+    response2 = Console.ReadLine();
+    if (Double.TryParse(response1, out num1) && Double.TryParse(response2, out num2))
+    {
+        result = num1 - num2;
+        Console.WriteLine($"{num1} - {num2} = {result}");
+        numGames++;
+        MainMenu();
+    }
+    else
+    {
+        Console.WriteLine("ERROR!: Please input NUMBERS only");
+        Subtraction();
+    }
 }
 
 void Addition()
 {
-    operationType = "Addition";
-    Console.ForegroundColor = ConsoleColor.Cyan;
-    Console.WriteLine("ADDITION");
-    Console.ResetColor();
-    Console.WriteLine("--------");
     Console.Write("First number: ");
-    num1 = double.Parse(Console.ReadLine());
+    response1 = Console.ReadLine();
     Console.Write("Second number: ");
-    num2 = double.Parse(Console.ReadLine());
-    result = num1 + num2;
-    Console.WriteLine($"{num1} + {num2} = {result:0.00}");
-    numGames++;
-    MainMenu();
+    response2 = Console.ReadLine();
+    if(Double.TryParse(response1, out num1) && Double.TryParse(response2, out num2))
+    {
+        result = num1 + num2;
+        Console.WriteLine($"{num1} + {num2} = {result}");
+        numGames++;
+        MainMenu();
+    }
+    else
+    {
+        Console.WriteLine("ERROR!: Please input NUMBERS only");
+        Addition();
+    }
 }
