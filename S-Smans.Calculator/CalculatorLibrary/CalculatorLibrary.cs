@@ -6,6 +6,9 @@ namespace CalculatorLibrary;
 public class Calculator
 {
     JsonWriter writer;
+    public int Iterations = 1;
+
+    List<History> history = new List<History>();
 
     public Calculator()
     {
@@ -55,6 +58,11 @@ public class Calculator
         writer.WritePropertyName("Result");
         writer.WriteValue(result);
         writer.WriteEndObject();
+
+        AddHistory(num1, num2, op, result);
+
+        Iterations++;
+
         return result;
     }
 
@@ -63,5 +71,44 @@ public class Calculator
         writer.WriteEndArray();
         writer.WriteEndObject();
         writer.Close();
+    }
+
+    public void AddHistory(double num1, double num2, string op, double result)
+    {
+        history.Add(new History
+        {
+            FirstOperand = num1,
+            SecondOperand = num2,
+            Operator = op,
+            Sum = result
+        });
+    }
+
+    public void DisplayHistory()
+    {
+        Console.Clear();
+        Console.WriteLine("------ History ------");
+        foreach (History calculation in history)
+        {
+            Console.WriteLine($"{calculation.FirstOperand} {OperatorSymbol(calculation.Operator)} {calculation.SecondOperand} = {calculation.Sum}");
+        }
+        Console.ReadLine();
+    }
+
+    private string OperatorSymbol(string op)
+    {
+        switch (op)
+        {
+            case "a":
+                return "+";
+            case "s":
+                return "-";
+            case "m":
+                return "*";
+            case "d":
+                return "/";
+            default:
+                return op;
+        }
     }
 }

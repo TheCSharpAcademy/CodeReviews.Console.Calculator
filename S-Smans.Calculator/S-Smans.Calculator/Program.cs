@@ -3,11 +3,14 @@
 bool endApp = false;
 Calculator calculator = new Calculator();
 
-Console.WriteLine("Console Calculator in C#\r");
-Console.WriteLine("------------------------\n");
 
 while (!endApp)
 {
+    Console.Clear();
+    Console.WriteLine("Console Calculator in C#\r");
+    Console.WriteLine("------------------------");
+    Console.WriteLine($"    {calculator.Iterations} calculation\n");
+
     string numInput1 = "";
     string numInput2 = "";
     double result = 0;
@@ -60,8 +63,11 @@ while (!endApp)
 
     Console.WriteLine("------------------------\n");
 
-    Console.Write("Press 'n' and Enter to close the app, or press any other key and Enter to continue: ");
-    if (Console.ReadLine() == "n") endApp = true;
+    Console.Write("Press 'n' and Enter to close the app, 'h' for history or press any other key and Enter to continue: ");
+    string input = Console.ReadLine();
+
+    if (input == "n") endApp = true;
+    if (input == "h") calculator.DisplayHistory();
 
     Console.WriteLine("\n");
 }
