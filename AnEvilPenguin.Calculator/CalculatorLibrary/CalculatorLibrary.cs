@@ -35,7 +35,7 @@ namespace CalculatorLibrary
 
         public double DoOperation(double num1, double num2, string op)
         {
-            double result = double.NaN; // Default value is "not-a-number" if an operation, such as division, could result in an error.
+            double result = double.NaN;
             writer.WriteStartObject();
             writer.WritePropertyName("Operand1");
             writer.WriteValue(num1);
