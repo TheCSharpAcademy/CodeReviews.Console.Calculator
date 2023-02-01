@@ -5,9 +5,9 @@ namespace CalculatorLibrary;
 public class Calculator
 {
     JsonWriter writer;
-    public int Iterations = 1;
-
-    List<History> history = new List<History>();
+    List<History> history = new();
+    Symbols symbol = new();
+    public int Iteration { get; set; }
 
     public Calculator()
     {
@@ -60,7 +60,7 @@ public class Calculator
 
         AddHistory(num1, num2, op, result);
 
-        Iterations++;
+        Iteration++;
 
         return result;
     }
@@ -78,36 +78,68 @@ public class Calculator
         {
             FirstOperand = num1,
             SecondOperand = num2,
-            Operator = op,
+            Operator = symbol.OperatorToSymbol(op),
             Sum = result
         });
     }
 
-    public void DisplayHistory()
+    public void History()
+    {
+        DisplayHistory();
+
+        Console.WriteLine("\nd - Delete history");
+        string input = Console.ReadLine();
+
+        switch (input)
+        {
+            case "d":
+                DeleteHistory();
+                break;
+        }
+    }
+
+    private void DisplayHistory()
     {
         Console.Clear();
         Console.WriteLine("------ History ------");
+
+        int i = 1;
         foreach (History calculation in history)
         {
-            Console.WriteLine($"{calculation.FirstOperand} {OperatorSymbol(calculation.Operator)} {calculation.SecondOperand} = {calculation.Sum}");
+            Console.WriteLine($"{i}) {calculation.FirstOperand} {calculation.Operator} {calculation.SecondOperand} = {calculation.Sum}");
+            i++;
         }
+    }
+
+    private void DeleteHistory()
+    {
+        history.Clear();
+        Console.Clear();
+        Console.WriteLine("History deleted!");
         Console.ReadLine();
     }
 
-    private string OperatorSymbol(string op)
+    public double PreviousResult()
     {
-        switch (op)
+        DisplayHistory();
+        Console.WriteLine("\nPick one of the numbers in the ordered list.\nThe sum will be used as an operand.");
+
+        double sum = 0;
+        string input = Console.ReadLine();
+
+        int cleanNum = 0;
+        while (int.TryParse(input, out cleanNum) && cleanNum > history.Count)
         {
-            case "a":
-                return "+";
-            case "s":
-                return "-";
-            case "m":
-                return "*";
-            case "d":
-                return "/";
-            default:
-                return op;
+            Console.WriteLine("Pick a number from the ordered list!");
+            input = Console.ReadLine();
         }
+
+        // Returns users requested sum from the history
+        return history[cleanNum - 1].Sum;
+    }
+
+    public int GetHistoryCount()
+    {
+        return history.Count;
     }
 }

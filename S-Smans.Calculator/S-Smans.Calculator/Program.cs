@@ -1,37 +1,62 @@
 ﻿using CalculatorLibrary;
 
 bool endApp = false;
-Calculator calculator = new Calculator();
-
+Calculator calculator = new();
 
 while (!endApp)
 {
     Console.Clear();
     Console.WriteLine("Console Calculator in C#\r");
     Console.WriteLine("------------------------");
-    Console.WriteLine($"    {calculator.Iterations} calculation\n");
+    Console.WriteLine($"Calculator used {calculator.Iteration} times\n");
 
     string numInput1 = "";
     string numInput2 = "";
     double result = 0;
 
-    Console.Write("Type a number, and then press Enter: ");
-    numInput1 = Console.ReadLine();
+    if (calculator.GetHistoryCount() == 0)
+    {
+        Console.Write("Type a number, and then press Enter: ");
+        numInput1 = Console.ReadLine();
+    }
+    else 
+    {
+        Console.WriteLine("Type a number or 'p' to get a previous result, and then press Enter: ");
+        numInput1 = Console.ReadLine();
+
+        if (numInput1 == "p")
+        {
+            numInput1 = calculator.PreviousResult().ToString();
+        }
+    }
 
     double cleanNum1 = 0;
     while (!double.TryParse(numInput1, out cleanNum1))
     {
-        Console.Write("This is not valid input. Please enter an integer value: ");
+        Console.Write("This is not valid input. Please enter a numeric value: ");
         numInput1 = Console.ReadLine();
     }
 
-    Console.Write("Type another number, and then press Enter: ");
-    numInput2 = Console.ReadLine();
+    if (calculator.GetHistoryCount() == 0) 
+    {
+        Console.Write("Type another number, and then press Enter: ");
+        numInput2 = Console.ReadLine();
+    }
+    else
+    {
+        Console.WriteLine("Type another number or 'p' to get a previous result, and then press Enter: ");
+        numInput2 = Console.ReadLine();
+
+        if (numInput2 == "p")
+        {
+            numInput2 = calculator.PreviousResult().ToString();
+        }
+    }
 
     double cleanNum2 = 0;
     while (!double.TryParse(numInput2, out cleanNum2))
     {
-        Console.Write("This is not valid input. Please enter an integer value: ");
+        Console.Write("This is not valid input. Please enter a numeric value: ");
         numInput2 = Console.ReadLine();
     }
 
@@ -63,11 +88,11 @@ while (!endApp)
 
     Console.WriteLine("------------------------\n");
 
-    Console.Write("Press 'n' and Enter to close the app, 'h' for history or press any other key and Enter to continue: ");
+    Console.Write("Press\n'n' close the app,\n'h' for history\nany other key to continue: ");
     string input = Console.ReadLine();
 
     if (input == "n") endApp = true;
-    if (input == "h") calculator.DisplayHistory();
+    if (input == "h") calculator.History();
 
     Console.WriteLine("\n");
 }
