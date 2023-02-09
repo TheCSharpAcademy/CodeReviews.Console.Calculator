@@ -1,5 +1,7 @@
-﻿using System.Runtime.CompilerServices;
+﻿var unusedVariable = 5;
 
-var unusedVariable = 5;
-
-void unusedMethod() { }
+UnusedMethod(unusedVariable);
+void UnusedMethod(int arg) 
+{
+    Console.WriteLine(arg);
+}
