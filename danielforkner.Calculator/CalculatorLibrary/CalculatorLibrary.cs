@@ -48,6 +48,10 @@ namespace CalculatorLibrary
                     writer.WriteValue("Divide");
                     break;
                 // Return text for an incorrect option entry.
+                case "e":
+                    result = Math.Pow(num1, num2);
+                    writer.WriteValue("Power");
+                    break;
                 default:
                     break;
             }
