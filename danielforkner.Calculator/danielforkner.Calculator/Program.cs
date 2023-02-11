@@ -11,13 +11,14 @@ namespace CalculatorProgram
             Console.WriteLine("\n----- Viewing Past Operations -----\n");
             bool viewingOperations = true;
             int idx = 0;
-            string selection = "";
-            if (calculator.Operations.Count == 0)
-            {
-                Console.WriteLine("You don't have any past operations to view!");
-            }
-            else while (viewingOperations)
+            while (viewingOperations)
                 {
+                    if (calculator.Operations.Count == 0)
+                    {
+                        Console.WriteLine("You don't have any past operations to view!");
+                        viewingOperations = false;
+                        continue;
+                    }
                     // operation
                     Console.WriteLine($"Operation: {calculator.Operations[idx].id}");
                     Console.WriteLine($"Operand1: {calculator.Operations[idx].Operand1}");
@@ -27,29 +28,40 @@ namespace CalculatorProgram
                     {
                         Console.WriteLine($"Success: {calculator.Operations[idx].Success}");
                     }
-                    Console.WriteLine("\n");
-                    Console.WriteLine($"{(calculator.Operations.Count > idx + 1 ? "Type next to move forward\n" : "")}{(idx != 0 ? "Type back for the previous operation\n" : "")}Type q to stop viewing operations");
+                    Console.Write("\n");
+                    Console.WriteLine($"{(calculator.Operations.Count > idx + 1 ? "Type next to move forward\n" : "")}{(idx != 0 ? "Type back for previous operation\n" : "")}Type delete to remove history\nType q to stop viewing operations");
                     Console.Write("Selection: ");
-                    selection = Console.ReadLine();
+                    string selection = Console.ReadLine();
+                    Console.Write("\n");
                     // convert to switch
-                    while (selection != "next".ToLower() && selection != "back".ToLower() && selection != "q")
+                    switch (selection.ToLower())
                     {
-                        Console.WriteLine("Your options are \"next\", \"back\", or \"q\"");
-                        selection = Console.ReadLine();
+                        case "next":
+                            if (calculator.Operations.Count <= idx + 1)
+                            {
+                                break;
+                            } else
+                            {
+                                idx++;
+                                break;
+                            }
+                        case "back":
+                            if (idx <= 0)
+                            {
+                                break;
+                            } else
+                            {
+                                idx--;
+                                break;
+                            }
+                        case "delete":
+                            calculator.Operations.RemoveAt(idx);
+                            idx--;
+                            break;
+                        case "q":
+                            viewingOperations = false;
+                            break;
                     }
-                    if (selection == "q")
-                    {
-                        viewingOperations = false;
-                    }
-                    else if (selection == "next")
-                    {
-                        idx++;
-                    }
-                    else
-                    {
-                        idx--;
-                    }
-
                 }
             Console.WriteLine("----- End View -----\n");
         }
@@ -70,18 +82,19 @@ namespace CalculatorProgram
                 Console.WriteLine("Information on this Calculator:");
                 Console.WriteLine($"Operations Performed: {calculator.OperationsCount}");
                 Console.WriteLine($"Highest Result: {(calculator.OperationsCount == 0 ? "N/A" : calculator.Operations.Max(op => op?.Result))}");
-                Console.WriteLine("\n");
+                Console.Write("\n");
                 Console.WriteLine("---\n");
 
                 Console.WriteLine("Calculator is open for business, what would you like to do?");
                 Console.WriteLine("\t1. Perform an operation");
                 Console.WriteLine("\t2. View past operations");
                 Console.Write("Your selection: ");
-
                 string selection = Console.ReadLine();
+                Console.Write("\n");
+
                 while (selection != "1" && selection != "2")
                 {
-                    Console.WriteLine("Choose 1 or 2: ");
+                    Console.Write("Choose 1 or 2: ");
                     selection = Console.ReadLine();
                 }
 
@@ -175,7 +188,7 @@ namespace CalculatorProgram
                 Console.Write("Press 'n' and Enter to close the app, or press any other key and Enter to continue: ");
                 if (Console.ReadLine() == "n") endApp = true;
 
-                Console.WriteLine("\n"); // Friendly linespacing.
+                Console.Write("\n"); // Friendly linespacing.
             }
             return;
             calculator.Finish();
