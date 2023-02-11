@@ -9,6 +9,7 @@ namespace CalculatorProgram
 
         class Calculation
         {
+            public int id { get; set; }
             public double Operand1 { get; set; }
             public double Operand2 { get; set; }
             public string Operation { get; set;}
@@ -31,11 +32,68 @@ namespace CalculatorProgram
                 string numInput1;
                 string numInput2;
 
-                Console.WriteLine("Information on this Calculator\r");
-                Console.WriteLine("---");
+                Console.WriteLine("Information on this Calculator:");
                 Console.WriteLine($"Operations Performed: {operationsCount}");
                 Console.WriteLine($"Highest Result: {(operationsCount == 0 ? "N/A" : operations.Max(op => op?.Result))}");
+                Console.WriteLine("\n");
                 Console.WriteLine("---\n");
+
+                Console.WriteLine("Calculator is open for business, what would you like to do?");
+                Console.WriteLine("\t1. Perform an operation");
+                Console.WriteLine("\t2. View past operations");
+                Console.Write("Your selection: ");
+
+                string selection = Console.ReadLine();
+                while (selection != "1" && selection != "2")
+                {
+                    Console.WriteLine("Choose 1 or 2: ");
+                    selection = Console.ReadLine();
+                }
+
+                if (selection == "2")
+                {
+                    Console.WriteLine("\n----- Viewing Past Operations -----\n");
+                    bool viewingOperations = true;
+                    int idx = 0;
+                    if (operations.Count == 0)
+                    {
+                        Console.WriteLine("You don't have any past operations to view!");
+                    } else while(viewingOperations)
+                        {
+                            // operation
+                            Console.WriteLine($"Operation: {operations[idx].id}");
+                            Console.WriteLine($"Operand1: {operations[idx].Operand1}");
+                            Console.WriteLine($"Operand2: {operations[idx].Operand2}");
+                            Console.WriteLine($"Result: {operations[idx].Result}");
+                            if (!operations[idx].Success)
+                            {
+                                Console.WriteLine($"Success: {operations[idx].Success}");
+                            }
+                            Console.WriteLine("\n");
+                            Console.WriteLine($"{(operations.Count > idx + 1 ? "Type next to move forward\n" : "")}{(idx != 0 ? "Type back for the previous operation\n" : "")}Type q to stop viewing operations");
+                            Console.Write("Selection: ");
+                            selection = Console.ReadLine();
+                            // convert to switch
+                            while (selection != "next".ToLower() && selection != "back".ToLower() && selection != "q")
+                            {
+                                Console.WriteLine("Your options are \"next\", \"back\", or \"q\"");
+                                selection = Console.ReadLine();
+                            }
+                            if (selection == "q")
+                            {
+                                viewingOperations = false;
+                            } else if (selection == "next")
+                            {
+                                idx++;
+                            } else
+                            {
+                                idx--;
+                            }
+
+                        }
+                    Console.WriteLine("----- End View -----\n");
+                }
+                
                 // Ask the user to type the first number.
                 Console.Write("Type a number, and then press Enter: ");
                 numInput1 = Console.ReadLine();
@@ -65,7 +123,7 @@ namespace CalculatorProgram
                 Console.WriteLine("\tm - Multiply");
                 Console.WriteLine("\td - Divide");
                 Console.WriteLine("\te - Raise to the Power");
-                Console.Write("Your option? ");
+                Console.Write("Your option: ");
 
                 string op = Console.ReadLine();
 
@@ -77,6 +135,7 @@ namespace CalculatorProgram
                         Console.WriteLine("This operation will result in a mathematical error.\n");
                         operations.Add(new Calculation
                         {
+                            id = operationsCount + 1,
                             Operand1 = cleanNum1,
                             Operand2 = cleanNum2,
                             Operation = op,
@@ -87,6 +146,7 @@ namespace CalculatorProgram
                     else Console.WriteLine("Your result: {0:0.##}\n", result);
                     operations.Add(new Calculation
                     {
+                        id = operationsCount + 1,
                         Operand1 = cleanNum1,
                         Operand2 = cleanNum2,
                         Operation = op,
@@ -100,6 +160,7 @@ namespace CalculatorProgram
                     Console.WriteLine("Oh no! An exception occurred trying to do the math.\n - Details: " + e.Message);
                     operations.Add(new Calculation
                     {
+                        id = operationsCount + 1,
                         Operand1 = cleanNum1,
                         Operand2 = cleanNum2,
                         Operation = op,
@@ -109,7 +170,6 @@ namespace CalculatorProgram
                 }
                 finally
                 {
-                    Console.WriteLine("iterating");
                     operationsCount++;
                 }
 
