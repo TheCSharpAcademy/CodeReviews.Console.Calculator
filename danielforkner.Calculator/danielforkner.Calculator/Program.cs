@@ -1,5 +1,4 @@
 ﻿using CalculatorLibrary;
-using System.Linq;
 
 namespace CalculatorProgram
 {
@@ -7,14 +6,52 @@ namespace CalculatorProgram
     class Program
     {
 
-        class Calculation
+        public static void ViewOperations(Calculator calculator)
         {
-            public int id { get; set; }
-            public double Operand1 { get; set; }
-            public double Operand2 { get; set; }
-            public string Operation { get; set;}
-            public double Result { get; set; }
-            public bool Success { get; set; }
+            Console.WriteLine("\n----- Viewing Past Operations -----\n");
+            bool viewingOperations = true;
+            int idx = 0;
+            string selection = "";
+            if (calculator.Operations.Count == 0)
+            {
+                Console.WriteLine("You don't have any past operations to view!");
+            }
+            else while (viewingOperations)
+                {
+                    // operation
+                    Console.WriteLine($"Operation: {calculator.Operations[idx].id}");
+                    Console.WriteLine($"Operand1: {calculator.Operations[idx].Operand1}");
+                    Console.WriteLine($"Operand2: {calculator.Operations[idx].Operand2}");
+                    Console.WriteLine($"Result: {calculator.Operations[idx].Result}");
+                    if (!calculator.Operations[idx].Success)
+                    {
+                        Console.WriteLine($"Success: {calculator.Operations[idx].Success}");
+                    }
+                    Console.WriteLine("\n");
+                    Console.WriteLine($"{(calculator.Operations.Count > idx + 1 ? "Type next to move forward\n" : "")}{(idx != 0 ? "Type back for the previous operation\n" : "")}Type q to stop viewing operations");
+                    Console.Write("Selection: ");
+                    selection = Console.ReadLine();
+                    // convert to switch
+                    while (selection != "next".ToLower() && selection != "back".ToLower() && selection != "q")
+                    {
+                        Console.WriteLine("Your options are \"next\", \"back\", or \"q\"");
+                        selection = Console.ReadLine();
+                    }
+                    if (selection == "q")
+                    {
+                        viewingOperations = false;
+                    }
+                    else if (selection == "next")
+                    {
+                        idx++;
+                    }
+                    else
+                    {
+                        idx--;
+                    }
+
+                }
+            Console.WriteLine("----- End View -----\n");
         }
         static void Main(string[] args)
         {
@@ -24,8 +61,6 @@ namespace CalculatorProgram
             Console.WriteLine("------------------------\n");
 
             Calculator calculator = new();
-            int operationsCount = 0;
-            List<Calculation> operations = new List<Calculation>();
             while (!endApp)
             {
                 // Declare variables and set to empty.
@@ -33,8 +68,8 @@ namespace CalculatorProgram
                 string numInput2;
 
                 Console.WriteLine("Information on this Calculator:");
-                Console.WriteLine($"Operations Performed: {operationsCount}");
-                Console.WriteLine($"Highest Result: {(operationsCount == 0 ? "N/A" : operations.Max(op => op?.Result))}");
+                Console.WriteLine($"Operations Performed: {calculator.OperationsCount}");
+                Console.WriteLine($"Highest Result: {(calculator.OperationsCount == 0 ? "N/A" : calculator.Operations.Max(op => op?.Result))}");
                 Console.WriteLine("\n");
                 Console.WriteLine("---\n");
 
@@ -52,46 +87,7 @@ namespace CalculatorProgram
 
                 if (selection == "2")
                 {
-                    Console.WriteLine("\n----- Viewing Past Operations -----\n");
-                    bool viewingOperations = true;
-                    int idx = 0;
-                    if (operations.Count == 0)
-                    {
-                        Console.WriteLine("You don't have any past operations to view!");
-                    } else while(viewingOperations)
-                        {
-                            // operation
-                            Console.WriteLine($"Operation: {operations[idx].id}");
-                            Console.WriteLine($"Operand1: {operations[idx].Operand1}");
-                            Console.WriteLine($"Operand2: {operations[idx].Operand2}");
-                            Console.WriteLine($"Result: {operations[idx].Result}");
-                            if (!operations[idx].Success)
-                            {
-                                Console.WriteLine($"Success: {operations[idx].Success}");
-                            }
-                            Console.WriteLine("\n");
-                            Console.WriteLine($"{(operations.Count > idx + 1 ? "Type next to move forward\n" : "")}{(idx != 0 ? "Type back for the previous operation\n" : "")}Type q to stop viewing operations");
-                            Console.Write("Selection: ");
-                            selection = Console.ReadLine();
-                            // convert to switch
-                            while (selection != "next".ToLower() && selection != "back".ToLower() && selection != "q")
-                            {
-                                Console.WriteLine("Your options are \"next\", \"back\", or \"q\"");
-                                selection = Console.ReadLine();
-                            }
-                            if (selection == "q")
-                            {
-                                viewingOperations = false;
-                            } else if (selection == "next")
-                            {
-                                idx++;
-                            } else
-                            {
-                                idx--;
-                            }
-
-                        }
-                    Console.WriteLine("----- End View -----\n");
+                    ViewOperations(calculator);
                 }
                 
                 // Ask the user to type the first number.
@@ -133,9 +129,9 @@ namespace CalculatorProgram
                     if (double.IsNaN(result))
                     {
                         Console.WriteLine("This operation will result in a mathematical error.\n");
-                        operations.Add(new Calculation
+                        calculator.Operations.Add(new Calculation
                         {
-                            id = operationsCount + 1,
+                            id = calculator.OperationsCount + 1,
                             Operand1 = cleanNum1,
                             Operand2 = cleanNum2,
                             Operation = op,
@@ -144,9 +140,9 @@ namespace CalculatorProgram
                         });
                     }
                     else Console.WriteLine("Your result: {0:0.##}\n", result);
-                    operations.Add(new Calculation
+                    calculator.Operations.Add(new Calculation
                     {
-                        id = operationsCount + 1,
+                        id = calculator.OperationsCount + 1,
                         Operand1 = cleanNum1,
                         Operand2 = cleanNum2,
                         Operation = op,
@@ -158,9 +154,9 @@ namespace CalculatorProgram
                 catch (Exception e)
                 {
                     Console.WriteLine("Oh no! An exception occurred trying to do the math.\n - Details: " + e.Message);
-                    operations.Add(new Calculation
+                    calculator.Operations.Add(new Calculation
                     {
-                        id = operationsCount + 1,
+                        id = calculator.OperationsCount + 1,
                         Operand1 = cleanNum1,
                         Operand2 = cleanNum2,
                         Operation = op,
@@ -170,7 +166,7 @@ namespace CalculatorProgram
                 }
                 finally
                 {
-                    operationsCount++;
+                    calculator.OperationsCount++;
                 }
 
                 Console.WriteLine("------------------------\n");

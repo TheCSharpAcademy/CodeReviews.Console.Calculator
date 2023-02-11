@@ -1,12 +1,35 @@
 ﻿using Newtonsoft.Json;
+using System.Linq;
 
 namespace CalculatorLibrary
 {
+    public class Calculation
+    {
+        public int id { get; set; }
+        public double Operand1 { get; set; }
+        public double Operand2 { get; set; }
+        public string Operation { get; set; }
+        public double Result { get; set; }
+        public bool Success { get; set; }
+    }
     public class Calculator
     {
         JsonWriter writer;
+        private int _operationsCount;
+        private List<Calculation> _operations;
+
+        public List<Calculation> Operations { 
+            get { return _operations; }
+        }
+        public int OperationsCount
+        {
+            get { return _operationsCount; }
+            set { _operationsCount = value; }
+        }
         public Calculator()
         {
+            _operationsCount = 0;
+            _operations = new List<Calculation>();
             StreamWriter logFile = File.CreateText("calculatorlog.json");
             logFile.AutoFlush = true;
             writer = new JsonTextWriter(logFile);
@@ -14,7 +37,7 @@ namespace CalculatorLibrary
             writer.WriteStartObject();
             writer.WritePropertyName("Operations");
             writer.WriteStartArray();
-        }
+    }
         public double DoOperation(double num1, double num2, string op)
         {
             double result = double.NaN; // Default value is "not-a-number" if an operation, such as division, could result in an error.
