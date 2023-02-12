@@ -209,8 +209,8 @@ namespace CalculatorProgram
 
                 Console.Write("\n"); // Friendly linespacing.
             }
-            return;
             calculator.Finish();
+            return;
         }
     }
 }
