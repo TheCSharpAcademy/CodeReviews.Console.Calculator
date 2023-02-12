@@ -56,8 +56,12 @@ namespace CalculatorProgram
                             }
                         case "delete":
                             calculator.Operations.RemoveAt(idx);
+                            if (calculator.Operations.Count <= idx)
+                        {
                             idx--;
                             break;
+                        } 
+                        break;
                         case "q":
                             viewingOperations = false;
                             break;
@@ -68,6 +72,7 @@ namespace CalculatorProgram
         static void Main(string[] args)
         {
             bool endApp = false;
+            string[] operationOptions = { "a", "s", "d", "m", "e" };
             // Display title as the C# console calculator app.
             Console.WriteLine("Console Calculator in C#\r");
             Console.WriteLine("------------------------\n");
@@ -104,25 +109,35 @@ namespace CalculatorProgram
                 }
                 
                 // Ask the user to type the first number.
-                Console.Write("Type a number, and then press Enter: ");
+                Console.Write("Type a new number" + $"{(calculator.Operations.Count > 0 ? ", or \"r\" to use previous result," : "")}" +  " and then press Enter: ");
                 numInput1 = Console.ReadLine();
-
                 double cleanNum1;
-                while (!double.TryParse(numInput1, out cleanNum1))
+                if (numInput1.ToLower() == "r") 
                 {
-                    Console.Write("This is not valid input. Please enter an integer value: ");
-                    numInput1 = Console.ReadLine();
+                    cleanNum1 = calculator.Operations[calculator.Operations.Count - 1].Result;
+                } else
+                {
+                    while (!double.TryParse(numInput1, out cleanNum1))
+                    {
+                        Console.Write("This is not valid input. Please enter an integer value: ");
+                        numInput1 = Console.ReadLine();
+                    }
                 }
 
                 // Ask the user to type the second number.
-                Console.Write("Type another number, and then press Enter: ");
+                Console.Write("Type another number" + $"{(calculator.Operations.Count > 0 ? ", or \"r\" to use previous result," : "")}" + " and then press Enter: ");
                 numInput2 = Console.ReadLine();
-
                 double cleanNum2;
-                while (!double.TryParse(numInput2, out cleanNum2))
+                if (numInput2.ToLower() == "r")
                 {
-                    Console.Write("This is not valid input. Please enter an integer value: ");
-                    numInput2 = Console.ReadLine();
+                    cleanNum2 = calculator.Operations[calculator.Operations.Count - 1].Result;
+                } else
+                {
+                    while (!double.TryParse(numInput2, out cleanNum2))
+                    {
+                        Console.Write("This is not valid input. Please enter an integer value: ");
+                        numInput2 = Console.ReadLine();
+                    }
                 }
 
                 // Ask the user to choose an operator.
@@ -135,7 +150,11 @@ namespace CalculatorProgram
                 Console.Write("Your option: ");
 
                 string op = Console.ReadLine();
-
+                while (!operationOptions.Contains(op))
+                {
+                    Console.Write("Supply a valid option: ");
+                    op = Console.ReadLine();
+                }
                 try
                 {
                     double result = calculator.DoOperation(cleanNum1, cleanNum2, op);
