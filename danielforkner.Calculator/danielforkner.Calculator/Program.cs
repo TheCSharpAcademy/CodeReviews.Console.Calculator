@@ -20,7 +20,7 @@ namespace CalculatorProgram
                         continue;
                     }
                     // operation
-                    Console.WriteLine($"Operation: {calculator.Operations[idx].id}");
+                    Console.WriteLine($"Operation: {calculator.Operations[idx].Id}");
                     Console.WriteLine($"Operand1: {calculator.Operations[idx].Operand1}");
                     Console.WriteLine($"Operand2: {calculator.Operations[idx].Operand2}");
                     Console.WriteLine($"Result: {calculator.Operations[idx].Result}");
@@ -163,7 +163,7 @@ namespace CalculatorProgram
                         Console.WriteLine("This operation will result in a mathematical error.\n");
                         calculator.Operations.Add(new Calculation
                         {
-                            id = calculator.OperationsCount + 1,
+                            Id = calculator.OperationsCount + 1,
                             Operand1 = cleanNum1,
                             Operand2 = cleanNum2,
                             Operation = op,
@@ -174,7 +174,7 @@ namespace CalculatorProgram
                     else Console.WriteLine("Your result: {0:0.##}\n", result);
                     calculator.Operations.Add(new Calculation
                     {
-                        id = calculator.OperationsCount + 1,
+                        Id = calculator.OperationsCount + 1,
                         Operand1 = cleanNum1,
                         Operand2 = cleanNum2,
                         Operation = op,
@@ -188,7 +188,7 @@ namespace CalculatorProgram
                     Console.WriteLine("Oh no! An exception occurred trying to do the math.\n - Details: " + e.Message);
                     calculator.Operations.Add(new Calculation
                     {
-                        id = calculator.OperationsCount + 1,
+                        Id = calculator.OperationsCount + 1,
                         Operand1 = cleanNum1,
                         Operand2 = cleanNum2,
                         Operation = op,
