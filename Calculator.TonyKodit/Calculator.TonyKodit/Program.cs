@@ -93,7 +93,7 @@ class Calculator
 
 class Program
 {
-    static int count = 0;
+    static int count;
     static List<string> calcHistory = new List<string>();
 
     static void Main(string[] args)
@@ -144,7 +144,7 @@ class Program
             }
             else
             {
-                //cleanNum2 = double.Parse(numInput2);
+                
                 while (!double.TryParse(numInput2, out cleanNum2))
                 {
                     Console.Write("This is not valid input. Please enter an integer value: ");
@@ -183,7 +183,7 @@ class Program
                 {
                     Console.WriteLine("Your result: {0:0.##}\n", result);
                     calcHistory.Add($"{cleanNum1} {op} {cleanNum2} = {result}");
-                    //calcHistory.Add(string.Format("{0} {1} {2} = {3:0.##}", cleanNum1, op, cleanNum2, result));
+                   
                 }
                 else
                 {
