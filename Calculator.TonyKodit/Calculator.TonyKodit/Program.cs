@@ -6,10 +6,9 @@ class Calculator
 {
     public static double DoOperation(double num1, double num2, string op)
     {
-        double result = double.NaN; // Default value is "not-a-number" if an operation, such as division, could result in an error.
+        double result = double.NaN; 
         bool isSingleOperation = true;
 
-        // Use a switch statement to do the math.
         switch (op)
         {
             case "a":
@@ -73,22 +72,17 @@ class Calculator
                 result = 10 * num1;
                 break;
             case "d":
-                // Ask the user to enter a non-zero divisor.
+               
                 if (num2 != 0)
                 {
                     result = num1 / num2;
                 }
                 break;
-
-            // Return text for an incorrect option entry.
             default:
                 break;
         }
         return result;
     }
-
-
-
 }
 
 class Program
@@ -100,39 +94,27 @@ class Program
     {
 
         bool endApp = false;
-        // Display title as the C# console calculator app.
+       
         Console.WriteLine("Console Calculator in C#\r");
         Console.WriteLine("------------------------\n");
 
-
-
         while (!endApp)
         {
-
             count++;
-            // Declare variables and set to empty.
             string numInput1 = "";
             string numInput2 = "";
             double result = 0;
 
-
-
-
-
-            // Ask the user to type the first number.
             Console.Write("Type the first number, and then press Enter: ");
             numInput1 = Console.ReadLine();
 
-
-            //I'm thinking of a way to make the code skip asking for the 2nd number once the operator is Sqr or trigonmetry functions.
             double cleanNum1 = 0;
             while (!double.TryParse(numInput1, out cleanNum1))
             {
                 Console.Write("This is not valid input. Please enter an integer value: ");
                 numInput1 = Console.ReadLine();
             }
-
-            // Ask the user to type the second number.
+            
             Console.Write("Type the 2nd number and then press Enter (or press only enter for a single operation):");
             numInput2 = Console.ReadLine();
             double cleanNum2 = 0;
@@ -152,9 +134,6 @@ class Program
                 }
             }
 
-
-
-            // Ask the user to choose an operator.
             Console.WriteLine("Choose an operator from the following list:");
             Console.WriteLine("\ta - Add");
             Console.WriteLine("\ts - Subtract");
@@ -228,7 +207,7 @@ class Program
                         endApp = true;
                     }
 
-                    Console.WriteLine("\n"); // Friendly linespacing.
+                    Console.WriteLine("\n"); 
 
                     break;
 
@@ -237,7 +216,6 @@ class Program
                 {
                     Console.WriteLine("Error! Please enter Y or N");
                 }
-
             }
         }
         return;
