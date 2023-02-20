@@ -1,8 +1,4 @@
-﻿
-
-using System.ComponentModel.DataAnnotations;
-
-class Calculator
+﻿class Calculator
 {
     public static double DoOperation(double num1, double num2, string op)
     {
@@ -42,14 +38,11 @@ class Calculator
                 {
                     Console.WriteLine("sin is a single operation, enter only one number.");
                 }
-
                 break;
             case "cos":
                 if (isSingleOperation)
                 {
-
                     result = Math.Cos(num1 * (Math.PI / 180));
-
                 }
                 else
                 {
@@ -59,9 +52,7 @@ class Calculator
             case "tan":
                 if (isSingleOperation)
                 {
-
                     result = Math.Tan(num1 * (Math.PI / 180));
-
                 }
                 else
                 {
@@ -72,7 +63,6 @@ class Calculator
                 result = 10 * num1;
                 break;
             case "d":
-               
                 if (num2 != 0)
                 {
                     result = num1 / num2;
@@ -90,9 +80,8 @@ class Program
     static int count;
     static List<string> calcHistory = new List<string>();
 
-    static void Main(string[] args)
+    static void Main()
     {
-
         bool endApp = false;
        
         Console.WriteLine("Console Calculator in C#\r");
@@ -101,14 +90,14 @@ class Program
         while (!endApp)
         {
             count++;
-            string numInput1 = "";
-            string numInput2 = "";
-            double result = 0;
+            string numInput1;
+            string numInput2;
+            double result;
 
             Console.Write("Type the first number, and then press Enter: ");
             numInput1 = Console.ReadLine();
 
-            double cleanNum1 = 0;
+            double cleanNum1;
             while (!double.TryParse(numInput1, out cleanNum1))
             {
                 Console.Write("This is not valid input. Please enter an integer value: ");
@@ -116,6 +105,7 @@ class Program
             }
             
             Console.Write("Type the 2nd number and then press Enter (or press only enter for a single operation):");
+
             numInput2 = Console.ReadLine();
             double cleanNum2 = 0;
             bool isSingleOperation = false;
@@ -126,7 +116,6 @@ class Program
             }
             else
             {
-                
                 while (!double.TryParse(numInput2, out cleanNum2))
                 {
                     Console.Write("This is not valid input. Please enter an integer value: ");
