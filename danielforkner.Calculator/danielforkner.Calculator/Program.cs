@@ -1,10 +1,8 @@
 ﻿using CalculatorLibrary;
 
 namespace CalculatorProgram;
-
 class Program
 {
-
     public static void ViewOperations(Calculator calculator)
     {
         Console.WriteLine("\n----- Viewing Past Operations -----\n");
@@ -66,6 +64,7 @@ class Program
             }
         Console.WriteLine("----- End View -----\n");
     }
+
     static void Main(string[] args)
     {
         bool endApp = false;
