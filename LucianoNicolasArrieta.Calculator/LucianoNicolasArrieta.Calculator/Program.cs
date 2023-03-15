@@ -8,6 +8,7 @@ namespace CalculatorProgram
         static void Main(string[] args)
         {
             bool endApp = false;
+            int timesUsed = 0;
             // Display title as the C# console calculator app.
             Console.WriteLine("Console Calculator in C#\r");
             Console.WriteLine("------------------------\n");
@@ -59,7 +60,11 @@ namespace CalculatorProgram
                     {
                         Console.WriteLine("This operation will result in a mathematical error.\n");
                     }
-                    else Console.WriteLine("Your result: {0:0.##}\n", result);
+                    else
+                    {
+                        Console.WriteLine("Your result: {0:0.##}\n", result);
+                        timesUsed++;
+                    }
                 }
                 catch (Exception e)
                 {
@@ -70,8 +75,11 @@ namespace CalculatorProgram
 
                 // Wait for the user to respond before closing.
                 Console.Write("Press 'n' and Enter to close the app, or press any other key and Enter to continue: ");
-                if (Console.ReadLine() == "n") endApp = true;
-
+                if (Console.ReadLine() == "n")
+                {
+                    endApp = true;
+                    Console.WriteLine($"Thanks for using our Calculator, you did {timesUsed} calculations. See you!");
+                }
                 Console.WriteLine("\n"); // Friendly linespacing.
             }
             calculator.Finish();
