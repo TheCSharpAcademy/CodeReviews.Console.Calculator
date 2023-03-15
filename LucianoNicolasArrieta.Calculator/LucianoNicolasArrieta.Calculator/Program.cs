@@ -9,6 +9,8 @@ namespace CalculatorProgram
         {
             bool endApp = false;
             int timesUsed = 0;
+            //List<int> previousResults = new List<int>();
+
             // Display title as the C# console calculator app.
             Console.WriteLine("Console Calculator in C#\r");
             Console.WriteLine("------------------------\n");
@@ -22,11 +24,11 @@ namespace CalculatorProgram
                 double result = 0;
 
                 // Ask the user to type the first number.
-                Console.Write("Type a number, and then press Enter: ");
+                Console.Write("Type a number, then press Enter: ");
                 numInput1 = Console.ReadLine();
 
                 double cleanNum1 = 0;
-                while (!double.TryParse(numInput1, out cleanNum1))
+                while (!(double.TryParse(numInput1, out cleanNum1) || numInput1 == "s"))
                 {
                     Console.Write("This is not valid input. Please enter an integer value: ");
                     numInput1 = Console.ReadLine();
@@ -74,7 +76,9 @@ namespace CalculatorProgram
                 Console.WriteLine("------------------------\n");
 
                 // Wait for the user to respond before closing.
-                Console.Write("Press 'n' and Enter to close the app, or press any other key and Enter to continue: ");
+                Console.WriteLine("Press 'n' and Enter to close the app, or press any other key and Enter to continue: ");
+                calculator.LastestCalculations();
+
                 if (Console.ReadLine() == "n")
                 {
                     endApp = true;

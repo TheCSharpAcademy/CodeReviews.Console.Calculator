@@ -7,6 +7,7 @@ namespace CalculatorLibrary
     {
 
         JsonWriter writer;
+        List<string> previousCalculations = new List<string>();
 
         public Calculator()
         {
@@ -34,20 +35,24 @@ namespace CalculatorLibrary
                 case "a":
                     result = num1 + num2;
                     writer.WriteValue("Add");
+                    previousCalculations.Add($"{num1} + {num2} = {result}");
                     break;
                 case "s":
                     result = num1 - num2;
                     writer.WriteValue("Subtract");
+                    previousCalculations.Add($"{num1} - {num2} = {result}");
                     break;
                 case "m":
                     result = num1 * num2;
                     writer.WriteValue("Multiply");
+                    previousCalculations.Add($"{num1} * {num2} = {result}");
                     break;
                 case "d":
                     // Ask the user to enter a non-zero divisor.
                     if (num2 != 0)
                     {
                         result = num1 / num2;
+                        previousCalculations.Add($"{num1} / {num2} = {result}");
                     }
                     writer.WriteValue("Divide");
                     break;
@@ -68,5 +73,32 @@ namespace CalculatorLibrary
             writer.WriteEndObject();
             writer.Close();
         }
+
+        public void LastestCalculations()
+        {
+            int i = 0;
+            Console.WriteLine("------------------------");
+            if (!previousCalculations.Any())
+            {
+                Console.WriteLine("There is no previous calculations done.");
+            }
+            else
+            {
+                foreach (string calculation in previousCalculations)
+                {
+                    i++;
+                    Console.WriteLine($"{i}. {calculation}");
+                }
+            }
+            Console.WriteLine("------------------------");
+        }
+        /*
+        public int UseAPreviousResult()
+        {
+            this.LastestCalculations();
+            Console.Write("Select the result you want to use in the calculator: ");
+
+        }
+        */
     }
 }
