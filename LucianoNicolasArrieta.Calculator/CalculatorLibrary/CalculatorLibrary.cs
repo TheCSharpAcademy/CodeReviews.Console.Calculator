@@ -1,5 +1,4 @@
 ﻿using Newtonsoft.Json;
-
 namespace CalculatorLibrary
 {
     public class Calculator
@@ -148,7 +147,7 @@ namespace CalculatorLibrary
         {
             previousCalculations.Clear();
             previousResults.Clear();
-            Console.WriteLine("Calculation history was deleted successfully");
+            Console.WriteLine("Calculation history was deleted successfully!");
         }
     }
 }
