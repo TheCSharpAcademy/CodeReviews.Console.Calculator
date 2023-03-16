@@ -8,6 +8,7 @@ namespace CalculatorLibrary
 
         JsonWriter writer;
         List<string> previousCalculations = new List<string>();
+        List<double> previousResults = new List<double>();
 
         public Calculator()
         {
@@ -63,6 +64,7 @@ namespace CalculatorLibrary
             writer.WritePropertyName("Result");
             writer.WriteValue(result);
             writer.WriteEndObject();
+            previousResults.Add(result);
 
             return result;
         }
@@ -74,31 +76,53 @@ namespace CalculatorLibrary
             writer.Close();
         }
 
-        public void LastestCalculations()
+        public void PrintLastestCalculations()
         {
             int i = 0;
             Console.WriteLine("------------------------");
-            if (!previousCalculations.Any())
+            foreach (string calculation in previousCalculations)
             {
-                Console.WriteLine("There is no previous calculations done.");
-            }
-            else
-            {
-                foreach (string calculation in previousCalculations)
-                {
-                    i++;
-                    Console.WriteLine($"{i}. {calculation}");
-                }
+                i++;
+                Console.WriteLine($"{i}. {calculation}");
             }
             Console.WriteLine("------------------------");
         }
-        /*
-        public int UseAPreviousResult()
-        {
-            this.LastestCalculations();
-            Console.Write("Select the result you want to use in the calculator: ");
 
+        public double UseAPreviousResult()
+        {
+            if (!previousCalculations.Any())
+            {
+                Console.Write("There is no previous calculations done. Please enter a number: ");
+                double number;
+                while (!double.TryParse(Console.ReadLine(), out number))
+                {
+                    Console.WriteLine("Please enter a number.");
+                }
+                return number;
+            } else
+            {
+                this.PrintLastestCalculations();
+                bool validNumber = false;
+                int choosenResult = 0;
+                string choosen_input;
+                while (!validNumber)
+                {
+                    Console.Write("Please, enter the number with the result you want to use in the calculator: ");
+                    choosen_input = Console.ReadLine();
+                    if (int.TryParse(choosen_input, out choosenResult))
+                    {
+                        validNumber = choosenResult <= previousResults.Count();
+                    }
+                }
+                return previousResults[choosenResult - 1];
+            }
         }
-        */
+        
+        public void DeleteCalculationHistory()
+        {
+            previousCalculations.Clear();
+            previousResults.Clear();
+            Console.WriteLine("Calculation history was deleted successfully");
+        }
     }
 }
