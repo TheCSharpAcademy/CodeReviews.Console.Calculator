@@ -9,7 +9,6 @@ namespace CalculatorProgram
         {
             bool endApp = false;
             int timesUsed = 0;
-            //List<int> previousResults = new List<int>();
 
             // Display title as the C# console calculator app.
             Console.WriteLine("Console Calculator in C#\r");
@@ -23,7 +22,7 @@ namespace CalculatorProgram
                 string numInput2 = "";
                 double result = 0;
 
-                // Ask the user to type the first number.
+                // Ask the user to type the first number. Or choose a result of a previous calculation.
                 Console.Write("Type a number or 's' to use a previous result, then press Enter: ");
                 numInput1 = Console.ReadLine();
 
@@ -38,7 +37,7 @@ namespace CalculatorProgram
                     cleanNum1 = calculator.UseAPreviousResult();
                 }
 
-                // Ask the user to type the second number.
+                // Ask the user to type the second number. Or choose a result of a previous calculation.
                 Console.Write("Type another number or 's' to use another result, and then press Enter: ");
                 numInput2 = Console.ReadLine();
 
@@ -59,6 +58,11 @@ namespace CalculatorProgram
                 Console.WriteLine("\ts - Subtract");
                 Console.WriteLine("\tm - Multiply");
                 Console.WriteLine("\td - Divide");
+                Console.WriteLine("\tsr - Square root (num1)");
+                Console.WriteLine("\tpw - Power");
+                Console.WriteLine("\tsin - Sin(num1)");
+                Console.WriteLine("\tcos - Cos(num1)");
+                Console.WriteLine("\ttan - Tang(num1)");
                 Console.Write("Your option? ");
 
                 string op = Console.ReadLine();

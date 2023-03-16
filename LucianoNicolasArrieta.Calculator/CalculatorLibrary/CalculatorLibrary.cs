@@ -57,7 +57,34 @@ namespace CalculatorLibrary
                     }
                     writer.WriteValue("Divide");
                     break;
-                // Return text for an incorrect option entry.
+                case "sr":
+                    if (num1 >= 0)
+                    {
+                        result = Math.Sqrt(num1);
+                        previousCalculations.Add($"sqrt({num1}) = {result}");
+                    }
+                    writer.WriteValue("Square Root (num1)");
+                    break;
+                case "pw":
+                    result = Math.Pow(num1, num2);
+                    previousCalculations.Add($"{num1} ^ {num2} = {result}");
+                    writer.WriteValue("Power");
+                    break;
+                case "sin":
+                    result = Math.Sin(num1);
+                    previousCalculations.Add($"sin({num1}) = {result}");
+                    writer.WriteValue("Sin (num1)");
+                    break;
+                case "cos":
+                    result = Math.Cos(num1);
+                    previousCalculations.Add($"cos({num1}) = {result}");
+                    writer.WriteValue("Cos (num1)");
+                    break;
+                case "tan":
+                    result = Math.Tan(num1);
+                    previousCalculations.Add($"tan({num1}) = {result}");
+                    writer.WriteValue("Tan (num1)");
+                    break;
                 default:
                     break;
             }
