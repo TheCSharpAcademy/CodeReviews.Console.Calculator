@@ -2,7 +2,7 @@
 
 class Program
 {
-    public static int NumberOfCalculations = 0;
+    public static int NumberOfCalculations;
     private static bool _closeCalculator;
     
     public static void Main(string[] args)
