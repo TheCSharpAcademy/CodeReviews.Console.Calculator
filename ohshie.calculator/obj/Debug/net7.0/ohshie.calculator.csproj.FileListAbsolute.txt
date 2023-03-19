@@ -1,0 +1,17 @@
+/Users/stas/RiderProjects/ohshie.calculator/bin/Debug/net7.0/ohshie.calculator
+/Users/stas/RiderProjects/ohshie.calculator/bin/Debug/net7.0/ohshie.calculator.deps.json
+/Users/stas/RiderProjects/ohshie.calculator/bin/Debug/net7.0/ohshie.calculator.runtimeconfig.json
+/Users/stas/RiderProjects/ohshie.calculator/bin/Debug/net7.0/ohshie.calculator.dll
+/Users/stas/RiderProjects/ohshie.calculator/bin/Debug/net7.0/ohshie.calculator.pdb
+/Users/stas/RiderProjects/ohshie.calculator/obj/Debug/net7.0/ohshie.calculator.csproj.AssemblyReference.cache
+/Users/stas/RiderProjects/ohshie.calculator/obj/Debug/net7.0/ohshie.calculator.GeneratedMSBuildEditorConfig.editorconfig
+/Users/stas/RiderProjects/ohshie.calculator/obj/Debug/net7.0/ohshie.calculator.AssemblyInfoInputs.cache
+/Users/stas/RiderProjects/ohshie.calculator/obj/Debug/net7.0/ohshie.calculator.AssemblyInfo.cs
+/Users/stas/RiderProjects/ohshie.calculator/obj/Debug/net7.0/ohshie.calculator.csproj.CoreCompileInputs.cache
+/Users/stas/RiderProjects/ohshie.calculator/obj/Debug/net7.0/ohshie.calculator.dll
+/Users/stas/RiderProjects/ohshie.calculator/obj/Debug/net7.0/refint/ohshie.calculator.dll
+/Users/stas/RiderProjects/ohshie.calculator/obj/Debug/net7.0/ohshie.calculator.pdb
+/Users/stas/RiderProjects/ohshie.calculator/obj/Debug/net7.0/ohshie.calculator.genruntimeconfig.cache
+/Users/stas/RiderProjects/ohshie.calculator/obj/Debug/net7.0/ref/ohshie.calculator.dll
+/Users/stas/RiderProjects/ohshie.calculator/bin/Debug/net7.0/Newtonsoft.Json.dll
+/Users/stas/RiderProjects/ohshie.calculator/obj/Debug/net7.0/ohshie.calculator.csproj.CopyComplete
