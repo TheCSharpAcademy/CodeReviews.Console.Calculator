@@ -8,4 +8,4 @@ build_property.PlatformNeutralAssembly =
 build_property.EnforceExtendedAnalyzerRules = 
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = ohshie.calculator
-build_property.ProjectDir = /Users/stas/RiderProjects/ohshie.calculator/
+build_property.ProjectDir = C:\Pablo\codereviews\CodeReviews.Console.Calculator\ohshie.calculator\

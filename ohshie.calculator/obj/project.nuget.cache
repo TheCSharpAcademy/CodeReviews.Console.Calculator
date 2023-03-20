@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "SoHsSo4JC4ZM95iscNA7aS8qj+3G0xzV4yr5ADDJLvBZA7UkCVvYrwWxN8RY/VpHX8rooSZ6RWQhNeQEYicjqg==",
+  "dgSpecHash": "6mDms2Z056SPvuTPIDVqepnGmaU+f6V0LmaRvbS9uClfsylIleq8Rv+5TFE+aLqGmwSc8JpXrFxkc3U8RSGXsg==",
   "success": true,
-  "projectFilePath": "/Users/stas/RiderProjects/ohshie.calculator/ohshie.calculator.csproj",
+  "projectFilePath": "C:\\Pablo\\codereviews\\CodeReviews.Console.Calculator\\ohshie.calculator\\ohshie.calculator.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }
