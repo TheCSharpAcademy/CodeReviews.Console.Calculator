@@ -124,7 +124,6 @@ internal class Helpers
                     Console.ReadLine();
                     break;
             }
-
         } while (input == false);
         return difficulty;
     }

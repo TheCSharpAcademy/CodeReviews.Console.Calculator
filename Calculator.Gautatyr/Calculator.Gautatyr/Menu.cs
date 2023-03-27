@@ -59,7 +59,7 @@ internal class Menu
                     Console.WriteLine("Invalid input, press any key to go back in the menu.");
                     Console.ReadLine();
                     break;
-            };
+            }
             Console.Clear();
         } while (isGameOn);
     }
