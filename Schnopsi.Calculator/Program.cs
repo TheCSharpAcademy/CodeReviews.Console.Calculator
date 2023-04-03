@@ -1,7 +1,6 @@
 ﻿using Schnopsi.Calculator;
 
 List<string> calculations = new();
-
 ConsoleInteractions.ShowWelcomeMessage();
 bool endApp = false;
 do

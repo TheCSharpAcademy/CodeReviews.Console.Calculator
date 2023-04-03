@@ -55,7 +55,6 @@ internal static class ConsoleInteractions
 			if (isValidInput == false)
 			{
                 Console.WriteLine("Invalid input!");
-
 			}
 		} while (isValidInput == false);
 		return userInputInt;
