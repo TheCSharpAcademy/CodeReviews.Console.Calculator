@@ -1,5 +1,6 @@
 ﻿using CalculatorLibrary;
 using ConsoleCalculator.Models;
+
 namespace ConsoleCalculator;
 class Program
 {
@@ -17,7 +18,6 @@ class Program
 
         while (!endApp)
         {
-            // Declare variables and set to empty or zeros.
             string choice;
             string numInput1;
             string numInput2;
@@ -49,7 +49,6 @@ class Program
                     }
                     else
                     {
-                        // Ask the user to type the first number.
                         Console.Write("Type a number, and then press Enter: ");
                         numInput1 = Console.ReadLine();
                     }
@@ -60,7 +59,6 @@ class Program
                         numInput1 = Console.ReadLine();
                     }
 
-                    // Ask the user to choose an operator.
                     Console.WriteLine("Choose an operator from the following list:");
                     Console.WriteLine("\tq - Square Root");
                     Console.WriteLine("\tt - 10x");
@@ -95,7 +93,6 @@ class Program
                     }
                     else
                     {
-                        // Ask the user to type the first number.
                         Console.Write("Type a number, and then press Enter: ");
                         numInput1 = Console.ReadLine();
                     }
@@ -105,7 +102,7 @@ class Program
                         Console.Write("This is not valid input. Please enter an integer value: ");
                         numInput1 = Console.ReadLine();
                     }
-                    // Ask the user to type the second number.
+                    
                     Console.Write("Type another number, and then press Enter: ");
                     numInput2 = Console.ReadLine();
 
@@ -115,7 +112,7 @@ class Program
                         Console.Write("This is not valid input. Please enter an integer value: ");
                         numInput2 = Console.ReadLine();
                     }
-                    // Ask the user to choose an operator.
+                    
                     Console.WriteLine("Choose an operator from the following list:");
                     Console.WriteLine("\ta - Add");
                     Console.WriteLine("\ts - Subtract");
