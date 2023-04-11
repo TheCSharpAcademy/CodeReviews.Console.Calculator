@@ -1,4 +1,8 @@
 ﻿using CalculatorLibrary;
+using System.Collections.Generic;
+using System.Diagnostics.Metrics;
+using System.Diagnostics;
+
 class Program
 {
     static void Main(string[] args)
@@ -14,7 +18,28 @@ class Program
             // Declare variables and set to empty.
             string numInput1 = "";
             string numInput2 = "";
+            string menuOption = "";
             double result = 0;
+
+            // Shows first menu
+            calculator.showMenuOptions();
+
+            menuOption = Console.ReadLine();
+            while (menuOption == "l" || menuOption == "d")
+            {
+                switch (menuOption)
+                {
+                    case "l":
+                        calculator.showLatestCalculations();
+                        break;
+                    case "d":
+                        calculator.deleteLatestCalculations();
+                        break;
+                }                
+
+                calculator.showMenuOptions();
+                menuOption = Console.ReadLine();
+            }
 
             // Ask the user to type the first number.
             Console.Write("Type a number, and then press Enter: ");
