@@ -1,4 +1,5 @@
-﻿namespace CalculatorLibrary
+﻿using System.Diagnostics;
+namespace CalculatorLibrary
 {
     public class Calculator
     {
