@@ -27,22 +27,13 @@ class Program
             menuOption = Console.ReadLine();
             while (menuOption == "l" || menuOption == "d")
             {
-                switch (menuOption)
-                {
-                    case "l":
-                        calculator.showLatestCalculations();
-                        break;
-                    case "d":
-                        calculator.deleteLatestCalculations();
-                        break;
-                }                
-
+                calculator.readMenuOptions(menuOption);
                 calculator.showMenuOptions();
                 menuOption = Console.ReadLine();
             }
 
             // Ask the user to type the first number.
-            Console.Write("Type a number, and then press Enter: ");
+            Console.Write("Type a number or type h to use a result of latest calculations, and then press Enter: ");
             numInput1 = Console.ReadLine();
 
             double cleanNum1 = 0;
