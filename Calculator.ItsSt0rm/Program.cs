@@ -25,22 +25,28 @@ class Program
             calculator.showMenuOptions();
 
             menuOption = Console.ReadLine();
-            while (menuOption == "l" || menuOption == "d")
-            {
-                calculator.readMenuOptions(menuOption);
+            Console.WriteLine(""); // Friendly linespacing.       
+            while (calculator.readMenuOptions(menuOption))
+            {               
                 calculator.showMenuOptions();
                 menuOption = Console.ReadLine();
             }
 
             // Ask the user to type the first number.
-            Console.Write("Type a number or type h to use a result of latest calculations, and then press Enter: ");
+            Console.Write("Type a number or type h to use a previous result, and then press Enter: ");
             numInput1 = Console.ReadLine();
 
             double cleanNum1 = 0;
-            while (!double.TryParse(numInput1, out cleanNum1))
+            while (!double.TryParse(numInput1, out cleanNum1) && !numInput1.Equals("h"))
             {
                 Console.Write("This is not valid input. Please enter an integer value: ");
                 numInput1 = Console.ReadLine();
+            }
+
+            if (numInput1.Equals("h"))
+            {
+                calculator.showLatestCalculations();
+                Console.Write("Choose the number of the operation that you want to use: ");               
             }
 
             // Ask the user to type the second number.
