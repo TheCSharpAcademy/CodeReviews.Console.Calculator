@@ -1,153 +1,175 @@
-﻿List<char> operations = new List<char>();
+﻿
+List<char> operations = new List<char>();
 string data = "asmd";
 operations.AddRange(data);
+// History, list of results and how many are stored currently
+List<float> history = new List<float>();
+int history_count = 0;
+// Operands for the operations, separate ones for floating point numbers and user inputs
+float operand_a = 0.0f;
+float operand_b = 0.0f;
+float result = 0.0f;
+string user_input1 = "";
+string user_input2 = "";
+string user_input_menu = "";
+string operation = "";
+bool running = true;
+bool checking_a = true;
+bool running_history = true;
 
-Console.WriteLine(@"Hello, what would you like to do today?
+
+void Menu()
+{
+    Console.WriteLine(@"
 [a]dd
 [s]ubtract
 [m]ultiply
-or [d]ivide
-2 numbers?");
+or [d]ivide");
 
-// History, list of results and how many are stored currently
-List<int> history = new List<int>();
-int history_count = 0;
-
-// Validation of operations, only single characters in operations list will pass
-string operation = Console.ReadLine();
-operation = operation.ToLower();
-while (!(operation.Length == 1 && operations.Contains(operation.First())))
-{
-    if (operation.Length != 1)
-    {
-        Console.WriteLine("Please enter a single letter");
-    }
-    else
-    {
-        Console.WriteLine("Please enter a valid operation from the list");
-    }
+    // Validation of operations, only single characters in operations list will pass
     operation = Console.ReadLine();
-}
+    operation = operation.ToLower();
 
-// Operands for the operations, separate ones for floating point numbers and user inputs
-int operand_a = 0;
-int operand_c = 0;
-float operand_b = 0.0f;
-float operand_d = 0.0f;
-string user_input1= "";
-string user_input2 = "";
-bool isvalid_a = false;
-bool isvalid_b = false;
-bool isvalid_c = false;
-bool isvalid_d = false;
-
-// Validating the user input and assigning them to the correct operands
-float ValidateFloatInput(string str)
-{
-    str = str.Replace(",", ".");
-    if (float.TryParse(str, out float tmp))
+    while (!(operation.Length == 1 && operations.Contains(operation.First())))
     {
-        return tmp;
-    }
-    else
-    {
-
-        return 0.0f;
-    }
-}
-
-int ValidateIntInput(string str)
-{
-    if (int.TryParse(str, out int tmp))
-    {
-        return tmp;
-    }
-    else
-    {
-        Console.WriteLine("The number you entered is invalid");
-        return 0;
-    }
-
-}
-
-// Validating the first user input
-while(operand_a == 0  && operand_b == 0.0f)
-{
-    Console.WriteLine("Enter the first number");
-    user_input1 = Console.ReadLine();
-
-    if (user_input1.Contains(",") || user_input1.Contains("."))
-    {
-        operand_b = (float)ValidateFloatInput(user_input1);
-    }
-    else
-    {
-        operand_a = ValidateIntInput(user_input1);
-    }
-}
-
-// Asking for the second operand dependin on the operation chosen
-
-switch (operation)
-{
-    case "a":
-        Console.WriteLine($"What would you like to add to {user_input1}?");
-        user_input2 = Console.ReadLine();
-        break;
-    case "s":
-        Console.WriteLine($"What would you like to subtract from {user_input1}?");
-        user_input2 = Console.ReadLine();
-        break;
-    case "m":
-        Console.WriteLine($"What would you like to multiply {user_input1} by?");
-        user_input2 = Console.ReadLine();
-        break;
-    case "d":
-        Console.WriteLine($"What would you like to divide {user_input1} by?");
-        user_input2 = Console.ReadLine();
-        break;
-}
-
-
-// Validating the second user input
-
-while (operand_c == 0 && operand_d == 0.0f)
-{
-    user_input2 = Console.ReadLine();
-    if (user_input2 == "0")
-    {
-        Console.WriteLine("Are you sure you want to continue with 0?\n y/n");
-        string check = Console.ReadLine();
-        if (check.ToLower() == "n")
+        if (operation.Length != 1)
         {
-            continue;
+            Console.WriteLine("Please enter a single letter");
         }
         else
         {
-            switch(operation)
+            Console.WriteLine("Please enter a valid operation from the list");
+        }
+        operation = Console.ReadLine();
+    }
+}
+
+
+// Validating the user input and assigning them to the correct operands
+
+float ValidateInput(string str)
+{
+    if (str.Contains(","))
+    {
+        str = str.Replace(",", ".");
+    }
+        if (float.TryParse(str, out float tmp))
+        {
+            return tmp;
+        }
+        else
+        {
+            Console.WriteLine("The number you entered is invalid");
+            return 0.0f;
+        }
+}
+
+while (running)
+{
+    Menu();
+    if (checking_a)
+    {
+        // Validating the first user input
+        while (operand_a == 0)
+        {
+            Console.WriteLine("Enter the first number");
+            user_input1 = Console.ReadLine();
+            if (user_input1 == null)
             {
-                case "a":
-                    Console.WriteLine($"The result is {user_input1}");
-                    break;
-                case "s":
-                    Console.WriteLine($"The result is {user_input1}");
-                    break;
-                case "m":
-                    Console.WriteLine("The result is 0");
-                    break;
-                case "d":
-                    Console.WriteLine("Unfortunately i cannot do that");
-                    break;
+                continue;
             }
+            operand_a = ValidateInput(user_input1);
         }
     }
 
-    if (user_input2.Contains(",") || user_input2.Contains("."))
+    checking_a = true;
+    // Validating the second user input
+    while (operand_b == 0)
     {
-        operand_d = (float)ValidateFloatInput(user_input2);
+        Console.WriteLine("Enter the second number");
+        user_input2 = Console.ReadLine();
+
+        // Check if the user wants to continue with 0
+        if (user_input2 == "0")
+        {
+            Console.WriteLine("Are you sure you want to continue with 0?\n y/n");
+            string check = Console.ReadLine();
+            if (check.ToLower() == "n")
+            {
+                continue;
+            }
+        }
+
+        // Validate the user input
+        operand_b = ValidateInput(user_input2);
     }
-    else
+
+
+    // Getting the result and displaying it, ADD THE RESULT TO HISTORY
+    switch (operation)
     {
-        operand_c = ValidateIntInput(user_input2);
+        case "a":   
+            result = operand_a + operand_b;
+            break;
+        case "s":
+            result = operand_a - operand_b;
+            break;
+        case "m":
+            result = operand_a * operand_b;
+            break;
+        case "d":
+            result = operand_a / operand_b;
+            break;
+    }
+
+    Console.WriteLine(result);
+
+    history.Add(result);
+    operand_a = 0;
+    operand_b = 0;
+    history_count++;
+    result = 0;
+
+    while (user_input_menu != "y" && user_input_menu != "h" && user_input_menu != "q")
+    {
+        Console.WriteLine("If you want to continue enter y\n if you want to acces history enter h\n if you want to quit enter q");
+        user_input_menu = Console.ReadLine();
+    }
+    if (user_input_menu == "q")
+    {
+        running = false;
+    }
+    else if (user_input_menu == "h")
+    {
+        Console.WriteLine("Chose the number you want to operate on by it's index,\n if you want to return to the menu enter c");
+        {
+            for (int i = 0; i < history.Count; i++)
+            {
+                Console.WriteLine($"{i}. {history[i]}");
+            }
+        }
+        while (running_history)
+        {
+            user_input_menu = Console.ReadLine();
+            if (user_input_menu.ToLower() == "c")
+            {
+                break;
+            }
+            else
+            {
+                try
+                {
+                    int i = Convert.ToInt32(user_input_menu);
+                    Console.WriteLine($"You chose {history[i]}");
+                    operand_a = history[i];
+                    checking_a = false;
+                    break;
+                }
+                catch (Exception ex) when (ex is FormatException || ex is ArgumentOutOfRangeException)
+                {
+                    Console.WriteLine("Enter a valid entry");
+                }
+            }
+        }
     }
 }
