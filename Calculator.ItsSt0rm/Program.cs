@@ -19,6 +19,8 @@ class Program
             string numInput1 = "";
             string numInput2 = "";
             string menuOption = "";
+            string operationSelected = "";
+            double previousOperation = 0;
             double result = 0;
 
             // Shows first menu
@@ -46,8 +48,16 @@ class Program
             if (numInput1.Equals("h"))
             {
                 calculator.showLatestCalculations();
-                Console.Write("Choose the number of the operation that you want to use: ");               
-            }
+                Console.Write("Choose the number of the operation that you want to use: ");
+                operationSelected = Console.ReadLine();
+
+                int cleanOption = 0;
+                
+                while (!int.TryParse(operationSelected, out cleanOption))
+                {
+                    
+                }
+            }           
 
             // Ask the user to type the second number.
             Console.Write("Type another number, and then press Enter: ");
