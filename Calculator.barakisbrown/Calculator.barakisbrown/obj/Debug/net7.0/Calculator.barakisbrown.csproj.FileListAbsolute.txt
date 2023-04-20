@@ -18,6 +18,7 @@ D:\SRC\C#\CodeReviews.Console.Calculator\Calculator.barakisbrown\Calculator.bara
 D:\SRC\C#\CodeReviews.Console.Calculator\Calculator.barakisbrown\Calculator.barakisbrown\bin\Debug\net7.0\Calculator.barakisbrown.runtimeconfig.json
 D:\SRC\C#\CodeReviews.Console.Calculator\Calculator.barakisbrown\Calculator.barakisbrown\bin\Debug\net7.0\Calculator.barakisbrown.dll
 D:\SRC\C#\CodeReviews.Console.Calculator\Calculator.barakisbrown\Calculator.barakisbrown\bin\Debug\net7.0\Calculator.barakisbrown.pdb
+D:\SRC\C#\CodeReviews.Console.Calculator\Calculator.barakisbrown\Calculator.barakisbrown\bin\Debug\net7.0\Newtonsoft.Json.dll
 D:\SRC\C#\CodeReviews.Console.Calculator\Calculator.barakisbrown\Calculator.barakisbrown\bin\Debug\net7.0\CalculatorLibrary.dll
 D:\SRC\C#\CodeReviews.Console.Calculator\Calculator.barakisbrown\Calculator.barakisbrown\bin\Debug\net7.0\CalculatorLibrary.pdb
 D:\SRC\C#\CodeReviews.Console.Calculator\Calculator.barakisbrown\Calculator.barakisbrown\obj\Debug\net7.0\Calculator.barakisbrown.csproj.AssemblyReference.cache
@@ -31,4 +32,3 @@ D:\SRC\C#\CodeReviews.Console.Calculator\Calculator.barakisbrown\Calculator.bara
 D:\SRC\C#\CodeReviews.Console.Calculator\Calculator.barakisbrown\Calculator.barakisbrown\obj\Debug\net7.0\Calculator.barakisbrown.pdb
 D:\SRC\C#\CodeReviews.Console.Calculator\Calculator.barakisbrown\Calculator.barakisbrown\obj\Debug\net7.0\Calculator.barakisbrown.genruntimeconfig.cache
 D:\SRC\C#\CodeReviews.Console.Calculator\Calculator.barakisbrown\Calculator.barakisbrown\obj\Debug\net7.0\ref\Calculator.barakisbrown.dll
-D:\SRC\C#\CodeReviews.Console.Calculator\Calculator.barakisbrown\Calculator.barakisbrown\bin\Debug\net7.0\Newtonsoft.Json.dll
