@@ -1,0 +1,15 @@
+/Users/barakis/Desktop/Development/ETC/NET/CodeReviews.Console.Calculator/Calculator.barakisbrown/Calculator.barakisbrown/bin/Debug/net7.0/Calculator.barakisbrown
+/Users/barakis/Desktop/Development/ETC/NET/CodeReviews.Console.Calculator/Calculator.barakisbrown/Calculator.barakisbrown/bin/Debug/net7.0/Calculator.barakisbrown.deps.json
+/Users/barakis/Desktop/Development/ETC/NET/CodeReviews.Console.Calculator/Calculator.barakisbrown/Calculator.barakisbrown/bin/Debug/net7.0/Calculator.barakisbrown.runtimeconfig.json
+/Users/barakis/Desktop/Development/ETC/NET/CodeReviews.Console.Calculator/Calculator.barakisbrown/Calculator.barakisbrown/bin/Debug/net7.0/Calculator.barakisbrown.dll
+/Users/barakis/Desktop/Development/ETC/NET/CodeReviews.Console.Calculator/Calculator.barakisbrown/Calculator.barakisbrown/bin/Debug/net7.0/Calculator.barakisbrown.pdb
+/Users/barakis/Desktop/Development/ETC/NET/CodeReviews.Console.Calculator/Calculator.barakisbrown/Calculator.barakisbrown/obj/Debug/net7.0/Calculator.barakisbrown.csproj.AssemblyReference.cache
+/Users/barakis/Desktop/Development/ETC/NET/CodeReviews.Console.Calculator/Calculator.barakisbrown/Calculator.barakisbrown/obj/Debug/net7.0/Calculator.barakisbrown.GeneratedMSBuildEditorConfig.editorconfig
+/Users/barakis/Desktop/Development/ETC/NET/CodeReviews.Console.Calculator/Calculator.barakisbrown/Calculator.barakisbrown/obj/Debug/net7.0/Calculator.barakisbrown.AssemblyInfoInputs.cache
+/Users/barakis/Desktop/Development/ETC/NET/CodeReviews.Console.Calculator/Calculator.barakisbrown/Calculator.barakisbrown/obj/Debug/net7.0/Calculator.barakisbrown.AssemblyInfo.cs
+/Users/barakis/Desktop/Development/ETC/NET/CodeReviews.Console.Calculator/Calculator.barakisbrown/Calculator.barakisbrown/obj/Debug/net7.0/Calculator.barakisbrown.csproj.CoreCompileInputs.cache
+/Users/barakis/Desktop/Development/ETC/NET/CodeReviews.Console.Calculator/Calculator.barakisbrown/Calculator.barakisbrown/obj/Debug/net7.0/Calculator.barakisbrown.dll
+/Users/barakis/Desktop/Development/ETC/NET/CodeReviews.Console.Calculator/Calculator.barakisbrown/Calculator.barakisbrown/obj/Debug/net7.0/refint/Calculator.barakisbrown.dll
+/Users/barakis/Desktop/Development/ETC/NET/CodeReviews.Console.Calculator/Calculator.barakisbrown/Calculator.barakisbrown/obj/Debug/net7.0/Calculator.barakisbrown.pdb
+/Users/barakis/Desktop/Development/ETC/NET/CodeReviews.Console.Calculator/Calculator.barakisbrown/Calculator.barakisbrown/obj/Debug/net7.0/Calculator.barakisbrown.genruntimeconfig.cache
+/Users/barakis/Desktop/Development/ETC/NET/CodeReviews.Console.Calculator/Calculator.barakisbrown/Calculator.barakisbrown/obj/Debug/net7.0/ref/Calculator.barakisbrown.dll
