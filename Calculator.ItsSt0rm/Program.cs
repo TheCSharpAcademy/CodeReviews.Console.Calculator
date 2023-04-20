@@ -20,7 +20,7 @@ class Program
             string numInput2 = "";
             string menuOption = "";
             string operationSelected = "";
-            double previousOperation = 0;
+            double previousOperation = double.NaN;
             double result = 0;
 
             // Shows first menu
@@ -29,7 +29,7 @@ class Program
             menuOption = Console.ReadLine();
             Console.WriteLine(""); // Friendly linespacing.       
             while (calculator.readMenuOptions(menuOption))
-            {               
+            {
                 calculator.showMenuOptions();
                 menuOption = Console.ReadLine();
             }
@@ -39,25 +39,53 @@ class Program
             numInput1 = Console.ReadLine();
 
             double cleanNum1 = 0;
-            while (!double.TryParse(numInput1, out cleanNum1) && !numInput1.Equals("h"))
+            int operationSelectedClean1 = 0;
+            bool breakLoopFirstNumber = false;
+            while (!breakLoopFirstNumber)
             {
-                Console.Write("This is not valid input. Please enter an integer value: ");
+                if (!double.TryParse(numInput1, out cleanNum1) && !numInput1.Equals("h"))
+                {
+                    Console.Write("This is not valid input. Please enter a valid value: ");
+                }
+
+                if (numInput1.Equals("h"))
+                {
+                    calculator.showLatestCalculations();
+                    if (calculator.latestCalculationsCount() > 0)
+                    {
+                        Console.Write("Choose the number of the operation that you want to use: ");
+                        operationSelected = Console.ReadLine();
+
+                        while (!int.TryParse(operationSelected, out operationSelectedClean1))
+                        {
+                            Console.Write("This is not valid input. Please enter an available option: ");
+                            operationSelected = Console.ReadLine();
+                        }
+
+                        previousOperation = calculator.previousOperationResult(operationSelectedClean1);
+                        if (double.IsNaN(previousOperation))
+                        {
+                            Console.Write("This is not valid input. Please enter an available option: ");
+                        }
+                        else
+                        {
+                            cleanNum1 = previousOperation;
+                            break;
+                        }
+                    }
+                    else
+                    {
+                        Console.Write("Type a number and then press Enter: ");
+                    }
+                }
+
+                if (double.IsNormal(cleanNum1))
+                {
+                    break;
+                }
+
                 numInput1 = Console.ReadLine();
             }
-
-            if (numInput1.Equals("h"))
-            {
-                calculator.showLatestCalculations();
-                Console.Write("Choose the number of the operation that you want to use: ");
-                operationSelected = Console.ReadLine();
-
-                int cleanOption = 0;
-                
-                while (!int.TryParse(operationSelected, out cleanOption))
-                {
-                    
-                }
-            }           
 
             // Ask the user to type the second number.
             Console.Write("Type another number, and then press Enter: ");
