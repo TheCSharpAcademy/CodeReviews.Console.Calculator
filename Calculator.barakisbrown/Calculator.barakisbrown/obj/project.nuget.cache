@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "GuvRUfOi/r1H0ygQR5NHsEzkDOfrkOBeEnJkoApoQgJtC3R5F06N4tOp1GTH71k1rdwF6ceYuH+j+SjOD2z2Vg==",
+  "success": true,
+  "projectFilePath": "D:\\SRC\\C#\\CodeReviews.Console.Calculator\\Calculator.barakisbrown\\Calculator.barakisbrown\\Calculator.barakisbrown.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\barak\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512"
+  ],
+  "logs": []
+}
