@@ -39,49 +39,41 @@ class Program
             numInput1 = Console.ReadLine();
 
             double cleanNum1 = 0;
-            int operationSelectedClean1 = 0;
             bool breakLoopFirstNumber = false;
             while (!breakLoopFirstNumber)
             {
-                if (!double.TryParse(numInput1, out cleanNum1) && !numInput1.Equals("h"))
-                {
-                    Console.Write("This is not valid input. Please enter a valid value: ");
-                }
-
+                double.TryParse(numInput1, out cleanNum1);
                 if (numInput1.Equals("h"))
                 {
                     calculator.showLatestCalculations();
                     if (calculator.latestCalculationsCount() > 0)
                     {
+                        int operationSelectedClean1 = 0;
+
                         Console.Write("Choose the number of the operation that you want to use: ");
                         operationSelected = Console.ReadLine();
-
-                        while (!int.TryParse(operationSelected, out operationSelectedClean1))
+                                               
+                        while (!int.TryParse(operationSelected, out operationSelectedClean1) || double.IsNaN(previousOperation = calculator.previousOperationResult(operationSelectedClean1)))
                         {
                             Console.Write("This is not valid input. Please enter an available option: ");
-                            operationSelected = Console.ReadLine();
+                            operationSelected = Console.ReadLine();                            
                         }
 
-                        previousOperation = calculator.previousOperationResult(operationSelectedClean1);
-                        if (double.IsNaN(previousOperation))
-                        {
-                            Console.Write("This is not valid input. Please enter an available option: ");
-                        }
-                        else
-                        {
-                            cleanNum1 = previousOperation;
-                            break;
-                        }
+                        cleanNum1 = previousOperation;
+                        break;
                     }
                     else
                     {
                         Console.Write("Type a number and then press Enter: ");
                     }
                 }
-
-                if (double.IsNormal(cleanNum1))
+                else if (double.IsNormal(cleanNum1))
                 {
                     break;
+                }
+                else
+                {
+                    Console.Write("This is not valid input. Please enter a valid value: ");
                 }
 
                 numInput1 = Console.ReadLine();
