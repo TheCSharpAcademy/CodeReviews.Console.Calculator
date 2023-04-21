@@ -142,12 +142,10 @@ while (running)
     else if (user_input_menu == "h")
     {
         Console.WriteLine("Chose the number you want to operate on by it's index,\n if you want to return to the menu enter c");
-        {
             for (int i = 0; i < history.Count; i++)
             {
                 Console.WriteLine($"{i}. {history[i]}");
             }
-        }
         while (running_history)
         {
             user_input_menu = Console.ReadLine();
