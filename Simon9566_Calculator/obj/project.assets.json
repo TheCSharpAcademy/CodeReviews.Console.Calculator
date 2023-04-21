@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "G:\\VS\\repo\\Calculator\\Calcualtor_simple\\Calcualtor_simple.csproj",
-      "projectName": "Calcualtor_simple",
-      "projectPath": "G:\\VS\\repo\\Calculator\\Calcualtor_simple\\Calcualtor_simple.csproj",
+      "projectUniqueName": "G:\\VS\\repo\\CodeReviews.Console.Calculator\\Simon9566_Calculator\\Calculator.csproj",
+      "projectName": "Calculator",
+      "projectPath": "G:\\VS\\repo\\CodeReviews.Console.Calculator\\Simon9566_Calculator\\Calculator.csproj",
       "packagesPath": "C:\\Users\\Szymon\\.nuget\\packages\\",
-      "outputPath": "G:\\VS\\repo\\Calculator\\Calcualtor_simple\\obj\\",
+      "outputPath": "G:\\VS\\repo\\CodeReviews.Console.Calculator\\Simon9566_Calculator\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Szymon\\AppData\\Roaming\\NuGet\\NuGet.Config",

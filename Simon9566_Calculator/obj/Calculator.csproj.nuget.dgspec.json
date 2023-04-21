@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "G:\\VS\\repo\\Calculator\\Calculator.csproj": {}
+    "G:\\VS\\repo\\CodeReviews.Console.Calculator\\Simon9566_Calculator\\Calculator.csproj": {}
   },
   "projects": {
-    "G:\\VS\\repo\\Calculator\\Calculator.csproj": {
+    "G:\\VS\\repo\\CodeReviews.Console.Calculator\\Simon9566_Calculator\\Calculator.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "G:\\VS\\repo\\Calculator\\Calculator.csproj",
+        "projectUniqueName": "G:\\VS\\repo\\CodeReviews.Console.Calculator\\Simon9566_Calculator\\Calculator.csproj",
         "projectName": "Calculator",
-        "projectPath": "G:\\VS\\repo\\Calculator\\Calculator.csproj",
+        "projectPath": "G:\\VS\\repo\\CodeReviews.Console.Calculator\\Simon9566_Calculator\\Calculator.csproj",
         "packagesPath": "C:\\Users\\Szymon\\.nuget\\packages\\",
-        "outputPath": "G:\\VS\\repo\\Calculator\\obj\\",
+        "outputPath": "G:\\VS\\repo\\CodeReviews.Console.Calculator\\Simon9566_Calculator\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Szymon\\AppData\\Roaming\\NuGet\\NuGet.Config",

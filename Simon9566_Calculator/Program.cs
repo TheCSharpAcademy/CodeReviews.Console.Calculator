@@ -105,7 +105,7 @@ while (running)
     }
 
 
-    // Getting the result and displaying it, ADD THE RESULT TO HISTORY
+    // Getting the result and displaying it
     switch (operation)
     {
         case "a":   
@@ -172,4 +172,5 @@ while (running)
             }
         }
     }
+    user_input_menu = "";
 }
