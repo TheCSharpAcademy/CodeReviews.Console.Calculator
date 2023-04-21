@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.33516.290
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Calculator.Leo-Chaos", "Calculator.Leo-Chaos\Calculator.Leo-Chaos.csproj", "{8783CC41-0785-4F0A-92A8-6DD8A40C5602}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CalculatorLibrary", "CalculatorLibrary\CalculatorLibrary.csproj", "{4EBBE71C-AB5B-43AF-B802-4D9712819FFD}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8783CC41-0785-4F0A-92A8-6DD8A40C5602}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8783CC41-0785-4F0A-92A8-6DD8A40C5602}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8783CC41-0785-4F0A-92A8-6DD8A40C5602}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8783CC41-0785-4F0A-92A8-6DD8A40C5602}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4EBBE71C-AB5B-43AF-B802-4D9712819FFD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4EBBE71C-AB5B-43AF-B802-4D9712819FFD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4EBBE71C-AB5B-43AF-B802-4D9712819FFD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4EBBE71C-AB5B-43AF-B802-4D9712819FFD}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E934B0C2-3AAF-4C7C-A69D-BA4C6803D9E2}
+	EndGlobalSection
+EndGlobal
