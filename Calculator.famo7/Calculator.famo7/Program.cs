@@ -79,7 +79,14 @@ while (!endApp)
     }
 
     Console.WriteLine("------------------------\n");
-
+    Console.Write("Delete latest list? press (y/n) ");
+    string input = Console.ReadLine();
+    if (input == "y")
+    {
+        latest.Clear();
+        count = 0;
+    }
+    else Console.WriteLine("list not deleted.");
     // Wait for the user to respond before closing.
     Console.Write("Press 'n' and Enter to close the app, or press any other key and Enter to continue: ");
     if (Console.ReadLine() == "n") endApp = true;
