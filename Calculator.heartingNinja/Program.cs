@@ -38,12 +38,8 @@ namespace CalculatorProgram
                         Console.Write("Press 'c' and Enter to clear the results\n");
                         Console.Write("Press 'r' and Enter to use these results of your number inputs, use the number in list for number to use in the calculator \n");
                         string input = Console.ReadLine();
-
-                        if (input == "s")
-                        {
-                            // continue;
-                        }
-                        else if (input == "c")
+                       
+                        if (input == "c")
                         {
                             calculator.ClearResults();
                         }
