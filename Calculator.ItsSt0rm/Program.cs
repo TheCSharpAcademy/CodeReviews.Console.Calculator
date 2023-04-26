@@ -28,67 +28,19 @@ class Program
 
             menuOption = Console.ReadLine();
             Console.WriteLine(""); // Friendly linespacing.       
-            while (calculator.readMenuOptions(menuOption))
+            while (calculator.ReadMenuOptions(menuOption))
             {
                 calculator.showMenuOptions();
                 menuOption = Console.ReadLine();
             }
 
-            // Ask the user to type the first number.
-            Console.Write("Type a number or type h to use a previous result, and then press Enter: ");
-            numInput1 = Console.ReadLine();
-
-            double cleanNum1 = 0;
-            bool breakLoopFirstNumber = false;
-            while (!breakLoopFirstNumber)
-            {
-                double.TryParse(numInput1, out cleanNum1);
-                if (numInput1.Equals("h"))
-                {
-                    calculator.showLatestCalculations();
-                    if (calculator.latestCalculationsCount() > 0)
-                    {
-                        int operationSelectedClean1 = 0;
-
-                        Console.Write("Choose the number of the operation that you want to use: ");
-                        operationSelected = Console.ReadLine();
-                                               
-                        while (!int.TryParse(operationSelected, out operationSelectedClean1) || double.IsNaN(previousOperation = calculator.previousOperationResult(operationSelectedClean1)))
-                        {
-                            Console.Write("This is not valid input. Please enter an available option: ");
-                            operationSelected = Console.ReadLine();                            
-                        }
-
-                        cleanNum1 = previousOperation;
-                        break;
-                    }
-                    else
-                    {
-                        Console.Write("Type a number and then press Enter: ");
-                    }
-                }
-                else if (double.IsNormal(cleanNum1))
-                {
-                    break;
-                }
-                else
-                {
-                    Console.Write("This is not valid input. Please enter a valid value: ");
-                }
-
-                numInput1 = Console.ReadLine();
-            }
+            // Ask the user to type the first number.           
+            double cleanNum1 = calculator.ReadNumber();
+            Console.WriteLine("First number saved");
 
             // Ask the user to type the second number.
-            Console.Write("Type another number, and then press Enter: ");
-            numInput2 = Console.ReadLine();
-
-            double cleanNum2 = 0;
-            while (!double.TryParse(numInput2, out cleanNum2))
-            {
-                Console.Write("This is not valid input. Please enter an integer value: ");
-                numInput2 = Console.ReadLine();
-            }
+            double cleanNum2 = calculator.ReadNumber();
+           Console.WriteLine("Second number saved");
 
             // Ask the user to choose an operator.
             Console.WriteLine("Choose an operator from the following list:");
