@@ -28,10 +28,15 @@ class Program
 
             menuOption = Console.ReadLine();
             Console.WriteLine(""); // Friendly linespacing.       
-            while (calculator.ReadMenuOptions(menuOption))
+            while (!calculator.ReadMenuOptions(menuOption))
             {
-                calculator.showMenuOptions();
+                Console.Write("This is not valid input. Please enter an available option: ");
                 menuOption = Console.ReadLine();
+            }
+
+            if (menuOption.Equals("n"))
+            {
+                return;
             }
 
             // Ask the user to type the first number.           
