@@ -21,24 +21,24 @@ namespace CalculatorProgram
 
                 // Ask the user to type the first number.
                 Console.Write("Type a number, and then press Enter: ");
-                numInput1 = Console.ReadLine();
+                numInput1 = Console.ReadLine()!;
 
                 double cleanNum1 = 0;
                 while (!double.TryParse(numInput1, out cleanNum1))
                 {
                     Console.Write("This is not valid input. Please enter an integer value: ");
-                    numInput1 = Console.ReadLine();
+                    numInput1 = Console.ReadLine()!;
                 }
 
                 // Ask the user to type the second number.
                 Console.Write("Type another number, and then press Enter: ");
-                numInput2 = Console.ReadLine();
+                numInput2 = Console.ReadLine()!;
 
                 double cleanNum2 = 0;
                 while (!double.TryParse(numInput2, out cleanNum2))
                 {
                     Console.Write("This is not valid input. Please enter an integer value: ");
-                    numInput2 = Console.ReadLine();
+                    numInput2 = Console.ReadLine()!;
                 }
 
                 // Ask the user to choose an operator.
@@ -49,7 +49,7 @@ namespace CalculatorProgram
                 Console.WriteLine("\td - Divide");
                 Console.Write("Your option? ");
 
-                string op = Console.ReadLine();
+                string op = Console.ReadLine()!;
 
                 try
                 {
@@ -73,6 +73,7 @@ namespace CalculatorProgram
 
                 Console.WriteLine("\n"); // Friendly linespacing.
             }
+            calculator.Finish();
             return;
         }
     }
