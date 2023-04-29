@@ -21,26 +21,18 @@ namespace CalculatorProgram
                 double result = 0;
 
                 // Ask the user to type the first number.
-                Console.Write("Type a number, and then press Enter: ");
+                Console.Write("Type a number, or 'p' to choose a previous result, and then press Enter: ");
                 numInput1 = Console.ReadLine()!;
-
                 double cleanNum1 = 0;
-                while (!double.TryParse(numInput1, out cleanNum1))
-                {
-                    Console.Write("This is not valid input. Please enter an integer value: ");
-                    numInput1 = Console.ReadLine()!;
-                }
+                cleanNum1 = GetNumber(calculator, ref numInput1);
+
+
 
                 // Ask the user to type the second number.
-                Console.Write("Type another number, and then press Enter: ");
+                Console.Write("Type another number, or 'p' to choose a previous result, and then press Enter: ");
                 numInput2 = Console.ReadLine()!;
-
                 double cleanNum2 = 0;
-                while (!double.TryParse(numInput2, out cleanNum2))
-                {
-                    Console.Write("This is not valid input. Please enter an integer value: ");
-                    numInput2 = Console.ReadLine()!;
-                }
+                cleanNum2 = GetNumber(calculator, ref numInput2);
 
                 // Ask the user to choose an operator.
                 Console.WriteLine("Choose an operator from the following list:");
@@ -51,6 +43,16 @@ namespace CalculatorProgram
                 Console.Write("Your option? ");
 
                 string op = Console.ReadLine()!;
+                while (op == "d" && cleanNum2 == 0)
+                {
+                    Console.Write("Cannot divide by 0, Please enter a value: ");
+                    numInput2 = Console.ReadLine()!;
+                    while (!double.TryParse(numInput2, out cleanNum2))
+                    {
+                        Console.Write("This is not valid input. Please enter a value: ");
+                        numInput2 = Console.ReadLine()!;
+                    }
+                }
 
                 try
                 {
@@ -78,6 +80,37 @@ namespace CalculatorProgram
             }
             calculator.Finish();
             return;
+        }
+
+        private static double GetNumber(Calculator calculator, ref string numInput1)
+        {
+            double cleanNum1;
+            if (numInput1 == "p")
+            {
+                List<string> previousResults = new List<string>();
+                foreach (Calculation calc in calculator.calculations)
+                {
+                    Console.Write($"\t{calculator.calculations.IndexOf(calc) + 1}: ");
+                    Console.WriteLine(calc.ToString());
+                    previousResults.Add(calc.Result.ToString());
+                }
+                Console.Write("Select one: ");
+                numInput1 = Console.ReadLine()!;
+                while (int.Parse(numInput1) > previousResults.Count || int.Parse(numInput1) < 1)
+                {
+                    Console.Write("That is not a valid choice. Select another: ");
+                    numInput1 = Console.ReadLine()!;
+                }
+                numInput1 = previousResults[int.Parse(numInput1) - 1];
+            }
+
+            while (!double.TryParse(numInput1, out cleanNum1))
+            {
+                Console.Write("This is not valid input. Please enter a value: ");
+                numInput1 = Console.ReadLine()!;
+            }
+
+            return cleanNum1;
         }
     }
 }
