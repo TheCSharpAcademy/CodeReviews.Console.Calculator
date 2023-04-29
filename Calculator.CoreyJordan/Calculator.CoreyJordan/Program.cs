@@ -12,6 +12,7 @@ namespace CalculatorProgram
             Console.WriteLine("------------------------\n");
 
             Calculator calculator = new();
+            int useCount = 0;
             while (!endApp)
             {
                 // Declare variables and set to empty.
@@ -59,6 +60,7 @@ namespace CalculatorProgram
                         Console.WriteLine("This operation will result in a mathematical error.\n");
                     }
                     else Console.WriteLine("Your result: {0:0.##}\n", result);
+                    useCount++;
                 }
                 catch (Exception e)
                 {
@@ -66,6 +68,7 @@ namespace CalculatorProgram
                 }
 
                 Console.WriteLine("------------------------\n");
+                Console.WriteLine($"Times used: {useCount}");
 
                 // Wait for the user to respond before closing.
                 Console.Write("Press 'n' and Enter to close the app, or press any other key and Enter to continue: ");
