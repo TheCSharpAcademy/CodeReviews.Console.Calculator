@@ -21,8 +21,13 @@ namespace CalculatorProgram
                 double result = 0;
 
                 // Ask the user to type the first number.
-                Console.Write("Type a number, and then press Enter: ");
+                Console.Write("Type a number, and then press Enter, or simply press enter to use the last calculations result(defaults to 0): ");
                 numInput1 = Console.ReadLine();
+
+                if (numInput1 == "")
+                {
+                    numInput1 = calculator.GetCalculationNumber() > 0 ? calculator.GetLastResult().ToString() : "0";
+                }
 
                 double cleanNum1 = 0;
                 while (!double.TryParse(numInput1, out cleanNum1))
@@ -32,8 +37,13 @@ namespace CalculatorProgram
                 }
 
                 // Ask the user to type the second number.
-                Console.Write("Type another number, and then press Enter: ");
+                Console.Write("Type another number, and then press Enter, or simply press enter to use the last calculations result(defaults to 0): ");
                 numInput2 = Console.ReadLine();
+
+                if (numInput2 == "")
+                {
+                    numInput2 = calculator.GetCalculationNumber() > 0 ? calculator.GetLastResult().ToString() : "0";
+                }
 
                 double cleanNum2 = 0;
                 while (!double.TryParse(numInput2, out cleanNum2))

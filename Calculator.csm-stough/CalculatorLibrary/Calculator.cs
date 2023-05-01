@@ -5,7 +5,22 @@ namespace CalculatorLibrary
     public class Calculator
     {
 
+        public struct Calculation
+        {
+            public double left;
+            public double right;
+            public double result;
+
+            public Calculation(double left, double right, double resut)
+            {
+                this.left = left;
+                this.right = right;
+                this.result = resut;
+            }
+        }
+
         JsonWriter writer;
+        private List<Calculation> calculations;
 
         public Calculator()
         {
@@ -16,6 +31,8 @@ namespace CalculatorLibrary
             writer.WriteStartObject();
             writer.WritePropertyName("Operations");
             writer.WriteStartArray();
+
+            calculations = new List<Calculation>();
         }
 
         public double DoOperation(double num1, double num2, string op)
@@ -58,6 +75,8 @@ namespace CalculatorLibrary
             writer.WriteValue(result);
             writer.WriteEndObject();
 
+            calculations.Add(new Calculation(num1, num2, result));
+
             return result;
         }
 
@@ -66,6 +85,26 @@ namespace CalculatorLibrary
             writer.WriteEndArray();
             writer.WriteEndObject();
             writer.Close();
+        }
+
+        public int GetCalculationNumber()
+        {
+            return calculations.Count;
+        }
+
+        public void DeleteCalculations()
+        {
+            calculations.Clear();
+        }
+
+        public double GetLastResult()
+        {
+            return calculations[calculations.Count - 1].result;
+        }
+
+        public List<Calculation> GetCalculationList()
+        {
+            return calculations;
         }
     }
 }
