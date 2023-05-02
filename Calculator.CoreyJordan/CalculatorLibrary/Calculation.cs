@@ -14,6 +14,7 @@ public class Calculation
                 '*' => Operand1 * Operand2,
                 '/' => Operand1 / Operand2,
                 '^' => Math.Pow(Operand1, Operand2),
+                'r' => Math.Pow(Operand1, 1 / Operand2),
                 _ => Operand1 + Operand2,
             };
         }

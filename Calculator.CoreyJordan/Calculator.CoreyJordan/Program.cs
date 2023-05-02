@@ -62,7 +62,7 @@ namespace CalculatorProgram
 
         private static string GetOperation()
         {
-            string[] options = new[] {"A", "S", "M", "D", "P"  };
+            string[] options = new[] {"A", "S", "M", "D", "P", "R"  };
             string choice = string.Empty;
 
             while (options.Contains(choice) == false)
@@ -72,7 +72,8 @@ namespace CalculatorProgram
                 Console.WriteLine($"\t{options[1]} - Subtract");
                 Console.WriteLine($"\t{options[2]} - Multiply");
                 Console.WriteLine($"\t{options[3]} - Divide");
-                Console.WriteLine($"\t{options[4]} - To the Power OF");
+                Console.WriteLine($"\t{options[4]} - To the Power Of");
+                Console.WriteLine($"\t{options[5]} - Root");
                 Console.Write("Your option? ");
                 choice = Console.ReadLine()!.ToUpper();
                 if (options.Contains(choice) == false)

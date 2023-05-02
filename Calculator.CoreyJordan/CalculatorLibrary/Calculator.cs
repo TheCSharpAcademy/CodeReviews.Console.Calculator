@@ -60,6 +60,10 @@ namespace CalculatorLibrary
                     calculation.Operator = '^';
                     writer.WriteValue("TakeThePower");
                     break;
+                case "R":
+                    calculation.Operator = 'r';
+                    writer.WriteValue("Root");
+                    break;
                 // Return text for an incorrect option entry.
                 default:
                     break;
