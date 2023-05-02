@@ -5,10 +5,12 @@ namespace CalculatorLibrary
     public class Calculator
     {
         public List<Calculation> calculations { get; set; } = new();
+        public int UseCount { get; private set; }
 
         JsonWriter writer;
         public Calculator()
         {
+            UseCount = 0;
             StreamWriter logFile = File.CreateText("calculatorlog.json");
             logFile.AutoFlush = true;
             writer = new JsonTextWriter(logFile);
@@ -35,18 +37,18 @@ namespace CalculatorLibrary
             // Use a switch statement to do the math.
             switch (op)
             {
-                case "a":
+                case "A":
                     calculation.Operator = '+';
                     writer.WriteValue("Add");
                     break;
-                case "s":
+                case "S":
                     calculation.Operator = '-';
                     writer.WriteValue("Subtract");
                     break;
-                case "m":
+                case "M":
                     calculation.Operator = '*';
                     writer.WriteValue("Multiply"); break;
-                case "d":
+                case "D":
                     if (num2 != 0)
                     {
                         calculation.Operator = '/';
@@ -62,6 +64,7 @@ namespace CalculatorLibrary
             writer.WriteEndObject();
 
             calculations.Add(calculation);
+            UseCount++;
             return calculation.Result;
         }
 

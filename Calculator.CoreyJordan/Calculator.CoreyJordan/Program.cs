@@ -7,51 +7,21 @@ namespace CalculatorProgram
         static void Main(string[] args)
         {
             bool endApp = false;
-            // Display title as the C# console calculator app.
+            Calculator calculator = new();
+
             Console.WriteLine("Console Calculator in C#\r");
             Console.WriteLine("------------------------\n");
 
-            Calculator calculator = new();
-            int useCount = 0;
             while (!endApp)
             {
-                // Declare variables and set to empty.
-                string numInput1 = "";
-                string numInput2 = "";
-                double result = 0;
+                double cleanNum1 = GetNumber(calculator, "Enter a number ");
+                double cleanNum2 = GetNumber(calculator, "Enter another number ");
+                double result;
+                string op = GetOperation();
 
-                // Ask the user to type the first number.
-                Console.Write("Type a number, or 'p' to choose a previous result, and then press Enter: ");
-                numInput1 = Console.ReadLine()!;
-                double cleanNum1 = 0;
-                cleanNum1 = GetNumber(calculator, ref numInput1);
-
-
-
-                // Ask the user to type the second number.
-                Console.Write("Type another number, or 'p' to choose a previous result, and then press Enter: ");
-                numInput2 = Console.ReadLine()!;
-                double cleanNum2 = 0;
-                cleanNum2 = GetNumber(calculator, ref numInput2);
-
-                // Ask the user to choose an operator.
-                Console.WriteLine("Choose an operator from the following list:");
-                Console.WriteLine("\ta - Add");
-                Console.WriteLine("\ts - Subtract");
-                Console.WriteLine("\tm - Multiply");
-                Console.WriteLine("\td - Divide");
-                Console.Write("Your option? ");
-
-                string op = Console.ReadLine()!;
-                while (op == "d" && cleanNum2 == 0)
+                if (op == "D")
                 {
-                    Console.Write("Cannot divide by 0, Please enter a value: ");
-                    numInput2 = Console.ReadLine()!;
-                    while (!double.TryParse(numInput2, out cleanNum2))
-                    {
-                        Console.Write("This is not valid input. Please enter a value: ");
-                        numInput2 = Console.ReadLine()!;
-                    }
+                    cleanNum2 = PreventZeroDivision(calculator, cleanNum2);
                 }
 
                 try
@@ -62,19 +32,17 @@ namespace CalculatorProgram
                         Console.WriteLine("This operation will result in a mathematical error.\n");
                     }
                     else Console.WriteLine("Your result: {0:0.##}\n", result);
-                    useCount++;
                 }
                 catch (Exception e)
                 {
                     Console.WriteLine("Oh no! An exception occurred trying to do the math.\n - Details: " + e.Message);
                 }
 
-                Console.WriteLine("------------------------\n");
-                Console.WriteLine($"Times used: {useCount}");
+                Console.WriteLine("--------------------------");
+                Console.WriteLine($"Calculations performed: {calculator.UseCount}");
+                Console.WriteLine("--------------------------\n");
 
-                // Wait for the user to respond before closing.
-                Console.Write("Press 'n' and Enter to close the app, or press any other key and Enter to continue: ");
-                if (Console.ReadLine() == "n") endApp = true;
+                endApp = DisplayMenu (calculator);
 
                 Console.WriteLine("\n"); // Friendly linespacing.
             }
@@ -82,35 +50,124 @@ namespace CalculatorProgram
             return;
         }
 
-        private static double GetNumber(Calculator calculator, ref string numInput1)
+        private static double PreventZeroDivision(Calculator calc, double divisor)
         {
-            double cleanNum1;
-            if (numInput1 == "p")
+            while (divisor == 0)
             {
-                List<string> previousResults = new List<string>();
-                foreach (Calculation calc in calculator.calculations)
-                {
-                    Console.Write($"\t{calculator.calculations.IndexOf(calc) + 1}: ");
-                    Console.WriteLine(calc.ToString());
-                    previousResults.Add(calc.Result.ToString());
-                }
-                Console.Write("Select one: ");
-                numInput1 = Console.ReadLine()!;
-                while (int.Parse(numInput1) > previousResults.Count || int.Parse(numInput1) < 1)
-                {
-                    Console.Write("That is not a valid choice. Select another: ");
-                    numInput1 = Console.ReadLine()!;
-                }
-                numInput1 = previousResults[int.Parse(numInput1) - 1];
+                Console.WriteLine("Cannot divide by zero");
+                divisor = GetNumber(calc);
             }
-
-            while (!double.TryParse(numInput1, out cleanNum1))
-            {
-                Console.Write("This is not valid input. Please enter a value: ");
-                numInput1 = Console.ReadLine()!;
-            }
-
-            return cleanNum1;
+            return divisor;
         }
+
+        private static string GetOperation()
+        {
+            string[] options = new[] {"A", "S", "M", "D"  };
+            string choice = string.Empty;
+
+            while (options.Contains(choice) == false)
+            {
+                Console.WriteLine("Choose an operation from the following list:");
+                Console.WriteLine("\tA - Add");
+                Console.WriteLine("\tS - Subtract");
+                Console.WriteLine("\tM - Multiply");
+                Console.WriteLine("\tD - Divide");
+                Console.Write("Your option? ");
+                choice = Console.ReadLine()!.ToUpper();
+                if (options.Contains(choice) == false)
+                {
+                    Console.WriteLine("\nThat is not a valid choice\n");
+                }
+            }
+            Console.WriteLine();
+            return choice;
+        }
+
+        private static double GetNumber(Calculator calc, string prompt = "")
+        {
+            double output = 0;
+            bool isValid = false;
+
+            while (isValid == false)
+            {
+                Console.Write($"{prompt} (P - Previous result): ");
+                string input = Console.ReadLine()!;
+
+                if (input.ToUpper() == "P" && calc.calculations.Count > 0) 
+                {
+                    DisplayPreviousCalculations(calc);
+                    Console.Write("Choose a result: ");
+                    string choice = Console.ReadLine()!.ToUpper();
+                    char c = choice[0];
+                    //int index = (int)char.GetNumericValue(c);
+                    int index = c - 65;
+
+                    output = calc.calculations[index].Result;
+                    Console.WriteLine($"You chose {output}");
+                    isValid = true;
+                }
+                else if (double.TryParse(input, out output) == false)
+                {
+                    Console.WriteLine("That is not a valid number");
+                }
+                else
+                {
+                    isValid = true;
+                }
+            }
+            return output;
+        }
+
+        private static bool DisplayMenu(Calculator calculator)
+        {
+            string choice;
+            bool quit = false;
+            do
+            {
+                Console.WriteLine("Choose from the following options:");
+                Console.WriteLine("\tP: View previous calculations");
+                Console.WriteLine("\tC: Clear previous calculations");
+                Console.WriteLine("\tN: Perform a new calculation");
+                Console.WriteLine("\tQ: Quit");
+                Console.Write("Select an option: ");
+                choice = Console.ReadLine()!.ToUpper();
+
+                if (choice == "Q")
+                {
+                    quit = true;
+                }
+                else if (choice == "P")
+                {
+                    DisplayPreviousCalculations(calculator);
+                }
+                else if (choice == "C")
+                {
+                    Console.Clear();
+                    Console.WriteLine("Previous calculations deleted");
+                    Console.WriteLine();
+                    calculator.calculations.Clear();
+                    choice = "N";
+                }
+                else if (choice != "N")
+                {
+                    Console.Clear();
+                    Console.WriteLine("Sorry, that is not a valid option, please try again.");
+                }
+            } while (choice != "N" && choice != "Q");
+
+            return quit;
+        }
+
+        private static void DisplayPreviousCalculations(Calculator calculator)
+        {
+            Console.Clear();
+            foreach (Calculation calc in calculator.calculations)
+            {
+                Console.Write($"\t{Char.ConvertFromUtf32(calculator.calculations.IndexOf(calc) + 65)}: ");
+                Console.WriteLine(calc.ToString());
+                Console.WriteLine();
+            }
+        }
+
     }
 }
