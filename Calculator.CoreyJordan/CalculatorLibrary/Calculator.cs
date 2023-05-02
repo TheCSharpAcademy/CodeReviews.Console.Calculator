@@ -47,13 +47,18 @@ namespace CalculatorLibrary
                     break;
                 case "M":
                     calculation.Operator = '*';
-                    writer.WriteValue("Multiply"); break;
+                    writer.WriteValue("Multiply");
+                    break;
                 case "D":
                     if (num2 != 0)
                     {
                         calculation.Operator = '/';
                         writer.WriteValue("Divide");
                     }
+                    break;
+                case "P":
+                    calculation.Operator = '^';
+                    writer.WriteValue("TakeThePower");
                     break;
                 // Return text for an incorrect option entry.
                 default:
