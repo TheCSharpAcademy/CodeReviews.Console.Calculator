@@ -40,32 +40,43 @@ class Program
             Console.WriteLine("\tm - Multiply");
             Console.WriteLine("\td - Divide");
             Console.WriteLine("\tr - Square Root");
+            Console.WriteLine("\tp - Taking the power");
+            Console.WriteLine("\tt - 10x");
+            Console.WriteLine("\tz - Sin");
+            Console.WriteLine("\tc - Cos");
+            Console.WriteLine("\tx - Tan");
+            Console.WriteLine("\tv - Cot");
+            Console.WriteLine("\tb - Sec");
+            Console.WriteLine("\tn - Csc");
             Console.Write("Your option? ");
 
             string op = Console.ReadLine();
 
-            bool twoOperations = true;
-            if (op.Equals("a") || op.Equals("s") || op.Equals("m") || op.Equals("d"))
+            bool twoOperators = true;
+            if (op.Equals("a") || op.Equals("s") || op.Equals("m") || op.Equals("d") || op.Equals("p"))
             {
                 // Ask the user to type the first number.           
                 cleanNum1 = calculator.ReadNumber();
                 Console.WriteLine("First number saved");
+                Console.WriteLine(""); // Friednly linespacing.
 
                 // Ask the user to type the second number.
                 cleanNum2 = calculator.ReadNumber();
                 Console.WriteLine("Second number saved");
+                Console.WriteLine(); // Friednly linespacing.
             }
             else
             {
                 // Ask the user to type a number.           
                 cleanNum1 = calculator.ReadNumber();
                 Console.WriteLine("Number saved");
-                twoOperations = false;
+                Console.WriteLine(); // Friednly linespacing.
+                twoOperators = false;
             }            
 
             try
             {
-                result = twoOperations == true ? calculator.DoOperation(cleanNum1, cleanNum2, op) : calculator.DoOperation(cleanNum1, op);
+                result = (twoOperators == true) ? calculator.DoOperation(cleanNum1, cleanNum2, op) : calculator.DoOperation(cleanNum1, op);
                 if (double.IsNaN(result))
                 {
                     Console.WriteLine("This operation will result in a mathematical error.\n");
