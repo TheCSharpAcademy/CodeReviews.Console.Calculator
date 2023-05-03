@@ -1,7 +1,4 @@
 ﻿using CalculatorLibrary;
-using System.Collections.Generic;
-using System.Diagnostics.Metrics;
-using System.Diagnostics;
 
 class Program
 {
