@@ -19,7 +19,7 @@ class Program
             double cleanNum2 = 0;
 
             // Shows first menu
-            calculator.showMenuOptions();
+            calculator.ShowMenuOptions();
 
             menuOption = Console.ReadLine();
             Console.WriteLine(""); // Friendly linespacing.       

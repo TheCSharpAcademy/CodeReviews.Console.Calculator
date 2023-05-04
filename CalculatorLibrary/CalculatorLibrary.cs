@@ -155,7 +155,7 @@ namespace CalculatorLibrary
             Console.WriteLine("Latest calculations list is now empty");
         }
 
-        public void showMenuOptions()
+        public void ShowMenuOptions()
         {
             Console.WriteLine("Choose an operator from the following list:");
             Console.WriteLine("\tl - Show latest calculations");
