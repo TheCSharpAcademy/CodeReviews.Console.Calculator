@@ -1,7 +1,7 @@
 ﻿using CalculatorLibrary;
 
-double num1 = 0;
-double num2 = 0;
+double num1;
+double num2;
 var calculations = new List<double>();
 
 bool endApp = false;
@@ -47,7 +47,7 @@ Your option?");
         op = Console.ReadLine();
     }
 
-    PerformOperation(num1, num2, calculations, calculator, result, op);
+    PerformOperation(num1, num2, calculations, calculator, op);
 
     Console.WriteLine("--------------\n");
 
@@ -70,9 +70,10 @@ double CheckValidity( string? v ) {
     return Convert.ToDouble(v);
 }
 
-static double PerformOperation( double num1, double num2, List<double> calculations, Calculator calculator, double result, string op ) {
+static void PerformOperation( double num1, double num2, List<double> calculations, Calculator calculator, string op ) {
+
     try {
-        result = calculator.DoOperation(num1, num2, op);
+        var result = calculator.DoOperation(num1, num2, op);
         if (double.IsNaN(result)) {
             Console.WriteLine("This operation will result in error\n");
         } else {
@@ -82,8 +83,6 @@ static double PerformOperation( double num1, double num2, List<double> calculati
     } catch (Exception ex) {
         Console.WriteLine("An error ocurred");
     }
-
-    return result;
 }
 
 static double ReplaceNumber( List<double> calculations, double secondNumber ) {
