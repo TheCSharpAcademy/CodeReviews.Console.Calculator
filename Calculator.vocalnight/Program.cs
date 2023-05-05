@@ -13,8 +13,6 @@ Calculator calculator = new Calculator();
 
 while (!endApp) {
 
-    double result = 0;
-
     Console.WriteLine("Type a number, and then press Enter");
 
     num1 = CheckValidity(Console.ReadLine());
