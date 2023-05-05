@@ -4,7 +4,7 @@ namespace CalculatorLibrary
 {
     public class Calculator
     {
-        public List<Calculation> calculations { get; set; } = new();
+        public List<Calculation> Calculations { get; set; } = new();
         public int UseCount { get; private set; }
 
         JsonWriter writer;
@@ -72,7 +72,7 @@ namespace CalculatorLibrary
             writer.WriteValue(calculation.Result);
             writer.WriteEndObject();
 
-            calculations.Add(calculation);
+            Calculations.Add(calculation);
             UseCount++;
             return calculation.Result;
         }

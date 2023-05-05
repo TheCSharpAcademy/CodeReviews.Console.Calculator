@@ -15,9 +15,9 @@ namespace CalculatorProgram
             while (!endApp)
             {
                 double cleanNum1 = GetNumber(calculator, "Enter a number ");
+                string op = GetOperation();
                 double cleanNum2 = GetNumber(calculator, "Enter another number ");
                 double result;
-                string op = GetOperation();
 
                 if (op == "D")
                 {
@@ -95,16 +95,15 @@ namespace CalculatorProgram
                 Console.Write($"{prompt} (P - Previous result): ");
                 string input = Console.ReadLine()!;
 
-                if (input.ToUpper() == "P" && calc.calculations.Count > 0) 
+                if (input.ToUpper() == "P" && calc.Calculations.Count > 0) 
                 {
                     DisplayPreviousCalculations(calc);
                     Console.Write("Choose a result: ");
                     string choice = Console.ReadLine()!.ToUpper();
                     char c = choice[0];
-                    //int index = (int)char.GetNumericValue(c);
                     int index = c - 65;
 
-                    output = calc.calculations[index].Result;
+                    output = calc.Calculations[index].Result;
                     Console.WriteLine($"You chose {output}");
                     isValid = true;
                 }
@@ -147,7 +146,7 @@ namespace CalculatorProgram
                     Console.Clear();
                     Console.WriteLine("Previous calculations deleted");
                     Console.WriteLine();
-                    calculator.calculations.Clear();
+                    calculator.Calculations.Clear();
                     choice = "N";
                 }
                 else if (choice != "N")
@@ -163,9 +162,9 @@ namespace CalculatorProgram
         private static void DisplayPreviousCalculations(Calculator calculator)
         {
             Console.Clear();
-            foreach (Calculation calc in calculator.calculations)
+            foreach (Calculation calc in calculator.Calculations)
             {
-                Console.Write($"\t{Char.ConvertFromUtf32(calculator.calculations.IndexOf(calc) + 65)}: ");
+                Console.Write($"\t{Char.ConvertFromUtf32(calculator.Calculations.IndexOf(calc) + 65)}: ");
                 Console.WriteLine(calc.ToString());
                 Console.WriteLine();
             }
