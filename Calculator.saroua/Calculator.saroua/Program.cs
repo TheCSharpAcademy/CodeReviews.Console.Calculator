@@ -12,6 +12,12 @@ class Program
 
         while (!endApp)
         {
+            // Diplay the title at every new calculation
+            if (runAmount != 0)
+            {
+                Console.WriteLine("Console Calculator in C#\r");
+                Console.WriteLine("------------------------\n");
+            }
             // Declare variables and set to empty.
             string numInput1 = "";
             string numInput2 = "";
@@ -48,7 +54,6 @@ class Program
             Console.Write("Your option? ");
 
             string op = Console.ReadLine();
-
             try
             {
                 result = Calculatore.DoOperation(cleanNum1, cleanNum2, op);
@@ -60,7 +65,6 @@ class Program
                 {
                     //Increments the total of use of the calculator
                     helpers.AddToCalculation(cleanNum1, cleanNum2, op);
-                    helpers.showPastCalculation();
                     runAmount = helpers.IncrementTotalUse(runAmount);
                     Console.WriteLine("Your result: {0:0.##}\n", result);
                 }
@@ -70,13 +74,39 @@ class Program
                 Console.WriteLine("Oh no! An exception occurred trying to do the math.\n - Details: " + e.Message);
             }
 
+
             Console.WriteLine("------------------------\n");
 
             // Wait for the user to respond before closing.
-            Console.Write("Press 'n' and Enter to close the app, or press any other key and Enter to continue: ");
-            if (Console.ReadLine() == "n") endApp = true;
+            Console.Write("Press 'v' to see your calcultation history\nPress 'T' to see how much you've used the calculator\nPress 'n' to close the app\nPress any other key and Enter to continue: ");
+            string userAnswer = Console.ReadLine().ToLower();
+            switch (userAnswer)
+            {
+                case "n":
+                    endApp = true;
+                    break;
+                case "v":
+                    Console.Clear();
+                    Console.WriteLine("Previous calculations:");
+                    helpers.showPastCalculation();
+                    Console.WriteLine("\nPress any key to continue");
+                    Console.ReadLine();
+                    Console.Clear();
+                    break;
+                case "t":
+                    Console.Clear();
+                    Console.WriteLine("Amount of time you've used the calculator:");
+                    Console.WriteLine(runAmount);
+                    Console.WriteLine("\nPress any key to continue");
+                    Console.ReadLine();
+                    Console.Clear();
+                    break;
+                default:
+                    Console.Clear();
+                    break;
+            }
 
-            Console.WriteLine("\n"); // Friendly linespacing.
+            //Console.WriteLine("\n"); // Friendly linespacing.
         }
         return;
     }
