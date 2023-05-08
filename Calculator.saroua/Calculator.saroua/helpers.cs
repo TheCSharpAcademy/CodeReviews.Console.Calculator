@@ -17,12 +17,13 @@ internal class helpers
 
     };
 
-    internal static void AddToCalculation(double num1, double num2, string op) {
+    internal static void AddToCalculation(double num1, double num2, string op, double result) {
         calculation.Add(new Calculation
         {
             Num1 = num1,
             Num2 = num2,
-            Op = op
+            Op = op,
+            Result = result
         });
     }
 
@@ -30,25 +31,22 @@ internal class helpers
 
     internal static void showPastCalculation()
     {
+        int i = 0;
         foreach (Calculation calculation in calculation)
         {
-            double result = 0;
+            i++;
             switch (calculation.Op) {
                 case "a":
-                    result = calculation.Num1 + calculation.Num2;
-                    Console.WriteLine($"{calculation.Num1} + {calculation.Num2} = {result}");
+                    Console.WriteLine($"{i}: {calculation.Num1} + {calculation.Num2} = {calculation.Result}");
                     break;
                 case "m":
-                    result = calculation.Num1 * calculation.Num2;
-                    Console.WriteLine($"{calculation.Num1} * {calculation.Num2} = {result}");
+                    Console.WriteLine($"{i}: {calculation.Num1} * {calculation.Num2} = {calculation.Result}");
                     break;
                 case "s":
-                    result = calculation.Num1 - calculation.Num2;
-                    Console.WriteLine($"{calculation.Num1} - {calculation.Num2} = {result}");
+                    Console.WriteLine($"{i}: {calculation.Num1} - {calculation.Num2} = {calculation.Result}");
                     break;
                 case "d":
-                    result = calculation.Num1 / calculation.Num2;
-                    Console.WriteLine($"{calculation.Num1} / {calculation.Num2} = {result}");
+                    Console.WriteLine($"{i}: {calculation.Num1} / {calculation.Num2} = {calculation.Result}");
                     break;
             }
         }

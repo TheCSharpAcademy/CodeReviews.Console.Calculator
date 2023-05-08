@@ -5,6 +5,8 @@ class Program
     static void Main(string[] args)
     {
         int runAmount = 0;
+        double reuseResult = 0;
+        bool reuseResultBool = false;
         bool endApp = false;
         // Display title as the C# console calculator app.
         Console.WriteLine("Console Calculator in C#\r");
@@ -24,14 +26,29 @@ class Program
             double result = 0;
 
             // Ask the user to type the first number.
-            Console.Write("Type a number, and then press Enter: ");
-            numInput1 = Console.ReadLine();
+            if(reuseResultBool == false)
+            {
+                Console.Write("Type a number, and then press Enter: ");
+                numInput1 = Console.ReadLine();
+            }
+            else
+            {
+                numInput1 = $"{reuseResult}";
+            }
 
             double cleanNum1 = 0;
-            while (!double.TryParse(numInput1, out cleanNum1))
+            if (reuseResultBool == false)
             {
-                Console.Write("This is not valid input. Please enter an integer value: ");
-                numInput1 = Console.ReadLine();
+                while (!double.TryParse(numInput1, out cleanNum1))
+                {
+                    Console.Write("This is not valid input. Please enter an integer value: ");
+                    numInput1 = Console.ReadLine();
+                }
+            }
+            else
+            {
+                cleanNum1 = reuseResult;
+                reuseResultBool = false;
             }
 
             // Ask the user to type the second number.
@@ -64,7 +81,7 @@ class Program
                 else
                 {
                     //Increments the total of use of the calculator
-                    helpers.AddToCalculation(cleanNum1, cleanNum2, op);
+                    helpers.AddToCalculation(cleanNum1, cleanNum2, op, result);
                     runAmount = helpers.IncrementTotalUse(runAmount);
                     Console.WriteLine("Your result: {0:0.##}\n", result);
                 }
@@ -89,8 +106,18 @@ class Program
                     Console.Clear();
                     Console.WriteLine("Previous calculations:");
                     helpers.showPastCalculation();
-                    Console.WriteLine("\nPress any key to continue");
-                    Console.ReadLine();
+                    Console.WriteLine("\nPress enter to continue or enter the number of the calculation to reuse it's result:");
+                    string calculationReused = Console.ReadLine();
+                    if (string.IsNullOrEmpty(calculationReused))
+                    {
+                        break;
+                    }
+                    else
+                    {
+                        int calculationReused2 = Int32.Parse(calculationReused);
+                        reuseResult = helpers.calculation[calculationReused2 - 1].Result;
+                        reuseResultBool = true;
+                    }
                     Console.Clear();
                     break;
                 case "t":
