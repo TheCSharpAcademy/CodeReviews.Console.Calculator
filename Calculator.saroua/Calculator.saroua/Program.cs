@@ -59,6 +59,8 @@ class Program
                 else
                 {
                     //Increments the total of use of the calculator
+                    helpers.AddToCalculation(cleanNum1, cleanNum2, op);
+                    helpers.showPastCalculation();
                     runAmount = helpers.IncrementTotalUse(runAmount);
                     Console.WriteLine("Your result: {0:0.##}\n", result);
                 }
