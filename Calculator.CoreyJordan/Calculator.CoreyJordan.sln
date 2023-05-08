@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.33516.290
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Calculator.CoreyJordan", "Calculator.CoreyJordan\Calculator.CoreyJordan.csproj", "{0459B852-1EA1-4727-8AEA-7D0994CC8779}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CalculatorLibrary", "CalculatorLibrary\CalculatorLibrary.csproj", "{A0C3910F-9319-4FB5-8D9B-03F1A0673F73}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0459B852-1EA1-4727-8AEA-7D0994CC8779}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0459B852-1EA1-4727-8AEA-7D0994CC8779}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0459B852-1EA1-4727-8AEA-7D0994CC8779}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0459B852-1EA1-4727-8AEA-7D0994CC8779}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A0C3910F-9319-4FB5-8D9B-03F1A0673F73}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A0C3910F-9319-4FB5-8D9B-03F1A0673F73}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A0C3910F-9319-4FB5-8D9B-03F1A0673F73}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A0C3910F-9319-4FB5-8D9B-03F1A0673F73}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {826575B2-524F-49FB-8E5E-03F64618BCA3}
+	EndGlobalSection
+EndGlobal

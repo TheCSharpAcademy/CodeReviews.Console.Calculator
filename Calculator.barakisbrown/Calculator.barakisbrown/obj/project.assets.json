@@ -73,23 +73,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\barak\\.nuget\\packages\\": {},
+    "C:\\Users\\corey\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\SRC\\C#\\CodeReviews.Console.Calculator\\Calculator.barakisbrown\\Calculator.barakisbrown\\Calculator.barakisbrown.csproj",
+      "projectUniqueName": "E:\\Projects\\C_Sharp_Academy\\CodeReviews.Console.Calculator\\Calculator.barakisbrown\\Calculator.barakisbrown\\Calculator.barakisbrown.csproj",
       "projectName": "Calculator.barakisbrown",
-      "projectPath": "D:\\SRC\\C#\\CodeReviews.Console.Calculator\\Calculator.barakisbrown\\Calculator.barakisbrown\\Calculator.barakisbrown.csproj",
-      "packagesPath": "C:\\Users\\barak\\.nuget\\packages\\",
-      "outputPath": "D:\\SRC\\C#\\CodeReviews.Console.Calculator\\Calculator.barakisbrown\\Calculator.barakisbrown\\obj\\",
+      "projectPath": "E:\\Projects\\C_Sharp_Academy\\CodeReviews.Console.Calculator\\Calculator.barakisbrown\\Calculator.barakisbrown\\Calculator.barakisbrown.csproj",
+      "packagesPath": "C:\\Users\\corey\\.nuget\\packages\\",
+      "outputPath": "E:\\Projects\\C_Sharp_Academy\\CodeReviews.Console.Calculator\\Calculator.barakisbrown\\Calculator.barakisbrown\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\barak\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\corey\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -98,15 +98,14 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "net7.0": {
           "targetAlias": "net7.0",
           "projectReferences": {
-            "D:\\SRC\\C#\\CodeReviews.Console.Calculator\\Calculator.barakisbrown\\CalculatorLibrary\\CalculatorLibrary.csproj": {
-              "projectPath": "D:\\SRC\\C#\\CodeReviews.Console.Calculator\\Calculator.barakisbrown\\CalculatorLibrary\\CalculatorLibrary.csproj"
+            "E:\\Projects\\C_Sharp_Academy\\CodeReviews.Console.Calculator\\Calculator.barakisbrown\\CalculatorLibrary\\CalculatorLibrary.csproj": {
+              "projectPath": "E:\\Projects\\C_Sharp_Academy\\CodeReviews.Console.Calculator\\Calculator.barakisbrown\\CalculatorLibrary\\CalculatorLibrary.csproj"
             }
           }
         }
@@ -136,7 +135,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.203\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.202\\RuntimeIdentifierGraph.json"
       }
     }
   }
