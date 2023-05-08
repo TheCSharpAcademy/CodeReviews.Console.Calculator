@@ -1,7 +1,10 @@
-﻿class Program
+﻿using Calculator.saroua;
+
+class Program
 {
     static void Main(string[] args)
     {
+        int runAmount = 0;
         bool endApp = false;
         // Display title as the C# console calculator app.
         Console.WriteLine("Console Calculator in C#\r");
@@ -48,12 +51,17 @@
 
             try
             {
-                result = Calculator.DoOperation(cleanNum1, cleanNum2, op);
+                result = Calculatore.DoOperation(cleanNum1, cleanNum2, op);
                 if (double.IsNaN(result))
                 {
                     Console.WriteLine("This operation will result in a mathematical error.\n");
                 }
-                else Console.WriteLine("Your result: {0:0.##}\n", result);
+                else
+                {
+                    //Increments the total of use of the calculator
+                    runAmount = helpers.IncrementTotalUse(runAmount);
+                    Console.WriteLine("Your result: {0:0.##}\n", result);
+                }
             }
             catch (Exception e)
             {
