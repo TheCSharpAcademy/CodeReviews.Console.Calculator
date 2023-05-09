@@ -69,6 +69,10 @@ class Program
             Console.WriteLine("\tm - Multiply");
             Console.WriteLine("\td - Divide");
             Console.WriteLine("\tp - Power");
+            Console.WriteLine("\tsr - Square root of the 1st Number");
+            Console.WriteLine("\tsin - Sine");
+            Console.WriteLine("\tcos - Cosinus");
+            Console.WriteLine("\ttan- Tangeant");
             Console.Write("Your option? ");
 
             string op = Console.ReadLine();

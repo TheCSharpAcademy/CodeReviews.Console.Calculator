@@ -48,6 +48,21 @@ internal class helpers
                 case "d":
                     Console.WriteLine($"{i}: {calculation.Num1} / {calculation.Num2} = {calculation.Result}");
                     break;
+                case "p":
+                    Console.WriteLine($"{i}: {calculation.Num1} ^ {calculation.Num2} = {calculation.Result}");
+                    break;
+                case "sr":
+                    Console.WriteLine($"{i}: Square root of {calculation.Num1} is {calculation.Result}");
+                    break;
+                case "sin":
+                    Console.WriteLine($"{i}: Sin({calculation.Num1}) = {calculation.Result}");
+                    break;
+                case "cos":
+                    Console.WriteLine($"{i}: Cos({calculation.Num1}) = {calculation.Result}");
+                    break;
+                case "tan":
+                    Console.WriteLine($"{i}: Tan({calculation.Num1}) = {calculation.Result}");
+                    break;
             }
         }
     }

@@ -23,8 +23,20 @@
                     result = num1 / num2;
                 }
                 break;
+            case "sr":
+                result = Math.Sqrt(num1);
+                break;
             case "p":
                 result = Math.Pow(num1, num2);
+                break;
+            case "sin":
+                result = Math.Sin(num1);
+                break;
+            case "cos":
+                result = Math.Cos(num1);
+                break;
+            case "tan":
+                result = Math.Tan(num1);
                 break;
             // Return text for an incorrect option entry.
             default:
