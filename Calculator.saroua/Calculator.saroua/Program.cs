@@ -86,8 +86,8 @@ class Program
                 else
                 {
                     //Increments the total of use of the calculator
-                    helpers.AddToCalculation(cleanNum1, cleanNum2, op, result);
-                    runAmount = helpers.IncrementTotalUse(runAmount);
+                    Helpers.AddToCalculation(cleanNum1, cleanNum2, op, result);
+                    runAmount = Helpers.IncrementTotalUse(runAmount);
                     Console.WriteLine("Your result: {0:0.##}\n", result);
                 }
             }
@@ -110,7 +110,7 @@ class Program
                 case "v":
                     Console.Clear();
                     Console.WriteLine("Previous calculations:");
-                    helpers.showPastCalculation();
+                    Helpers.ShowPastCalculation();
                     Console.WriteLine("\nPress enter to continue or enter the number of the calculation to reuse it's result:");
                     string calculationReused = Console.ReadLine();
                     if (string.IsNullOrEmpty(calculationReused))
@@ -120,7 +120,7 @@ class Program
                     else
                     {
                         int calculationReused2 = Int32.Parse(calculationReused);
-                        reuseResult = helpers.calculation[calculationReused2 - 1].Result;
+                        reuseResult = Helpers.calculation[calculationReused2 - 1].Result;
                         reuseResultBool = true;
                     }
                     Console.Clear();

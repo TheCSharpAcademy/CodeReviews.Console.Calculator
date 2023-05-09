@@ -2,7 +2,7 @@
 
 namespace Calculator.saroua;
 
-internal class helpers
+internal class Helpers
 {
     //Method that returns the amount of calculator uses incremented by one
     internal static int IncrementTotalUse(int runAmount)
@@ -29,7 +29,7 @@ internal class helpers
 
     //shows the past calculations and store the result in the variable result
 
-    internal static void showPastCalculation()
+    internal static void ShowPastCalculation()
     {
         int i = 0;
         foreach (Calculation calculation in calculation)
