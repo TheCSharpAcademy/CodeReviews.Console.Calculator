@@ -23,6 +23,9 @@
                     result = num1 / num2;
                 }
                 break;
+            case "p":
+                result = Math.Pow(num1, num2);
+                break;
             // Return text for an incorrect option entry.
             default:
                 break;
