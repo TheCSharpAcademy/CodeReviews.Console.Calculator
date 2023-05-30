@@ -43,6 +43,7 @@ namespace MeksCalculator
         {
             bool endApp = false;
 
+            Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine("Mek's Calculator\r");
             Console.WriteLine("----------------------------");
 
@@ -52,26 +53,31 @@ namespace MeksCalculator
                 string numInput2 = "";
                 double result = 0;
 
+                Console.ForegroundColor = ConsoleColor.White;
                 Console.Write("Enter First Number and Press Enter: ");
                 numInput1 = Console.ReadLine();
 
                 double cleanNum1 = 0;
                 while (!double.TryParse(numInput1, out cleanNum1))
                 {
+                    Console.ForegroundColor = ConsoleColor.Red;
                     Console.Write("This is not a valid input. Please eneter an integer value: ");
                     numInput1 = Console.ReadLine();
                 }
 
+                Console.ForegroundColor = ConsoleColor.White;
                 Console.Write("Enter Second Number and Press Enter: ");
                 numInput2 = Console.ReadLine();
 
                 double cleanNum2 = 0;
                 while (!double.TryParse((string)numInput2, out cleanNum2))
                 {
+                    Console.ForegroundColor = ConsoleColor.Red;
                     Console.Write("This is not a valid input. Please Enter an integer value: ");
                     numInput2 = Console.ReadLine();
                 }
 
+                Console.ForegroundColor = ConsoleColor.White;
                 Console.WriteLine("Choose an operator from the following list:");
                 Console.WriteLine("\ta - Add");
                 Console.WriteLine("\tb - Subtract");
@@ -86,18 +92,22 @@ namespace MeksCalculator
                     result = Calculator.DoOperation(cleanNum1, cleanNum2, op);
                     if (double.IsNaN(result))
                     {
+                        Console.ForegroundColor = ConsoleColor.Yellow;
                         Console.WriteLine("This operation will result in a mathematical error.\n");
                     }
                     else
                     {
+                        Console.ForegroundColor = ConsoleColor.White;
                         Console.WriteLine("Your Result: {0:0.##}\n", result);
                     }
                 }
                 catch (Exception e)
                 {
+                    Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine("Oh No! An exception occured trying to do the math.\n - Details: " + e.Message);
                 }
 
+                Console.ForegroundColor = ConsoleColor.White;
                 Console.WriteLine("---------------------------");
 
                 Console.Write("Press 'n' and Enter to close the app, or press any other key and Enter to continue: ");
