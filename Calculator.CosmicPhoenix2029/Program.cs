@@ -1,7 +1,4 @@
-﻿using System;
-using System.Diagnostics.Contracts;
-
-namespace CalculatorProgram;
+﻿namespace CalculatorProgram;
 
 class Program
 {
