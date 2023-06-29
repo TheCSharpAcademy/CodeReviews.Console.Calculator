@@ -5,7 +5,7 @@
         public static double DoOperation(double num1, double num2, string op)
         {
             double result = double.NaN; // Default value is "not-a-number" if an operation, such as division, could result in an error.
-            string operation = "";
+            string operation;
             // Use a switch statement to do the math.
             switch (op)
             {
