@@ -4,7 +4,7 @@
     {
         public static void Main(string[] args)
         {
-            string operation = "";
+            string operation;
             var counter = 0;
             var calcUses = 0;
             bool endApp = false;
