@@ -6,7 +6,7 @@ For your second project you'll build a Console Calculator App with the help of M
 It will also serve as practice in a very important skill: following written documentation. This is something you’ll be doing on a regular basis as a professional developer, so it’s essential that you’re comfortable applying text-based instructions when developing software.
 
 ## Requirements
-  -  [ ] Complete the following tutorial: Create a Calculator App (Microsoft Docs)
+  -  [x] Complete the following tutorial: Create a Calculator App (Microsoft Docs)
 
  ## Challenges
   -  [ ] Create a functionality that will count the amount of times the calculator was used.
