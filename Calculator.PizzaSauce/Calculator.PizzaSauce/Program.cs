@@ -61,26 +61,26 @@
                 // Ask the user to type the first number.
                 Console.Write("Type a number or press h to retrieve a previous result, and then press Enter: ");
                 numInput1 = Console.ReadLine();
-                ProcessInput(numInput1);
+                numInput1 = ProcessInput(numInput1);
 
                 while (!double.TryParse(numInput1, out cleanNum1))
                 {
                     Console.Write("This is not valid input. Please enter an integer value or press h to retrieve a previous result: ");
                     numInput1 = Console.ReadLine();
-                    ProcessInput(numInput1);
+                    numInput1 = ProcessInput(numInput1);
                 }
                 if (operation != "sqrt")
                 {
                     // Ask the user to type the second number.
                     Console.Write("Type another number or press h to retrieve a previous result, and then press Enter: ");
                     numInput2 = Console.ReadLine();
-                    ProcessInput(numInput2);
+                    numInput2 = ProcessInput(numInput2);
 
                     while (!double.TryParse(numInput2, out cleanNum2))
                     {
-                        Console.Write("This is not valid input. Please enter an integer value or press h to retrieve a previous result: ");
+                        Console.Write("This is not valid input. Please enter a value or press h to retrieve a previous result: ");
                         numInput2 = Console.ReadLine();
-                        ProcessInput(numInput2);
+                        numInput2 = ProcessInput(numInput2);
                     }
                 }
 
@@ -133,7 +133,7 @@
             Console.WriteLine("\tq - Square Root");
             Console.WriteLine("\tp - Taking the Power");
         }
-        static void ProcessInput(string input)
+        static string ProcessInput(string input)
         {
             if (input == "h" && Helpers.calcs.Count != 0)
             {
@@ -151,6 +151,7 @@
                 Console.WriteLine("History Cleared. Please input an integer: ");
                 input = Console.ReadLine();
             }
+            return input;
         }
     }
 }
