@@ -79,11 +79,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\João Silva\\source\\repos\\C# academy course\\CalculatorAppJMS\\CalculatorAppJMS\\CalculatorAppJMS.csproj",
+      "projectUniqueName": "C:\\Users\\João Silva\\source\\repos\\C# academy course\\C# academy - GitHub Review Repository\\CodeReviews.Console.Calculator\\CalculatorAppJMS\\CalculatorAppJMS\\CalculatorAppJMS.csproj",
       "projectName": "CalculatorAppJMS",
-      "projectPath": "C:\\Users\\João Silva\\source\\repos\\C# academy course\\CalculatorAppJMS\\CalculatorAppJMS\\CalculatorAppJMS.csproj",
+      "projectPath": "C:\\Users\\João Silva\\source\\repos\\C# academy course\\C# academy - GitHub Review Repository\\CodeReviews.Console.Calculator\\CalculatorAppJMS\\CalculatorAppJMS\\CalculatorAppJMS.csproj",
       "packagesPath": "C:\\Users\\João Silva\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\João Silva\\source\\repos\\C# academy course\\CalculatorAppJMS\\CalculatorAppJMS\\obj\\",
+      "outputPath": "C:\\Users\\João Silva\\source\\repos\\C# academy course\\C# academy - GitHub Review Repository\\CodeReviews.Console.Calculator\\CalculatorAppJMS\\CalculatorAppJMS\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -105,8 +105,8 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "C:\\Users\\João Silva\\source\\repos\\C# academy course\\CalculatorAppJMS\\CalculatorLibrary\\CalculatorLibrary.csproj": {
-              "projectPath": "C:\\Users\\João Silva\\source\\repos\\C# academy course\\CalculatorAppJMS\\CalculatorLibrary\\CalculatorLibrary.csproj"
+            "C:\\Users\\João Silva\\source\\repos\\C# academy course\\C# academy - GitHub Review Repository\\CodeReviews.Console.Calculator\\CalculatorAppJMS\\CalculatorLibrary\\CalculatorLibrary.csproj": {
+              "projectPath": "C:\\Users\\João Silva\\source\\repos\\C# academy course\\C# academy - GitHub Review Repository\\CodeReviews.Console.Calculator\\CalculatorAppJMS\\CalculatorLibrary\\CalculatorLibrary.csproj"
             }
           }
         }

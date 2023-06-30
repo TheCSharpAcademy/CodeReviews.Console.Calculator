@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "lpGfQkxav3PsDUEdB01Zwdhzsx72LopCTZVAiMcp2gEyFq0wUJHOoaHkRjazWj2EKmirHIQXimCf2ZpHuzjYNQ==",
+  "dgSpecHash": "eUIcXADitTLMVLhwhkDBnBs8DLnHro9VFIH82AxqoR6Nam+KqdI0l5iaXSdz+YP8b0iMA0aBW2oMYhEjvOkXEw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\João Silva\\source\\repos\\C# academy course\\CalculatorAppJMS\\CalculatorLibrary\\CalculatorLibrary.csproj",
+  "projectFilePath": "C:\\Users\\João Silva\\source\\repos\\C# academy course\\C# academy - GitHub Review Repository\\CodeReviews.Console.Calculator\\CalculatorAppJMS\\CalculatorLibrary\\CalculatorLibrary.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\João Silva\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512"
   ],

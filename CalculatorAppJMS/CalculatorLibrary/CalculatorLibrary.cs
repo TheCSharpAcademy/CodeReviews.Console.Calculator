@@ -1,6 +1,4 @@
 ﻿using Newtonsoft.Json;
-using System.Buffers;
-using System.Diagnostics;
 using static CalculatorLibrary.CalculationsRecord;
 
 namespace CalculatorLibrary;
@@ -103,12 +101,12 @@ namespace CalculatorLibrary;
         OperationRecord operationRecord = new OperationRecord
         {
             Id = operationId,
-            numA1 = num1A,
-            operation = operationA,
+            NumA1 = num1A,
+            Operation = operationA,
             NumA2 = num2A,
-            resultA = resultA
+            ResultA = resultA
         };
-        operationsList.Add(operationRecord); //adds the operation record to the operationsList that we are using
+        operationsList.Add(operationRecord);
         operationId++;
         return resultA;
     }
@@ -225,7 +223,7 @@ namespace CalculatorLibrary;
         {
             if (record.Id == idChosen)
             {
-                result = record.resultA;
+                result = record.ResultA;
             }
         }
         return result;

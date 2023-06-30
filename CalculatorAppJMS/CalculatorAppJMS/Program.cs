@@ -5,7 +5,7 @@ bool endApp = false;
 Calculator calculator = new Calculator();
 int timesCalculatorUsed = 0;
 string userOption;
-bool gag = false;
+bool sillyJoke = false;
 
 while (endApp == false)
 {
@@ -14,7 +14,7 @@ while (endApp == false)
 
     if (timesCalculatorUsed == 2)
     {
-        gag = true;
+        sillyJoke = true;
     }
 
     Console.WriteLine("Welcome! This is the console calculator App");
@@ -34,7 +34,7 @@ while (endApp == false)
     {
         Console.WriteLine("Invalid input!");
         userOption = Console.ReadLine();
-    };
+    }
 
     if(userOption == "n")
     {
@@ -42,14 +42,14 @@ while (endApp == false)
     }
     else if(userOption == "t")
     {
-        if(gag == true)
+        if(sillyJoke == true)
         {
             Console.Clear();
             Console.WriteLine($"The calculator was used {timesCalculatorUsed} times. Don´t you think you have used the calculator enough times already... ");
             Console.ReadLine();
             Console.WriteLine("Just kidding! Enjoy! Press any key to continue!");
             Console.ReadLine();
-            gag = false;
+            sillyJoke = false;
             Console.Clear();
         }
         else
@@ -66,7 +66,7 @@ while (endApp == false)
         Console.WriteLine("List of operations performed:");
         foreach (var operationRecord in operationsList)
         {
-            Console.WriteLine($"Id: {operationRecord.Id}, Operation: {operationRecord.numA1} {operationRecord.operation} {operationRecord.NumA2}, Result: {operationRecord.resultA}");
+            Console.WriteLine($"Id: {operationRecord.Id}, Operation: {operationRecord.NumA1} {operationRecord.Operation} {operationRecord.NumA2}, Result: {operationRecord.ResultA}");
         }
         Console.WriteLine("Press any key to continue!");
         Console.ReadLine();
@@ -82,7 +82,7 @@ while (endApp == false)
             Console.WriteLine("List of operations performed:");
             foreach (var operationRecord in operationsList)
             {
-                Console.WriteLine($"Id: {operationRecord.Id}, Operation: {operationRecord.numA1} {operationRecord.operation} {operationRecord.NumA2}, Result: {operationRecord.resultA}");
+                Console.WriteLine($"Id: {operationRecord.Id}, Operation: {operationRecord.NumA1} {operationRecord.Operation} {operationRecord.NumA2}, Result: {operationRecord.ResultA}");
             }
 
             Console.WriteLine("Choose an Id containing the result you want to use:");
