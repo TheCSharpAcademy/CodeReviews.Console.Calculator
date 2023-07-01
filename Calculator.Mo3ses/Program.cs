@@ -7,28 +7,40 @@ namespace Calculator.Mo3ses
     {
         public static void Main(string[] args)
         {
-
+            int counter = 0;
             int answer = 0;
-            bool verify = false;
+            bool listValue = true;
             double value1 = 0;
             double value2 = 0;
 
-            while (verify == false)
+            MathOperations calculator = new MathOperations();
+            do
             {
-                Menu.StartMenu();
-                if (int.TryParse(Console.ReadLine(), out answer))
-                {
-                    verify = true;
-                }
-                else
-                {
-                    Console.WriteLine("Invalid Option, Try Again.");
-                }
-                if (verify)
-                {
-                    Console.WriteLine("Choose 1 Value:");
-                    value1 = Convert.ToDouble(Console.ReadLine());
 
+                bool verify = false;
+
+                while (verify == false)
+                {
+                    Menu.StartMenu(listValue);
+                    Console.Write("Your option? ");
+                    if (int.TryParse(Console.ReadLine(), out answer))
+                    {
+                        verify = true;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Invalid Option, Try Again.");
+                    }
+
+                }
+
+                if (verify == true && answer != 9 && answer != 10)
+                {
+                    if (listValue)
+                    {
+                        Console.WriteLine("Choose 1 Value:");
+                        value1 = Convert.ToDouble(Console.ReadLine());
+                    }
                     Console.WriteLine("Choose 2 Value:");
                     value2 = Convert.ToDouble(Console.ReadLine());
                     while (answer == 4 && value2 == 0)
@@ -37,28 +49,30 @@ namespace Calculator.Mo3ses
                         value2 = Convert.ToDouble(Console.ReadLine());
                     }
                 }
-            }
 
-            switch (answer)
-            {
-                case 1:
-                    MathOperations.Sum(value1, value2);
-                    break;
-                case 2:
-                    MathOperations.Subtract(value1, value2);
-                    break;
-                case 3:
-                    MathOperations.Multiply(value1, value2);
-                    break;
-                case 4:
-                    MathOperations.Divide(value1, value2);
-                    break;
-                case 9:
-                    break;
-                default:
-                    Console.WriteLine("Invalid Option, Try Again.");
-                    break;
-            }
+                listValue = Menu.MenuAnswer(answer, value1, value2,calculator);
+                Console.WriteLine();
+                if (listValue == false)
+                {
+                    Console.WriteLine("Do you want to use one of the results in the next calculation? (y/n)");
+                    if (Console.ReadLine() == "y")
+                    {
+                        Console.WriteLine("Type the number of the result in the list above to use in the next calculation.");
+                        int id = Convert.ToInt32(Console.ReadLine());
+                        value1 = Convert.ToDouble(calculator.OperationGetById(id));
+                    }
+                    else
+                    {
+                        listValue = true;
+                    }
+                }
+                if (answer != 9 && answer != 10)
+                {
+                    counter++;
+                    Console.WriteLine($"You used the calculator {counter} times.");
+                }
+                
+            } while (answer != 11);
         }
     }
 }
