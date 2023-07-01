@@ -1,5 +1,3 @@
-using System;
-
 namespace Calculator.Mo3ses
 {
     public static class Menu
@@ -11,10 +9,6 @@ namespace Calculator.Mo3ses
             Console.WriteLine("2 - Subtract");
             Console.WriteLine("3 - Multiply");
             Console.WriteLine("4 - Divide");
-            //Console.WriteLine("5 - Taking The Power");
-            //Console.WriteLine("6 - x10");
-            //Console.WriteLine("7 - Take Square Root");
-            //Console.WriteLine("8 - Trigonometry functions");
             if (isListValue)
             {
                 Console.WriteLine("9 - Last Calcs");
