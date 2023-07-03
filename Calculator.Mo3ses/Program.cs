@@ -34,15 +34,31 @@ namespace Calculator.Mo3ses
 
                 }
 
-                if (verify == true && answer != 9 && answer != 10)
+                if (verify == true && answer != 9 && answer != 10 && answer != 11)
                 {
-                    if (listValue)
+                    if (listValue == true && answer != 8)
                     {
-                        Console.WriteLine("Choose 1 Value:");
+                        Console.WriteLine("Choose the Value:");
                         value1 = Convert.ToDouble(Console.ReadLine());
                     }
-                    Console.WriteLine("Choose 2 Value:");
-                    value2 = Convert.ToDouble(Console.ReadLine());
+
+                    switch (answer)
+                    {
+                        case 5:
+                            break;
+                        case 6:
+                            Console.WriteLine("Choose pow Number:");
+                            value2 = Convert.ToDouble(Console.ReadLine());
+                            break;
+                        case 7:
+                        break;
+                        case 8:
+                        break;
+                        default:
+                            Console.WriteLine("Choose 2 Value:");
+                            value2 = Convert.ToDouble(Console.ReadLine());
+                            break;
+                    }
                     while (answer == 4 && value2 == 0)
                     {
                         Console.WriteLine("Enter a non-zero divisor: ");
@@ -50,7 +66,7 @@ namespace Calculator.Mo3ses
                     }
                 }
 
-                listValue = Menu.MenuAnswer(answer, value1, value2,calculator);
+                listValue = Menu.MenuAnswer(answer, value1, value2, calculator);
                 Console.WriteLine();
                 if (listValue == false)
                 {
@@ -71,7 +87,7 @@ namespace Calculator.Mo3ses
                     counter++;
                     Console.WriteLine($"You used the calculator {counter} times.");
                 }
-                
+
             } while (answer != 11);
         }
     }

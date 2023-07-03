@@ -9,7 +9,7 @@ It will also serve as practice in a very important skill: following written docu
   -  [x] Complete the following tutorial: Create a Calculator App (Microsoft Docs)
 
  ## Challenges
-  -  [ ] Create a functionality that will count the amount of times the calculator was used.
-  -  [ ] Store a list with the latest calculations. And give the users the ability to delete that list.
-  -  [ ] Allow the users to use the results in the list above to perform new calculations.
-  -  [ ] Add extra calculations: Square Root, Taking the Power, 10x, Trigonometry functions.
+  -  [x] Create a functionality that will count the amount of times the calculator was used.
+  -  [x] Store a list with the latest calculations. And give the users the ability to delete that list.
+  -  [x] Allow the users to use the results in the list above to perform new calculations.
+  -  [x] Add extra calculations: Square Root, Taking the Power, 10x, Trigonometry functions.
