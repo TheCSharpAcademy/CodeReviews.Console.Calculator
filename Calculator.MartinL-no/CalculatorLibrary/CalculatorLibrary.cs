@@ -107,7 +107,7 @@ public class Calculator
         {
             validOutput = operations[index].Result;
             return true;
-        };
+        }
     }
 
     public List<string> GetPreviousOperations()

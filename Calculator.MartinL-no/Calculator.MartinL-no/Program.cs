@@ -48,14 +48,12 @@ class Program
         return;
     }
 
-    private static double SingleInputOperation(string op)
+    private static void SingleInputOperation(string op)
     {
         ShowPreviousOperations();
         var input = GetInputOne();
         var result = Calc.DoOperation(input, op);
         ShowResult(result);
-
-        return result;
     }
 
 
@@ -107,7 +105,7 @@ class Program
 
     private static double GetInputTwo()
     {
-        Console.Write($"Type a number{(Calc.IsPreviousOperations() ? " or input from above" : "")}, and then press Enter: ");
+        Console.Write($"Type another number{(Calc.IsPreviousOperations() ? " or input from above" : "")}, and then press Enter: ");
         return GetInput();
     }
 
