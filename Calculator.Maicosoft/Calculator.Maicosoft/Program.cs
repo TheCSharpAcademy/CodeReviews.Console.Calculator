@@ -5,10 +5,23 @@ Console.WriteLine("\tCalculator");
 Console.WriteLine("--------------------------\n");
 
 Console.WriteLine("Please enter your first number: ");
-double num1 = Convert.ToDouble(Console.ReadLine());
+var num1 = Console.ReadLine();
+double finalnum1;
+while (!double.TryParse(num1, out finalnum1))
+{
+    Console.WriteLine("That's not a valid character, type a number: ");
+    num1 = Console.ReadLine();
+}
 
 Console.WriteLine("Please enter your second number: ");
-double num2 = Convert.ToDouble(Console.ReadLine());
+var num2 = Console.ReadLine();
+double finalnum2;
+while (!double.TryParse(num2, out finalnum2))
+{
+    Console.WriteLine("That's not a valid character, type a number: ");
+    num2 = Console.ReadLine();
+}
+
 
 Console.WriteLine("Please enter an operation:");
 Console.WriteLine("\ta - Adittion");
@@ -19,23 +32,6 @@ Console.WriteLine("Make you choice: ");
 
 var operation = Console.ReadLine().Trim().ToLower();
 
-switch (operation)
-{
-    case "a":
-        var resultA = Calculate.Addition(num1, num2);
-        Console.WriteLine($"{num1} + {num2} = {resultA}");
-        break;
-    case "s":
-        var resultS =  Calculate.Subtraction(num1, num2);
-        Console.WriteLine($"{num1} - {num2} = {resultS}");
-        break;
-    case "m":
-        var resultM =  Calculate.Multiply(num1, num2);
-        Console.WriteLine($"{num1} * {num2} = {resultM}");
-        break;
-    case "d":
-        var resultD = Calculate.Division(num1, num2);
-        Console.WriteLine($"{num1} / {num2} = {resultD}");
-        break;
-}
-    
+double result = Calculate.DoMath(finalnum1, finalnum2, operation);
+
+Console.WriteLine($"{num1} {operation} {num2} = {result}");

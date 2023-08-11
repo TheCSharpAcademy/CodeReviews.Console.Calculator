@@ -1,36 +1,25 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace Calculator.Maicosoft;
 
-namespace Calculator.Maicosoft
+internal class Calculate
 {
-    internal class Calculate
+    internal static double DoMath(double num1, double num2, string operation)
     {
-        internal static double Addition(double num1, double num2)
+        double result = double.NaN;
+        switch (operation)
         {
-            return num1 + num2;
+            case "a":
+                result = num1 + num2;
+                break;
+            case "s":
+                result = num2 - num1;
+                break;
+            case "m":
+                result = num1 * num2;
+                break;
+            case "d":
+                result = num1 / num2;
+                break;
         }
-
-        internal static double Division(double num1, double num2)
-        {
-            while (num2 == 0)
-            {
-                Console.WriteLine("You cannot divide by 0, please enter a valid number: ");
-                num2 = Convert.ToDouble(Console.ReadLine());
-            }
-            return num1 / num2;
-        }
-
-        internal static double Multiply(double num1, double num2)
-        {
-            return num1 * num2;
-        }
-
-        internal static double Subtraction(double num1, double num2)
-        {
-            return num1 - num2;
-        }
+        return result;
     }
 }
