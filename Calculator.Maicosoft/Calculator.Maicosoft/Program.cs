@@ -22,7 +22,6 @@ while (!double.TryParse(num2, out finalnum2))
     num2 = Console.ReadLine();
 }
 
-
 Console.WriteLine("Please enter an operation:");
 Console.WriteLine("\ta - Adittion");
 Console.WriteLine("\ts - Subtraction");
@@ -30,8 +29,8 @@ Console.WriteLine("\tm - Multiply");
 Console.WriteLine("\td - Division");
 Console.WriteLine("Make you choice: ");
 
-var operation = Console.ReadLine().Trim().ToLower();
+string operation = Console.ReadLine().Trim().ToLower();
 
-double result = Calculate.DoMath(finalnum1, finalnum2, operation);
+string result = Calculate.DoMath(finalnum1, finalnum2, operation);
 
-Console.WriteLine($"{num1} {operation} {num2} = {result}");
+Console.WriteLine(result);
