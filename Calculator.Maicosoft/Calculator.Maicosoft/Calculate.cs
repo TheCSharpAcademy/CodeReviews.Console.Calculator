@@ -1,7 +1,4 @@
-﻿using System.Numerics;
-using System.Runtime.CompilerServices;
-
-namespace Calculator.Maicosoft;
+﻿namespace Calculator.Maicosoft;
 
 internal class Calculate
 {
@@ -28,11 +25,13 @@ internal class Calculate
                 break;
             case "m":
                 result = num1 * num2;
-                output = $"{num1} - {num2} = {result}";
+                result = Math.Round(result, 2);
+                output = $"{num1} * {num2} = {result}";
                 break;
             case "d":
                 result = num1 / num2;
-                output = $"{num1} - {num2} = {result}";
+                result = Math.Round(result, 2);
+                output = $"{num1} / {num2} = {result}";
                 break;
         }
         return output;
