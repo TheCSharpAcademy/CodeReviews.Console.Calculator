@@ -1,7 +1,7 @@
 ﻿using CalculatorLibrary;
 
 bool endProgramm = false;
-Calculate calculate = new Calculate();
+Calculate calculate = new();
 while (!endProgramm)
 {
     Console.WriteLine("--------------------------");
@@ -44,5 +44,6 @@ while (!endProgramm)
     {
         endProgramm = true;
     }
+    calculate.Finish();
     Console.Clear();
 }

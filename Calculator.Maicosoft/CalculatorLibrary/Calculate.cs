@@ -5,20 +5,22 @@ namespace CalculatorLibrary;
 
 public class Calculate
 {
-    JsonWriter writer;
+    JsonWriter _writer;
     public Calculate()
     {
         StreamWriter logFile = File.CreateText("Calculate.json");
         logFile.AutoFlush = true;
-        writer = new JsonTextWriter(logFile);
-        writer.Formatting = Formatting.Indented;
-        writer.WriteStartObject();
-        writer.WritePropertyName("Operations");
-        writer.WriteStartArray();
+        _writer = new JsonTextWriter(logFile)
+        {
+            Formatting = Formatting.Indented
+        };
+        _writer.WriteStartObject();
+        _writer.WritePropertyName("Operations");
+        _writer.WriteStartArray();
     }
     public string DoMath(double num1, double num2, string operation)
     {
-        double result = 0;
+        double result =0;
         string output = string.Empty;
         string op = operation;
 
@@ -27,6 +29,14 @@ public class Calculate
             Console.WriteLine("Not a valid input, Please enter an operation: ");
             op = Console.ReadLine();
         }
+
+        _writer.WriteStartObject();
+        _writer.WritePropertyName("Operand1");
+        _writer.WriteValue(num1);
+        _writer.WritePropertyName("Operand2");
+        _writer.WriteValue(num2);
+        _writer.WritePropertyName("Operation");
+
         switch (op)
         {
             case "a":
@@ -52,6 +62,17 @@ public class Calculate
                 Trace.WriteLine(String.Format("{0} / {1} = {2}", num1, num2, result));
                 break;
         }
+
+        _writer.WritePropertyName("Result");
+        _writer.WriteValue(result);
+        _writer.WriteEndObject();
+
         return output;
+    }
+    public void Finish()
+    {
+        _writer.WriteEndArray();
+        _writer.WriteEndObject();
+        _writer.Close();
     }
 }
