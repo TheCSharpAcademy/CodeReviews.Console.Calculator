@@ -1,6 +1,7 @@
-﻿using Calculator.Maicosoft;
+﻿using CalculatorLibrary;
 
 bool endProgramm = false;
+Calculate calculate = new Calculate();
 while (!endProgramm)
 {
     Console.WriteLine("--------------------------");
@@ -34,7 +35,7 @@ while (!endProgramm)
 
     string operation = Console.ReadLine().Trim().ToLower();
 
-    string result = Calculate.DoMath(finalnum1, finalnum2, operation);
+    string result = calculate.DoMath(finalnum1, finalnum2, operation);
 
     Console.WriteLine("\nThe result is:\n" + result);
 
