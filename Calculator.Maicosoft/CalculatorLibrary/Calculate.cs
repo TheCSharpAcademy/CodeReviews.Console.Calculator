@@ -1,5 +1,4 @@
 ﻿using Newtonsoft.Json;
-using System.Diagnostics;
 
 namespace CalculatorLibrary;
 
@@ -42,24 +41,24 @@ public class Calculate
             case "a":
                 result = num1 + num2;
                 output = $"{num1} + {num2} = {result}";
-                Trace.WriteLine(String.Format("{0} + {1} = {2}", num1, num2, result));
+                _writer.WriteValue("Add");
                 break;
             case "s":
                 result = num2 - num1;
                 output = $"{num1} - {num2} = {result}";
-                Trace.WriteLine(String.Format("{0} - {1} = {2}", num1, num2, result));
+                _writer.WriteValue("Subtract");
                 break;
             case "m":
                 result = num1 * num2;
                 result = Math.Round(result, 2);
                 output = $"{num1} * {num2} = {result}";
-                Trace.WriteLine(String.Format("{0} * {1} = {2}", num1, num2, result));
+                _writer.WriteValue("Multiply");
                 break;
             case "d":
                 result = num1 / num2;
                 result = Math.Round(result, 2);
                 output = $"{num1} / {num2} = {result}";
-                Trace.WriteLine(String.Format("{0} / {1} = {2}", num1, num2, result));
+                _writer.WriteValue("Divide");
                 break;
         }
 
