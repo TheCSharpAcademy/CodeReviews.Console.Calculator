@@ -44,7 +44,7 @@ public class Calculate
                 _writer.WriteValue("Add");
                 break;
             case "s":
-                result = num2 - num1;
+                result = num1 - num2;
                 output = $"{num1} - {num2} = {result}";
                 _writer.WriteValue("Subtract");
                 break;
@@ -55,6 +55,19 @@ public class Calculate
                 _writer.WriteValue("Multiply");
                 break;
             case "d":
+                bool valid = true;
+
+                while (num2 == 0)
+                {
+                    Console.WriteLine("You can not divide by '0'. Please enter a valid number: ");
+                    valid = double.TryParse(Console.ReadLine(), out num2);
+                    while (!valid) 
+                    {
+                        Console.WriteLine("That's not a valid character, type a number: ");
+                        valid = double.TryParse(Console.ReadLine(), out num2);
+                    }
+
+                }
                 result = num1 / num2;
                 result = Math.Round(result, 2);
                 output = $"{num1} / {num2} = {result}";

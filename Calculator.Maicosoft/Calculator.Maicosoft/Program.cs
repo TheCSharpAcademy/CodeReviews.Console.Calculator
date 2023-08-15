@@ -35,6 +35,7 @@ while (!endProgramm)
 
     string operation = Console.ReadLine().Trim().ToLower();
 
+    
     string result = calculate.DoMath(finalnum1, finalnum2, operation);
 
     Console.WriteLine("\nThe result is:\n" + result);
@@ -42,8 +43,8 @@ while (!endProgramm)
     Console.WriteLine("Do you want to do another calculation? y/n");
     if (Console.ReadLine() == "n")
     {
+        calculate.Finish();
         endProgramm = true;
-    }
-    calculate.Finish();
+    }    
     Console.Clear();
 }
