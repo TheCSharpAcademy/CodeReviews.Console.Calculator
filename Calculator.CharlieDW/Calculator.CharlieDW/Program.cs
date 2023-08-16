@@ -5,12 +5,29 @@ internal class Program
     private static void Main(string[] args)
     {
         bool isGameOn = true;
+        int timesCalcUsed = 0;
 
         Console.WriteLine("Console Calculator in C#\r");
         Console.WriteLine("------------------------\n");
 
         while (isGameOn)
         {
+            if(timesCalcUsed != 0)
+            {
+                Console.WriteLine("So far you've used the calculator {0} time(s)\n", timesCalcUsed);
+            }
+
+            Console.WriteLine("Choose an option from the following list:");
+            Console.WriteLine("\ta - Add");
+            Console.WriteLine("\ts - Subtract");
+            Console.WriteLine("\tm - Multiply");
+            Console.WriteLine("\td - Divide");
+            Console.WriteLine("\tr - Square Root");
+            Console.WriteLine("\tp - Power");
+            Console.WriteLine("Your option? ");
+
+            string? operation = Console.ReadLine();
+
             double num1;
             double num2;
             double result = 0;
@@ -26,25 +43,22 @@ internal class Program
 
             num1 = Convert.ToDouble(num1Input);
 
-            Console.WriteLine("Type another number, and then press Enter");
-            string? num2Input = Console.ReadLine();
-
-            while (Helpers.IsNotANumber(num2Input))
+            if(operation != "r")
             {
-                Console.WriteLine("Pleaser provide a numeric value:");
-                num2Input = Console.ReadLine();
+                Console.WriteLine("Type another number, and then press Enter");
+                string? num2Input = Console.ReadLine();
+
+                while (Helpers.IsNotANumber(num2Input))
+                {
+                    Console.WriteLine("Pleaser provide a numeric value:");
+                    num2Input = Console.ReadLine();
+                }
+
+                num2 = Convert.ToDouble(num2Input);
+            } else
+            {
+                num2 = 0;
             }
-
-            num2 = Convert.ToDouble(num2Input);
-
-            Console.WriteLine("Choose an option from the following list:");
-            Console.WriteLine("\ta - Add");
-            Console.WriteLine("\ts - Subtract");
-            Console.WriteLine("\tm - Multiply");
-            Console.WriteLine("\td - Divide");
-            Console.Write("Your option? ");
-
-            string? operation = Console.ReadLine();
 
             try
             {
@@ -65,11 +79,13 @@ internal class Program
 
             Console.WriteLine("--------------------------\n");
 
-            Console.Write("Press 'n' and Enter to close the app, or press any other key to continue");
+            Console.WriteLine("Press 'n' and Enter to close the app, or press any other key to continue");
             if (Console.ReadLine() == "n") isGameOn = false;
 
             Console.WriteLine("\n");
             Console.Clear();
+
+            timesCalcUsed++;
         }
     }
 }

@@ -1,7 +1,7 @@
 ﻿namespace Calculator.CharlieDW
 {
     public class Calculator
-    {
+    { 
         public static double DoOperation(double num1, double num2, string operation)
         {
             double result = double.NaN;
@@ -20,6 +20,12 @@
                 case "d":
                     if (num2 != 0)
                         result = num1 / num2;
+                    break;
+                case "r":
+                    result = Math.Sqrt(num1);
+                    break;
+                case "p":
+                    result = Math.Pow(num1, num2);
                     break;
                 default:
                     break;
