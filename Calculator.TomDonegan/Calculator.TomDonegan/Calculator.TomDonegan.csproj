@@ -14,7 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="Calculator.TomDonegan\CalculatorLibrary\CalculatorLibrary.csproj" />
+    <ProjectReference Include="..\CalculatorLibrary\CalculatorLibrary.csproj" />
   </ItemGroup>
 
 </Project>
