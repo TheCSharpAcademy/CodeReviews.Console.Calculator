@@ -150,7 +150,6 @@ namespace CalculatorLibrary
             {
                 calculations.RemoveAt(0);
             }
-            ;
         }
     }
 }
