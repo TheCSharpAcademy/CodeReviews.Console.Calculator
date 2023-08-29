@@ -1,135 +1,75 @@
-﻿//Calculator app from https://learn.microsoft.com/en-us/visualstudio/get-started/csharp/tutorial-console?view=vs-2022
+﻿using CalculatorLibrary;
 
-class Calculator
+namespace CalculatorProgram
 {
-    double num1;
-    double num2;
-    string op;
 
-    public void setNumbers()//here we are setting values of number1 and number2
+    class Program
     {
-        string input;
-        //get num1 value
-        while (true)
+        static void Main(string[] args)
         {
-            Console.Write("Type a number, and then press Enter: ");
-            input = Console.ReadLine()!;
-            try
+            bool endApp = false;
+            Console.WriteLine("Console Calculator in C#\r");
+            Console.WriteLine("------------------------\n");
+
+            Calculator calculator = new Calculator();
+            while (!endApp)
             {
-                num1 = double.Parse(input);
-                break;
+                string numInput1 = "";
+                string numInput2 = "";
+                double result = 0;
+
+                Console.Write("Type a number, and then press Enter: ");
+                numInput1 = Console.ReadLine();
+
+                double cleanNum1 = 0;
+                while (!double.TryParse(numInput1, out cleanNum1))
+                {
+                    Console.Write("This is not valid input. Please enter an integer value: ");
+                    numInput1 = Console.ReadLine();
+                }
+
+                Console.Write("Type another number, and then press Enter: ");
+                numInput2 = Console.ReadLine();
+
+                double cleanNum2 = 0;
+                while (!double.TryParse(numInput2, out cleanNum2))
+                {
+                    Console.Write("This is not valid input. Please enter an integer value: ");
+                    numInput2 = Console.ReadLine();
+                }
+                //menu
+                Console.WriteLine("Choose an operator from the following list:");
+                Console.WriteLine("\ta - Add");
+                Console.WriteLine("\ts - Subtract");
+                Console.WriteLine("\tm - Multiply");
+                Console.WriteLine("\td - Divide");
+                Console.Write("Your option? ");
+
+                string op = Console.ReadLine();
+
+                try
+                {
+                    result = calculator.DoOperation(cleanNum1, cleanNum2, op);
+                    if (double.IsNaN(result))
+                    {
+                        Console.WriteLine("This operation will result in a mathematical error.\n");
+                    }
+                    else Console.WriteLine("Your result: {0:0.##}\n", result);
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine("Oh no! An exception occurred trying to do the math.\n - Details: " + e.Message);
+                }
+
+                Console.WriteLine("------------------------\n");
+
+                Console.Write("Press 'n' and Enter to close the app, or press any other key and Enter to continue: ");
+                if (Console.ReadLine() == "n") endApp = true;
+
+                Console.WriteLine("\n");
             }
-            catch
-            {
-                Console.WriteLine("This is no a valid input!");
-            }
-        }
-        //get num2 value
-        while (true)
-        {
-            Console.Write("Type another number, and then press Enter: ");
-            input = Console.ReadLine()!;
-            try
-            {
-                num2 = double.Parse(input);
-                break;
-            }
-            catch
-            {
-                Console.WriteLine("This is no a valid input!");
-            }
-        }
-    }
-
-    public void chooseOperation()
-    {
-        Console.WriteLine("Choose an operator from the following list:");
-        Console.WriteLine($"\ta - Add\n\ts - Substract\n\tm - Multiply\n\td - Divide");
-        Console.Write("Your option: ");
-        while (true)
-        {
-            op = Console.ReadLine()!;
-            op.ToLower();
-            if (op == "a" || op == "s" || op == "m" || op == "d")
-            {
-                break;
-            }
-            else
-            {
-                Console.WriteLine("Please choose correct option.");
-            }
-        }
-    }
-
-    public void printNumbers()//debug
-    {
-        Console.WriteLine($"num1 = {num1}, num2 = {num2}");
-    }
-
-    public double calculate()
-    {
-        switch (op)
-        {
-            case "a":
-                return num1 + num2;
-            case "s":
-                return num1 - num2;
-            case "m":
-                return num1 * num2;
-            case "d":
-                return division();
-        }
-        return 0;
-    }
-
-    public double division()
-    {
-        if (num1 == 0)
-        {
-            return 0;
-        } 
-        else if (num2 == 0)
-        {
-            Console.WriteLine("Can't divide by 0, returning 0 instead.");
-            return 0;
-        }
-        else
-        { 
-            return num1 / num2;
-        }
-    }
-
-    public bool end()
-    {
-        Console.WriteLine($"\n-------------------\n");
-        Console.Write("Press n and Enter to close the app, or press any other key and Enter to continue: ");
-        string input = Console.ReadLine()!;
-        if (input == "n")
-        {
-            return false;
-        }
-        else
-        {
-            Console.WriteLine($"\n");
-            return true;
-        }
-    }
-
-}
-
-class Program
-{
-    static void Main(string[] args)
-    {
-        bool appLoop = true;
-        Calculator calc = new Calculator();
-        
-        while (appLoop)
-        {
-            calc.setNumbers();
-            calc.chooseOperation();
-            Console.WriteLine($"Your result: {calc.calculate():0.##}");
-            appLoop = calc.end();
+            calculator.Finish();
+            return;
         }
     }
 }
