@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "oYhA4CPa0lDeN5nj/Hue+vyT1CD9/4q5TwVlhU+QLS3FIUm8hGN/+uump+kNe0khQ4InY2aGDvtT1ILLfmbNGw==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\Leo\\Documents\\C# class\\Calculator.Kakurokan\\Calculator.Kakurokan\\Calculator.Kakurokan.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Leo\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512"
+  ],
+  "logs": []
+}
