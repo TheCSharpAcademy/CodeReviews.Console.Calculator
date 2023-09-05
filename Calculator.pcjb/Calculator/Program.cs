@@ -1,4 +1,8 @@
-﻿class Program
+﻿namespace CalculatorProgram;
+
+using CalculatorLibrary;
+
+class Program
 {
     static void Main(string[] args)
     {
