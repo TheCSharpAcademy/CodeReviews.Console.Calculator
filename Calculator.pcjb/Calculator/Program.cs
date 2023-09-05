@@ -11,10 +11,15 @@ class Program
         Console.WriteLine("Console Calculator in C#\r");
         Console.WriteLine("------------------------\n");
 
-        Calculator calculator = new Calculator();
+        var calculator = new Calculator();
+        var database = new Database("calculatordb.json");
 
         while (!endApp)
         {
+            Console.WriteLine($"Calculator used {database.GetUsageCount()} times.");
+            Console.WriteLine("------------------------");
+            database.AddUsage();
+            
             // Declare variables and set to empty.
             string numInput1 = "";
             string numInput2 = "";
@@ -75,6 +80,7 @@ class Program
             Console.WriteLine("\n"); // Friendly linespacing.
         }
         calculator.Finish();
+        database.Close();
         return;
     }
 }
