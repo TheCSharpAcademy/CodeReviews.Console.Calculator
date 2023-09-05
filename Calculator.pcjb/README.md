@@ -15,3 +15,17 @@ see https://www.thecsharpacademy.com/project/11
   * Taking the Power
   * 10x
   * Trigonometry functions
+
+## Hints for tutorial part 2 (requires Visual Studio) using only VS Code / dotnet CLI
+see https://learn.microsoft.com/en-us/dotnet/core/tutorials/library-with-visual-studio-code?pivots=dotnet-7-0
+
+Move existing calculator project files (Calculator.csproj, Program.cs, Calculator.cs) into new subdirectory 'Calculator'. Remove bin/, obj/.
+
+Add solution, classlib and reference
+```
+Calculator.pcjb$ dotnet new sln
+Calculator.pcjb$ dotnet new classlib -o CalculatorLibrary
+Calculator.pcjb$ dotnet sln add CalculatorLibrary/CalculatorLibrary.csproj
+Calculator.pcjb$ dotnet sln add Calculator/Calculator.csproj
+Calculator$ dotnet add Calculator.csproj reference ../CalculatorLibrary/CalculatorLibrary.csproj
+```
