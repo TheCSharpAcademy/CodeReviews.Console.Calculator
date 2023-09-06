@@ -4,10 +4,13 @@ using Newtonsoft.Json;
 
 public class Calculator
 {
-    JsonWriter writer;
+    private readonly JsonWriter writer;
+    public List<Operation> Operations { get; }
+    private Operation? activeOperation;
 
     public Calculator()
     {
+        Operations = BuildOperationsList();
         StreamWriter logFile = File.CreateText("calculatorlog.json");
         logFile.AutoFlush = true;
         writer = new JsonTextWriter(logFile);
@@ -17,42 +20,55 @@ public class Calculator
         writer.WriteStartArray();
     }
 
-    public double DoOperation(double num1, double num2, string op)
+    public bool SetActiveOperation(string? shortcut)
     {
-        double result = double.NaN; // Default value is "not-a-number" if an operation, such as division, could result in an error.
+        if (shortcut == null || Operations == null)
+        {
+            return false;
+        }
+
+        foreach (var op in Operations)
+        {
+            if (op.Shortcut.Equals(shortcut))
+            {
+                activeOperation = op;
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public string GetActiveOperationShortcut()
+    {
+        if (activeOperation != null)
+        {
+            return activeOperation.Shortcut;
+        }
+        return "";
+    }
+
+    public bool OperationRequiresTwoNumbers()
+    {
+        return activeOperation != null && activeOperation.ParamCount == 2;
+    }
+
+    public double DoOperation(double num1, double num2)
+    {
+        string operationName = "";
+        double result = double.NaN;
+        if (activeOperation != null)
+        {
+            operationName = activeOperation.Name;
+            result = activeOperation.GetResult(new double[] { num1, num2 });
+        }
+
         writer.WriteStartObject();
         writer.WritePropertyName("Operand1");
         writer.WriteValue(num1);
         writer.WritePropertyName("Operand2");
         writer.WriteValue(num2);
         writer.WritePropertyName("Operation");
-        // Use a switch statement to do the math.
-        switch (op)
-        {
-            case "a":
-                result = num1 + num2;
-                writer.WriteValue("Add");
-                break;
-            case "s":
-                result = num1 - num2;
-                writer.WriteValue("Subtract");
-                break;
-            case "m":
-                result = num1 * num2;
-                writer.WriteValue("Multiply");
-                break;
-            case "d":
-                // Ask the user to enter a non-zero divisor.
-                if (num2 != 0)
-                {
-                    result = num1 / num2;
-                }
-                writer.WriteValue("Divide");
-                break;
-            // Return text for an incorrect option entry.
-            default:
-                break;
-        }
+        writer.WriteValue(operationName);
         writer.WritePropertyName("Result");
         writer.WriteValue(result);
         writer.WriteEndObject();
@@ -65,5 +81,34 @@ public class Calculator
         writer.WriteEndArray();
         writer.WriteEndObject();
         writer.Close();
+    }
+
+    public string Format(Calculation calculation)
+    {
+        foreach (var op in Operations)
+        {
+            if (op.Shortcut.Equals(calculation.Op))
+            {
+                return String.Format("{0} = {1}", op.Format(new double[] { calculation.Num1, calculation.Num2 }), calculation.Result);
+            }
+        }
+        throw new InvalidOperationException($"Unknown operation shortcut {calculation.Op}");
+    }
+
+    private static List<Operation> BuildOperationsList()
+    {
+        return new()
+        {
+            new OperationAdd(),
+            new OperationSubtract(),
+            new OperationMultiply(),
+            new OperationDivide(),
+            new OperationSquareRoot(),
+            new OperationPower(),
+            new Operation10x(),
+            new OperationSine(),
+            new OperationCosine(),
+            new OperationTangent()
+        };
     }
 }

@@ -25,6 +25,7 @@ class Program
             string numInput2 = "";
             double result = 0;
             double cleanNum1 = 0;
+            double cleanNum2 = 0;
 
             // Ask the user to type the first number.
             bool askForNum1;
@@ -38,7 +39,7 @@ class Program
                     var calculations = database.GetCalculations();
                     if (calculations != null && calculations.Count > 0)
                     {
-                        cleanNum1 = SelectResult(calculations);    
+                        cleanNum1 = SelectResult(calculations, calculator);
                         askForNum1 = false;
                     }
                     else
@@ -58,30 +59,33 @@ class Program
                 }
             } while (askForNum1);
 
-            // Ask the user to type the second number.
-            Console.Write("Type another number, and then press Enter: ");
-            numInput2 = Console.ReadLine();
-
-            double cleanNum2 = 0;
-            while (!double.TryParse(numInput2, out cleanNum2))
+            do
             {
-                Console.Write("This is not valid input. Please enter an integer value: ");
+                // Ask the user to choose an operator.
+                Console.WriteLine("Choose an operator from the following list:");
+                foreach (var operation in calculator.Operations)
+                {
+                    Console.WriteLine($"\t{operation.Shortcut} - {operation.Name}");
+                }
+                Console.Write("Your option? ");
+            } while (!calculator.SetActiveOperation(Console.ReadLine()));
+
+            if (calculator.OperationRequiresTwoNumbers())
+            {
+                // Ask the user to type the second number.
+                Console.Write("Type another number, and then press Enter: ");
                 numInput2 = Console.ReadLine();
+
+                while (!double.TryParse(numInput2, out cleanNum2))
+                {
+                    Console.Write("This is not valid input. Please enter an integer value: ");
+                    numInput2 = Console.ReadLine();
+                }
             }
-
-            // Ask the user to choose an operator.
-            Console.WriteLine("Choose an operator from the following list:");
-            Console.WriteLine("\ta - Add");
-            Console.WriteLine("\ts - Subtract");
-            Console.WriteLine("\tm - Multiply");
-            Console.WriteLine("\td - Divide");
-            Console.Write("Your option? ");
-
-            string op = Console.ReadLine();
 
             try
             {
-                result = calculator.DoOperation(cleanNum1, cleanNum2, op);
+                result = calculator.DoOperation(cleanNum1, cleanNum2);
                 if (double.IsNaN(result))
                 {
                     Console.WriteLine("This operation will result in a mathematical error.\n");
@@ -89,7 +93,7 @@ class Program
                 else
                 {
                     Console.WriteLine("Your result: {0:0.##}\n", result);
-                    database.AddCalculation(cleanNum1, cleanNum2, op, result);
+                    database.AddCalculation(cleanNum1, cleanNum2, calculator.GetActiveOperationShortcut(), result);
                 }
             }
             catch (Exception e)
@@ -122,12 +126,12 @@ class Program
         return;
     }
 
-    static double SelectResult(List<Calculation> calculations)
+    static double SelectResult(List<Calculation> calculations, Calculator calculator)
     {
         Console.WriteLine("Latest Calculations:");
         for (int i = 0; i < calculations.Count; i++)
         {
-            Console.WriteLine($"#{i + 1}: {FormatCalculation(calculations[i])}");
+            Console.WriteLine($"#{i + 1}: {calculator.Format(calculations[i])}");
         }
 
         int line;
@@ -142,17 +146,5 @@ class Program
         var result = calculations[line - 1].Result;
         Console.WriteLine($"Selected result: {result}");
         return result;
-    }
-
-    static string FormatCalculation(Calculation calculation)
-    {
-        return calculation.Op switch
-        {
-            "a" => String.Format("{0} + {1} = {2}", calculation.Num1, calculation.Num2, calculation.Result),
-            "s" => String.Format("{0} - {1} = {2}", calculation.Num1, calculation.Num2, calculation.Result),
-            "m" => String.Format("{0} * {1} = {2}", calculation.Num1, calculation.Num2, calculation.Result),
-            "d" => String.Format("{0} / {1} = {2}", calculation.Num1, calculation.Num2, calculation.Result),
-            _ => throw new NotImplementedException()
-        };
     }
 }
