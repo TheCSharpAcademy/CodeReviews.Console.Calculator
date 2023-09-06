@@ -34,7 +34,7 @@ namespace CalculatorLibrary
                 "d" => "Divide",
                 _ => throw new NotImplementedException()
             };
-            writer.WriteValue("test");
+            writer.WriteValue(operationName);
 
             double result = op switch
             {
