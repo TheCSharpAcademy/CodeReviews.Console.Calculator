@@ -13,11 +13,6 @@ public class Database
         data = LoadFromFile();
     }
 
-    public void Close()
-    {
-        SaveToFile();
-    }
-
     public int GetUsageCount()
     {
         return data.UsageCount;
@@ -26,6 +21,7 @@ public class Database
     public void AddCalculation(double num1, double num2, string op, double result)
     {
         data.AddCalculation(new Calculation(num1, num2, op, result));
+        SaveToFile();
     }
 
     public List<Calculation> GetCalculations()
@@ -36,11 +32,13 @@ public class Database
     public void DeleteCalculations()
     {
         data.DeleteCalculations();
+        SaveToFile();
     }
 
     public void AddUsage()
     {
         data.UsageCount++;
+        SaveToFile();
     }
 
     private CalculatorData LoadFromFile()
