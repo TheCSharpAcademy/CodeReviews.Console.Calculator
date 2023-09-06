@@ -1,10 +1,4 @@
 ﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CalculatorLibrary
 {
@@ -32,6 +26,16 @@ namespace CalculatorLibrary
             writer.WriteValue(num2);
             writer.WritePropertyName("Operation");
 
+            string operationName = op switch
+            {
+                "a" => "Add",
+                "s" => "Subtract",
+                "m" => "Multiply",
+                "d" => "Divide",
+                _ => throw new NotImplementedException()
+            };
+            writer.WriteValue(operationName);
+
             double result = op switch
             {
                 "a" => num1 + num2,
@@ -40,16 +44,6 @@ namespace CalculatorLibrary
                 "d" => num1 / PreventDivisionError(num2),
                 _ => double.NaN
             };
-
-            string operationName = op switch
-            {
-                "a" => "Add",
-                "s" => "Subtract",
-                "m" => "Multiply",
-                "d" => "Divide"
-            };
-
-            writer.WriteValue(operationName);
 
             writer.WritePropertyName("Result");
             writer.WriteValue(result);

@@ -1,5 +1,4 @@
-﻿using System;
-using CalculatorLibrary;
+﻿using CalculatorLibrary;
 
 namespace CalculatorProgram
 {
@@ -7,7 +6,7 @@ namespace CalculatorProgram
     {
         static void Main(string[] args)
         {
-            Calculator calculator = new ();
+            Calculator calculator = new();
             bool endApp = false;
 
             Console.WriteLine("Console Calculator in C#\r");
@@ -52,7 +51,7 @@ namespace CalculatorProgram
                     }
                     else Console.WriteLine($"Your result: {result:0.##}\n");
                 }
-                catch(Exception e)
+                catch (Exception e)
                 {
                     Console.WriteLine("Oh no! An error occurred trying to do the math.\n - Details: " + e.Message);
                 }
