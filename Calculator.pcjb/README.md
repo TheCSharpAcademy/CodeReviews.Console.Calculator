@@ -8,7 +8,7 @@ see https://www.thecsharpacademy.com/project/11
 ## Optional Requirements
 * Count the amount of times the calculator was used
 * Store a list with the latest calculations
-  * Give the users the ability delete the list
+  * Give the users the ability to delete the list
   * Allow the users to use results from the list to perform new calculations
 * Add extra calculations: 
   * Square Root

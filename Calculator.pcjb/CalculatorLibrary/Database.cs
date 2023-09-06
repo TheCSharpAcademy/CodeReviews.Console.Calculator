@@ -2,11 +2,6 @@ namespace CalculatorLibrary;
 
 using Newtonsoft.Json;
 
-public class CalculatorData
-{
-    public int UsageCount { get; set; }
-}
-
 public class Database
 {
     private readonly string filename;
@@ -26,6 +21,21 @@ public class Database
     public int GetUsageCount()
     {
         return data.UsageCount;
+    }
+
+    public void AddCalculation(double num1, double num2, string op, double result)
+    {
+        data.AddCalculation(new Calculation(num1, num2, op, result));
+    }
+
+    public List<Calculation> GetCalculations()
+    {
+        return data.Calculations ?? new List<Calculation>();
+    }
+
+    public void DeleteCalculations()
+    {
+        data.DeleteCalculations();
     }
 
     public void AddUsage()
