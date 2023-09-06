@@ -105,7 +105,7 @@ public class Calculator
             new OperationDivide(),
             new OperationSquareRoot(),
             new OperationPower(),
-            new Operation10x(),
+            new Operation10X(),
             new OperationSine(),
             new OperationCosine(),
             new OperationTangent()

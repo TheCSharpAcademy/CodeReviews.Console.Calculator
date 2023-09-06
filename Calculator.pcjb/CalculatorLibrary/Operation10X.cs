@@ -1,8 +1,8 @@
 namespace CalculatorLibrary;
 
-public class Operation10x : Operation
+public class Operation10X : Operation
 {
-    public Operation10x() : base("x", "10x", 1)
+    public Operation10X() : base("x", "10x", 1)
     { }
 
     public override double GetResult(double[] numbers)
