@@ -6,13 +6,17 @@ class Program
 {
     static void Main(string[] args)
     {
-        bool endApp = false;
-        // Display title as the C# console calculator app.
         Console.WriteLine("Console Calculator in C#\r");
         Console.WriteLine("------------------------\n");
 
+        bool endApp = false;
         var calculator = new Calculator();
         var database = new Database("calculatordb.json");
+        string? numInput1 = "";
+        string? numInput2 = "";
+        double result = 0;
+        double cleanNum1 = 0;
+        double cleanNum2 = 0;
 
         while (!endApp)
         {
@@ -20,14 +24,6 @@ class Program
             Console.WriteLine("------------------------");
             database.AddUsage();
 
-            // Declare variables and set to empty.
-            string numInput1 = "";
-            string numInput2 = "";
-            double result = 0;
-            double cleanNum1 = 0;
-            double cleanNum2 = 0;
-
-            // Ask the user to type the first number.
             bool askForNum1;
             do
             {
@@ -61,7 +57,6 @@ class Program
 
             do
             {
-                // Ask the user to choose an operator.
                 Console.WriteLine("Choose an operator from the following list:");
                 foreach (var operation in calculator.Operations)
                 {
@@ -72,7 +67,6 @@ class Program
 
             if (calculator.OperationRequiresTwoNumbers())
             {
-                // Ask the user to type the second number.
                 Console.Write("Type another number, and then press Enter: ");
                 numInput2 = Console.ReadLine();
 
@@ -103,7 +97,6 @@ class Program
 
             Console.WriteLine("------------------------\n");
 
-            // Wait for the user to respond before closing.
             string? input;
             do
             {
@@ -119,7 +112,7 @@ class Program
                     Console.WriteLine("Latest calculations deleted.");
                 }
             } while (input == "d");
-            Console.WriteLine("\n"); // Friendly linespacing.
+            Console.WriteLine("\n");
         }
         calculator.Finish();
         return;
