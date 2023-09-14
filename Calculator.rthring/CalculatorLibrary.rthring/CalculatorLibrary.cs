@@ -1,5 +1,4 @@
-﻿using System.Diagnostics;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
 namespace CalculatorLibrary.rthring
 {
@@ -44,7 +43,6 @@ namespace CalculatorLibrary.rthring
                     if (num2 != 0)
                     {
                         result = num1 / num2;
-                        Trace.WriteLine(String.Format("{0} / {1} = {2}", num1, num2, result));
                     }
                     writer.WriteValue("Divide");
                     break;
