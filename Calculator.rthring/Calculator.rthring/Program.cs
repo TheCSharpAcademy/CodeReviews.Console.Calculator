@@ -1,33 +1,4 @@
-﻿class Calculator
-{
-    public static double DoOperation(double num1, double num2, string op)
-    {
-        double result = double.NaN;
-
-        switch (op)
-        {
-            case "a":
-                result = num1 + num2;
-                break;
-            case "s":
-                result = num1 - num2;
-                break;
-            case "m":
-                result = num1 * num2;
-                break;
-            case "d":
-                if (num2 != 0)
-                {
-                    result = num1 / num2;
-                }
-                break;
-            default:
-                break;
-        }
-        return result;
-    }
-}
-
+﻿using CalculatorLibrary.rthring;
 class Program
 {
     static void Main(string[] args)
@@ -36,6 +7,8 @@ class Program
 
         Console.WriteLine("Console Calculator in C#\r");
         Console.WriteLine("------------------------\n");
+
+        Calculator calculator = new Calculator();
 
         while (!endApp)
         {
@@ -74,7 +47,7 @@ class Program
 
             try
             {
-                result = Calculator.DoOperation(cleanNum1, cleanNum2, op);
+                result = calculator.DoOperation(cleanNum1, cleanNum2, op);
                 if (double.IsNaN(result))
                 {
                     Console.WriteLine("This operation will result in a mathematical error.\n");
@@ -93,6 +66,7 @@ class Program
 
             Console.WriteLine("\n");
         }
+        calculator.Finish();
         return;
     }
 }
