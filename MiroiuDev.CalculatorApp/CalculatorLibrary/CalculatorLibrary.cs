@@ -1,11 +1,10 @@
-﻿using System.Diagnostics;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
 namespace CalculatorLibrary;
 
 public class Calculator
 {
-    public int NumberOfCalculations { get; set; } = 0;
+    public int NumberOfCalculations { get; set; };
     private readonly List<Calculation> _history = new();
 
     private readonly JsonWriter _writer;
@@ -74,7 +73,7 @@ public class Calculator
                 {
                     Console.Write("Number must not be equal to 0. Please try again: ");
                     operand2 = Helpers.GetNumber();
-                };
+                }
 
                 result = operand1 / operand2;
                 _writer.WriteValue("Divide");
