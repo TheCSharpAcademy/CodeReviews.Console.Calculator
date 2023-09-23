@@ -8,6 +8,7 @@ namespace CalculatorProgram
         {
             int timesUsed = 0;
             bool endApp = false;
+
             // Display title as the C# console calculator app.
             Console.WriteLine("Console Calculator in C#\r");
             Console.WriteLine("------------------------\n");
@@ -49,36 +50,46 @@ namespace CalculatorProgram
                 Console.WriteLine("\ts - Subtract");
                 Console.WriteLine("\tm - Multiply");
                 Console.WriteLine("\td - Divide");
+                Console.WriteLine("\tv - View Previous Calculations");
+                Console.WriteLine("\tx - Delete Previous Calculations");
                 Console.Write("Your option? ");
 
                 string op = Console.ReadLine();
 
-                try
+                if (op == "v")
                 {
-                    result = calculator.DoOperation(cleanNum1, cleanNum2, op);
-                    if (double.IsNaN(result))
-                    {
-                        Console.WriteLine("This operation will result in a mathematical error.\n");
-                    }
-                    else Console.WriteLine("Your result: {0:0.##}\n", result);
+                    Helpers.ShowHistory();
                 }
-                catch (Exception e)
+                else if (op == "x")
                 {
-                    Console.WriteLine("Oh no! An exception occurred trying to do the math.\n - Details: " + e.Message);
-                }
-
-                Console.WriteLine("------------------------\n");
-                
-                //Display how many times calculator has been used
-                timesUsed++;
-                if (timesUsed == 1)
-                {
-                    Console.WriteLine("Calculator has been used 1 time.");
+                    Console.WriteLine("Deleting");
                 }
                 else
                 {
-                    Console.WriteLine($"Calculator has been used {timesUsed} times");
+                    try
+                    {
+                        result = calculator.DoOperation(cleanNum1, cleanNum2, op);
+                        if (double.IsNaN(result))
+                        {
+                            Console.WriteLine("This operation will result in a mathematical error.\n");
+                        }
+                        else
+                        {
+                            Console.WriteLine("Your result: {0:0.##}\n", result);
+                            Helpers.AddToHistory(cleanNum1, cleanNum2, op);
+                        }
+                    }
+                    catch (Exception e)
+                    {
+                        Console.WriteLine("Oh no! An exception occurred trying to do the math.\n - Details: " + e.Message);
+                    }
+                    timesUsed++;
                 }
+                Console.WriteLine("------------------------\n");
+                
+                //Display how many times calculator has been used
+                
+                Helpers.ShowTimesUsed(timesUsed);
 
                 // Wait for the user to respond before closing.
                 Console.Write("Press 'n' and Enter to close the app, or press any other key and Enter to continue: ");
