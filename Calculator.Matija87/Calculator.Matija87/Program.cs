@@ -6,6 +6,7 @@ namespace CalculatorProgram
     {
         static void Main(string[] args)
         {
+            int timesUsed = 0;
             bool endApp = false;
             // Display title as the C# console calculator app.
             Console.WriteLine("Console Calculator in C#\r");
@@ -67,6 +68,17 @@ namespace CalculatorProgram
                 }
 
                 Console.WriteLine("------------------------\n");
+                
+                //Display how many times calculator has been used
+                timesUsed++;
+                if (timesUsed == 1)
+                {
+                    Console.WriteLine("Calculator has been used 1 time.");
+                }
+                else
+                {
+                    Console.WriteLine($"Calculator has been used {timesUsed} times");
+                }
 
                 // Wait for the user to respond before closing.
                 Console.Write("Press 'n' and Enter to close the app, or press any other key and Enter to continue: ");
