@@ -59,5 +59,10 @@
             Console.ReadKey();
             Console.Clear();
         }
+
+        internal static void DeleteHistory()
+        {
+            latestCalculations.Clear();
+        }
     }
 }

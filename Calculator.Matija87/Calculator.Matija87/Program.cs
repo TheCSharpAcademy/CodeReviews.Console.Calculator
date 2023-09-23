@@ -62,7 +62,8 @@ namespace CalculatorProgram
                 }
                 else if (op == "x")
                 {
-                    Console.WriteLine("Deleting");
+                    Helpers.DeleteHistory();
+                    Console.WriteLine("\nPrevious Calculations Deleted\n");
                 }
                 else
                 {
