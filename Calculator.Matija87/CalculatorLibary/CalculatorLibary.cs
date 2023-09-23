@@ -67,5 +67,4 @@ namespace CalculatorLibary
             writer.Close();
         }
     }
-
 }
