@@ -15,7 +15,7 @@
             }
         }
         
-        internal static void AddToHistory(double first, double second, string operation)
+        internal static void AddToHistory(double first, double second, string operation, double result)
         {
             string convertedOperation = ""; 
 
@@ -41,7 +41,8 @@
             {
                 FirstOperand = first,
                 SecondOperand = second,
-                Operation = convertedOperation
+                Operation = convertedOperation,
+                Result = result
             });
         }
 
