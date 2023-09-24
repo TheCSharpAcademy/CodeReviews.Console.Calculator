@@ -51,24 +51,16 @@
             Console.WriteLine("Previous Calculations");
             Console.WriteLine("------------------------\n");
 
-            int calculationCounter = 0;
+            int calculationCounter = 1;
 
             foreach (Calculations calculations in latestCalculations)
             {
-                Console.WriteLine($"Index {calculationCounter }: {calculations.FirstOperand} {calculations.Operation} {calculations.SecondOperand} = {calculations.Result}");
+                Console.WriteLine($"Calculation {calculationCounter }: {calculations.FirstOperand} {calculations.Operation} {calculations.SecondOperand} = {calculations.Result}");
                 calculationCounter++;
             }
             Console.WriteLine("\nPress any key to continue");
             Console.ReadKey();
             Console.Clear();
-        }
-
-        internal static void UsePreviousCalculation(double first, double second, string operation)
-        {
-            int previousResultNumber;
-
-            Console.WriteLine("Enter number of previous result: ");
-            
         }
 
         internal static void DeleteHistory()

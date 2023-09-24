@@ -62,38 +62,7 @@ namespace CalculatorProgram
                     string? numInput1 = "";
                     string? numInput2 = "";
                     double result = 0;
-                    string? usePreviousResults = "";
-                    string? previousResultIndex = "";
-                    bool correctInput = false;
-
-                    do
-                    {
-                        Console.WriteLine("Do you want to use previous results? (y/n)");
-                        usePreviousResults = Console.ReadLine();
-                        
-                        if (usePreviousResults == "y")
-                        {                                                        
-                            while (string.IsNullOrEmpty(previousResultIndex) || !Int32.TryParse(previousResultIndex, out _))
-                            {
-                                Console.WriteLine("Enter index of previous result: ");
-                                previousResultIndex = Console.ReadLine();
-                            }
-                            correctInput = true;
-                        }
-
-                        else if (usePreviousResults == "n")
-                        {
-                            Console.WriteLine("Previous calculations will not be used this time!");
-                            correctInput = true;
-                        }
-
-                        else
-                        {
-                            Console.WriteLine("Incorrect input!");
-                        }
-
-                    } while (correctInput == false);
-                                       
+                                                                               
                     // Ask the user to type the first number.
                     Console.Write("Type a number, and then press Enter: ");
                     numInput1 = Console.ReadLine();
