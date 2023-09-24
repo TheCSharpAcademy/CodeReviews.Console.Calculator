@@ -7,14 +7,12 @@ namespace CalculatorProgram
         static void Main(string[] args)
         {
             int timesUsed = 0;
-            string mainChoice;
+            string? mainChoice;
 
             // Display title as the C# console calculator app.
             Console.WriteLine("Console Calculator in C#\r");
             Console.WriteLine("------------------------\n");
-
             Calculator calculator = new Calculator();
-
             MainMenu();
                         
             // Add call to close the JSON writer before return
@@ -117,7 +115,6 @@ namespace CalculatorProgram
                     Console.WriteLine("------------------------\n");
 
                     //Display how many times calculator has been used
-
                     Helpers.ShowTimesUsed(timesUsed);
 
                     // Wait for the user to respond before closing.
