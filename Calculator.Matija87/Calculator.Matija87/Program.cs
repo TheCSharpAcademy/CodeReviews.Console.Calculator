@@ -103,7 +103,7 @@ namespace CalculatorProgram
                         else
                         {
                             Console.WriteLine("Your result: {0:0.##}\n", result);
-                            Helpers.AddToHistory(cleanNum1, cleanNum2, op);
+                            Helpers.AddToHistory(cleanNum1, cleanNum2, op, result);
                         }
                     }
                     catch (Exception e)
