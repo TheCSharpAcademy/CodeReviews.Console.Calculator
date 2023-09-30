@@ -54,7 +54,10 @@ namespace CalculatorProgram
                     {
                         Console.WriteLine("This operation will result in a mathematical error.\n");
                     }
-                    else Console.WriteLine("Your result: {0:0.##}\n", result);
+                    else
+                    {
+                        Console.WriteLine("Your result: {0:0.##}\n", result);
+                    }
                 }
                 catch (Exception e)
                 {
