@@ -9,7 +9,7 @@ public class Calculator
 {
     JsonWriter writer;
 
-    public int OperationsCounter { get; set; } = 0;
+    public int OperationsCounter { get; set; }
 
     internal static List<Operation> Operations = new();
 
