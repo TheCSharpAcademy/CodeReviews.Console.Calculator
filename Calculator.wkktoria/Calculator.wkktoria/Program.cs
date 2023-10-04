@@ -1,72 +1,92 @@
-﻿namespace Calculator.wkktoria;
+﻿using CalculatorLibrary;
 
-internal class Program
+namespace Calculator.wkktoria;
+
+internal static class Program
 {
     private static void Main(string[] args)
     {
         var endApp = false;
 
         Console.WriteLine("Console Calculator in C#\r");
-        Console.WriteLine("------------------------\n");
+        Console.WriteLine("------------------------");
 
         var calculator = new CalculatorLibrary.Calculator();
 
         while (!endApp)
         {
-            var numInput1 = "";
-            var numInput2 = "";
-            double result = 0;
+            var onlyOneNumber = false;
 
-            Console.Write("Type a number, and then press enter: ");
-            numInput1 = Console.ReadLine();
+            var num1 = double.NaN;
+            var num2 = double.NaN;
+            var result = double.NaN;
 
-            double cleanNum1 = 0;
-            while (!double.TryParse(numInput1, out cleanNum1))
-            {
-                Console.Write("This is not valid input. Please enter an integer value: ");
-                numInput1 = Console.ReadLine();
-            }
+            Console.WriteLine("\nChoose an option from the following list:");
+            calculator.PrintAvailableOperations();
 
-            Console.Write("Type another number, and then press enter: ");
-            numInput2 = Console.ReadLine();
-
-            double cleanNum2 = 0;
-            while (!double.TryParse(numInput2, out cleanNum2))
-            {
-                Console.Write("This is not valid input. Please enter an integer value: ");
-                numInput2 = Console.ReadLine();
-            }
-
-            Console.WriteLine("Choose an option from the following list:");
-            Console.WriteLine("\ta - Add");
-            Console.WriteLine("\ts - Subtract");
-            Console.WriteLine("\tm - Multiply");
-            Console.WriteLine("\td - Divide");
-            Console.Write("Your option? ");
-
+            Console.Write("> ");
             var op = Console.ReadLine();
 
-            try
+            while (!calculator.IsValidOperation(op))
             {
-                result = calculator.DoOperation(cleanNum1, cleanNum2, op);
-
-                if (double.IsNaN(result))
-                    Console.WriteLine("This operation will result in a mathematical error.\n");
-                else
-                    Console.WriteLine("Your result: {0:0.##}\n", result);
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine("Oh no! An exception occurred trying to do the math.\n - Details: " + e.Message);
+                Console.Write("Invalid operation. Choose one from the list above: ");
+                op = Console.ReadLine();
             }
 
-            Console.WriteLine("------------------------\n");
+            op = Helpers.ParseOperation(op);
 
+            Console.WriteLine();
 
-            Console.Write("Press 'n' and enter to close the app, or press any other key and enter to continue: ");
-            if (Console.ReadLine() == "n") endApp = true;
+            switch (op)
+            {
+                case "times":
+                    Console.WriteLine($"Times used: {CalculatorLibrary.Calculator.GetTimesUsed()}");
+                    break;
+                case "print":
+                    CalculatorLibrary.Calculator.PrintLatestCalculations();
+                    break;
+                case "delete":
+                    CalculatorLibrary.Calculator.DeleteLatestCalculations();
+                    break;
+                default:
+                {
+                    if (op is "sqr" or "sin" or "cos" or "10x")
+                    {
+                        onlyOneNumber = true;
+                    }
 
-            Console.WriteLine("\n");
+                    if (onlyOneNumber)
+                    {
+                        num1 = Helpers.GetNumber();
+                    }
+                    else
+                    {
+                        num1 = Helpers.GetNumber();
+                        num2 = Helpers.GetNumber();
+                    }
+
+                    Console.WriteLine($"\nData: first number: {num1}{(double.IsNaN(num2) ? "" : $"; second number: {num2}")}; operation: {op} ");
+
+                    try
+                    {
+                        result = calculator.DoOperation(num1, num2, op);
+            
+                        if (double.IsNaN(result))
+                            Console.WriteLine("This operation will result in a mathematical error.");
+                        else
+                            Console.WriteLine("Result: {0:0.##}", result);
+                    }
+                    catch (Exception e)
+                    {
+                        Console.WriteLine("An exception occurred trying to do the math.");
+                    }
+
+                    break;
+                }
+            }
+            
+            Console.WriteLine("\nPress any key to continue, or 'q' to quit...");
+            if (Console.ReadLine() == "q") endApp = true;
         }
 
         calculator.Finish();
