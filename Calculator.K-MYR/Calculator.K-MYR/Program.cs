@@ -13,27 +13,44 @@ internal class Program
 
         while (!endApp)
         {
-            // Declare variables and set to empty.
-            string numInput1 = "";
-            string numInput2 = "";
-            double result = 0;
+            double cleanNum1;
+            double cleanNum2;
+            double result;
+            double? returnValue = null;
 
-            // Ask the user to type the first number.
-            Console.Write("Type a number, and then press Enter: ");
-            numInput1 = Console.ReadLine();
+            //Ask the user if he wants to use a previous result
+            Console.WriteLine("Enter 'h' to show previous results to choose from, or press Enter to continue: ");
+            string? readResult = Console.ReadLine();
 
-            double cleanNum1 = 0;
-            while (!double.TryParse(numInput1, out cleanNum1))
+            if (readResult == "h")
             {
-                Console.Write("This is not valid input. Please enter an integer value: ");
-                numInput1 = Console.ReadLine();
+                returnValue = calculator.ShowHistory();
+                Console.Clear();
+            }
+
+            if (returnValue.HasValue)
+            {
+                cleanNum1 = returnValue.Value;
+            }
+            else
+            {
+                // Ask the user to type the first number.
+
+                Console.Write("Type a number, and then press Enter: ");
+                // Declare variables and set to empty.
+                string numInput1 = Console.ReadLine();
+
+                while (!double.TryParse(numInput1, out cleanNum1))
+                {
+                    Console.Write("This is not valid input. Please enter an integer value: ");
+                    numInput1 = Console.ReadLine();
+                }
             }
 
             // Ask the user to type the second number.
             Console.Write("Type another number, and then press Enter: ");
-            numInput2 = Console.ReadLine();
+            string numInput2 = Console.ReadLine();
 
-            double cleanNum2 = 0;
             while (!double.TryParse(numInput2, out cleanNum2))
             {
                 Console.Write("This is not valid input. Please enter an integer value: ");
@@ -46,31 +63,44 @@ internal class Program
             Console.WriteLine("\ts - Subtract");
             Console.WriteLine("\tm - Multiply");
             Console.WriteLine("\td - Divide");
+            Console.WriteLine("\tr - Nth-Root");
+            Console.WriteLine("\tp - Nth-Power");
             Console.Write("Your option? ");
 
-            string op = Console.ReadLine();
+            string[] listOfOperations = { "a", "s", "m", "d", "r", "p" };
+
+            string op = Console.ReadLine().Trim().ToLower();
+
+            while (!listOfOperations.Contains(op))
+            {
+                Console.WriteLine("Invalid Input! Please choose a operation from above");
+                op = Console.ReadLine().Trim().ToLower();
+            }
 
             try
             {
+                Console.WriteLine("------------------------");
                 result = calculator.DoOperation(cleanNum1, cleanNum2, op);
                 if (double.IsNaN(result))
                 {
-                    Console.WriteLine("This operation will result in a mathematical error.\n");
+                    Console.WriteLine("This operation will result in a mathematical error.");
                 }
-                else Console.WriteLine("Your result: {0:0.##}\n", result);
+                else
+                {
+                    Console.WriteLine("Your result: {0:0.##}", result);
+                }
+
             }
             catch (Exception e)
             {
                 Console.WriteLine("Oh no! An exception occurred trying to do the math.\n - Details: " + e.Message);
             }
 
-            Console.WriteLine("------------------------\n");
+            Console.WriteLine("------------------------");
+            Console.Write("Enter 'n' to exit. Press Enter to continue:\n");
 
-            // Wait for the user to respond before closing.
-            Console.Write("Press 'n' and Enter to close the app, or press any other key and Enter to continue: ");
+            // Wait for the user to respond before closing.            
             if (Console.ReadLine() == "n") endApp = true;
-
-            Console.WriteLine("\n"); // Friendly linespacing.
         }
         // Add call to close the JSON writer before return
         calculator.Finish();
