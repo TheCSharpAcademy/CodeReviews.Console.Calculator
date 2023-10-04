@@ -89,8 +89,8 @@ internal class Program
                 {
                     Console.WriteLine("Your result: {0:0.##}", result);
                 }
-
             }
+
             catch (Exception e)
             {
                 Console.WriteLine("Oh no! An exception occurred trying to do the math.\n - Details: " + e.Message);
