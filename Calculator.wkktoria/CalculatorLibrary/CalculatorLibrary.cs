@@ -6,7 +6,7 @@ public class Calculator
 {
     private readonly JsonWriter _writer;
     private static double _lastResult = double.NaN;
-    private static int _timesUsed = 0;
+    private static int _timesUsed;
     private static List<string> _latestCalculations = new List<string>();
     private static readonly Dictionary<string, string> Operations = new Dictionary<string, string>
     {
