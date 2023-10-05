@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Calculator.wkktoria", "Calculator.wkktoria\Calculator.wkktoria.csproj", "{C2FC6400-4BEC-469A-AE84-CB0EE5FAE9C0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CalculatorLibrary", "CalculatorLibrary\CalculatorLibrary.csproj", "{8296B5EB-47C2-45EB-B9B1-0D902E1DC53B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C2FC6400-4BEC-469A-AE84-CB0EE5FAE9C0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C2FC6400-4BEC-469A-AE84-CB0EE5FAE9C0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C2FC6400-4BEC-469A-AE84-CB0EE5FAE9C0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C2FC6400-4BEC-469A-AE84-CB0EE5FAE9C0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8296B5EB-47C2-45EB-B9B1-0D902E1DC53B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8296B5EB-47C2-45EB-B9B1-0D902E1DC53B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8296B5EB-47C2-45EB-B9B1-0D902E1DC53B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8296B5EB-47C2-45EB-B9B1-0D902E1DC53B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
