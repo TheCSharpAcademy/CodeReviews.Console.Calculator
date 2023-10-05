@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.33627.172
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Calculator.UgniusFalze", "Calculator.UgniusFalze\Calculator.UgniusFalze.csproj", "{C54EF863-C5C9-4C11-A486-7BCB796161D8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CalculatorLibrary.UgniusFalze", "CalculatorLibrary.UgniusFalze\CalculatorLibrary.UgniusFalze.csproj", "{854A5EBA-A290-4920-A1DC-87FF7D8DDC29}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C54EF863-C5C9-4C11-A486-7BCB796161D8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C54EF863-C5C9-4C11-A486-7BCB796161D8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C54EF863-C5C9-4C11-A486-7BCB796161D8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C54EF863-C5C9-4C11-A486-7BCB796161D8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{854A5EBA-A290-4920-A1DC-87FF7D8DDC29}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{854A5EBA-A290-4920-A1DC-87FF7D8DDC29}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{854A5EBA-A290-4920-A1DC-87FF7D8DDC29}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{854A5EBA-A290-4920-A1DC-87FF7D8DDC29}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {0619A22D-37EE-4C45-A74E-E8B7C8794176}
+	EndGlobalSection
+EndGlobal
