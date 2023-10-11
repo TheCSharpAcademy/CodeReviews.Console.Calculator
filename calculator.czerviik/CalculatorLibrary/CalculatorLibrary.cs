@@ -5,11 +5,15 @@ namespace CalculatorLibrary
     public class Calculator
     {
         JsonWriter writer;
+        public List<double> PastResults { get; private set; }
         public static int TimesUsed { get; private set; }
+        private double cleanNum = 0;
+        private string numInput;
 
         public Calculator()
         {
             TimesUsed = 0;
+            PastResults = new List<double>();
             StreamWriter logFile = File.CreateText("calculatorlog.json");
             logFile.AutoFlush = true;
             writer = new JsonTextWriter(logFile);
@@ -51,6 +55,26 @@ namespace CalculatorLibrary
                     }
                     writer.WriteValue("Divide");
                     break;
+                case "r":
+                    result = Math.Sqrt(num1);
+                    writer.WriteValue("Square Root");
+                    break;
+                case "p":
+                    result = Math.Pow(num1, num2);
+                    writer.WriteValue("Taking the Power");
+                    break;
+                case "t":
+                    result = num1 * 10;
+                    writer.WriteValue("x10");
+                    break;
+                case "i":
+                    result = Math.Sin(num1);
+                    writer.WriteValue("Sinus");
+                    break;
+                case "o":
+                    result = Math.Cos(num1);
+                    writer.WriteValue("Cosinus");
+                    break;
                 // Return text for an incorrect option entry.
                 default:
                     break;
@@ -60,13 +84,71 @@ namespace CalculatorLibrary
             writer.WriteValue(result);
             writer.WriteEndObject();
 
+            PastResults.Add(result);
             return result;
         }
         public void Finish()
         {
+            writer.WriteStartObject();
+            writer.WritePropertyName("Operations total");
+            writer.WriteValue(TimesUsed);
+            writer.WriteEndObject();
             writer.WriteEndArray();
             writer.WriteEndObject();
             writer.Close();
         }
-    }
+        public void SetInputNumber()
+        {
+            bool isValidInput = false;
+
+            do
+            {
+                numInput = Console.ReadLine();
+                if (numInput.ToLower() == "p")
+                    if (PastResults.Any())
+                    {
+                        foreach (double entry in PastResults)
+                        {
+                            Console.WriteLine("{0} - {1}", PastResults.IndexOf(entry) + 1, entry);
+                        }
+
+                        int numInputPast;
+                        string input = Console.ReadLine();
+                        if (int.TryParse(input, out numInputPast))
+                        {
+                            if (PastResults.Count >= numInputPast && numInputPast > 0)
+                            {
+                                cleanNum = PastResults[numInputPast - 1];
+                                isValidInput = true;
+                            }
+                            else
+                            {
+                                Console.WriteLine("You entered a wrong number.");
+                            }
+                        }
+                        else
+                            Console.WriteLine("You didn't enter a number.");
+                    }
+                    else
+                    {
+                        Console.WriteLine("No previous results yet.");
+                        Console.WriteLine("Type a number, and then press Enter: ");
+                    }
+                else
+                {
+                    while (!double.TryParse(numInput, out cleanNum))
+                    {
+                        Console.Write("This is not valid input. Please enter an integer value: ");
+                        numInput = Console.ReadLine();
+                    }
+                    isValidInput = true;
+                    
+                }
+            } while (!isValidInput);
+        }
+        public double GetCleanNumber()
+        {
+            return cleanNum;
+        }
+    }  
 }
