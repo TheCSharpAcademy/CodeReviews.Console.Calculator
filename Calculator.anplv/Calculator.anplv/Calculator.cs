@@ -1,4 +1,6 @@
-﻿    class Calculator
+﻿namespace Calculator.anplv
+{
+    class Calculator
     {
         public static double DoOperation(double num1, double num2, string op)
         {
@@ -30,3 +32,4 @@
             return result;
         }
     }
+}
