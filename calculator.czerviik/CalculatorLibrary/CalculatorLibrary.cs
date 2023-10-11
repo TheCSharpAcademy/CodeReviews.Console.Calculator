@@ -1,14 +1,15 @@
-﻿using System.Diagnostics;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
 namespace CalculatorLibrary
 {
     public class Calculator
     {
         JsonWriter writer;
+        public static int TimesUsed { get; private set; }
 
         public Calculator()
         {
+            TimesUsed = 0;
             StreamWriter logFile = File.CreateText("calculatorlog.json");
             logFile.AutoFlush = true;
             writer = new JsonTextWriter(logFile);
@@ -54,6 +55,7 @@ namespace CalculatorLibrary
                 default:
                     break;
             }
+            TimesUsed++;
             writer.WritePropertyName("Result");
             writer.WriteValue(result);
             writer.WriteEndObject();
