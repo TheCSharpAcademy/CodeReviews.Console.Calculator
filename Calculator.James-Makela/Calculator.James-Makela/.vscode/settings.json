@@ -1,7 +1,0 @@
-{
-    "dotnet.defaultSolution": "Calculator.James-Makela.sln",
-    "launch": {
-        "configurations": [],
-        "compounds": []
-    }
-}
