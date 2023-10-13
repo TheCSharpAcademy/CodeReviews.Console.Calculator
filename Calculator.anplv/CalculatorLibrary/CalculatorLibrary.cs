@@ -1,10 +1,19 @@
-﻿using System.Diagnostics;
+﻿using System.Collections.Generic;
+using System.Diagnostics;
 using Newtonsoft.Json;
 namespace CalculatorLibrary
 {
     public class Calculator
     {
         JsonWriter writer;
+        Dictionary<int, string> operations = new Dictionary<int, string>()
+        {
+            [0] = "Addition",
+            [0] = "Subtraction",
+            [0] = "Multiplication",
+            [0] = "Division"
+        };
+
         public Calculator()
         {
             StreamWriter logFile = File.CreateText("calculatorlog.json");
@@ -64,6 +73,13 @@ namespace CalculatorLibrary
             writer.WriteEndArray();
             writer.WriteEndObject();
             writer.Close();
+        }
+
+
+        internal static int CountOperations()
+        {
+            int count = 0;
+            return count;
         }
     }
 }
