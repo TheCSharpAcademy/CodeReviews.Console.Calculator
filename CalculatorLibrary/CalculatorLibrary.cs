@@ -1,71 +1,90 @@
-﻿using System.Diagnostics;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
 namespace CalculatorLibrary
 {
     public class Calculator
     {
-        JsonWriter writer;
+        private List<Operation>? operations;
+        private const string PATH = "calculatorlog.json";
+        private const string ADD = "Add";
+        private const string SUBSTRACT = "Substract";
+        private const string MULTIPLY = "Multiply";
+        private const string DIVIDE = "Divide";
+        private const string OPERATION_ADD = "a";
+        private const string OPERATION_SUB = "s";
+        private const string OPERATION_MUL = "m";
+        private const string OPERATION_DIV = "d";
 
         public Calculator()
         {
-            StreamWriter logFile = File.CreateText("calculatorlog.json");
-            logFile.AutoFlush = true;
-            writer = new JsonTextWriter(logFile);
-            writer.Formatting = Formatting.Indented;
-            writer.WriteStartObject();
-            writer.WritePropertyName("Operations");
-            writer.WriteStartArray();
+            loadHistory();
         }
 
         public double DoOperation(double num1, double num2, string op)
         {
             double result = double.NaN; // Default value is "not-a-number" if an operation, such as division, could result in an error.
-            writer.WriteStartObject();
-            writer.WritePropertyName("Operand1");
-            writer.WriteValue(num1);
-            writer.WritePropertyName("Operand2");
-            writer.WriteValue(num2);
-            writer.WritePropertyName("Operation");
-            // Use a switch statement to do the math.
+            Operation operation = new Operation();
             switch (op)
             {
-                case "a":
+                case OPERATION_ADD:
                     result = num1 + num2;
-                    writer.WriteValue("Add");
+                    operation.Type = ADD;
                     break;
-                case "s":
+                case OPERATION_SUB:
                     result = num1 - num2;
-                    writer.WriteValue("Subtract");
+                    operation.Type = SUBSTRACT;
                     break;
-                case "m":
+                case OPERATION_MUL:
                     result = num1 * num2;
-                    writer.WriteValue("Multiply");
+                    operation.Type = MULTIPLY;
                     break;
-                case "d":
+                case OPERATION_DIV:
                     // Ask the user to enter a non-zero divisor.
                     if (num2 != 0)
                     {
                         result = num1 / num2;
                     }
-                    writer.WriteValue("Divide");
+                    operation.Type = DIVIDE;
                     break;
                 // Return text for an incorrect option entry.
                 default:
                     break;
             }
-            writer.WritePropertyName("Result");
-            writer.WriteValue(result);
-            writer.WriteEndObject();
-
+            operation.Operand1 = num1;
+            operation.Operand2 = num2;
+            operation.Result = result;
+            operations ??= new();
+            operations.Add(operation);
             return result;
         }
 
-        public void Finish()
+        private void loadHistory()
         {
-            writer.WriteEndArray();
-            writer.WriteEndObject();
-            writer.Close();
+            // This text is added only once to the file.
+            if (!File.Exists(PATH))
+            {
+                Console.WriteLine("Oh no, the file dose not exist!");
+                return;
+            }
+
+            // Open the file to read from.
+            string json = File.ReadAllText(PATH);
+            operations = JsonConvert.DeserializeObject<List<Operation>>(json);
+        }
+
+        public void writeHistory()
+        {
+            // This text is added only once to the file.
+            if (!File.Exists(PATH))
+            {
+                Console.WriteLine("Oh no, the file dose not exist!");
+                return;
+            }
+
+            string json = JsonConvert.SerializeObject(operations, Formatting.Indented);
+
+            // Write calculation history to the file.
+            File.WriteAllText(PATH, json);
         }
     }
 }
