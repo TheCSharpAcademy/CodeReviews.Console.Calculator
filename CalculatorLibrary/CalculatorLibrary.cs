@@ -86,5 +86,7 @@ namespace CalculatorLibrary
             // Write calculation history to the file.
             File.WriteAllText(PATH, json);
         }
+
+        public int getTotalCalculationTimes() => operations.Count;
     }
 }
