@@ -20,7 +20,7 @@ namespace Calculator
             var store = new List<string>();
             List<double> numList1 = new List<double>();
             List<double> numList2 = new List<double>();
-            //  var store = new List<string>();
+
             int number = -1;
             string operationSign;
             string operand = " ";
@@ -90,7 +90,7 @@ namespace Calculator
                 number++;
                 operationSign = calculator.Sign(op);
                 operand = calculator.Operation(op);
-                //newMath.MathFunctions(op);
+
                 switch ( op )
                     {
 

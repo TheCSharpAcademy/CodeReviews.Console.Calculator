@@ -1,6 +1,5 @@
 using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
+
 using System.Formats.Asn1;
 using System.IO;
 using System.Xml;
@@ -28,7 +27,7 @@ namespace CalculatorLibrary
             writer.WriteEndObject();
             writer.Close();
             }
-        private int count = 0;
+        private int count;
         public void Counter()
             {
             count += 1;
@@ -136,8 +135,7 @@ namespace CalculatorLibrary
                 break;
             // Return text for an incorrect option entry.
             case "r":
-                //Math.Sqrt(x);
-                //num2 = 0;
+
                 result = Math.Sqrt(num1);
                 writer.WriteValue("Square Root");
                 break;
