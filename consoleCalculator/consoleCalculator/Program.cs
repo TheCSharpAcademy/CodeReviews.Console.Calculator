@@ -1,5 +1,4 @@
 ﻿using CalculatorLibrary;
-using consoleCalculator;
 
 bool endApp = false;
 // Display title as the C# console calculator app.
