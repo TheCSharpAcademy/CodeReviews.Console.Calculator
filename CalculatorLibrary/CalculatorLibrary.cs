@@ -4,7 +4,8 @@ namespace CalculatorLibrary
 {
     public class Calculator
     {
-        private List<Operation>? operations;
+        #region Constants
+
         private const string PATH = "calculatorlog.json";
         private const string ADD = "Add";
         private const string SUBSTRACT = "Substract";
@@ -15,10 +16,24 @@ namespace CalculatorLibrary
         private const string OPERATION_MUL = "m";
         private const string OPERATION_DIV = "d";
 
+        #endregion Constants
+
+        #region fields
+
+        private List<Operation>? operations;
+
+        #endregion fields
+
+        #region Constructor
+
         public Calculator()
         {
             loadHistory();
         }
+
+        #endregion Constructor
+
+        #region Methods
 
         public double DoOperation(double num1, double num2, string op)
         {
@@ -88,5 +103,14 @@ namespace CalculatorLibrary
         }
 
         public int getTotalCalculationTimes() => operations.Count;
+
+        public List<Operation> GetHistory() => operations;
+
+        public void RemoveOperation(int index)
+        {
+            operations?.RemoveAt(index);
+        }
+
+        #endregion Methods
     }
 }

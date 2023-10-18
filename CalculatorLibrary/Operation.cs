@@ -2,7 +2,7 @@
 
 namespace CalculatorLibrary
 {
-    internal class Operation
+    public class Operation
     {
         [JsonProperty]
         public double Operand1 { get; set; }
@@ -15,5 +15,10 @@ namespace CalculatorLibrary
 
         [JsonProperty]
         public double Result { get; set; }
+
+        public override string ToString() 
+        {
+            return $"{Operand1} {Type} {Operand2} = {Result}";
+        }
     }
 }
