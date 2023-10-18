@@ -1,12 +1,11 @@
-﻿using System.Diagnostics;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
 namespace CalculatorLibrary
 {
     public class Calculator
     {
         JsonWriter writer;
-        private int timesUsed = 0;
+        private int timesUsed;
 
         public Calculator()
         {
