@@ -19,15 +19,29 @@ class Program
             string numInput2 = "";
             double result = 0;
 
-            // Ask the user to type the first number.
-            Console.Write("Type a number, and then press Enter: ");
-            numInput1 = Console.ReadLine();
-
-            double cleanNum1 = 0;
-            while (!double.TryParse(numInput1, out cleanNum1))
+            double cleanNum1 = double.NaN;
+            if (calculator.TryGetPreviousResult(out var prevRes))
             {
-                Console.Write("This is not valid input. Please enter an integer value: ");
+                Console.Write("Type a number, or if you want to use previous result, just press Enter: ");
                 numInput1 = Console.ReadLine();
+                if (string.IsNullOrEmpty(numInput1))
+                {
+                    cleanNum1 = prevRes;
+                    Console.CursorTop--;
+                    Console.WriteLine($"Type a number, or if you want to use previous result, just press Enter: {cleanNum1}");
+                }
+            }
+            
+            if (double.IsNaN(cleanNum1))
+            {
+                // Ask the user to type the first number.
+                Console.Write("Type a number, and then press Enter: ");
+                numInput1 = Console.ReadLine();
+                while (!double.TryParse(numInput1, out cleanNum1))
+                {
+                    Console.Write("This is not valid input. Please enter an integer value: ");
+                    numInput1 = Console.ReadLine();
+                }
             }
 
             // Ask the user to type the second number.
@@ -68,8 +82,11 @@ class Program
             Console.WriteLine("------------------------\n");
 
             // Wait for the user to respond before closing.
-            Console.Write("Press 'n' and Enter to close the app, or press any other key and Enter to continue: ");
-            if (Console.ReadLine() == "n") endApp = true;
+            Console.Write("Press 'n' and Enter to close the app, or press 'h' and Enter to show previous operations or press Enter to continue: ");
+
+            var action = Console.ReadLine();
+            if (action == "n") endApp = true;
+            else if (action == "h") calculator.ShowOperationsHIstory();
 
             Console.WriteLine("\n"); // Friendly linespacing.
         }

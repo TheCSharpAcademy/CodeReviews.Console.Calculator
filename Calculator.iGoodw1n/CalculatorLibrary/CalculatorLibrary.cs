@@ -4,7 +4,9 @@ namespace CalculatorLibrary;
 
 public class Calculator
 {
-    JsonWriter writer;
+    readonly JsonWriter writer;
+    readonly List<(string Operation, double Result)> operations = new();
+
 
     public Calculator()
     {
@@ -32,20 +34,24 @@ public class Calculator
             case "a":
                 result = num1 + num2;
                 writer.WriteValue("Add");
+                operations.Add(($"{num1} + {num2} = {result}", result));
                 break;
             case "s":
                 result = num1 - num2;
                 writer.WriteValue("Subtract");
+                operations.Add(($"{num1} - {num2} = {result}", result));
                 break;
             case "m":
                 result = num1 * num2;
                 writer.WriteValue("Multiply");
+                operations.Add(($"{num1} * {num2} = {result}", result));
                 break;
             case "d":
                 // Ask the user to enter a non-zero divisor.
                 if (num2 != 0)
                 {
                     result = num1 / num2;
+                    operations.Add(($"{num1} / {num2} = {result}", result));
                 }
                 writer.WriteValue("Divide");
                 break;
@@ -65,5 +71,25 @@ public class Calculator
         writer.WriteEndArray();
         writer.WriteEndObject();
         writer.Close();
+    }
+
+    public void ShowOperationsHIstory()
+    {
+        foreach (var op in operations)
+        {
+            Console.WriteLine(op.Operation);
+        }
+    }
+
+    public bool TryGetPreviousResult(out double result)
+    {
+        if (operations.Any())
+        {
+            result = operations.Last().Result;
+            return true;
+        }
+
+        result = double.NaN;
+        return false;
     }
 }
