@@ -1,7 +1,6 @@
 ﻿using CalculatorLibrary;
 
 namespace CalculatorProgram;
-
 class Program
 {
     static void Main(string[] args)
@@ -73,6 +72,7 @@ class Program
 
             Console.WriteLine("\n"); // Friendly linespacing.
         }
+        calculator.Finish();
         return;
     }
 }
