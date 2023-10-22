@@ -29,7 +29,17 @@ class Program
                 case Constants.USE_HISTORY:
                     ReuseCalculation(calculator);
                     break;
-                default:
+                case Constants.OPERATION_SR:
+                case Constants.OPERATION_P:
+                case Constants.OPERATION_SIN:
+                case Constants.OPERATION_COS:
+                    double number = GetFirstNumber();
+                    DoCalculation(calculator, op, number);
+                    break;
+                case Constants.OPERATION_ADD:
+                case Constants.OPERATION_SUB:
+                case Constants.OPERATION_MUL:
+                case Constants.OPERATION_DIV:
                     double firstNumber = GetFirstNumber();
                     double secondNumber = GetSecondNumber();
                     DoCalculation(calculator, op, firstNumber, secondNumber);
@@ -53,7 +63,7 @@ class Program
 
     private static double GetFirstNumber()
     {
-        Console.Write("Type the first number, and then press Enter: ");
+        Console.Write("Type the number, and then press Enter: ");
         string numInput1 = Console.ReadLine();
 
         double cleanNum1 = 0;
@@ -80,11 +90,11 @@ class Program
         return cleanNum2;
     }
 
-    private static void DoCalculation(Calculator calculator, string op, double cleanNum1, double cleanNum2)
+    private static void DoCalculation(Calculator calculator, string op, double cleanNum1, double cleanNum2 = 0)
     {
         try
         {
-            double result = calculator.DoOperation(cleanNum1, cleanNum2, op);
+            double result = calculator.DoOperation(op, cleanNum1, cleanNum2);
             if (double.IsNaN(result))
             {
                 Console.WriteLine("This operation will result in a mathematical error.\n");
@@ -129,6 +139,10 @@ class Program
         Console.WriteLine("\ts - Subtract");
         Console.WriteLine("\tm - Multiply");
         Console.WriteLine("\td - Divide");
+        Console.WriteLine("\tsr - Square Root");
+        Console.WriteLine("\tp - Power");
+        Console.WriteLine("\tsin - Sin");
+        Console.WriteLine("\tcos - Cos");
     }
 
     private static void printMenu()

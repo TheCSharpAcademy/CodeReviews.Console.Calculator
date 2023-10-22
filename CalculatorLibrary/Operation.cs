@@ -18,7 +18,11 @@ namespace CalculatorLibrary
 
         public override string ToString()
         {
-            return $"{Operand1} {Constants.TPS[Type]} {Operand2} = {Result}";
+            if (Constants.TWO_PARA_TYPES.Contains(Type))
+            {
+                return $"{Operand1} {Type} {Operand2} = {Result}";
+            }
+            return $"{Type} {Operand1} = {Result}";
         }
     }
 }

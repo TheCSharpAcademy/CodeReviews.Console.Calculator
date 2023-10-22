@@ -21,7 +21,7 @@ namespace CalculatorLibrary
 
         #region Methods
 
-        public double DoOperation(double num1, double num2, string op)
+        public double DoOperation(string op, double num1, double num2 = 0)
         {
             double result = double.NaN; // Default value is "not-a-number" if an operation, such as division, could result in an error.
             Operation operation = new Operation();
@@ -46,6 +46,22 @@ namespace CalculatorLibrary
                         result = num1 / num2;
                     }
                     operation.Type = Constants.DIVIDE;
+                    break;
+                case Constants.OPERATION_SR:
+                    result = Math.Sqrt(num1);
+                    operation.Type = Constants.SQUARE_ROOT;
+                    break;
+                case Constants.OPERATION_P:
+                    result = Math.Pow(num1, 2);
+                    operation.Type = Constants.POWER;
+                    break;
+                case Constants.OPERATION_SIN:
+                    result = Math.Sin(num1);
+                    operation.Type = Constants.SIN;
+                    break;
+                case Constants.OPERATION_COS:
+                    result = Math.Cos(num1);
+                    operation.Type = Constants.COS;
                     break;
                 // Return text for an incorrect option entry.
                 default:
