@@ -100,6 +100,7 @@ namespace CalculatorLibrary
         public void ClearHistory()
         {
             operations?.Clear();
+            Console.WriteLine("Successfully clear the calculation history.");
         }
 
         public void PrintHistory()
@@ -113,6 +114,11 @@ namespace CalculatorLibrary
         public double GetCalculationResultById(int id)
         {
             return operations[id].Result;
+        }
+
+        public void printCalculationTimes()
+        {
+            Console.WriteLine($"Your history calculation times is {getTotalCalculationTimes()}");
         }
 
         #endregion Methods

@@ -4,61 +4,36 @@ class Program
 {
     static void Main(string[] args)
     {
+        Calculator calculator = new Calculator();
         bool endApp = false;
         // Display title as the C# console calculator app.
         Console.WriteLine("Console Calculator in C#\r");
         Console.WriteLine("------------------------\n");
-
-        Calculator calculator = new Calculator();
 
         while (!endApp)
         {
             printMenu();
             string op = Console.ReadLine();
 
-            if (op == Constants.CALCULATION_TIMES)
+            switch (op)
             {
-                Console.WriteLine($"Your history calculation times is {calculator.getTotalCalculationTimes()}");
-            }
-            else if (op == Constants.CALCULATION_HISTORY)
-            {
-                calculator.PrintHistory();
-            }
-            else if (op == Constants.CLEAR_HISTORY)
-            {
-                calculator.ClearHistory();
-                Console.WriteLine("Successfully clear the calculation history.");
-            }
-            else if (op == Constants.USE_HISTORY)
-            {
-                var cnt = calculator.getTotalCalculationTimes();
-                if (cnt < 1)
-                {
-                    Console.WriteLine("There is no calculation can be resued.");
-                    continue;
-                }
-                calculator.PrintHistory();
-                Console.WriteLine($"Please choose the calculation id (1-{cnt}) you want to resue:");
-                string id = Console.ReadLine();
-                int cleanId = 0;
-                while (!int.TryParse(id, out cleanId) || cleanId < 0 || cleanId > cnt)
-                {
-                    Console.Write($"This is not valid input. Please enter a valid id(1-{cnt}): ");
-                    id = Console.ReadLine();
-                }
-                double cleanNum1 = calculator.GetCalculationResultById(cleanId - 1);
-                Console.WriteLine($"The fist number is {cleanNum1}");
-                double cleanNum2 = GetSecondNumber();
-                Console.WriteLine("Please choose a operation:");
-                PrintCalculationOperation();
-                string operation = Console.ReadLine();
-                DoCalculation(calculator, operation, cleanNum1, cleanNum2);
-            }
-            else
-            {
-                double firstNumber = GetFirstNumber();
-                double secondNumber = GetSecondNumber();
-                DoCalculation(calculator, op, firstNumber, secondNumber);
+                case Constants.CALCULATION_TIMES:
+                    calculator.printCalculationTimes();
+                    break;
+                case Constants.CALCULATION_HISTORY:
+                    calculator.PrintHistory();
+                    break;
+                case Constants.CLEAR_HISTORY:
+                    calculator.ClearHistory();
+                    break;
+                case Constants.USE_HISTORY:
+                    ReuseCalculation(calculator);
+                    break;
+                default:
+                    double firstNumber = GetFirstNumber();
+                    double secondNumber = GetSecondNumber();
+                    DoCalculation(calculator, op, firstNumber, secondNumber);
+                    break;
             }
 
             Console.WriteLine("------------------------\n");
@@ -120,6 +95,32 @@ class Program
         {
             Console.WriteLine("Oh no! An exception occurred trying to do the math.\n - Details: " + e.Message);
         }
+    }
+
+    private static void ReuseCalculation(Calculator calculator)
+    {
+        var cnt = calculator.getTotalCalculationTimes();
+        if (cnt < 1)
+        {
+            Console.WriteLine("There is no calculation can be resued.");
+            return;
+        }
+        calculator.PrintHistory();
+        Console.WriteLine($"Please choose the calculation id (1-{cnt}) you want to resue:");
+        string id = Console.ReadLine();
+        int cleanId = 0;
+        while (!int.TryParse(id, out cleanId) || cleanId < 0 || cleanId > cnt)
+        {
+            Console.Write($"This is not valid input. Please enter a valid id(1-{cnt}): ");
+            id = Console.ReadLine();
+        }
+        double cleanNum1 = calculator.GetCalculationResultById(cleanId - 1);
+        Console.WriteLine($"The fist number is {cleanNum1}");
+        double cleanNum2 = GetSecondNumber();
+        Console.WriteLine("Please choose a operation:");
+        PrintCalculationOperation();
+        string operation = Console.ReadLine();
+        DoCalculation(calculator, operation, cleanNum1, cleanNum2);
     }
 
     private static void PrintCalculationOperation()
