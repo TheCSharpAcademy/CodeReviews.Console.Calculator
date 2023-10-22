@@ -21,20 +21,26 @@ class Program
             Console.WriteLine("\td - Divide");
             Console.WriteLine("\tt - Show the times of your history calculation");
             Console.WriteLine("\th - Show the calculation history");
+            Console.WriteLine("\tc - Clear the calculation history");
             Console.Write("Your option? ");
 
             string op = Console.ReadLine();
-                   
-            if(op == "t")
+
+            if (op == Constants.CALCULATION_TIMES)
             {
                 Console.WriteLine($"Your history calculation times is {calculator.getTotalCalculationTimes()}");
             }
-            else if(op == "h")
+            else if (op == Constants.CALCULATION_HISTORY)
             {
                 Console.WriteLine("================Calculation History=================");
                 var ind = 1;
                 calculator.GetHistory().ForEach(his => { Console.WriteLine($"{ind}: {his}"); ind++; });
                 Console.WriteLine("====================================================");
+            }
+            else if (op == Constants.CLEAR_HISTORY)
+            {
+                calculator.ClearHistory();
+                Console.WriteLine("Successfully clear the calculation history.");
             }
             else
             {

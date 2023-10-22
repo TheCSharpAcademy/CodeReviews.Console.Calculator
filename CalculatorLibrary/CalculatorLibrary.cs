@@ -4,20 +4,6 @@ namespace CalculatorLibrary
 {
     public class Calculator
     {
-        #region Constants
-
-        private const string PATH = "calculatorlog.json";
-        private const string ADD = "Add";
-        private const string SUBSTRACT = "Substract";
-        private const string MULTIPLY = "Multiply";
-        private const string DIVIDE = "Divide";
-        private const string OPERATION_ADD = "a";
-        private const string OPERATION_SUB = "s";
-        private const string OPERATION_MUL = "m";
-        private const string OPERATION_DIV = "d";
-
-        #endregion Constants
-
         #region fields
 
         private List<Operation>? operations;
@@ -41,25 +27,25 @@ namespace CalculatorLibrary
             Operation operation = new Operation();
             switch (op)
             {
-                case OPERATION_ADD:
+                case Constants.OPERATION_ADD:
                     result = num1 + num2;
-                    operation.Type = ADD;
+                    operation.Type = Constants.ADD;
                     break;
-                case OPERATION_SUB:
+                case Constants.OPERATION_SUB:
                     result = num1 - num2;
-                    operation.Type = SUBSTRACT;
+                    operation.Type = Constants.SUBSTRACT;
                     break;
-                case OPERATION_MUL:
+                case Constants.OPERATION_MUL:
                     result = num1 * num2;
-                    operation.Type = MULTIPLY;
+                    operation.Type = Constants.MULTIPLY;
                     break;
-                case OPERATION_DIV:
+                case Constants.OPERATION_DIV:
                     // Ask the user to enter a non-zero divisor.
                     if (num2 != 0)
                     {
                         result = num1 / num2;
                     }
-                    operation.Type = DIVIDE;
+                    operation.Type = Constants.DIVIDE;
                     break;
                 // Return text for an incorrect option entry.
                 default:
@@ -76,21 +62,21 @@ namespace CalculatorLibrary
         private void loadHistory()
         {
             // This text is added only once to the file.
-            if (!File.Exists(PATH))
+            if (!File.Exists(Constants.PATH))
             {
                 Console.WriteLine("Oh no, the file dose not exist!");
                 return;
             }
 
             // Open the file to read from.
-            string json = File.ReadAllText(PATH);
+            string json = File.ReadAllText(Constants.PATH);
             operations = JsonConvert.DeserializeObject<List<Operation>>(json);
         }
 
         public void writeHistory()
         {
             // This text is added only once to the file.
-            if (!File.Exists(PATH))
+            if (!File.Exists(Constants.PATH))
             {
                 Console.WriteLine("Oh no, the file dose not exist!");
                 return;
@@ -99,7 +85,7 @@ namespace CalculatorLibrary
             string json = JsonConvert.SerializeObject(operations, Formatting.Indented);
 
             // Write calculation history to the file.
-            File.WriteAllText(PATH, json);
+            File.WriteAllText(Constants.PATH, json);
         }
 
         public int getTotalCalculationTimes() => operations.Count;
@@ -109,6 +95,11 @@ namespace CalculatorLibrary
         public void RemoveOperation(int index)
         {
             operations?.RemoveAt(index);
+        }
+
+        public void ClearHistory()
+        {
+            operations?.Clear();
         }
 
         #endregion Methods
