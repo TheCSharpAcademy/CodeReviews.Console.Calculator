@@ -102,6 +102,19 @@ namespace CalculatorLibrary
             operations?.Clear();
         }
 
+        public void PrintHistory()
+        {
+            Console.WriteLine("================Calculation History=================");
+            var ind = 1;
+            GetHistory().ForEach(his => { Console.WriteLine($"{ind}: {his}"); ind++; });
+            Console.WriteLine("====================================================");
+        }
+
+        public double GetCalculationResultById(int id)
+        {
+            return operations[id].Result;
+        }
+
         #endregion Methods
     }
 }

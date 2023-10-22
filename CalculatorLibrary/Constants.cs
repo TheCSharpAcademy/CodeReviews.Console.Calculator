@@ -14,6 +14,7 @@
         public const string CALCULATION_TIMES = "t";
         public const string CALCULATION_HISTORY = "h";
         public const string CLEAR_HISTORY = "c";
+        public const string USE_HISTORY = "u";
 
         public static readonly Dictionary<string, string> TPS = new Dictionary<string, string>
         { {ADD, "+"}, {SUBSTRACT, "-"}, {MULTIPLY, "*"}, { DIVIDE, "/"}};
