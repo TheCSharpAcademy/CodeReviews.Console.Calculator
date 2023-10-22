@@ -1,7 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-
-namespace CalculatorLibrary
+﻿namespace CalculatorLibrary
 {
     public class Constants
     {

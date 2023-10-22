@@ -108,11 +108,6 @@ namespace CalculatorLibrary
 
         public List<Operation> GetHistory() => operations;
 
-        public void RemoveOperation(int index)
-        {
-            operations?.RemoveAt(index);
-        }
-
         public void ClearHistory()
         {
             operations?.Clear();
