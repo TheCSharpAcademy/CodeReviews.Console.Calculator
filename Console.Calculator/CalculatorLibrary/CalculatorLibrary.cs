@@ -69,6 +69,48 @@ public class Calculator
 		return result;
 	}
 
+	public double DoOperation(double num, string? op)
+	{
+		double result = double.NaN;
+
+		switch (op)
+		{
+			case "sqrt":
+				result = Math.Sqrt(num);
+				break;
+			case "p":
+				Console.Write("Enter exponent for power: ");
+				string? input = Console.ReadLine();
+
+				int exponent;
+				while (!int.TryParse(input, out exponent))
+				{
+					Console.Write("This is not valid input. Please enter an integer value: ");
+					input = Console.ReadLine();
+				}
+				result = Math.Pow(num, exponent);
+				break;
+			case "x":
+				result = 10 * num;
+				break;
+			case "s":
+				result = Math.Sin(num);
+				break;
+			case "c":
+				result = Math.Cos(num);
+				break;
+			case "t":
+				result = Math.Tan(num);
+				break;
+			default:
+				break;
+		}
+
+		UsedCount++;
+
+		return result;
+	}
+
 	public void Finish()
 	{
 		writer.WriteEndArray();
