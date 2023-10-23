@@ -7,9 +7,12 @@ public class Calculator
 	JsonWriter writer;
 
 	public int UsedCount { get; set; } = 0;
+	private List<double> Calculations { get; set; }
 
 	public Calculator()
 	{
+		Calculations = new List<double>();
+
 		StreamWriter logFile = File.CreateText("calculatorlog.json");
 		logFile.AutoFlush = true;
 		writer = new JsonTextWriter(logFile);
@@ -21,8 +24,46 @@ public class Calculator
 
 	public void ShowUsedCount()
 	{
-        Console.WriteLine($"Calculator has been used {UsedCount} times.");
-    }
+		Console.WriteLine($"Calculator has been used {UsedCount} times.");
+	}
+
+	public void ShowCalculations()
+	{
+		Console.Clear();
+
+		if (Calculations.Count == 0)
+            Console.WriteLine("List is empty.");
+		else
+		{
+			Console.WriteLine("All calculation results:");
+			foreach (var calculation in Calculations)
+			{
+				Console.WriteLine($"\t{calculation}");
+			}
+		}
+
+		Console.ForegroundColor = ConsoleColor.Yellow;
+		Console.WriteLine("Press any key to continue.");
+		Console.ForegroundColor = ConsoleColor.White;
+
+		Console.ReadKey();
+	}
+
+	public void ClearCalculations()
+	{
+		Console.Clear();
+		Calculations.Clear();
+
+		Console.ForegroundColor = ConsoleColor.Red;
+        Console.WriteLine("All calculation results cleared.");
+		Console.ForegroundColor = ConsoleColor.White;
+
+		Console.ForegroundColor = ConsoleColor.Yellow;
+		Console.WriteLine("Press any key to continue.");
+		Console.ForegroundColor = ConsoleColor.White;
+
+		Console.ReadKey();
+	}
 
 	public double DoOperation(double num1, double num2, string? op)
 	{
@@ -65,6 +106,7 @@ public class Calculator
 		writer.WriteEndObject();
 
 		UsedCount++;
+		Calculations.Add(result);
 
 		return result;
 	}
@@ -107,6 +149,7 @@ public class Calculator
 		}
 
 		UsedCount++;
+		Calculations.Add(result);
 
 		return result;
 	}

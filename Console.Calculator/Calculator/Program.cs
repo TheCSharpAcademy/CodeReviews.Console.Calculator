@@ -7,8 +7,10 @@ class Program
 	static void Main(string[] args)
 	{
 		bool endApp = false;
-		Console.WriteLine("Console Calculator in C#\r");
-		Console.WriteLine("------------------------\n");
+		Console.ForegroundColor = ConsoleColor.Magenta;
+		Console.WriteLine("Console Calculator");
+		Console.ForegroundColor = ConsoleColor.White;
+		Console.WriteLine("------------------------");
 
 		Calculator calculator = new Calculator();
 		while (!endApp)
@@ -17,19 +19,43 @@ class Program
 			string? numInput2;
 			double result;
 
-			Console.WriteLine("Is this a unary operation (square root, power, trig) or binary (addition, subtraction...)");
-            Console.WriteLine("1 -> Unary\n0 -> Binary");
+			Console.Clear();
 
-			int operationTypeClean;
-			string? operationType = Console.ReadLine();
+			Console.WriteLine("Options:");
+			Console.ForegroundColor = ConsoleColor.Yellow;
+			Console.WriteLine("u -> Unary operation (square root, power, trig, 10x)");
+			Console.WriteLine("b -> Binary operation (addition, subtraction...)");
+			Console.WriteLine("c -> View previous calculations");
+			Console.WriteLine("d -> Delete calculations");
 
-			while (!int.TryParse(operationType, out operationTypeClean) || operationTypeClean != 1 && operationTypeClean != 0)
+			Console.ForegroundColor = ConsoleColor.Red;
+			Console.WriteLine("q -> Quit game");
+			Console.ForegroundColor = ConsoleColor.White;
+
+			string? option;
+			do
 			{
-				Console.Write("This is not valid input. Please enter 1 or 0: ");
-				operationType = Console.ReadLine();
+				Console.Write("Choose an option: ");
+				option = Console.ReadLine();
+			} while (option != "u" && option != "b" && option != "c" && option != "q" && option != "d");
+
+			if (option == "q")
+			{
+				Environment.Exit(0);
+			}
+			else if (option == "c")
+			{
+				calculator.ShowCalculations();
+				continue;
+			} else if (option == "d")
+			{
+				calculator.ClearCalculations();
+				continue;
 			}
 
-            Console.Write("Type a number, and then press Enter: ");
+			Console.Clear();
+
+			Console.Write("Type a number, and then press Enter: ");
 			numInput1 = Console.ReadLine();
 
 			double cleanNum1;
@@ -40,7 +66,7 @@ class Program
 			}
 
 			double cleanNum2;
-			if (operationTypeClean == 0)
+			if (option == "b")
 			{
 				Console.Write("Type another number, and then press Enter: ");
 				numInput2 = Console.ReadLine();
@@ -73,7 +99,8 @@ class Program
 				{
 					Console.WriteLine("Oh no! An exception occurred trying to do the math.\n - Details: " + e.Message);
 				}
-			} else
+			}
+			else if (option == "u")
 			{
 				Console.WriteLine("Choose an operator from the following list:");
 				Console.WriteLine("\tsqrt - Square Root");
@@ -101,12 +128,14 @@ class Program
 				}
 			}
 
-			Console.WriteLine("------------------------\n");
+			Console.WriteLine("------------------------");
+			Console.WriteLine("Press n to close the app.");
 
-			Console.Write("Press 'n' and Enter to close the app, or press any other key and Enter to continue: ");
+			Console.ForegroundColor = ConsoleColor.Yellow;
+			Console.WriteLine("Press any key to continue.");
+			Console.ForegroundColor = ConsoleColor.White;
+
 			if (Console.ReadLine() == "n") endApp = true;
-
-			Console.WriteLine("\n");
 		}
 
 		calculator.ShowUsedCount();
