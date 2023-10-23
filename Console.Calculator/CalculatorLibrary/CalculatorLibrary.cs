@@ -7,7 +7,7 @@ public class Calculator
 	JsonWriter writer;
 
 	public int UsedCount { get; set; } = 0;
-	private List<double> Calculations { get; set; }
+	public List<double> Calculations { get; private set; }
 
 	public Calculator()
 	{
