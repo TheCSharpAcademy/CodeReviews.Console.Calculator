@@ -27,26 +27,35 @@ public class Calculator
 		Console.WriteLine($"Calculator has been used {UsedCount} times.");
 	}
 
-	public void ShowCalculations()
+	public bool IsEmptyCalculations()
 	{
-		Console.Clear();
+		return Calculations.Count == 0;
+	}
+
+	public void ShowCalculations(bool isDecorative = true)
+	{
+		if (isDecorative)
+			Console.Clear();
 
 		if (Calculations.Count == 0)
             Console.WriteLine("List is empty.");
 		else
 		{
 			Console.WriteLine("All calculation results:");
-			foreach (var calculation in Calculations)
+			for (int i = 0; i < Calculations.Count; i++)
 			{
-				Console.WriteLine($"\t{calculation}");
-			}
+                Console.WriteLine($"[{i}] - {Calculations[i]}");
+            }
 		}
 
-		Console.ForegroundColor = ConsoleColor.Yellow;
-		Console.WriteLine("Press any key to continue.");
-		Console.ForegroundColor = ConsoleColor.White;
+		if (isDecorative)
+		{
+			Console.ForegroundColor = ConsoleColor.Yellow;
+			Console.WriteLine("Press any key to continue.");
+			Console.ForegroundColor = ConsoleColor.White;
 
-		Console.ReadKey();
+			Console.ReadKey();
+		}
 	}
 
 	public void ClearCalculations()

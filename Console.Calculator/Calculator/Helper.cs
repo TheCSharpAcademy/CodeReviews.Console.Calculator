@@ -1,4 +1,6 @@
-﻿namespace CalculatorProgram;
+﻿using CalculatorLibrary;
+
+namespace CalculatorProgram;
 
 public class Helper
 {
@@ -37,5 +39,33 @@ public class Helper
 		}
 
 		return number;
+	}
+
+	public static double GetNumberFromCalculations(Calculator calculator)
+	{
+		calculator.ShowCalculations(isDecorative: false);
+
+		int index;
+		do
+		{
+			index = (int)GetNumberFromUser("Choose the index for the number you want to select: ");
+		} while (index < 0 || index >= calculator.Calculations.Count);
+
+		double result = calculator.Calculations[index];
+
+		Console.WriteLine($"You chose {result}.");
+		return result;
+    }
+
+	public static double GetNumber(Calculator calculator, string promptText)
+	{
+		if (Console.ReadLine() == "y" && !calculator.IsEmptyCalculations())
+		{
+			return GetNumberFromCalculations(calculator);
+		}
+		else
+		{
+			return GetNumberFromUser(promptText);
+		}
 	}
 }

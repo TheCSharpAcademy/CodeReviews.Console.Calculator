@@ -34,13 +34,16 @@ class Program
 			}
 
 			ui.Clear();
+			ui.ShowNumberInputChoice();
 
-			double num1 = Helper.GetNumberFromUser("Type a number, and then press Enter: ");
+			double num1;
+			num1 = Helper.GetNumber(calculator, "Type a number, and then press Enter: ");
+
 			double num2;
-
 			if (option == "b")
 			{
-				num2 = Helper.GetNumberFromUser("Type another number, and then press Enter: ");
+				ui.ShowNumberInputChoice(isSecondNumber: true);
+				num2 = Helper.GetNumber(calculator, "Type another number, and then press Enter: ");
 				ui.ShowBinaryOperations();
 
 				string? op = Helper.GetStringFromUser("Enter option: ");

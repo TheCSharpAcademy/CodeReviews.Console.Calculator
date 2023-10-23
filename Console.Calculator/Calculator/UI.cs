@@ -76,4 +76,17 @@ public class UI
 		Console.WriteLine("Press any key to continue.");
 		Console.ForegroundColor = ConsoleColor.White;
 	}
+
+	public void ShowNumberInputChoice(bool isSecondNumber = false)
+	{
+		Console.ForegroundColor = ConsoleColor.Cyan;
+		if (isSecondNumber)
+			Console.WriteLine("If you want to use a number from the previous calculation results for the second number, press y.");
+		else
+			Console.WriteLine("If you want to use a number from the previous calculation results, press y.");
+
+		Console.WriteLine("If the list is empty, you will enter your own number in any case.");
+		Console.WriteLine("To use your own number, press any key.");
+		Console.ForegroundColor = ConsoleColor.White;
+	}
 }
