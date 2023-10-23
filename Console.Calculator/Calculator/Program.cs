@@ -68,6 +68,7 @@ class Program
 			Console.WriteLine("\n");
 		}
 
+		calculator.ShowUsedCount();
 		calculator.Finish();
 		return;
 	}

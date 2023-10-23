@@ -1,11 +1,12 @@
-﻿using System.Diagnostics;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
 namespace CalculatorLibrary;
 
 public class Calculator
 {
 	JsonWriter writer;
+
+	public int UsedCount { get; set; } = 0;
 
 	public Calculator()
 	{
@@ -17,6 +18,11 @@ public class Calculator
 		writer.WritePropertyName("Operations");
 		writer.WriteStartArray();
 	}
+
+	public void ShowUsedCount()
+	{
+        Console.WriteLine($"Calculator has been used {UsedCount} times.");
+    }
 
 	public double DoOperation(double num1, double num2, string? op)
 	{
@@ -57,6 +63,8 @@ public class Calculator
 		writer.WritePropertyName("Result");
 		writer.WriteValue(result);
 		writer.WriteEndObject();
+
+		UsedCount++;
 
 		return result;
 	}
