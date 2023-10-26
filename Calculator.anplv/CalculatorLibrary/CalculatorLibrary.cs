@@ -6,10 +6,10 @@ public class Calculator
 
     public static Dictionary<int, Calculation> historyResults = new Dictionary<int, Calculation>();
     static string[] calculationOptions = new string[] { "a", "s", "m", "d", "r", "p", "x", "i", "c", "t" };
-    public static int operationNumber = 0;
+    public static int operationNumber;
     public static double cleanFirstNumber;
     public static double cleanSecondNumber;
-    public static bool useResult = false;
+    public static bool useResult;
 
 
     public Calculator()
