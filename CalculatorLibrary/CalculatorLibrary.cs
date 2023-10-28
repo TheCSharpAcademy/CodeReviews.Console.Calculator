@@ -104,7 +104,7 @@ namespace CalculatorLibrary
             File.WriteAllText(Constants.PATH, json);
         }
 
-        public int getTotalCalculationTimes() => operations.Count;
+        public int getTotalCalculationTimes() => operations == null ? 0 : operations.Count;
 
         public List<Operation> GetHistory() => operations;
 
@@ -118,7 +118,15 @@ namespace CalculatorLibrary
         {
             Console.WriteLine("================Calculation History=================");
             var ind = 1;
-            GetHistory().ForEach(his => { Console.WriteLine($"{ind}: {his}"); ind++; });
+            List<Operation> operations = GetHistory();
+            if (operations != null)
+            {
+                operations.ForEach(his => { Console.WriteLine($"{ind}: {his}"); ind++; });
+            }
+            else
+            {
+                Console.WriteLine("There is no calculation history.");
+            }
             Console.WriteLine("====================================================");
         }
 
