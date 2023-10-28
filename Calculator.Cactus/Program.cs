@@ -12,13 +12,13 @@ class Program
 
         while (!endApp)
         {
-            printMenu();
+            PrintMenu();
             string op = Console.ReadLine();
 
             switch (op)
             {
                 case Constants.CALCULATION_TIMES:
-                    calculator.printCalculationTimes();
+                    calculator.PrintCalculationTimes();
                     break;
                 case Constants.CALCULATION_HISTORY:
                     calculator.PrintHistory();
@@ -56,7 +56,7 @@ class Program
         }
 
         // Write the calculation history before return
-        calculator.writeHistory();
+        calculator.WriteHistory();
 
         return;
     }
@@ -109,7 +109,7 @@ class Program
 
     private static void ReuseCalculation(Calculator calculator)
     {
-        var cnt = calculator.getTotalCalculationTimes();
+        var cnt = calculator.GetTotalCalculationTimes();
         if (cnt < 1)
         {
             Console.WriteLine("There is no calculation can be resued.");
@@ -145,7 +145,7 @@ class Program
         Console.WriteLine("\tcos - Cos");
     }
 
-    private static void printMenu()
+    private static void PrintMenu()
     {
         Console.WriteLine("Choose an operator from the following list:");
         PrintCalculationOperation();

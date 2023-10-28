@@ -14,7 +14,7 @@ namespace CalculatorLibrary
 
         public Calculator()
         {
-            loadHistory();
+            LoadHistory();
         }
 
         #endregion Constructor
@@ -75,7 +75,7 @@ namespace CalculatorLibrary
             return result;
         }
 
-        private void loadHistory()
+        private void LoadHistory()
         {
             // This text is added only once to the file.
             if (!File.Exists(Constants.PATH))
@@ -89,7 +89,7 @@ namespace CalculatorLibrary
             operations = JsonConvert.DeserializeObject<List<Operation>>(json);
         }
 
-        public void writeHistory()
+        public void WriteHistory()
         {
             // This text is added only once to the file.
             if (!File.Exists(Constants.PATH))
@@ -104,7 +104,7 @@ namespace CalculatorLibrary
             File.WriteAllText(Constants.PATH, json);
         }
 
-        public int getTotalCalculationTimes() => operations == null ? 0 : operations.Count;
+        public int GetTotalCalculationTimes() => operations == null ? 0 : operations.Count;
 
         public List<Operation> GetHistory() => operations;
 
@@ -135,9 +135,9 @@ namespace CalculatorLibrary
             return operations[id].Result;
         }
 
-        public void printCalculationTimes()
+        public void PrintCalculationTimes()
         {
-            Console.WriteLine($"Your history calculation times is {getTotalCalculationTimes()}");
+            Console.WriteLine($"Your history calculation times is {GetTotalCalculationTimes()}");
         }
 
         #endregion Methods
