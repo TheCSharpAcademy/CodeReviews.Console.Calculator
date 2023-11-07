@@ -1,0 +1,22 @@
+{
+  "Operations": [
+    {
+      "Operand1": 2.0,
+      "Operand2": 2.0,
+      "Operation": "Add",
+      "Result": 4.0
+    },
+    {
+      "Operand1": 4.0,
+      "Operand2": 2.0,
+      "Operation": "Multiply",
+      "Result": 8.0
+    },
+    {
+      "Operand1": 2.0,
+      "Operand2": 2.0,
+      "Operation": "Add",
+      "Result": 4.0
+    }
+  ]
+}
