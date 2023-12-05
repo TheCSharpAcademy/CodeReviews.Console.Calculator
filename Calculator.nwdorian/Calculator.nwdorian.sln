@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34322.80
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Calculator.nwdorian", "Calculator.nwdorian\Calculator.nwdorian.csproj", "{ACD0C766-B08F-4A49-B337-D4AD029873A1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CalculatorLibrary", "CalculatorLibrary\CalculatorLibrary.csproj", "{23E6E344-7564-4EE6-AD82-733B6516909D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{ACD0C766-B08F-4A49-B337-D4AD029873A1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ACD0C766-B08F-4A49-B337-D4AD029873A1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ACD0C766-B08F-4A49-B337-D4AD029873A1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ACD0C766-B08F-4A49-B337-D4AD029873A1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{23E6E344-7564-4EE6-AD82-733B6516909D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{23E6E344-7564-4EE6-AD82-733B6516909D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{23E6E344-7564-4EE6-AD82-733B6516909D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{23E6E344-7564-4EE6-AD82-733B6516909D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {976B0457-F0BE-4CA6-9CED-D22FF76C17E6}
+	EndGlobalSection
+EndGlobal
