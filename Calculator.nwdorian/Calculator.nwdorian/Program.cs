@@ -7,6 +7,8 @@ class Program
     static void Main(string[] args)
     {
         bool endApp = false;
+        int usageCounter = 0;
+
         // Display title as the C# console calculator app.
         Console.WriteLine("Console Calculator in C#\r");
         Console.WriteLine("------------------------\n");
@@ -55,11 +57,17 @@ class Program
             try
             {
                 result = calculator.DoOperation(cleanNum1, cleanNum2, op);
+
                 if (double.IsNaN(result))
                 {
                     Console.WriteLine("This operation will result in a mathematical error.\n");
                 }
-                else Console.WriteLine("Your result: {0:0.##}\n", result);
+                else
+                {
+                    usageCounter++;
+                    Console.WriteLine("Your result: {0:0.##}\n", result);
+                    Console.WriteLine("You used the calculator {0} times", usageCounter);
+                }
             }
             catch (Exception e)
             {
