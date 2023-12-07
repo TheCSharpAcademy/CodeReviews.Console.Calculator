@@ -79,7 +79,7 @@ namespace CalculatorLibrary
             switch (op2)
             {
                 case "r":
-                    result = Math.Sqrt((double)num1);
+                    result = Math.Sqrt(num1);
                     writer.WriteValue("Square root");
                     sums.Add($"Square root of {num1} = {result}");
                     break;
