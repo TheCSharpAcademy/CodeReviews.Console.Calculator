@@ -13,10 +13,6 @@ class Program
 
         while (!endApp)
         {
-            Console.Clear();
-            Console.WriteLine("Console Calculator in C#\r");
-            Console.WriteLine("------------------------");
-
             string numInput1 = "";
             string numInput2 = "";
             double result = 0;
@@ -24,99 +20,66 @@ class Program
             string userInput = "";
             double cleanNum1 = 0;
             double cleanNum2 = 0;
+            bool hasHistory = calculator.history.Any();
 
-            if (calculator.history.Any())
+            Console.Clear();
+            Console.WriteLine("Console Calculator in C#\r");
+            Console.WriteLine("------------------------");
+
+            if (hasHistory)
             {
-                while (userInput.ToLower().Trim() != "y" && userInput.ToLower().Trim() != "n")
+                userInput = HelpersLibrary.ValidateYesOrNoInput(userInput, "Would you like to delete results history (y/n)?");
+                if (userInput == "y")
                 {
-                    Console.WriteLine("Would you like to delete results history (y/n)?");
-                    userInput = Console.ReadLine();
-                }
-                if (userInput.ToLower().Trim() == "y")
-                {
-                    calculator.history.Clear();
-                    Console.WriteLine("Results history was cleared! Press any key to continue...");
-                    Console.ReadKey();
+                    calculator.DeleteResultsHistory(calculator.history);
                 }
             }
 
-            if (calculator.history.Any())
+            hasHistory = calculator.history.Any();
+            if (hasHistory)
             {
                 userInput = "";
-                while (userInput.ToLower().Trim() != "y" && userInput.ToLower().Trim() != "n")
+                userInput = HelpersLibrary.ValidateYesOrNoInput(userInput, "Would you like to use a previous result for a new calculation (y/n)?: ");
+                
+                if (userInput == "y")
                 {
-                    Console.WriteLine("Would you like to use a previous result for a new calculation (y/n)?: ");
-                    userInput = Console.ReadLine();
-                }
-
-                if (userInput.ToLower().Trim() == "y")
-                {
-                    foreach (var item in calculator.history)
-                    {
-                        Console.WriteLine($"{calculator.history.IndexOf(item) + 1}. result -> {item}");
-                    }
-                    Console.WriteLine("Select a number from the list to use in a new calculation");
+                    calculator.PrintResultsHistory(calculator.history);
+                    Console.Write("Select a number from the list to use in a new calculation: ");
                     string numIndex = Console.ReadLine();
-
                     int cleanIndex = 0;
-                    while (!int.TryParse(numIndex, out cleanIndex) || cleanIndex <= 0 || cleanIndex > calculator.history.Count)
-                    {
-                        Console.Write("This is not a valid input. Please enter an integer value within the list range: ");
-                        numIndex = Console.ReadLine();
-                    }
+
+                    cleanIndex = HelpersLibrary.ValidateIndex(numIndex, calculator.history);
                     cleanNum1 = calculator.history[cleanIndex - 1];
                     Console.WriteLine($"First calculation number is: {cleanNum1}\n");
 
-                    Console.WriteLine("Select another number from the list to use in a new calculation");
+                    Console.Write("Select another number from the list to use in a new calculation: ");
                     numIndex = Console.ReadLine();
 
-                    while (!int.TryParse(numIndex, out cleanIndex) || cleanIndex <= 0 || cleanIndex > calculator.history.Count)
-                    {
-                        Console.Write("This is not a valid input. Please enter an integer value within the list range: ");
-                        numIndex = Console.ReadLine();
-                    }
+                    cleanIndex = HelpersLibrary.ValidateIndex(numIndex, calculator.history);
                     cleanNum2 = calculator.history[cleanIndex - 1];
-                    Console.WriteLine($"First calculation number is: {cleanNum2}");
+                    Console.WriteLine($"Second calculation number is: {cleanNum2}");
                 }
                 else
                 {
                     Console.Write("Type a first number, and then press Enter: ");
                     numInput1 = Console.ReadLine();
-
-                    while (!double.TryParse(numInput1, out cleanNum1))
-                    {
-                        Console.Write("This is not valid input. Please enter an integer value: ");
-                        numInput1 = Console.ReadLine();
-                    }
+                    cleanNum1 = HelpersLibrary.ValidateNumberInput(numInput1);
 
                     Console.Write("Type a second number, and then press Enter: ");
                     numInput2 = Console.ReadLine();
-
-                    while (!double.TryParse(numInput2, out cleanNum2))
-                    {
-                        Console.Write("This is not valid input. Please enter an integer value: ");
-                        numInput2 = Console.ReadLine();
-                    }
+                    cleanNum2 = HelpersLibrary.ValidateNumberInput(numInput2);
                 }
             }
             else
             {
                 Console.Write("Type a first number, and then press Enter: ");
                 numInput1 = Console.ReadLine();
+                cleanNum1 = HelpersLibrary.ValidateNumberInput(numInput1);
 
-                while (!double.TryParse(numInput1, out cleanNum1))
-                {
-                    Console.Write("This is not valid input. Please enter an integer value: ");
-                    numInput1 = Console.ReadLine();
-                }
                 Console.Write("Type a second number, and then press Enter: ");
                 numInput2 = Console.ReadLine();
+                cleanNum2 = HelpersLibrary.ValidateNumberInput(numInput2);
 
-                while (!double.TryParse(numInput2, out cleanNum2))
-                {
-                    Console.Write("This is not valid input. Please enter an integer value: ");
-                    numInput2 = Console.ReadLine();
-                }
             }
 
             Console.WriteLine("Choose an operator from the following list:");

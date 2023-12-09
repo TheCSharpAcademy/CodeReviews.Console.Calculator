@@ -1,11 +1,4 @@
 ﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Text.Json;
-using System.Threading.Tasks;
 
 namespace CalculatorLibrary;
 
@@ -66,6 +59,24 @@ public class Calculator
         writer.WriteValue(result);
         writer.WriteEndObject();
         return result;
+    }
+
+    public void PrintResultsHistory(List<double> history)
+    {
+        Console.WriteLine("Results history");
+        Console.WriteLine("--------------------");
+        foreach (var item in history)
+        {
+            Console.WriteLine($"{history.IndexOf(item) + 1}. result -> {item}");
+        }
+        Console.WriteLine("--------------------");
+    }
+
+    public void DeleteResultsHistory(List<double> history)
+    {
+        history.Clear();
+        Console.WriteLine("Results history was cleared! Press any key to continue...");
+        Console.ReadKey();
     }
 
     public void Finish()
