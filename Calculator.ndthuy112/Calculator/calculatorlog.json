@@ -1,0 +1,16 @@
+{
+  "Operations": [
+    {
+      "Operand1": 12.0,
+      "Operand2": 0.0,
+      "Operation": "Fail Divide",
+      "Result": "NaN"
+    },
+    {
+      "Operand1": 34.0,
+      "Operand2": 23.0,
+      "Operation": "Add",
+      "Result": 57.0
+    }
+  ]
+}
