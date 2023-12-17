@@ -1,0 +1,12 @@
+C:\Users\dmnpe\OneDrive\Escritorio\Programacion\C#\Calculator\CalculatorLibrary\bin\Debug\net7.0\CalculatorLibrary.deps.json
+C:\Users\dmnpe\OneDrive\Escritorio\Programacion\C#\Calculator\CalculatorLibrary\bin\Debug\net7.0\CalculatorLibrary.dll
+C:\Users\dmnpe\OneDrive\Escritorio\Programacion\C#\Calculator\CalculatorLibrary\bin\Debug\net7.0\CalculatorLibrary.pdb
+C:\Users\dmnpe\OneDrive\Escritorio\Programacion\C#\Calculator\CalculatorLibrary\obj\Debug\net7.0\CalculatorLibrary.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\dmnpe\OneDrive\Escritorio\Programacion\C#\Calculator\CalculatorLibrary\obj\Debug\net7.0\CalculatorLibrary.AssemblyInfoInputs.cache
+C:\Users\dmnpe\OneDrive\Escritorio\Programacion\C#\Calculator\CalculatorLibrary\obj\Debug\net7.0\CalculatorLibrary.AssemblyInfo.cs
+C:\Users\dmnpe\OneDrive\Escritorio\Programacion\C#\Calculator\CalculatorLibrary\obj\Debug\net7.0\CalculatorLibrary.csproj.CoreCompileInputs.cache
+C:\Users\dmnpe\OneDrive\Escritorio\Programacion\C#\Calculator\CalculatorLibrary\obj\Debug\net7.0\CalculatorLibrary.dll
+C:\Users\dmnpe\OneDrive\Escritorio\Programacion\C#\Calculator\CalculatorLibrary\obj\Debug\net7.0\refint\CalculatorLibrary.dll
+C:\Users\dmnpe\OneDrive\Escritorio\Programacion\C#\Calculator\CalculatorLibrary\obj\Debug\net7.0\CalculatorLibrary.pdb
+C:\Users\dmnpe\OneDrive\Escritorio\Programacion\C#\Calculator\CalculatorLibrary\obj\Debug\net7.0\ref\CalculatorLibrary.dll
+C:\Users\dmnpe\OneDrive\Escritorio\Programacion\C#\Calculator\CalculatorLibrary\obj\Debug\net7.0\CalculatorLibrary.csproj.AssemblyReference.cache

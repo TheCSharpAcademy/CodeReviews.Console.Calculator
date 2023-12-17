@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "Tbq0YkznctDJeI3jQ6J7LdfO/8c90kL9uey6BZygL52vDuOTqOtVQaBs4VOi/zPNuVQ1ZCCjQtMWsbM37FwR3w==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\dmnpe\\OneDrive\\Escritorio\\Programacion\\C#\\Calculator\\Calculator\\Calculator.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\dmnpe\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512"
+  ],
+  "logs": []
+}
