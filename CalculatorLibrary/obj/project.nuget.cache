@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "Pwixlbw/jzZZY+AulUupQy2s0MGpA6rHrMDf6xSl0LJQcIo7GEQYFbr1EKsinBhl/8yQBaN0iEu/hfGiBbWtXA==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\sipah\\Desktop\\serdar\\projeler\\calculator\\CalculatorLibrary\\CalculatorLibrary.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\sipah\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512"
+  ],
+  "logs": []
+}

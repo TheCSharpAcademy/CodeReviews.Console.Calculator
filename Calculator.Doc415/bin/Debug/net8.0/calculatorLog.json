@@ -1,0 +1,14 @@
+{
+  "Operations": [
+    {
+      "Operand1": 34.0,
+      "Operand2": 43.0,
+      "Operation": "Add",
+      "Result": 77.0
+    },
+    {
+      "Operand1": 45.0,
+      "Operand2": 32.0,
+      "Operation": "Subtract",
+      "Result": 13.0
+    }

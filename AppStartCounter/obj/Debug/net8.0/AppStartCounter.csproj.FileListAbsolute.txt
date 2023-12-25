@@ -1,0 +1,11 @@
+C:\Users\sipah\Desktop\serdar\projeler\calculator\AppStartCounter\bin\Debug\net8.0\AppStartCounter.deps.json
+C:\Users\sipah\Desktop\serdar\projeler\calculator\AppStartCounter\bin\Debug\net8.0\AppStartCounter.dll
+C:\Users\sipah\Desktop\serdar\projeler\calculator\AppStartCounter\bin\Debug\net8.0\AppStartCounter.pdb
+C:\Users\sipah\Desktop\serdar\projeler\calculator\AppStartCounter\obj\Debug\net8.0\AppStartCounter.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\sipah\Desktop\serdar\projeler\calculator\AppStartCounter\obj\Debug\net8.0\AppStartCounter.AssemblyInfoInputs.cache
+C:\Users\sipah\Desktop\serdar\projeler\calculator\AppStartCounter\obj\Debug\net8.0\AppStartCounter.AssemblyInfo.cs
+C:\Users\sipah\Desktop\serdar\projeler\calculator\AppStartCounter\obj\Debug\net8.0\AppStartCounter.csproj.CoreCompileInputs.cache
+C:\Users\sipah\Desktop\serdar\projeler\calculator\AppStartCounter\obj\Debug\net8.0\AppStartCounter.dll
+C:\Users\sipah\Desktop\serdar\projeler\calculator\AppStartCounter\obj\Debug\net8.0\refint\AppStartCounter.dll
+C:\Users\sipah\Desktop\serdar\projeler\calculator\AppStartCounter\obj\Debug\net8.0\AppStartCounter.pdb
+C:\Users\sipah\Desktop\serdar\projeler\calculator\AppStartCounter\obj\Debug\net8.0\ref\AppStartCounter.dll
