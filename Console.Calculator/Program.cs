@@ -1,4 +1,5 @@
-﻿class Program
+﻿using CalculatorLibrary;
+class Program
 {
     static void Main(string[] args)
     {
@@ -7,6 +8,7 @@
         Console.WriteLine("Console Calculator in C#\r");
         Console.WriteLine("------------------------\r");
 
+        Calculator calculator = new Calculator();
         while (!endApp)
         {
             string numInput1 = "";
@@ -14,7 +16,6 @@
             double result = 0;
             double cleanNum1 = 0;
             double cleanNum2 = 0;
-
 
             Console.WriteLine("Type a number, and then press Enter");
             numInput1 = Console.ReadLine();
@@ -42,11 +43,11 @@ m - Multiply
 d - Divide");
 
             string operation = Console.ReadLine();
+            operation?.Trim().ToLower();
 
             try
             {
-                result = Calculator.DoOperation(cleanNum1, cleanNum2, operation);
-
+                result = calculator.DoOperation(cleanNum1, cleanNum2, operation);
                 if (double.IsNaN(result))
                 {
                     Console.WriteLine("This operation will result in a mathematical error.\n");
@@ -54,7 +55,6 @@ d - Divide");
                 {
                     Console.WriteLine("Your result: {0:0.##}\n", result);
                 }
-
             }
             catch (Exception e)
             {
@@ -62,13 +62,12 @@ d - Divide");
             }
 
             Console.WriteLine("------------------------\n");
-
             Console.WriteLine("Press 'n' and Enter to close the app, or any other key followed by Enter to continue.");
 
             if (Console.ReadLine() == "n") endApp = true;
-
             Console.WriteLine("\n");
         }
+        calculator.Finish();
         return;
     }
 }
