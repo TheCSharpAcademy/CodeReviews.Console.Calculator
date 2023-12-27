@@ -4,6 +4,7 @@ class Program
     static void Main(string[] args)
     {
         bool endApp = false;
+        int timesUsed = 0;
 
         Console.WriteLine("Console Calculator in C#\r");
         Console.WriteLine("------------------------\r");
@@ -54,6 +55,8 @@ d - Divide");
                 } else
                 {
                     Console.WriteLine("Your result: {0:0.##}\n", result);
+                    timesUsed++;
+                    Console.WriteLine($"Amount of times the calculator was used: {timesUsed}");
                 }
             }
             catch (Exception e)
