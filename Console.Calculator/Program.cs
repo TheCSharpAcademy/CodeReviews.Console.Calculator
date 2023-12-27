@@ -64,11 +64,15 @@ d - Divide");
                 Console.WriteLine("Oh no! An exception occurred trying to do the math.\n - Details: " + e.Message);
             }
 
-            Console.WriteLine("------------------------\n");
-            Console.WriteLine("Press 'n' and Enter to close the app, or any other key followed by Enter to continue.");
+            Console.WriteLine("Want to take a look at your calculation history? Type: y - yes | n - no");
 
-            if (Console.ReadLine() == "n") endApp = true;
-            Console.WriteLine("\n");
+            if (Console.ReadLine() == "y") calculator.ShowHistory();
+
+            Console.Clear();
+            Console.WriteLine("------------------------");
+            Console.WriteLine("Press 'n' and Enter to close the app, or Enter to continue.");
+
+            if (Console.ReadLine() == "n") endApp = true;            
         }
         calculator.Finish();
         return;

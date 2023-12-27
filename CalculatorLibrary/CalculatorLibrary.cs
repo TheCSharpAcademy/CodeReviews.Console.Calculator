@@ -6,6 +6,8 @@ namespace CalculatorLibrary
     public class Calculator
     {
         JsonWriter writer;
+        List<string> history = new List<string>();
+
         public Calculator()
         {
             StreamWriter logfile = File.CreateText("calculatorlog.json");
@@ -39,20 +41,24 @@ namespace CalculatorLibrary
                 case "a":
                     result = num1 + num2;
                     writer.WriteValue("Add");
+                    history.Add($"{DateTime.Now} : {num1} + {num2} = {result}");
                     break;
                 case "s":
                     result = num1 - num2;
                     writer.WriteValue("Subtract");
+                    history.Add($"{DateTime.Now} : {num1} - {num2} = {result}");
                     break;
                 case "m":
                     result = num1 * num2;
                     writer.WriteValue("Multiply");
+                    history.Add($"{DateTime.Now} : {num1} * {num2} = {result}");
                     break;
                 case "d":
                     if (num2 != 0)
                     {
                         result = num1 / num2;
                         writer.WriteValue("Divide");
+                        history.Add($"{DateTime.Now} : {num1} / {num2} = {result}");
                     }
                     break;
             }
@@ -60,6 +66,15 @@ namespace CalculatorLibrary
             writer.WriteValue(result);
             writer.WriteEndObject();
             return result;
+        }
+
+        public void ShowHistory()
+        {
+            foreach (var calculation in history) Console.WriteLine(calculation.ToString());
+
+            Console.WriteLine("Press x and Enter to delete the list or Enter to go back");
+           
+            if (Console.ReadLine() == "x") history.Clear();
         }
     }
 }
