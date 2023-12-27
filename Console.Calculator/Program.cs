@@ -65,13 +65,11 @@ d - Divide");
             }
 
             Console.WriteLine("Want to take a look at your calculation history? Type: y - yes | n - no");
-
             if (Console.ReadLine() == "y") calculator.ShowHistory();
 
             Console.Clear();
             Console.WriteLine("------------------------");
             Console.WriteLine("Press 'n' and Enter to close the app, or Enter to continue.");
-
             if (Console.ReadLine() == "n") endApp = true;            
         }
         calculator.Finish();

@@ -1,5 +1,4 @@
-﻿using System.Diagnostics;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
 namespace CalculatorLibrary
 {
@@ -73,7 +72,6 @@ namespace CalculatorLibrary
             foreach (var calculation in history) Console.WriteLine(calculation.ToString());
 
             Console.WriteLine("Press x and Enter to delete the list or Enter to go back");
-           
             if (Console.ReadLine() == "x") history.Clear();
         }
     }
