@@ -30,7 +30,6 @@ internal class Engine
                 Console.WriteLine("Input a valid integer menu selection");
                 readResult = Console.ReadLine();
             }
-
             switch (menuSelection)
             {
                 case 1:
@@ -86,7 +85,6 @@ internal class Engine
             Console.Write("This is not valid input. Please enter an integer value: ");
             numInput2 = Console.ReadLine();
         }
-
         // Ask the user to choose an operator.
         Console.WriteLine("\nChoose an operator from the following list:");
         Console.WriteLine("\ta - Add");
@@ -110,7 +108,6 @@ internal class Engine
         {
             Console.WriteLine("Oh no! An exception occurred trying to do the math.\n - Details: " + e.Message);
         }
-
         Console.WriteLine("------------------------\n");
 
         // Wait for the user to respond before closing.
