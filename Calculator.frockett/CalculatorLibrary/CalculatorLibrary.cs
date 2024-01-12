@@ -3,13 +3,13 @@ using Newtonsoft.Json;
 
 namespace CalculatorLibrary;
 
-public class Calculator
+public class CalculatorLog
 {
+    ListFunctions listFunctions = new ListFunctions();
     JsonWriter writer;
-    static List<CalculationHistory> history = new();
     string operation = "";
     int totalComputations = 0;
-    public Calculator() 
+    public CalculatorLog() 
     {
         StreamWriter logFile = File.CreateText("calculatorlog.json");
         logFile.AutoFlush = true;
@@ -17,67 +17,64 @@ public class Calculator
         writer.Formatting = Formatting.Indented;
         writer.WritePropertyName("Operations");
         writer.WriteStartArray();
-        //Trace.WriteLine("Starting Calculator Log");
-        //Trace.WriteLine(String.Format("Started {0}", System.DateTime.Now.ToString()));
     }
 
     public double DoOperation(double num1, double num2, string op)
     {
         double result = double.NaN; // Default value is "not-a-number" if an operation, such as division, could result in an error.
-        writer.WriteStartObject();
-        writer.WritePropertyName("Operand1");
-        writer.WriteValue(num1);
-        writer.WritePropertyName("Operand2");
-        writer.WriteValue(num2);
-        writer.WritePropertyName("Operation");
-        //writer.WriteStartArray();
+  
         // Use a switch statement to do the math.
         switch (op)
         {
             case "a":
                 result = num1 + num2;
-                writer.WriteValue("Add");
                 operation = "Add";
-                //Trace.WriteLine(String.Format("{0} + {1} = {2}", num1, num2, result));
                 break;
             case "s":
                 result = num1 - num2;
-                writer.WriteValue("Subtract");
                 operation = "Subtract";
-                //Trace.WriteLine(String.Format("{0} - {1} = {2}", num1, num2, result));
                 break;
             case "m":
                 result = num1 * num2;
-                writer.WriteValue("Multiply");
                 operation = "Multiply";
-                //Trace.WriteLine(String.Format("{0} * {1} = {2}", num1, num2, result));
                 break;
             case "d":
                 // Ask the user to enter a non-zero divisor.
                 if (num2 != 0)
                 {
                     result = num1 / num2;
-                    //Trace.WriteLine(String.Format("{0} / {1} = {2}", num1, num2, result));
                 }
-                writer.WriteValue("Divide");
                 operation = "Divide";
                 break;
             // Return text for an incorrect option entry.
             default:
                 break;
         }
-        writer.WritePropertyName("product");
-        writer.WriteValue(result);
-        writer.WriteEndObject();
-        
+        WriteToLog(num1, num2, operation, result);
+       
         // Add to tally
         totalComputations++;
 
         // Write to list for user access during runtime
-        WriteList(num1, num2, operation, result, totalComputations);
+        listFunctions.WriteList(num1, num2, operation, result, totalComputations);
         
         return result;
     }
+
+    public void WriteToLog(double num1, double num2, string operation, double result)
+    {
+        writer.WriteStartObject();
+        writer.WritePropertyName("Operand1");
+        writer.WriteValue(num1);
+        writer.WritePropertyName("Operand2");
+        writer.WriteValue(num2);
+        writer.WritePropertyName("Operation");
+        writer.WriteValue(operation);
+        writer.WritePropertyName("Result");
+        writer.WriteValue(result);
+        writer.WriteEndObject();
+    }
+
     public void Finish()
     {
         writer.WriteStartObject();
@@ -87,25 +84,6 @@ public class Calculator
         writer.WriteEndArray();
         //writer.WriteEndObject();
         writer.Close();
-
-        // TEMP write list to check content
-        foreach (CalculationHistory calculation in history)
-        {
-            Console.WriteLine($"{calculation.Num1} {calculation.Operation} {calculation.Num2} = {calculation.Result} at index {calculation.Index}");
-        }
     }
-
-    public void WriteList(double num1, double num2, string operation, double result, int index)
-    {
-        history.Add(new CalculationHistory
-        {
-            Num1 = num1,
-            Num2 = num2,
-            Operation = operation,
-            Result = result,
-            Index = index,
-        });
-    }
-
 }
 
