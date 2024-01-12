@@ -24,12 +24,11 @@ public class ListFunctions
 
     public void PrintList()
     {
-        Console.Clear();
-        Console.WriteLine("Calculation History");
+        Console.WriteLine("\nCalculation History");
         Console.WriteLine("___________________");
         foreach (CalculationHistory calculation in history)
         {
-            Console.WriteLine($"{calculation.Num1} {calculation.Operation} {calculation.Num2} = {calculation.Result} at index {calculation.Index}");
+            Console.WriteLine($"Calculation #{calculation.Index}: {calculation.Num1} {calculation.Operation} {calculation.Num2} = {calculation.Result}");
         }
         Console.WriteLine("\nPress any key to return to main menu");
         Console.ReadLine();
@@ -38,6 +37,9 @@ public class ListFunctions
     public void ClearList()
     {
         history.Clear();
+        Console.WriteLine("History has been cleared\n");
+        Console.WriteLine("Press enter to return to main menu...");
+        Console.ReadLine();
     }
 
 }
