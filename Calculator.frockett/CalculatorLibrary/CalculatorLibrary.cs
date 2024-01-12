@@ -6,6 +6,7 @@ namespace CalculatorLibrary;
 public class Calculator
 {
     JsonWriter writer;
+    int totalComputations = 0;
     public Calculator() 
     {
         StreamWriter logFile = File.CreateText("calculatorlog.json");
@@ -27,7 +28,7 @@ public class Calculator
         writer.WritePropertyName("Operand2");
         writer.WriteValue(num2);
         writer.WritePropertyName("Operation");
-        writer.WriteStartArray();
+        //writer.WriteStartArray();
         // Use a switch statement to do the math.
         switch (op)
         {
@@ -59,16 +60,21 @@ public class Calculator
             default:
                 break;
         }
-        writer.WritePropertyName("Result");
+        writer.WritePropertyName("product");
         writer.WriteValue(result);
         writer.WriteEndObject();
      
+        totalComputations++;
         return result;
     }
     public void Finish()
     {
-        writer.WriteEndArray();
+        writer.WriteStartObject();
+        writer.WritePropertyName("Computations ran");
+        writer.WriteValue(totalComputations);
         writer.WriteEndObject();
+        writer.WriteEndArray();
+        //writer.WriteEndObject();
         writer.Close();
     }
 
