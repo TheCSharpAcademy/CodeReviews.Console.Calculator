@@ -6,6 +6,8 @@ namespace CalculatorLibrary;
 public class Calculator
 {
     JsonWriter writer;
+    static List<CalculationHistory> history = new();
+    string? operation = "";
     int totalComputations = 0;
     public Calculator() 
     {
@@ -35,16 +37,19 @@ public class Calculator
             case "a":
                 result = num1 + num2;
                 writer.WriteValue("Add");
+                operation = "Add";
                 //Trace.WriteLine(String.Format("{0} + {1} = {2}", num1, num2, result));
                 break;
             case "s":
                 result = num1 - num2;
                 writer.WriteValue("Subtract");
+                operation = "Subtract";
                 //Trace.WriteLine(String.Format("{0} - {1} = {2}", num1, num2, result));
                 break;
             case "m":
                 result = num1 * num2;
                 writer.WriteValue("Multiply");
+                operation = "Multiply";
                 //Trace.WriteLine(String.Format("{0} * {1} = {2}", num1, num2, result));
                 break;
             case "d":
@@ -55,6 +60,7 @@ public class Calculator
                     //Trace.WriteLine(String.Format("{0} / {1} = {2}", num1, num2, result));
                 }
                 writer.WriteValue("Divide");
+                operation = "Divide";
                 break;
             // Return text for an incorrect option entry.
             default:
@@ -63,8 +69,13 @@ public class Calculator
         writer.WritePropertyName("product");
         writer.WriteValue(result);
         writer.WriteEndObject();
-     
+        
+        // Add to tally
         totalComputations++;
+
+        // Write to list for user access during runtime
+        WriteList(num1, num2, op, result, totalComputations);
+        
         return result;
     }
     public void Finish()
@@ -76,6 +87,18 @@ public class Calculator
         writer.WriteEndArray();
         //writer.WriteEndObject();
         writer.Close();
+    }
+
+    public void WriteList(double num1, double num2, string operation, double result, int index)
+    {
+        history.Add(new CalculationHistory
+        {
+            Num1 = num1,
+            Num2 = num2,
+            Operation = operation,
+            Result = result,
+            Index = index,
+        });
     }
 
 }
