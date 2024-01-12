@@ -16,6 +16,8 @@ internal class Program
 
         while (!endApp)
         {
+
+
             // Declare variables and set to empty.
             string? numInput1 = "";
             string? numInput2 = "";

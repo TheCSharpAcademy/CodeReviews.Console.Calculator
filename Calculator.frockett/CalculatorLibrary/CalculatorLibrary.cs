@@ -7,7 +7,7 @@ public class Calculator
 {
     JsonWriter writer;
     static List<CalculationHistory> history = new();
-    string? operation = "";
+    string operation = "";
     int totalComputations = 0;
     public Calculator() 
     {
@@ -74,7 +74,7 @@ public class Calculator
         totalComputations++;
 
         // Write to list for user access during runtime
-        WriteList(num1, num2, op, result, totalComputations);
+        WriteList(num1, num2, operation, result, totalComputations);
         
         return result;
     }
@@ -87,6 +87,12 @@ public class Calculator
         writer.WriteEndArray();
         //writer.WriteEndObject();
         writer.Close();
+
+        // TEMP write list to check content
+        foreach (CalculationHistory calculation in history)
+        {
+            Console.WriteLine($"{calculation.Num1} {calculation.Operation} {calculation.Num2} = {calculation.Result} at index {calculation.Index}");
+        }
     }
 
     public void WriteList(double num1, double num2, string operation, double result, int index)
