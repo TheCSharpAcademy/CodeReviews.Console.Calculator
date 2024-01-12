@@ -7,8 +7,8 @@ internal class Engine
     ListFunctions listFunctions = new ListFunctions();
     CalculatorLog log = new CalculatorLog();
 
-    bool endApp = false;
-    int totalComputations = 0;
+    bool endApp;
+    int totalComputations;
 
     public void ShowMenu()
     {
@@ -46,7 +46,6 @@ internal class Engine
                     break;
                 case 4:
                     endApp = true;
-                    //ExitProgram();
                     break;
                 default:
                     Console.WriteLine("Invalid input, please enter a valid integer menu selection");

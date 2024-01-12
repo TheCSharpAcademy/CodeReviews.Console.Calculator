@@ -6,7 +6,6 @@ public class CalculatorLog
 {
     ListFunctions listFunctions = new ListFunctions();
     JsonWriter writer;
-    //int totalComputations = 0;
 
     public CalculatorLog() 
     {
