@@ -1,12 +1,11 @@
-﻿using System.Text;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
 namespace CalculatorLibrary
 {
     public class Calculator
     {
         JsonWriter writer;
-        private int _timesUsed = 0;
+        private int _timesUsed;
         private List<string> _calculationsHistory = new ();
 
         public Calculator()
