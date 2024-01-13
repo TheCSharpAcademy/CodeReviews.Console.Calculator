@@ -22,7 +22,7 @@ namespace CalculatorProgram
         {
             MainMenu();
 
-            // calculator.Finish();
+            calculator.Finish();
             return;
         }
 
