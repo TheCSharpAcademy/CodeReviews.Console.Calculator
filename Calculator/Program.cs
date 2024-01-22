@@ -6,7 +6,7 @@ namespace CalculatorProgram
     class Program
     {
         static Calculator calculator = new Calculator();
-        static bool endApp = false;
+        static bool endApp;
         static double firstNumber = double.NaN;
         static double secondNumber = double.NaN;
         
@@ -23,8 +23,6 @@ namespace CalculatorProgram
             while (true)
             {
                 // Declare variables and set to empty.
-                string numInput1 = "";
-                string numInput2 = "";
                 double cleanNum1 = 0;
                 double cleanNum2 = 0;
                 double result = 0;
