@@ -22,6 +22,8 @@ namespace CalculatorLibrary
         public double DoOperation(double num1, double num2, string op)
         {
             double result = double.NaN; // Default value is "not-a-number" if an operation, such as division, could result in an error.
+            string[] oneArgumentOperations = {"r", "x", "tan", "cos", "sin", "cot"};
+            
             writer.WriteStartObject();
             writer.WritePropertyName("Operand1");
             writer.WriteValue(num1);
@@ -29,6 +31,8 @@ namespace CalculatorLibrary
             writer.WriteValue(num2);
             writer.WritePropertyName("Operation");
             // Use a switch statement to do the math.
+            if (oneArgumentOperations.Contains(op)) num2 = double.NaN;
+                
             switch (op)
             {
                 case "a":
@@ -90,7 +94,6 @@ namespace CalculatorLibrary
             writer.WritePropertyName("Times Used");
             writer.WriteValue(GetTimesUsed());
             writer.WriteEndObject();
-            
 
             return result;
         }
@@ -145,6 +148,14 @@ namespace CalculatorLibrary
             double resultDouble = Convert.ToDouble(result);
             
             return resultDouble;
+        }
+        
+        public double ConvertToRadians(double degrees)
+        {
+            Console.WriteLine($"{degrees} degrees in radians is {Math.PI / 180 * degrees, 0:0.##}");
+            Console.WriteLine("Press any key to continue...");
+            Console.ReadKey();
+            return (Math.PI / 180) * degrees;
         }
     }
 }

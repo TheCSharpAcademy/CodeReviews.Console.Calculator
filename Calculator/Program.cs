@@ -6,17 +6,9 @@ namespace CalculatorProgram
     class Program
     {
         static Calculator calculator = new Calculator();
-        static bool endApp;
-        static double firstNumber;
-        static double secondNumber;
-        
-        static Program()
-        {
-            calculator = new Calculator();
-            endApp = false;
-            firstNumber = double.NaN;
-            secondNumber = double.NaN;
-        }
+        static bool endApp = false;
+        static double firstNumber = double.NaN;
+        static double secondNumber = double.NaN;
         
         static void Main(string[] args)
         {
@@ -36,20 +28,33 @@ namespace CalculatorProgram
                 double cleanNum1 = 0;
                 double cleanNum2 = 0;
                 double result = 0;
+                
+                Console.Clear();
+                Console.WriteLine("Only the first number will be used for square root,");
+                Console.WriteLine("10x, sine, cosine, tangent and cotangent.\n");
+                Console.WriteLine("Trigonometric functions are in radians.\n");
+                Console.WriteLine("If you want to convert degrees to radians, type 'd'.");
+                Console.WriteLine("Otherwise, press any key and enter to continue.");
+                
+                var userChoice = Console.ReadLine().ToLower().Trim();
+
+                if (userChoice.Equals("d"))
+                {
+                    Console.Write("Please enter degrees needed to be converted to radians: ");
+                    cleanNum1 = AskForNumber();
+                    
+                    firstNumber = calculator.ConvertToRadians(cleanNum1);
+                    // Assigning secondNumber to 1 to avoid divide by zero errors
+                    // in case if the user will not choose trigonometric operation.
+                    secondNumber = 1d;
+                }
 
                 // Ask the user to type the first number.
                 if (double.IsNaN(firstNumber))
                 {
                     Console.Write("Type first number, and then press Enter: ");
-                    numInput1 = Console.ReadLine();
-
-
-                    cleanNum1 = 0;
-                    while (!double.TryParse(numInput1, out cleanNum1))
-                    {
-                        Console.Write("This is not valid input. Please enter an integer value: ");
-                        numInput1 = Console.ReadLine();
-                    }
+                    
+                    cleanNum1 = AskForNumber();
                 }
                 else
                 {
@@ -60,14 +65,8 @@ namespace CalculatorProgram
                 if (double.IsNaN(secondNumber))
                 {
                     Console.Write("Type second number, and then press Enter: ");
-                    numInput2 = Console.ReadLine();
 
-                    cleanNum2 = 0;
-                    while (!double.TryParse(numInput2, out cleanNum2))
-                    {
-                        Console.Write("This is not valid input. Please enter an integer value: ");
-                        numInput2 = Console.ReadLine();
-                    }
+                    cleanNum2 = AskForNumber();
                 } 
                 else
                 {
@@ -76,8 +75,6 @@ namespace CalculatorProgram
 
                 // Ask the user to choose an operator.
                 Console.WriteLine("Choose an operator from the following list:");
-                Console.WriteLine("Please note, only the first number will be used for square root,");
-                Console.WriteLine("10x, sine, cosine, tangent and cotangent.");
                 Console.WriteLine("\ta - Add");
                 Console.WriteLine("\ts - Subtract");
                 Console.WriteLine("\tm - Multiply");
@@ -91,7 +88,7 @@ namespace CalculatorProgram
                 Console.WriteLine("\tcot - Cotangent");
                 Console.Write("Your option? ");
 
-                string op = Console.ReadLine();
+                string op = AskForOperation();
 
                 try
                 {
@@ -112,14 +109,13 @@ namespace CalculatorProgram
                 Console.WriteLine("------------------------\n");
 
                 // Wait for the user to respond before closing.
-                Console.Write("Press 'n' to close the app, 'm' for main menu or press any other key and Enter to continue: ");
+                Console.Write("Press 'm' to return to the main menu or press any other key and Enter to continue: ");
                 
                 var input = Console.ReadLine().ToLower();
                 
-                if (input.Equals("n")) Environment.Exit(0);
                 if (input.Equals("m")) return;
                 
-                Console.WriteLine("\n"); // Friendly linespacing.
+                Console.WriteLine("\n"); // Friendly line spacing.
             }
         }
 
@@ -147,7 +143,7 @@ namespace CalculatorProgram
 
             while (true)
             {
-                string input = Console.ReadLine().ToLower();
+                string input = Console.ReadLine().ToLower().Trim();
                 
                 if (input.Equals("m")) return;
 
@@ -178,7 +174,7 @@ namespace CalculatorProgram
 
             while (true)
             {
-                string input = Console.ReadLine().ToLower();
+                string input = Console.ReadLine().ToLower().Trim();
                 
                     if (input.Equals("f"))
                     {
@@ -226,13 +222,51 @@ namespace CalculatorProgram
                         ShowHistory();
                         break;
                     case "q":
-                        Environment.Exit(0);
+                        endApp = true;
                         break;
                     default:
                         Console.WriteLine("Invalid input. Please try again.");
                         break;
                 }
             }
+        }
+
+        static string AskForOperation()
+        {
+            string[] validCommands =
+            {
+                "a", "s", "m", "d", 
+                "p", "r", "x", "sin", 
+                "cos", "tan", "cot"
+            };
+            
+            while (true)
+            {
+                var input = Console.ReadLine().ToLower().Trim();
+
+                if (validCommands.Contains(input))
+                {
+                    return input;
+                }
+                
+                Console.WriteLine("Invalid input. Please try again.");
+            }
+        }
+
+        static double AskForNumber()
+        {
+            double result = 0;
+            
+            string? input = Console.ReadLine();
+            
+            while (!double.TryParse(input, out result))
+            {
+                Console.Write("This is not valid input. Please enter an integer value: ");
+                
+                input = Console.ReadLine();
+            }
+
+            return result;
         }
     }
 }
