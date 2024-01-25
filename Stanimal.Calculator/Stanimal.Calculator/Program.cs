@@ -12,6 +12,9 @@ namespace CalculatorProgram
             Console.WriteLine("------------------------\n");
 
             Calculator calculator = new Calculator();
+
+            // count number of times the calculator was used.
+            int numCalculatorUsed = 0;
             while (!endApp)
             {
                 // Declare variables and set to empty.
@@ -58,7 +61,13 @@ namespace CalculatorProgram
                     {
                         Console.WriteLine("This operation will result in a mathematical error.\n");
                     }
-                    else Console.WriteLine("Your result: {0:0.##}\n", result);
+                    else
+                    {
+                        Console.WriteLine("Your result: {0:0.##}\n", result);
+                        // only count a successful result as part of number of times the calculator was used.
+                        numCalculatorUsed++;
+                        Console.WriteLine($"You used the calculator {numCalculatorUsed} times");
+                    }
                 }
                 catch (Exception e)
                 {
