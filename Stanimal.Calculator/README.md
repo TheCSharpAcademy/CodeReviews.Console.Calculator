@@ -1,0 +1,2 @@
+# README
+This console app follows https://learn.microsoft.com/en-us/visualstudio/get-started/csharp/tutorial-console?view=vs-2022 and tracks the number of times the calculator was used.  It also stores the previous results and allows the user to delete the list.
