@@ -228,7 +228,7 @@ class Program
                 readResult = Console.ReadLine();
                 if (readResult != null)
                 {
-                    ContinueCalculatingSelection(readResult);
+                    ContinueCalculatingSelection();
                 }
                 else
                 {
@@ -237,7 +237,7 @@ class Program
             }
         }
 
-        void ContinueCalculatingSelection(string input)
+        void ContinueCalculatingSelection()
         {
             switch (readResult.Trim().ToLower())
             {
