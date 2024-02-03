@@ -10,8 +10,9 @@ namespace CalculatorProgram
             // Display title as the C# console calculator app.
             Console.WriteLine("Console Calculator in C#\r");
             Console.WriteLine("------------------------\n");
-            
+
             Calculator calculator = new Calculator();
+
             while (!endApp)
             {
                 // Declar variables and to empty.
