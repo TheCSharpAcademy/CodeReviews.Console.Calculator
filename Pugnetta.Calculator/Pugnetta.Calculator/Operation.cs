@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Numerics;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Pugnetta.Calculator;
+﻿namespace Pugnetta.Calculator;
 
 public record Operation
 {
@@ -13,7 +6,7 @@ public record Operation
     public decimal N1 { get; }
     public decimal N2 { get; }
     public Operator Operator { get; }
-    public string? Result { get; init; } = null;
+    public string? Result { get; init; } 
     private Operation(Guid id, decimal n1, decimal n2, Operator o) =>
         (Id, N1, N2, Operator) = (id, n1, n2, o);    
     public static Operation Create(decimal n1, decimal n2, Operator o) =>
