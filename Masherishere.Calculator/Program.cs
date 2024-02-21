@@ -1,9 +1,11 @@
-﻿using Masherishere.Calculator;
+﻿using Masherishere.CalculatorLibrary;
 
 bool endApp = false;
 // Display title as the C# console calculator app.
 Console.WriteLine("Console Calculator in C#\r");
 Console.WriteLine("------------------------\n");
+
+Calculator calculator = new Calculator();
 
 while (!endApp)
 {
@@ -28,6 +30,7 @@ while (!endApp)
     numInput2 = Console.ReadLine();
 
     double cleanNum2 = 0;
+
     while (!double.TryParse(numInput2, out cleanNum2))
     {
         Console.Write("This is not valid input. Please enter an integer value: ");
@@ -46,7 +49,7 @@ while (!endApp)
 
     try
     {
-        result = Calculator.DoOperation(cleanNum1, cleanNum2, op);
+        result = calculator.DoOperation(cleanNum1, cleanNum2, op);
         if (double.IsNaN(result))
         {
             Console.WriteLine("This operation will result in a mathematical error.\n");
@@ -66,4 +69,6 @@ while (!endApp)
 
     Console.WriteLine("\n"); // Friendly linespacing.
 }
+
+calculator.Finish();
 return;
