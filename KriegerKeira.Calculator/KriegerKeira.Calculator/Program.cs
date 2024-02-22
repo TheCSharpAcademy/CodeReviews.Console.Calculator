@@ -9,7 +9,10 @@ while (!endApp)
 A - Add
 S - Subtract
 M - Multiply
-D - Divide");
+D - Divide
+SQRT - Square Root
+P - Power of
+P10 - Power of 10");
     Console.WriteLine("--------------------------------------------");
     var op = Console.ReadLine()?.Trim().ToLower();
     calculator.DoOperation(op);

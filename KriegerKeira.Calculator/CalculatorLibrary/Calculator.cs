@@ -55,6 +55,18 @@ public class Calculator
             case "d":
                 Division();
                 break;
+            case "sqrt":
+                SquareRoot();
+                break;
+            case "p":
+                PowerOf();
+                break;
+            case "p10":
+                PowerOfTen();
+                break;
+            default:
+                Console.WriteLine("Invalid selection");
+                break;
         }
     }
     public static void CalculatorHeader()
@@ -192,5 +204,42 @@ public class Calculator
         DisplayResults(result, cleanFirstNumber, cleanSecondNumber, operationType);
         return result;
 
+    }
+
+    public double SquareRoot()
+    {
+        var operationType = "Square Root";
+        var cleanFirstNumber = GetFirstNumber();
+        double? secondNumberPlaceHolder = null;
+        CalculatorHeader();
+        var result = Math.Sqrt(cleanFirstNumber);
+        DisplayResults(result,cleanFirstNumber,secondNumberPlaceHolder,operationType);
+        return result;
+    }
+
+    public double PowerOf()
+    {
+        var operationType = "Power of";
+        CalculatorHeader();
+        var cleanFirstNumber = GetFirstNumber();
+        Console.Write("Enter your second number: ");
+        var secondNumber = Console.ReadLine()?.Trim().ToLower();
+        var cleanSecondNumber = ValidateNumbers(secondNumber);
+        var result = Math.Pow(cleanFirstNumber, cleanSecondNumber);
+        DisplayResults(result,cleanFirstNumber,cleanSecondNumber,operationType);
+        return result;
+    }
+
+    public double PowerOfTen()
+    {
+        var operationType = "Power of 10";
+        var cleanFirstNumber = 10;
+        CalculatorHeader();
+        Console.Write("Enter your second number: ");
+        var secondNumber = Console.ReadLine()?.Trim().ToLower();
+        var cleanSecondNumber = ValidateNumbers(secondNumber);
+        var result = Math.Pow(cleanFirstNumber, cleanSecondNumber);
+        DisplayResults(result,cleanFirstNumber,cleanSecondNumber,operationType);
+        return result;
     }
 }
