@@ -1,5 +1,4 @@
-﻿using System.Transactions;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 namespace CalculatorLibrary;
 
 public class Calculator
@@ -63,6 +62,9 @@ public class Calculator
                 break;
             case "p10":
                 PowerOfTen();
+                break;
+            case "t":
+                Trigonometry();
                 break;
             default:
                 Console.WriteLine("Invalid selection");
@@ -240,6 +242,76 @@ public class Calculator
         var cleanSecondNumber = ValidateNumbers(secondNumber);
         var result = Math.Pow(cleanFirstNumber, cleanSecondNumber);
         DisplayResults(result,cleanFirstNumber,cleanSecondNumber,operationType);
+        return result;
+    }
+
+    public double Trigonometry()
+    {
+        var operationType = "";
+        var result = double.NaN;
+        var trigRunning = true;
+        var cleanFirstNumber = GetFirstNumber();
+        double? secondNumberPlaceHolder = null;
+        var radians = cleanFirstNumber * Math.PI / 180;
+        while (trigRunning)
+        {
+            CalculatorHeader();
+            Console.WriteLine($@"Choose your trigonometry function from the list below: 
+sin - Sine
+cos - Cosine
+tan - Tangent
+cot - Cotangent
+sec - Secant
+csc - Cosecant");
+            Console.WriteLine("-------------------------------------------------------");
+            var trigSelection = Console.ReadLine()?.Trim().ToLower();
+            switch (trigSelection)
+            {
+                case "sin":
+                {
+                    operationType = "Sine";
+                    result = Math.Sin(radians);
+                    trigRunning = false;
+                }break;
+                case "cos":
+                {
+                    operationType = "Cosine";
+                    result = Math.Cos(radians);
+                    trigRunning = false;
+                }break;
+                case "tan":
+                {
+                    operationType = "Tangent";
+                    result = Math.Tan(radians);
+                    trigRunning = false;
+                }break;
+                case "cot":
+                {
+                    operationType = "Cotangent";
+                    result = 1 / Math.Tan(radians);
+                    trigRunning = false;
+                }break;
+                case "sec":
+                {
+                    operationType = "Secant";
+                    result = 1 / Math.Cos(radians);
+                    trigRunning = false;
+                }break;
+                case "csc":
+                {
+                    operationType = "Cosecant";
+                    result = 1 / Math.Sin(radians);
+                    trigRunning = false;
+                }break;
+                default:
+                {
+                    Console.WriteLine("Invalid selection, please select a trigonometry function");
+                    Thread.Sleep(3000);
+                    continue;
+                }
+            }
+        }
+        DisplayResults(result,cleanFirstNumber,secondNumberPlaceHolder,operationType);
         return result;
     }
 }

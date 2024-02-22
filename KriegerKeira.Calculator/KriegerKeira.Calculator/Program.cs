@@ -12,7 +12,8 @@ M - Multiply
 D - Divide
 SQRT - Square Root
 P - Power of
-P10 - Power of 10");
+P10 - Power of 10
+T - Trigonometry");
     Console.WriteLine("--------------------------------------------");
     var op = Console.ReadLine()?.Trim().ToLower();
     calculator.DoOperation(op);
