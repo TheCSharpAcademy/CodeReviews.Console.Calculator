@@ -1,7 +1,11 @@
-﻿namespace CalculatorLibrary
+﻿namespace CalculatorLibrary;
+public class CalculationDataStore
 {
-    public class Class1
-    {
+    public static List<double> Results = [];
 
+    public static double AddLastCalculation(double result)
+    {
+        Results.Add(result);
+        return result;
     }
 }
