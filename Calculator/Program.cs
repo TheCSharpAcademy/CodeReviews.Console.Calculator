@@ -1,5 +1,4 @@
 ﻿using CalculatorLibrary;
-using System.Diagnostics;
 
 class Program
 {
