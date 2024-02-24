@@ -1,5 +1,4 @@
-﻿using System.Net;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
 namespace CalculatorLibrary
 {
@@ -12,7 +11,7 @@ namespace CalculatorLibrary
         JsonWriter writer;
         List<string> calculations = new List<string>();
         List<double> results = new List<double>();
-        int count = 0;
+        int count;
         public Calculator()
         {
             StreamWriter logFile = File.CreateText("calculatorlog.json");
