@@ -1,0 +1,8 @@
+{
+  "Operations": [
+    {
+      "Operand1": 3.0,
+      "Operand2": 3.0,
+      "Operation": "Invalid operation",
+      "Result": "NaN"
+    }
