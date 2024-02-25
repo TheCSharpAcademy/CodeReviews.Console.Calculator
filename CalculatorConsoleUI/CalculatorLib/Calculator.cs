@@ -1,37 +1,31 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace CalculatorLib;
+﻿namespace CalculatorLib;
 
 public static class Calculator
 {
-    private static List<(double firstOperand,string op,double? secondOperand,double result)>  history { get; set; }
+    private static List<(double firstOperand, string op, double? secondOperand, double result)> history { get; set; }
     public static int CalculatorUsageCount { get; set; }
     public static void InitializeCalculator()
     {
-        history = new List<(double firstOperand, string op, double? secondOperand,double result)>();
+        history = new List<(double firstOperand, string op, double? secondOperand, double result)>();
         CalculatorUsageCount = 0;
     }
 
-    public static double DoOperation(double firstOperand, string op,double secondOperand)
+    public static double DoOperation(double firstOperand, string op, double secondOperand)
     {
         double result;
         switch (op)
         {
             case "+":
-                 result = firstOperand+secondOperand;
-                 break;
+                result = firstOperand + secondOperand;
+                break;
             case "-":
-                result = firstOperand-secondOperand;
+                result = firstOperand - secondOperand;
                 break;
             case "*":
-                result = firstOperand*secondOperand;
+                result = firstOperand * secondOperand;
                 break;
             case "^":
-                result = Math.Pow(firstOperand,secondOperand);
+                result = Math.Pow(firstOperand, secondOperand);
                 break;
             case "%":
                 result = firstOperand % secondOperand;
@@ -47,10 +41,10 @@ public static class Calculator
                     throw new Exception($"Error: cant divide by zero {ex.Message}");
                 }
                 break;
-             default: 
+            default:
                 throw new InvalidOperationException($"Error: Invalid Operation");
         }
-        history.Add((firstOperand,op,secondOperand,result));
+        history.Add((firstOperand, op, secondOperand, result));
         CalculatorUsageCount++;
         return result;
 
@@ -68,12 +62,12 @@ public static class Calculator
                 }
                 catch (ArithmeticException ex)
                 {
-                    throw new ArithmeticException($"Error: you cant take square root of negative number",ex);
+                    throw new ArithmeticException($"Error: you cant take square root of negative number", ex);
                 }
                 break;
             case "!":
                 op = $"10x({operand})";
-                result = Math.Pow(10,operand);
+                result = Math.Pow(10, operand);
                 break;
             case "~":
                 op = $"sin({operand})";
@@ -87,7 +81,7 @@ public static class Calculator
                 op = $"tan({operand})";
                 result = Math.Tan(operand);
                 break;
-            default : throw new InvalidOperationException("Invalid Operation");
+            default: throw new InvalidOperationException("Invalid Operation");
         }
         history.Add((operand, op, null, result));
         CalculatorUsageCount++;
@@ -95,9 +89,9 @@ public static class Calculator
     }
     public static double RevealResultFromHistory(int operationIndex)
     {
-        var result =  history[operationIndex].result;
-        return result;  
-    }   
+        var result = history[operationIndex].result;
+        return result;
+    }
     public static int GetCalculatorHistoryCount() { return history.Count; }
     public static int GetCalculatorUsageCount() { return CalculatorUsageCount; }
 
@@ -106,7 +100,7 @@ public static class Calculator
         history.Clear();
     }
 
-    public static List<(double firstOperand,string operation,double? secondOperand,double result)> GetCalculatorHistory(int? index = null)
+    public static List<(double firstOperand, string operation, double? secondOperand, double result)> GetCalculatorHistory(int? index = null)
     {
         List<(double firstOperand, string operation, double? secondOperand, double result)> result = new();
         if (index == null)

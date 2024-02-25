@@ -42,7 +42,7 @@ static void ExecuteCalculatorProgram()
                 Console.WriteLine($"result : {result}");
                 break;
             case "h":
-                if(Calculator.GetCalculatorHistoryCount() > 0)
+                if (Calculator.GetCalculatorHistoryCount() > 0)
                 {
                     var x = Calculator.GetCalculatorHistory();
                     ConsoleMassages.DisplayList(x);
@@ -51,7 +51,7 @@ static void ExecuteCalculatorProgram()
                 {
                     Console.WriteLine("The History is now Empty!");
                 }
-                
+
                 break;
             case "c":
                 Calculator.ClearCalculatorHistory();
@@ -59,7 +59,7 @@ static void ExecuteCalculatorProgram()
                 break;
             case "r":
                 int range = Calculator.GetCalculatorHistoryCount();
-                if(range > 0)
+                if (range > 0)
                 {
                     do
                     {

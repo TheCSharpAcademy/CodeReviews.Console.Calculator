@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ConsoleUI
+﻿namespace ConsoleUI
 {
     public static class ConsoleHelper
     {
@@ -55,8 +49,8 @@ namespace ConsoleUI
             return result;
 
         }
-        public static bool IsEmptyOrNull(this string input) 
-        { 
+        public static bool IsEmptyOrNull(this string input)
+        {
             return input == null || input == string.Empty;
         }
         public static bool IsValidChoice(this string input)
