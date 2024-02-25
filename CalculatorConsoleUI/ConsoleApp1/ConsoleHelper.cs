@@ -10,7 +10,7 @@
             {
                 Console.Write($"{message}: ");
                 userInput = Console.ReadLine();
-            } while (!isValidInput(userInput, InputType.CHOICE));
+            } while (!IsValidInput(userInput, InputType.CHOICE));
 
             output = userInput.Trim().ToLower();
             return output;
@@ -23,11 +23,11 @@
             {
                 Console.Write($"{message}: ");
                 userInput = Console.ReadLine();
-            } while (!isValidInput(userInput, InputType.NUMBER));
+            } while (!IsValidInput(userInput, InputType.NUMBER));
             output = userInput.CastToDouble();
             return output;
         }
-        public static bool isValidInput(string input, InputType option)
+        public static bool IsValidInput(string input, InputType option)
         {
             bool result = false;
             if (!input.IsEmptyOrNull())
