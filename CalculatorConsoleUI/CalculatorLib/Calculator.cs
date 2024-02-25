@@ -2,11 +2,11 @@
 
 public static class Calculator
 {
-    private static List<(double firstOperand, string op, double? secondOperand, double result)> history { get; set; }
+    private static List<(double firstOperand, string op, double? secondOperand, double result)> History { get; set; }
     public static int CalculatorUsageCount { get; set; }
     public static void InitializeCalculator()
     {
-        history = new List<(double firstOperand, string op, double? secondOperand, double result)>();
+        History = new List<(double firstOperand, string op, double? secondOperand, double result)>();
         CalculatorUsageCount = 0;
     }
 
@@ -44,7 +44,7 @@ public static class Calculator
             default:
                 throw new InvalidOperationException($"Error: Invalid Operation");
         }
-        history.Add((firstOperand, op, secondOperand, result));
+        History.Add((firstOperand, op, secondOperand, result));
         CalculatorUsageCount++;
         return result;
 
@@ -83,30 +83,30 @@ public static class Calculator
                 break;
             default: throw new InvalidOperationException("Invalid Operation");
         }
-        history.Add((operand, op, null, result));
+        History.Add((operand, op, null, result));
         CalculatorUsageCount++;
         return result;
     }
     public static double RevealResultFromHistory(int operationIndex)
     {
-        var result = history[operationIndex].result;
+        var result = History[operationIndex].result;
         return result;
     }
-    public static int GetCalculatorHistoryCount() { return history.Count; }
+    public static int GetCalculatorHistoryCount() { return History.Count; }
     public static int GetCalculatorUsageCount() { return CalculatorUsageCount; }
 
     public static void ClearCalculatorHistory()
     {
-        history.Clear();
+        History.Clear();
     }
 
     public static List<(double firstOperand, string operation, double? secondOperand, double result)> GetCalculatorHistory(int? index = null)
     {
         List<(double firstOperand, string operation, double? secondOperand, double result)> result = new();
         if (index == null)
-            result = history;
+            result = History;
         else
-            result.Add(history[index.Value]);
+            result.Add(History[index.Value]);
         return result;
     }
 }
