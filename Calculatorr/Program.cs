@@ -1,6 +1,4 @@
-﻿using System;
-using System.Linq;
-using CalculatorLibrary;
+﻿using CalculatorLibrary;
 
 namespace CalculatorProgram
 {
