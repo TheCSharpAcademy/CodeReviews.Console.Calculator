@@ -110,7 +110,7 @@ namespace CalculatorLibrary
             {
                 Console.WriteLine("Type the number of the result you would like to use: ");
                 result = Console.ReadLine();
-                if (int.TryParse(result, out _) && Convert.ToDouble(result) > 0)
+                if (int.TryParse(result, out _) && Convert.ToDouble(result) > 0 && Convert.ToDouble(result) < count)
                     num1 = Convert.ToDouble(results[(Convert.ToInt32(result) - 1)]);
                 else
                 {
