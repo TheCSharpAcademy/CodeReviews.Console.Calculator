@@ -1,0 +1,351 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="NumApp.CalculatorPage"
+             BackgroundColor="#212529">
+
+    <ContentView>
+
+        <VerticalStackLayout
+            Padding="10, 20, 10, 10"
+            Spacing="25">
+
+            <Grid
+                RowDefinitions="*, *, *, *, *, *, *, *, *"
+                ColumnDefinitions="*, *, *, *">
+
+                <!--Row 0-->
+                <Label
+                    x:Name="OperationLabel"
+                    Text=""
+                    TextColor="White"
+                    FontSize="16"
+                    HorizontalTextAlignment="End"
+                    Grid.Row="0"
+                    Grid.ColumnSpan="4" />
+
+                <Label
+                    x:Name="RandomLabelFrom"
+                    Text="From:"
+                    TextColor="White"
+                    FontSize="16"
+                    IsVisible="false"
+                    HorizontalTextAlignment="Start"
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="2" />
+
+                <Label
+                    x:Name="RandomLabelTo"
+                    Text="To:"
+                    TextColor="White"
+                    FontSize="16"
+                    IsVisible="false"
+                    HorizontalTextAlignment="Start"
+                    Grid.Row="0"
+                    Grid.Column="2"
+                    Grid.ColumnSpan="2" />
+
+                <!--Row 1-->
+                <Entry
+                    x:Name="OperationEntry"
+                    Text=""
+                    Placeholder="0"
+                    FontSize="32"
+                    HorizontalTextAlignment="End"
+                    MinimumHeightRequest="80"
+                    Grid.Row="1"
+                    Grid.ColumnSpan="4"
+                    TextChanged="CheckKeyboardInput" />
+
+                <Entry
+                    x:Name="RandomEntryFrom"
+                    Text=""
+                    Placeholder="0"
+                    FontSize="32"
+                    IsVisible="false"
+                    HorizontalTextAlignment="Start"
+                    MinimumHeightRequest="80"
+                    Grid.Row="1"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="2"
+                    Focused="RandomEntryFrom_Focused" />
+
+                <Entry
+                    x:Name="RandomEntryTo"
+                    Text=""
+                    Placeholder="0"
+                    FontSize="32"
+                    IsVisible="false"
+                    HorizontalTextAlignment="Start"
+                    MinimumHeightRequest="80"
+                    Grid.Row="1"
+                    Grid.Column="2"
+                    Grid.ColumnSpan="2"
+                    Focused="RandomEntryTo_Focused" />
+
+                <!--Row 2-->
+                <Button
+                    x:Name="MoreButton"
+                    Text="More"
+                    FontSize="14"
+                    Grid.Row="2"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="1"
+                    Clicked="OnMoreButtonClicked" />
+
+                <Button
+                    x:Name="ClearButton"
+                    Text="C"
+                    FontSize="14"
+                    Grid.Row="2"
+                    Grid.Column="1"
+                    Grid.ColumnSpan="1"
+                    Clicked="OnClearButtonClicked" />
+
+                <Button
+                    x:Name="ClearEntryButton"
+                    Text="CE"
+                    FontSize="14"
+                    Grid.Row="2"
+                    Grid.Column="2"
+                    Grid.ColumnSpan="1"
+                    Clicked="OnClearEntryButtonClicked" />
+
+                <Button
+                    x:Name="DeleteButton"
+                    Text="⌫"
+                    FontSize="14"
+                    Grid.Row="2"
+                    Grid.Column="3"
+                    Grid.ColumnSpan="1"
+                    Clicked="OnDeleteButtonClicked" />
+                
+                <!--Row 3-->
+                <Button
+                    x:Name="SaveButton"
+                    Text="Save"
+                    FontSize="14"
+                    IsVisible="false"
+                    Grid.Row="3"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="1"
+                    Clicked="OnSaveButtonClicked" />
+
+                <Button
+                    x:Name="RandomButton"
+                    Text="Rand"
+                    FontSize="14"
+                    IsVisible="false"
+                    Grid.Row="3"
+                    Grid.Column="1"
+                    Grid.ColumnSpan="1"
+                    Clicked="OnRandomButtonClicked" />
+
+                <Button
+                    x:Name="HexButton"
+                    Text="Hex"
+                    FontSize="14"
+                    IsVisible="false"
+                    Grid.Row="3"
+                    Grid.Column="2"
+                    Grid.ColumnSpan="1"
+                    Clicked="OnHexButtonClicked" />
+
+                <Button
+                    x:Name="BinButton"
+                    Text="Bin"
+                    FontSize="14"
+                    IsVisible="false"
+                    Grid.Row="3"
+                    Grid.Column="3"
+                    Grid.ColumnSpan="1"
+                    Clicked="OnBinButtonClicked" />
+
+                <!--Row 4-->
+                <Button
+                    x:Name="SquareButton"
+                    Text="x^2"
+                    FontSize="14"
+                    Grid.Row="4"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="1"
+                    Clicked="OnSquareButtonClicked" />
+
+                <Button
+                    x:Name="SqrtButton"
+                    Text="√x"
+                    FontSize="14"
+                    Grid.Row="4"
+                    Grid.Column="1"
+                    Grid.ColumnSpan="1"
+                    Clicked="OnSqrtButtonClicked" />
+
+                <Button
+                    x:Name="DecimalPrecisionButton"
+                    Text="DP"
+                    FontSize="14"
+                    Grid.Row="4"
+                    Grid.Column="2"
+                    Grid.ColumnSpan="1"
+                    Clicked="OnDecimalPrecisionButtonClicked" />
+
+                <Button
+                    x:Name="DivideButton"
+                    Text="÷"
+                    FontSize="20"
+                    BackgroundColor="#6C2126"
+                    Grid.Row="4"
+                    Grid.Column="3"
+                    Grid.ColumnSpan="1"
+                    Clicked="OnDivideButtonClicked" />
+
+                <!--Row 5-->
+                <Button
+                    x:Name="SevenButton"
+                    Text="7"
+                    Grid.Row="5"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="1"
+                    Clicked="OnSevenButtonClicked" />
+
+                <Button
+                    x:Name="EightButton"
+                    Text="8"
+                    Grid.Row="5"
+                    Grid.Column="1"
+                    Grid.ColumnSpan="1"
+                    Clicked="OnEightButtonClicked" />
+
+                <Button
+                    x:Name="NineButton"
+                    Text="9"
+                    Grid.Row="5"
+                    Grid.Column="2"
+                    Grid.ColumnSpan="1"
+                    Clicked="OnNineButtonClicked" />
+
+                <Button
+                    x:Name="MultiplyButton"
+                    Text="×"
+                    FontSize="20"
+                    BackgroundColor="#6C2126"
+                    Grid.Row="5"
+                    Grid.Column="3"
+                    Grid.ColumnSpan="1"
+                    Clicked="OnMultiplyButtonClicked" />
+
+                <!--Row 6-->
+                <Button
+                    x:Name="FourButton"
+                    Text="4"
+                    Grid.Row="6"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="1"
+                    Clicked="OnFourButtonClicked" />
+
+                <Button
+                    x:Name="FiveButton"
+                    Text="5"
+                    Grid.Row="6"
+                    Grid.Column="1"
+                    Grid.ColumnSpan="1"
+                    Clicked="OnFiveButtonClicked" />
+
+                <Button
+                    x:Name="SixButton"
+                    Text="6"
+                    Grid.Row="6"
+                    Grid.Column="2"
+                    Grid.ColumnSpan="1"
+                    Clicked="OnSixButtonClicked" />
+
+                <Button
+                    x:Name="SubtractButton"
+                    Text="-"
+                    FontSize="20"
+                    BackgroundColor="#6C2126"
+                    Grid.Row="6"
+                    Grid.Column="3"
+                    Grid.ColumnSpan="1"
+                    Clicked="OnSubtractButtonClicked" />
+
+                <!--Row 7-->
+                <Button
+                    x:Name="OneButton"
+                    Text="1"
+                    Grid.Row="7"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="1"
+                    Clicked="OnOneButtonClicked" />
+
+                <Button
+                    x:Name="TwoButton"
+                    Text="2"
+                    Grid.Row="7"
+                    Grid.Column="1"
+                    Grid.ColumnSpan="1"
+                    Clicked="OnTwoButtonClicked" />
+
+                <Button
+                    x:Name="ThreeButton"
+                    Text="3"
+                    Grid.Row="7"
+                    Grid.Column="2"
+                    Grid.ColumnSpan="1"
+                    Clicked="OnThreeButtonClicked" />
+
+                <Button
+                    x:Name="AddButton"
+                    Text="+"
+                    FontSize="20"
+                    BackgroundColor="#6C2126"
+                    Grid.Row="7"
+                    Grid.Column="3"
+                    Grid.ColumnSpan="1"
+                    Clicked="OnAddButtonClicked" />
+
+                <!--Row 8-->
+                <Button
+                    x:Name="SignButton"
+                    Text="+/-"
+                    Grid.Row="8"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="1"
+                    Clicked="OnSignButtonClicked" />
+
+                <Button
+                    x:Name="ZeroButton"
+                    Text="0"
+                    Grid.Row="8"
+                    Grid.Column="1"
+                    Grid.ColumnSpan="1"
+                    Clicked="OnZeroButtonClicked" />
+
+                <Button
+                    x:Name="PointButton"
+                    Text="."
+                    FontSize="20"
+                    Grid.Row="8"
+                    Grid.Column="2"
+                    Grid.ColumnSpan="1"
+                    Clicked="OnPointButtonClicked" />
+
+                <Button
+                    x:Name="EqualsButton"
+                    Text="="
+                    FontSize="20"
+                    BackgroundColor="#6C2126"
+                    Grid.Row="8"
+                    Grid.Column="3"
+                    Grid.ColumnSpan="1"
+                    Clicked="OnEqualsButtonClicked" />
+
+            </Grid>
+
+
+        </VerticalStackLayout>
+
+    </ContentView>
+
+</ContentPage>
