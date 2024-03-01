@@ -15,11 +15,11 @@ public partial class CalculatorPage : ContentPage
     public bool RandomOn { get; set; }
     public bool DecimalPrecisionOn { get; set; }
 
-    private bool _moreOptionsShown = false;
+    private bool _moreOptionsShown;
     private List<Button> moreOptionsButtons = new List<Button>();
 
-    private bool _randomEntryFromWasFocused = false;
-    private bool _randomEntryToWasFocused = false;
+    private bool _randomEntryFromWasFocused;
+    private bool _randomEntryToWasFocused;
 
     public CalculatorPage()
     {
