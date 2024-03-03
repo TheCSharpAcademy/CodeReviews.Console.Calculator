@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleCalculator", "ConsoleCalculator\ConsoleCalculator.csproj", "{4D5AC88B-E38B-46F1-8447-769DFC840086}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CalculatorLibrary", "CalculatorLibrary\CalculatorLibrary.csproj", "{44252F2A-CF31-4446-A0FD-F01D196CBC59}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4D5AC88B-E38B-46F1-8447-769DFC840086}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4D5AC88B-E38B-46F1-8447-769DFC840086}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4D5AC88B-E38B-46F1-8447-769DFC840086}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4D5AC88B-E38B-46F1-8447-769DFC840086}.Release|Any CPU.Build.0 = Release|Any CPU
+		{44252F2A-CF31-4446-A0FD-F01D196CBC59}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{44252F2A-CF31-4446-A0FD-F01D196CBC59}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{44252F2A-CF31-4446-A0FD-F01D196CBC59}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{44252F2A-CF31-4446-A0FD-F01D196CBC59}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
