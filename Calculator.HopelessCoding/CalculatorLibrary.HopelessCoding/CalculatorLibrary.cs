@@ -59,7 +59,7 @@ namespace CalculatorLibrary.HopelessCoding
                     history.Add($"{num1} ^ {num2} = {result}");
                     break;
                 case "l":
-                    showHistory();
+                    ShowHistory();
                     break;
                 default:
                     break; // Return NaN for an incorrect option entry
@@ -71,7 +71,7 @@ namespace CalculatorLibrary.HopelessCoding
             return result;
         }
 
-        public void showHistory()
+        public void ShowHistory()
         {
             int i = 1;
             Console.WriteLine("\nYour calculation history:");
@@ -83,7 +83,7 @@ namespace CalculatorLibrary.HopelessCoding
             Console.WriteLine();
         }
 
-        public void clearHistory()
+        public void ClearHistory()
         {
             history.Clear();
             Console.WriteLine("\nHistory successfully cleared\n");

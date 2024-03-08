@@ -79,7 +79,7 @@ namespace CalculatorProgram
                 Console.Write("Press 'm' and Enter to enter menu, or press any other key and Enter to continue: ");
                 if (Console.ReadLine() == "m")
                 {
-                    showMenu(calculator);
+                    ShowMenu(calculator);
                 }
                 Console.WriteLine();
             }
@@ -118,7 +118,7 @@ namespace CalculatorProgram
             }
         }
 
-        private static void showMenu(Calculator calculator)
+        private static void ShowMenu(Calculator calculator)
         {
             bool stayMenu = true;
             while (stayMenu)
@@ -134,10 +134,10 @@ namespace CalculatorProgram
                 switch (option)
                 {
                     case "l":
-                        calculator.showHistory();
+                        calculator.ShowHistory();
                         break;
                     case "c":
-                        calculator.clearHistory();
+                        calculator.ClearHistory();
                         break;
                     case "e":
                         stayMenu = false;
