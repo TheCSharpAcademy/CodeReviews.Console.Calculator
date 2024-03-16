@@ -7,6 +7,8 @@ public class Calculator
 {
     JsonWriter writer;
 
+    private static int calculatorCount;
+
     public Calculator()
     {
         StreamWriter logFile = File.CreateText("calculatorlog.json");
@@ -58,6 +60,8 @@ public class Calculator
         writer.WriteValue(result);
         writer.WriteEndObject();
 
+        calculatorCount++;
+
         return result;
     }
 
@@ -66,5 +70,10 @@ public class Calculator
         writer.WriteEndArray();
         writer.WriteEndObject();
         writer.Close();
+    }
+
+    public int GetCalculatorCount()
+    {
+        return calculatorCount;
     }
 }
