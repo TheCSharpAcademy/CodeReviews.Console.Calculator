@@ -27,6 +27,12 @@ class Program
                 case "c":
                     Printer.PrintCalculatorCount(calculator.GetCalculatorCount());
                     break;
+                case "v":
+                    CalculatorEngine.PrintCalculations();
+                    break;
+                case "d":
+                    CalculatorEngine.DeleteCalculations();
+                    break;
                 case "q":
                     Console.WriteLine("Thanks for playing. \nGame Over ...");
                     endApp = true;

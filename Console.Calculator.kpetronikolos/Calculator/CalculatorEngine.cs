@@ -1,9 +1,12 @@
 ﻿using CalculatorLibrary;
+using CalculatorLibrary.Models;
 
 namespace CalculatorProgram;
 
 public static class CalculatorEngine
 {
+    private static List<CalculationModel> calculations = new List<CalculationModel>();
+
     public static void InitCalculator(Calculator calculator)
     {
 
@@ -45,7 +48,12 @@ public static class CalculatorEngine
             {
                 Console.WriteLine("This operation will result in a mathematical error.\n");
             }
-            else Console.WriteLine("Your result: {0:0.##}\n", result);
+            else
+            {
+                Console.WriteLine("Your result: {0:0.##}\n", result);
+                StoreCalculation(cleanNum1, cleanNum2, op, result);
+            }
+                
 
         }
         catch (Exception e)
@@ -54,5 +62,38 @@ public static class CalculatorEngine
         }
 
         Console.WriteLine("------------------------\n");
+    }
+
+    private static void StoreCalculation(double firstOperand, double secondOperand, string operation, double result)
+    {
+        calculations.Add(new CalculationModel
+        {
+            FirstOperand = firstOperand,
+            SecondOperand = secondOperand,
+            Operation = operation,
+            Result = result
+        });
+    }
+
+    public static void PrintCalculations()
+    {
+
+        if (calculations.Any() == true)
+        {
+            foreach (var calculation in calculations)
+            {
+                Console.WriteLine($"{calculation.FirstOperand} {calculation.Operation} {calculation.SecondOperand} = {calculation.Result} ");
+            }
+        }
+        else
+        {
+            Console.WriteLine("You haven't performed any calculation yet.");
+        }
+    }
+
+    public static void DeleteCalculations()
+    {
+        calculations.Clear();
+        Console.WriteLine("All the Calculations have been deleted.");
     }
 }
