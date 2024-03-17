@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.9.34622.214
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GetTeched.Calculator", "GetTeched.Calculator.csproj", "{D94F0A0A-A0F2-4503-93E5-E3D20C0C8E4E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GetTeched.Calculator", "GetTeched.Calculator.csproj", "{D94F0A0A-A0F2-4503-93E5-E3D20C0C8E4E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GetTeched.CalculatorLibrary", "..\GetTeched.CalculatorLibrary\GetTeched.CalculatorLibrary.csproj", "{FAECAEDB-2FE9-4C87-8F6B-296EF16B6784}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{D94F0A0A-A0F2-4503-93E5-E3D20C0C8E4E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D94F0A0A-A0F2-4503-93E5-E3D20C0C8E4E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D94F0A0A-A0F2-4503-93E5-E3D20C0C8E4E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FAECAEDB-2FE9-4C87-8F6B-296EF16B6784}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FAECAEDB-2FE9-4C87-8F6B-296EF16B6784}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FAECAEDB-2FE9-4C87-8F6B-296EF16B6784}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FAECAEDB-2FE9-4C87-8F6B-296EF16B6784}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
