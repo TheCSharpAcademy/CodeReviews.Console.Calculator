@@ -10,6 +10,7 @@ public static class Menu
         Console.WriteLine("\tc - Count the amount of times the calculator was used");
         Console.WriteLine("\tv - View a list of the calculations");
         Console.WriteLine("\td - Delete the list of the calculations");
+        Console.WriteLine("\th - Use the results from the calculation list to perform new calculation");
         Console.WriteLine("\tq - Quit the App");
         Console.Write("Enter your option: ");
     }

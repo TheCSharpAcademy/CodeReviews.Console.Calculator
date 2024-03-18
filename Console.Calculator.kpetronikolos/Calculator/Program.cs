@@ -33,6 +33,9 @@ class Program
                 case "d":
                     CalculatorEngine.DeleteCalculations();
                     break;
+                case "h":
+                    CalculatorEngine.InitHistoryCalculator(calculator);
+                    break;
                 case "q":
                     Console.WriteLine("Thanks for playing. \nGame Over ...");
                     endApp = true;
