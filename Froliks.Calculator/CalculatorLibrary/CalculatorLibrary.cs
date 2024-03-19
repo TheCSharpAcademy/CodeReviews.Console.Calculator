@@ -21,7 +21,7 @@ public class Calculator
 {
     private CalculatorData? _data;
     private List<OperationItem> _operations = new List<OperationItem>(); 
-    private int _usedCount = 0;
+    private int _usedCount;
     
     public Calculator()
     {

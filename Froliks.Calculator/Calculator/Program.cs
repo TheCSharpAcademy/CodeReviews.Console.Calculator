@@ -5,7 +5,7 @@ namespace CalculatorProgram;
 public class Calculator
 {
     private static CalculatorLibrary.Calculator _calculator = new CalculatorLibrary.Calculator();
-    private static bool usePreviousResult = false;
+    private static bool usePreviousResult;
 
     public static void Main(string[] args)
     {
