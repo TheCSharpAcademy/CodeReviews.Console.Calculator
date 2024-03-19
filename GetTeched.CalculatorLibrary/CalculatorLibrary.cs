@@ -6,7 +6,9 @@ public class Calculator
     int calculatorUsage;
     public Calculator()
     {
-        calculatorUsage = GetCalculatorUsageStats();
+        JsonParse jsonParse = new();
+
+        calculatorUsage = jsonParse.GetCalculatorUsageStats();
         StreamWriter logFile = File.CreateText("calculator.json");
         logFile.AutoFlush = true;
         writer = new JsonTextWriter(logFile);
@@ -23,7 +25,7 @@ public class Calculator
         writer.WriteValue(firstNumber);
         writer.WritePropertyName("Operand2");
         writer.WriteValue(secondNumber);
-        writer.WritePropertyName("Operation");
+        writer.WritePropertyName("OperationType");
 
         switch (operation)
         {
@@ -69,20 +71,54 @@ public class Calculator
         writer.Close();
     }
 
-    public int GetCalculatorUsageStats()
-    {
-        int result= 0;
+    //public int GetCalculatorUsageStats()
+    //{
+    //    int result = 0;
+    //    List<string> previousCalculations = new();
 
-        string path = Path.Combine(Environment.CurrentDirectory, "calculator.json");
-        var json = File.ReadAllText(path);
-        CalculatorUsageData _calculatorUsage = JsonConvert.DeserializeObject<CalculatorUsageData>(json);
-        result = Int32.Parse(_calculatorUsage.Usage.ToString());
-        return result;
-    }
+    //    string path = Path.Combine(Environment.CurrentDirectory, "calculator.json");
+    //    string json = File.ReadAllText(path);
+    //    CalculatorUsageData _calculatorUsage = JsonConvert.DeserializeObject<CalculatorUsageData>(json);
+    //    result = Int32.Parse(_calculatorUsage.Usage.ToString());
+    //    foreach (var operations in _calculatorUsage.Operations)
+    //    {
+    //        switch (operations.OperationType)
+    //        {
+    //            case "Add":
+    //                previousCalculations.Add($"{operations.Operand1} + {operations.Operand2} = {operations.Result}");
+    //                break;
+    //            case "Subtract":
+    //                previousCalculations.Add($"{operations.Operand1} - {operations.Operand2} = {operations.Result}");
+    //                break;
+    //            case "Multiply":
+    //                previousCalculations.Add($"{operations.Operand1} X {operations.Operand2} = {operations.Result}");
+    //                break;
+    //            case "Divide":
+    //                previousCalculations.Add($"{operations.Operand1} / {operations.Operand2} = {operations.Result}");
+    //                break;
+    //        }
+    //    }
 
-    public class CalculatorUsageData()
-    {
-        public int Usage;
-    }
+    //    foreach (string calculations in previousCalculations)
+    //    {
+    //        Console.WriteLine(calculations);
+    //    }
+    //    Console.ReadLine();
+    //    return result;
+    //}
+
+    //public class JSONArray
+    //{
+    //    public double Operand1;
+    //    public double Operand2;
+    //    public string OperationType;
+    //    public double Result;
+    //}
+
+    //public class CalculatorUsageData()
+    //{
+    //    public List<JSONArray> Operations;
+    //    public int Usage;
+    //}
 }
 

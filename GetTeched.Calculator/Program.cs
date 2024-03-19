@@ -13,6 +13,7 @@
  * Add extra calculations: Square Root, Taking the Power, 10x, Trigonometry functions.
  */
 using CalculatorLibrary;
+using System.Text.Json.Nodes;
 using System.Text.RegularExpressions;
 namespace CalculatorProgram;
 
@@ -22,6 +23,7 @@ class Program
     {
         bool endApplication = false;
         Calculator calculator = new();
+        JsonParse jsonParse = new();
 
         Console.WriteLine("Console Calculator in C#\r");
         Console.WriteLine("------------------------\n");
@@ -87,7 +89,19 @@ class Program
             Console.WriteLine("------------------------\n");
 
             Console.Write("Press 'n' and Enter to close the app, or press any other key and Enter to continue: ");
-            if (Console.ReadLine() == "n") endApplication = true;
+            if (Console.ReadLine() == "n")
+            {
+                endApplication = true;
+            }
+            else if(Console.ReadLine() == "x")
+            {
+                calculator.Finish();
+                Console.WriteLine(jsonParse.CalculationHistory().Count());
+                foreach (string test in jsonParse.CalculationHistory())
+                {  Console.WriteLine(test); }
+                jsonParse.CalculationHistory().Clear();
+                Console.WriteLine(jsonParse.CalculationHistory().Count());
+            }
 
             Console.WriteLine("\n");
 
