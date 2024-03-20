@@ -64,78 +64,30 @@ public static class CalculatorEngine
         Console.WriteLine("------------------------\n");
     }
 
-    public static void InitHistoryCalculator(Calculator calculator)
+    public static void InitAdvancedCalculator(Calculator calculator)
     {
-        if (calculations.Any() == false)
-        {
-            Console.WriteLine("You haven't performed any calculation yet.");
-            return;
-        }
-
-        Console.WriteLine("Please select  two numbers, from the following list range, that correspond to the calculation history");
-        PrintCalculations();
-
+        // Declare variables and set to empty.
         string numInput1 = "";
-        string numInput2 = "";
-        double num1;
-        double num2;
         double result = 0;
 
-        Console.Write("Type first number, and then press Enter: ");
+        // Ask the user to type the first number.
+        Console.Write("Type a number, and then press Enter: ");
         numInput1 = Console.ReadLine();
 
-        int cleanNum1 = 0;
-        while (!int.TryParse(numInput1, out cleanNum1))
+        double cleanNum1 = 0;
+        while (!double.TryParse(numInput1, out cleanNum1))
         {
             Console.Write("This is not valid input. Please enter an integer value: ");
             numInput1 = Console.ReadLine();
         }
 
-        while (cleanNum1 < 1 || cleanNum1 > calculations.Count)
-        {
-            Console.Write($"This is not valid input. Please select a number from the following list range (1 - {calculations.Count}): ");
-            numInput1 = Console.ReadLine();
-
-            while (!int.TryParse(numInput1, out cleanNum1))
-            {
-                Console.Write("This is not valid input. Please enter an integer value: ");
-                numInput1 = Console.ReadLine();
-            }
-        }
-
-        num1 = calculations[cleanNum1 - 1].Result;
-
-        Console.Write("Type second number, and then press Enter: ");
-        numInput2 = Console.ReadLine();
-
-        int cleanNum2 = 0;
-        while (!int.TryParse(numInput2, out cleanNum2))
-        {
-            Console.Write("This is not valid input. Please enter an integer value: ");
-            numInput2 = Console.ReadLine();
-        }
-
-        while (cleanNum2 < 1 || cleanNum2 > calculations.Count)
-        {
-            Console.Write($"This is not valid input. Please select a number from the following list range (1 - {calculations.Count}): ");
-            numInput2 = Console.ReadLine();
-
-            while (!int.TryParse(numInput2, out cleanNum2))
-            {
-                Console.Write("This is not valid input. Please enter an integer value: ");
-                numInput2 = Console.ReadLine();
-            }
-        }
-
-        num2 = calculations[cleanNum2 - 1].Result;
-
-        Menu.DisplayCalculationMenu();
+        Menu.DisplayAdvancedCalculationMenu();
 
         string op = Console.ReadLine();
 
         try
         {
-            result = calculator.DoOperation(num1, num2, op);
+            result = calculator.DoAdvancedOperation(cleanNum1, op);
             if (double.IsNaN(result))
             {
                 Console.WriteLine("This operation will result in a mathematical error.\n");
@@ -143,7 +95,7 @@ public static class CalculatorEngine
             else
             {
                 Console.WriteLine("Your result: {0:0.##}\n", result);
-                StoreCalculation(num1, num2, op, result);
+                StoreCalculation(cleanNum1, null, op, result);
             }
 
 
@@ -154,10 +106,164 @@ public static class CalculatorEngine
         }
 
         Console.WriteLine("------------------------\n");
+    }
+
+    public static void InitHistoryCalculator(Calculator calculator)
+    {
+        if (calculations.Any() == false)
+        {
+            Console.WriteLine("You haven't performed any calculation yet.");
+            return;
+        }
+
+        Menu.DisplayCalculationOptions();
+        string choice = Console.ReadLine();
+
+        if (choice == "p")
+        {
+            Console.WriteLine("Please select  two numbers, from the following list range, that correspond to the calculation history");
+            PrintCalculations();
+
+            string numInput1 = "";
+            string numInput2 = "";
+            double num1;
+            double num2;
+            double result = 0;
+
+            Console.Write("Type first number, and then press Enter: ");
+            numInput1 = Console.ReadLine();
+
+            int cleanNum1 = 0;
+            while (!int.TryParse(numInput1, out cleanNum1))
+            {
+                Console.Write("This is not valid input. Please enter an integer value: ");
+                numInput1 = Console.ReadLine();
+            }
+
+            while (cleanNum1 < 1 || cleanNum1 > calculations.Count)
+            {
+                Console.Write($"This is not valid input. Please select a number from the following list range (1 - {calculations.Count}): ");
+                numInput1 = Console.ReadLine();
+
+                while (!int.TryParse(numInput1, out cleanNum1))
+                {
+                    Console.Write("This is not valid input. Please enter an integer value: ");
+                    numInput1 = Console.ReadLine();
+                }
+            }
+
+            num1 = calculations[cleanNum1 - 1].Result;
+
+            Console.Write("Type second number, and then press Enter: ");
+            numInput2 = Console.ReadLine();
+
+            int cleanNum2 = 0;
+            while (!int.TryParse(numInput2, out cleanNum2))
+            {
+                Console.Write("This is not valid input. Please enter an integer value: ");
+                numInput2 = Console.ReadLine();
+            }
+
+            while (cleanNum2 < 1 || cleanNum2 > calculations.Count)
+            {
+                Console.Write($"This is not valid input. Please select a number from the following list range (1 - {calculations.Count}): ");
+                numInput2 = Console.ReadLine();
+
+                while (!int.TryParse(numInput2, out cleanNum2))
+                {
+                    Console.Write("This is not valid input. Please enter an integer value: ");
+                    numInput2 = Console.ReadLine();
+                }
+            }
+
+            num2 = calculations[cleanNum2 - 1].Result;
+
+            Menu.DisplayCalculationMenu();
+
+            string op = Console.ReadLine();
+
+            try
+            {
+                result = calculator.DoOperation(num1, num2, op);
+                if (double.IsNaN(result))
+                {
+                    Console.WriteLine("This operation will result in a mathematical error.\n");
+                }
+                else
+                {
+                    Console.WriteLine("Your result: {0:0.##}\n", result);
+                    StoreCalculation(num1, num2, op, result);
+                }
+
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Oh no! An exception occurred trying to do the math.\n - Details: " + e.Message);
+            }
+        }
+        else if (choice == "a")
+        {
+            Console.WriteLine("Please select one number, from the following list range, that correspond to the calculation history");
+            PrintCalculations();
+
+            string numInput1 = "";
+            double num1;
+            double result = 0;
+
+            Console.Write("Type first number, and then press Enter: ");
+            numInput1 = Console.ReadLine();
+
+            int cleanNum1 = 0;
+            while (!int.TryParse(numInput1, out cleanNum1))
+            {
+                Console.Write("This is not valid input. Please enter an integer value: ");
+                numInput1 = Console.ReadLine();
+            }
+
+            while (cleanNum1 < 1 || cleanNum1 > calculations.Count)
+            {
+                Console.Write($"This is not valid input. Please select a number from the following list range (1 - {calculations.Count}): ");
+                numInput1 = Console.ReadLine();
+
+                while (!int.TryParse(numInput1, out cleanNum1))
+                {
+                    Console.Write("This is not valid input. Please enter an integer value: ");
+                    numInput1 = Console.ReadLine();
+                }
+            }
+
+            num1 = calculations[cleanNum1 - 1].Result;
+            Menu.DisplayAdvancedCalculationMenu();
+
+            string op = Console.ReadLine();
+
+            try
+            {
+                result = calculator.DoAdvancedOperation(num1, op);
+                if (double.IsNaN(result))
+                {
+                    Console.WriteLine("This operation will result in a mathematical error.\n");
+                }
+                else
+                {
+                    Console.WriteLine("Your result: {0:0.##}\n", result);
+                    StoreCalculation(num1, null, op, result);
+                }
+
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Oh no! An exception occurred trying to do the math.\n - Details: " + e.Message);
+            }
+        }        
+
+        Console.WriteLine("------------------------\n");
 
     }
 
-    private static void StoreCalculation(double firstOperand, double secondOperand, string operation, double result)
+    private static void StoreCalculation(double firstOperand, double? secondOperand, string operation, double result)
     {
         calculations.Add(new CalculationModel
         {
@@ -176,7 +282,14 @@ public static class CalculatorEngine
         {
             foreach (var calculation in calculations)
             {
-                Console.WriteLine($"{index}) {calculation.FirstOperand} {calculation.Operation} {calculation.SecondOperand} = {calculation.Result} ");
+                if (calculation.SecondOperand == null)
+                {
+                    Console.WriteLine($"{index}) {calculation.Operation}({calculation.FirstOperand}) = {calculation.Result} ");
+                }
+                else
+                {
+                    Console.WriteLine($"{index}) {calculation.FirstOperand} {calculation.Operation} {calculation.SecondOperand} = {calculation.Result} ");
+                }                
                 index++;
             }
         }

@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics;
 using Newtonsoft.Json;
+using static System.Math;
 
 namespace CalculatorLibrary;
 
@@ -51,6 +52,53 @@ public class Calculator
                     result = num1 / num2;
                 }
                 writer.WriteValue("Divide");
+                break;
+            case "^":
+                result = Pow(num1, num2);
+                writer.WriteValue("Pow");
+                break;
+            // Return text for an incorrect option entry.
+            default:
+                break;
+        }
+        writer.WritePropertyName("Result");
+        writer.WriteValue(result);
+        writer.WriteEndObject();
+
+        calculatorCount++;
+
+        return result;
+    }
+
+    public double DoAdvancedOperation(double operand, string op)
+    {
+        double result = double.NaN;
+        writer.WriteStartObject();
+        writer.WritePropertyName("Operand1");
+        writer.WriteValue(operand);
+        writer.WritePropertyName("Operation");
+        // Use a switch statement to do the math.
+        switch (op)
+        {
+            case "sqrt":
+                result = Sqrt(operand); 
+                writer.WriteValue("Sqrt");
+                break;
+            case "10^":
+                result = Pow(10, operand);
+                writer.WriteValue("10^");
+                break;
+            case "sin":
+                result = Sin(operand);
+                writer.WriteValue("Sinus");
+                break;
+            case "cos":
+                result = Cos(operand);
+                writer.WriteValue("CosSinus");
+                break;
+            case "tan":
+                result = Tan(operand);
+                writer.WriteValue("Tangent");
                 break;
             // Return text for an incorrect option entry.
             default:

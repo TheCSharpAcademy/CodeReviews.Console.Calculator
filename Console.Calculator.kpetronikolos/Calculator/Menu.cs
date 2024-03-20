@@ -7,6 +7,7 @@ public static class Menu
         // Wait for the user to respond before closing.
         Console.WriteLine("Choose an option from the following list:");
         Console.WriteLine("\tp - Perform Calculation");
+        Console.WriteLine("\ta - Perform Advanced Calculation");
         Console.WriteLine("\tc - Count the amount of times the calculator was used");
         Console.WriteLine("\tv - View a list of the calculations");
         Console.WriteLine("\td - Delete the list of the calculations");
@@ -22,6 +23,27 @@ public static class Menu
         Console.WriteLine("\t- - Subtract");
         Console.WriteLine("\t* - Multiply");
         Console.WriteLine("\t/ - Divide");
+        Console.WriteLine("\t^ - Pow");
         Console.Write("Your option? ");
+    }
+
+    public static void DisplayAdvancedCalculationMenu()
+    {
+        Console.WriteLine("Choose an operator from the following list:");
+        Console.WriteLine("\tsqrt - Square Root");
+        Console.WriteLine("\t10^ - 10^");
+        Console.WriteLine("\tsin - Sinus");
+        Console.WriteLine("\tcos - CosSinus");
+        Console.WriteLine("\ttan - Tangient");
+        //Console.WriteLine("\ttan - Tangient"); TODO:sftan()
+        Console.Write("Your option? ");
+    }
+
+    public static void DisplayCalculationOptions()
+    {
+        Console.WriteLine("Choose an option from the following list:");
+        Console.WriteLine("\tp - Perform Calculation");
+        Console.WriteLine("\ta - Perform Advanced Calculation");
+        Console.Write("Enter your option: ");
     }
 }

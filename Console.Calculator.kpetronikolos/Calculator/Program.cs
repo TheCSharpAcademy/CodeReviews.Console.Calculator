@@ -24,6 +24,9 @@ class Program
                 case "p":
                     CalculatorEngine.InitCalculator(calculator);
                     break;
+                case "a":
+                    CalculatorEngine.InitAdvancedCalculator(calculator);
+                    break;
                 case "c":
                     Printer.PrintCalculatorCount(calculator.GetCalculatorCount());
                     break;
