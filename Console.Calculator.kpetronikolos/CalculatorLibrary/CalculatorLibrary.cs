@@ -1,5 +1,4 @@
-﻿using System.Diagnostics;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using static System.Math;
 
 namespace CalculatorLibrary;
@@ -30,7 +29,7 @@ public class Calculator
         writer.WritePropertyName("Operand2");
         writer.WriteValue(num2);
         writer.WritePropertyName("Operation");
-        // Use a switch statement to do the math.
+
         switch (op)
         {
             case "+":
@@ -46,7 +45,6 @@ public class Calculator
                 writer.WriteValue("Multiply");
                 break;
             case "/":
-                // Ask the user to enter a non-zero divisor.
                 if (num2 != 0)
                 {
                     result = num1 / num2;
@@ -57,7 +55,6 @@ public class Calculator
                 result = Pow(num1, num2);
                 writer.WriteValue("Pow");
                 break;
-            // Return text for an incorrect option entry.
             default:
                 break;
         }
@@ -77,7 +74,7 @@ public class Calculator
         writer.WritePropertyName("Operand1");
         writer.WriteValue(operand);
         writer.WritePropertyName("Operation");
-        // Use a switch statement to do the math.
+
         switch (op)
         {
             case "sqrt":
@@ -100,7 +97,6 @@ public class Calculator
                 result = Tan(operand);
                 writer.WriteValue("Tangent");
                 break;
-            // Return text for an incorrect option entry.
             default:
                 break;
         }

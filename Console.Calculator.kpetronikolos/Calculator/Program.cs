@@ -7,7 +7,7 @@ class Program
     static void Main(string[] args)
     {
         bool endApp = false;
-        // Display title as the C# console calculator app.
+
         Console.WriteLine("Console Calculator in C#\r");
         Console.WriteLine("------------------------\n");
 
@@ -48,9 +48,9 @@ class Program
                     break;
             }
 
-            Console.WriteLine("\n"); // Friendly linespacing.
+            Console.WriteLine("\n");
         }
-        // Add call to close the JSON writer before return
+
         calculator.Finish();
         return;
     }
