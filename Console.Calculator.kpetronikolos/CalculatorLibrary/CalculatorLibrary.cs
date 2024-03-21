@@ -20,7 +20,7 @@ public class Calculator
         writer.WriteStartArray();
     }
 
-    public double DoOperation(double num1, double num2, string op)
+    public double DoOperation(double num1, double? num2, string op)
     {
         double result = double.NaN; // Default value is "not-a-number" if an operation, such as division, could result in an error.
         writer.WriteStartObject();
@@ -33,68 +33,46 @@ public class Calculator
         switch (op)
         {
             case "+":
-                result = num1 + num2;
+                result = (double)(num1 + num2);
                 writer.WriteValue("Add");
                 break;
             case "-":
-                result = num1 - num2;
+                result = (double)(num1 - num2);
                 writer.WriteValue("Subtract");
                 break;
             case "*":
-                result = num1 * num2;
+                result = (double)(num1 * num2);
                 writer.WriteValue("Multiply");
                 break;
             case "/":
                 if (num2 != 0)
                 {
-                    result = num1 / num2;
+                    result = (double)(num1 / num2);
                 }
                 writer.WriteValue("Divide");
                 break;
             case "^":
-                result = Pow(num1, num2);
+                result = Pow(num1, (double)num2);
                 writer.WriteValue("Pow");
                 break;
-            default:
-                break;
-        }
-        writer.WritePropertyName("Result");
-        writer.WriteValue(result);
-        writer.WriteEndObject();
-
-        calculatorCount++;
-
-        return result;
-    }
-
-    public double DoAdvancedOperation(double operand, string op)
-    {
-        double result = double.NaN;
-        writer.WriteStartObject();
-        writer.WritePropertyName("Operand1");
-        writer.WriteValue(operand);
-        writer.WritePropertyName("Operation");
-
-        switch (op)
-        {
             case "sqrt":
-                result = Sqrt(operand); 
+                result = Sqrt(num1);
                 writer.WriteValue("Sqrt");
                 break;
             case "10^":
-                result = Pow(10, operand);
+                result = Pow(10, num1);
                 writer.WriteValue("10^");
                 break;
             case "sin":
-                result = Sin(operand);
+                result = Sin(num1);
                 writer.WriteValue("Sinus");
                 break;
             case "cos":
-                result = Cos(operand);
+                result = Cos(num1);
                 writer.WriteValue("CosSinus");
                 break;
             case "tan":
-                result = Tan(operand);
+                result = Tan(num1);
                 writer.WriteValue("Tangent");
                 break;
             default:
@@ -107,7 +85,7 @@ public class Calculator
         calculatorCount++;
 
         return result;
-    }
+    }    
 
     public void Finish()
     {

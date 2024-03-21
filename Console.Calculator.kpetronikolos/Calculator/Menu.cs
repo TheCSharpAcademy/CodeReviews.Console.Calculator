@@ -1,8 +1,52 @@
-﻿namespace CalculatorProgram;
+﻿using CalculatorLibrary;
+
+namespace CalculatorProgram;
 
 public static class Menu
 {
-    public static void DisplayMainMenu()
+    public static void MainFunctionality(Calculator calculator)
+    {
+        bool endApp = false;
+
+        while (!endApp)
+        {
+            Menu.DisplayMainMenu();
+
+            string selection = Console.ReadLine();
+
+            switch (selection.Trim().ToLower())
+            {
+                case "p":
+                    CalculatorEngine.InitCalculator(calculator);
+                    break;
+                case "a":
+                    CalculatorEngine.InitCalculator(calculator, useSecondNumber: false);
+                    break;
+                case "c":
+                    Printer.PrintCalculatorCount(calculator.GetCalculatorCount());
+                    break;
+                case "v":
+                    CalculatorEngine.PrintCalculations();
+                    break;
+                case "d":
+                    CalculatorEngine.DeleteCalculations();
+                    break;
+                case "h":
+                    CalculatorEngine.InitHistoryCalculator(calculator);
+                    break;
+                case "q":
+                    Console.WriteLine("Thanks for using the calculator. \nExiting ...");
+                    endApp = true;
+                    break;
+                default:
+                    Console.WriteLine("Invalid input. Please try again.\n");
+                    break;
+            }
+
+            Console.WriteLine("\n");
+        }
+    }
+    private static void DisplayMainMenu()
     {
         Console.WriteLine("Choose an option from the following list:");
         Console.WriteLine("\tp - Perform Calculation");
@@ -43,6 +87,7 @@ public static class Menu
         Console.WriteLine("Choose an option from the following list:");
         Console.WriteLine("\tp - Perform Calculation");
         Console.WriteLine("\ta - Perform Advanced Calculation");
+        Console.WriteLine("\tAny other key to go back");
         Console.Write("Enter your option: ");
     }
 }
