@@ -8,7 +8,7 @@ public class Calculator
     {
         JsonParse jsonParse = new();
 
-        calculatorUsage = jsonParse.GetCalculatorUsageStats();
+        //calculatorUsage = jsonParse.GetCalculatorUsageStats();
         StreamWriter logFile = File.CreateText("calculator.json");
         logFile.AutoFlush = true;
         writer = new JsonTextWriter(logFile);
