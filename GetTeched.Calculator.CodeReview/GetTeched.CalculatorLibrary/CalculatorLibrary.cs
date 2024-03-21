@@ -8,14 +8,14 @@ public class Calculator
     {
         JsonParse jsonParse = new();
 
-        //calculatorUsage = jsonParse.GetCalculatorUsageStats();
-        StreamWriter logFile = File.CreateText("calculator.json");
-        logFile.AutoFlush = true;
-        writer = new JsonTextWriter(logFile);
-        writer.Formatting = Formatting.Indented;
-        writer.WriteStartObject();
-        writer.WritePropertyName("Operations");
-        writer.WriteStartArray();
+        calculatorUsage = jsonParse.GetCalculatorUsageStats();
+        //StreamWriter logFile = File.CreateText("calculator.json");
+        //logFile.AutoFlush = true;
+        //writer = new JsonTextWriter(logFile);
+        //writer.Formatting = Formatting.Indented;
+        //writer.WriteStartObject();
+        //writer.WritePropertyName("Operations");
+        //writer.WriteStartArray();
     }
     public double DoOperation(double firstNumber, double secondNumber, string operation)
     {
@@ -59,6 +59,17 @@ public class Calculator
         writer.WriteValue(result);
         writer.WriteEndObject();
         return result;
+    }
+
+    public void Start()
+    {
+        StreamWriter logFile = File.CreateText("calculator.json");
+        logFile.AutoFlush = true;
+        writer = new JsonTextWriter(logFile);
+        writer.Formatting = Formatting.Indented;
+        writer.WriteStartObject();
+        writer.WritePropertyName("Operations");
+        writer.WriteStartArray();
     }
 
     public void Finish()

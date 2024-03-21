@@ -7,9 +7,9 @@ internal class CalculatorData
     
     internal void CalculatorHistory()
     {
-        CalculatorMenu claculatorMenu = new();
+        //CalculatorMenu claculatorMenu = new();
         JsonParse jsonParse = new();
-        claculatorMenu.RecordResultsJSON();
+        //claculatorMenu.RecordResultsJSON();
 
         foreach (string test in jsonParse.CalculationHistory())
         { 
