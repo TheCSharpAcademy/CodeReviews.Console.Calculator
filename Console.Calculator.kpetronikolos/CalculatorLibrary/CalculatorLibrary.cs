@@ -23,64 +23,58 @@ public class Calculator
     public double DoOperation(double num1, double? num2, string op)
     {
         double result = double.NaN; // Default value is "not-a-number" if an operation, such as division, could result in an error.
-        writer.WriteStartObject();
-        writer.WritePropertyName("Operand1");
-        writer.WriteValue(num1);
-        writer.WritePropertyName("Operand2");
-        writer.WriteValue(num2);
-        writer.WritePropertyName("Operation");
+        string operation;
 
         switch (op)
         {
             case "+":
                 result = (double)(num1 + num2);
-                writer.WriteValue("Add");
+                operation = "Add";
                 break;
             case "-":
                 result = (double)(num1 - num2);
-                writer.WriteValue("Subtract");
+                operation = "Subtract";
                 break;
             case "*":
                 result = (double)(num1 * num2);
-                writer.WriteValue("Multiply");
+                operation = "Multiply";
                 break;
             case "/":
                 if (num2 != 0)
                 {
                     result = (double)(num1 / num2);
                 }
-                writer.WriteValue("Divide");
+                operation = "Divide";
                 break;
             case "^":
                 result = Pow(num1, (double)num2);
-                writer.WriteValue("Pow");
+                operation = "Pow";
                 break;
             case "sqrt":
                 result = Sqrt(num1);
-                writer.WriteValue("Sqrt");
+                operation = "Sqrt";
                 break;
             case "10^":
                 result = Pow(10, num1);
-                writer.WriteValue("10^");
+                operation = "10^";
                 break;
             case "sin":
                 result = Sin(num1);
-                writer.WriteValue("Sinus");
+                operation = "Sinus";
                 break;
             case "cos":
                 result = Cos(num1);
-                writer.WriteValue("CosSinus");
+                operation = "CosSinus";
                 break;
             case "tan":
                 result = Tan(num1);
-                writer.WriteValue("Tangent");
+                operation = "Tangent";
                 break;
             default:
-                break;
+                return result;
         }
-        writer.WritePropertyName("Result");
-        writer.WriteValue(result);
-        writer.WriteEndObject();
+
+        WriteToFile(num1, num2, result, operation);
 
         calculatorCount++;
 
@@ -97,5 +91,24 @@ public class Calculator
     public int GetCalculatorCount()
     {
         return calculatorCount;
+    }
+
+    private void WriteToFile(double num1, double? num2, double result, string operation)
+    {
+        writer.WriteStartObject();
+
+        writer.WritePropertyName("Operand1");
+        writer.WriteValue(num1);
+
+        writer.WritePropertyName("Operand2");
+        writer.WriteValue(num2);
+
+        writer.WritePropertyName("Operation");
+        writer.WriteValue(operation);
+
+        writer.WritePropertyName("Result");
+        writer.WriteValue(result);
+
+        writer.WriteEndObject();
     }
 }
