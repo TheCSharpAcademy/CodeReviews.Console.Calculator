@@ -62,11 +62,15 @@ public class Calculator
     }
     public void Finish()
     {
-            writer.WriteEndArray();
-            writer.WritePropertyName("Usage");
-            writer.WriteValue(calculatorUsage);
-            writer.WriteEndObject();
-            writer.Close();       
+        //JsonParse jsonParse = new();
+
+        writer.WriteEndArray();
+        writer.WritePropertyName("Usage");
+        writer.WriteValue(calculatorUsage);
+        writer.WriteEndObject();
+        writer.Close();
+
+        //jsonParse.CalculationHistory();
     }
     public void Start()
     {

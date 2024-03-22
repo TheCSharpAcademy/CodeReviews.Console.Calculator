@@ -6,6 +6,7 @@ namespace CalculatorProgram;
 internal class CalculatorMenu
 {
     Calculator calculator = new();
+    List<string> history = new List<string>();
     internal double[] InputValues()
     {
         double[] numbers = new double[2];
@@ -66,7 +67,7 @@ internal class CalculatorMenu
         else if (Regex.IsMatch(operation, "l"))
         {
             calculator.Finish();
-            calculatorData.CalculatorHistory();
+            history = calculatorData.CalculatorHistory();
             calculator.Start();
         }
         else if (Regex.IsMatch(operation, "u"))

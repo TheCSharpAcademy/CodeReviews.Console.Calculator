@@ -33,8 +33,12 @@ class Program
             {
                 endApplication = calculatorMenu.CalculatorOperation(0, 0, operation);
             }
-            double[] numbers = calculatorMenu.InputValues();
-            endApplication = calculatorMenu.CalculatorOperation(numbers[0], numbers[1], operation);
+            else
+            {
+                double[] numbers = calculatorMenu.InputValues();
+                endApplication = calculatorMenu.CalculatorOperation(numbers[0], numbers[1], operation);
+            }
+            
         }
         return;
     }
