@@ -5,6 +5,7 @@ namespace CalculatorProgram;
 
 internal class CalculatorMenu
 {
+    Calculator calculator = new();
     internal double[] InputValues()
     {
         double[] numbers = new double[2];
@@ -36,9 +37,9 @@ internal class CalculatorMenu
         numbers[1] = cleanSecondNumber;
         return numbers;
     }
-
-    internal string GameMenu()
+    internal string CalculatorOptions()
     {
+        Console.Clear();
         Console.WriteLine("Choose an option from the following list:");
         Console.WriteLine("\ta - Add");
         Console.WriteLine("\ts - Subtract");
@@ -49,51 +50,59 @@ internal class CalculatorMenu
         Console.WriteLine("\tl - Previous Results");
         Console.Write("Your option? ");
 
-
         string operation = Console.ReadLine();
 
         return operation;
     }
-
-    //internal void GameOperation(double firstNumber, double secondNumber, string operation)
-    //{
-    //    CalculatorData calculatorData = new();
-    //    Calculator calculator = new();
-    //    double result = 0;
-    //    if (operation == null || !Regex.IsMatch(operation, "[a|s|m|d|l]"))
-    //    {
-    //        Console.WriteLine("Error: Unrecognized input.");
-    //    }
-    //    else if (Regex.IsMatch(operation, "l"))
-    //    {
-    //        calculatorData.CalculatorHistory();
-    //    }
-    //    else
-    //    {
-    //        try
-    //        {
-    //            result = calculator.DoOperation(firstNumber, secondNumber, operation);
-    //            if (double.IsNaN(result))
-    //            {
-    //                Console.WriteLine("This operation will result in a mathematical error.\n");
-    //            }
-    //            else
-    //            {
-    //                Console.WriteLine("Your reslut: {0:0.##}\n", result);
-    //            }
-    //        }
-    //        catch (Exception e)
-    //        {
-    //            Console.WriteLine("Oh no! An exception occurred trying to do the math.\n - Details: " + e.Message);
-    //        }
-    //    }
-    //}
-
-    //Need to try not call Calculator more than needed should only be called in Program.cs
-    internal void RecordResultsJSON()
+    internal bool CalculatorOperation(double firstNumber, double secondNumber, string operation)
     {
-        Calculator calculator = new();
-        calculator.Finish();
-    }
+        CalculatorData calculatorData = new();
 
+        double result = 0;
+        if (operation == null || !Regex.IsMatch(operation, "[a|s|m|d|l|u]"))
+        {
+            Console.WriteLine("Error: Unrecognized input.");
+        }
+        else if (Regex.IsMatch(operation, "l"))
+        {
+            calculator.Finish();
+            calculatorData.CalculatorHistory();
+            calculator.Start();
+        }
+        else if (Regex.IsMatch(operation, "u"))
+        {
+            calculator.Finish();
+            calculatorData.CalculatorStatistics();
+            calculator.Start();
+        }
+        else
+        {
+            try
+            {
+                result = calculator.DoOperation(firstNumber, secondNumber, operation);
+                if (double.IsNaN(result))
+                {
+                    Console.WriteLine("This operation will result in a mathematical error.\n");
+                }
+                else
+                {
+                    Console.WriteLine("Your reslut: {0:0.##}\n", result);
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Oh no! An exception occurred trying to do the math.\n - Details: " + e.Message);
+            }
+        }
+        Console.WriteLine("------------------------\n");
+
+        Console.Write("Press 'n' and Enter to close the app, or press any other key and Enter to continue: ");
+        if (Console.ReadLine() == "n")
+        {
+            calculator.Finish();
+            return true;
+        }
+        Console.WriteLine("\n");
+        return false;
+    }
 }

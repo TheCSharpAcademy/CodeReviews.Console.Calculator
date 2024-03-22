@@ -4,13 +4,9 @@ namespace CalculatorProgram;
 
 internal class CalculatorData
 {
-    
+    JsonParse jsonParse = new();
     internal void CalculatorHistory()
     {
-        //CalculatorMenu claculatorMenu = new();
-        JsonParse jsonParse = new();
-        //claculatorMenu.RecordResultsJSON();
-
         foreach (string test in jsonParse.CalculationHistory())
         { 
             Console.WriteLine(test); 
@@ -22,5 +18,10 @@ internal class CalculatorData
         {
             Console.WriteLine("Please try again.");
         }
+    }
+    internal void CalculatorStatistics()
+    {
+        int calculatorUsage = jsonParse.GetCalculatorUsageStats();
+        Console.WriteLine($"This calculator has been used {calculatorUsage} of times");
     }
 }

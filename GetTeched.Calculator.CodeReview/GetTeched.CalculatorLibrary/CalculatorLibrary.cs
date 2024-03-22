@@ -9,13 +9,13 @@ public class Calculator
         JsonParse jsonParse = new();
 
         calculatorUsage = jsonParse.GetCalculatorUsageStats();
-        //StreamWriter logFile = File.CreateText("calculator.json");
-        //logFile.AutoFlush = true;
-        //writer = new JsonTextWriter(logFile);
-        //writer.Formatting = Formatting.Indented;
-        //writer.WriteStartObject();
-        //writer.WritePropertyName("Operations");
-        //writer.WriteStartArray();
+        StreamWriter logFile = File.CreateText("calculator.json");
+        logFile.AutoFlush = true;
+        writer = new JsonTextWriter(logFile);
+        writer.Formatting = Formatting.Indented;
+        writer.WriteStartObject();
+        writer.WritePropertyName("Operations");
+        writer.WriteStartArray();
     }
     public double DoOperation(double firstNumber, double secondNumber, string operation)
     {
@@ -60,7 +60,14 @@ public class Calculator
         writer.WriteEndObject();
         return result;
     }
-
+    public void Finish()
+    {
+            writer.WriteEndArray();
+            writer.WritePropertyName("Usage");
+            writer.WriteValue(calculatorUsage);
+            writer.WriteEndObject();
+            writer.Close();       
+    }
     public void Start()
     {
         StreamWriter logFile = File.CreateText("calculator.json");
@@ -70,66 +77,6 @@ public class Calculator
         writer.WriteStartObject();
         writer.WritePropertyName("Operations");
         writer.WriteStartArray();
-    }
-
-    public void Finish()
-    {
-
-        writer.WriteEndArray();
-        writer.WritePropertyName("Usage");
-        writer.WriteValue(calculatorUsage);
-        writer.WriteEndObject();
-        writer.Close();
-    }
-
-    //public int GetCalculatorUsageStats()
-    //{
-    //    int result = 0;
-    //    List<string> previousCalculations = new();
-
-    //    string path = Path.Combine(Environment.CurrentDirectory, "calculator.json");
-    //    string json = File.ReadAllText(path);
-    //    CalculatorUsageData _calculatorUsage = JsonConvert.DeserializeObject<CalculatorUsageData>(json);
-    //    result = Int32.Parse(_calculatorUsage.Usage.ToString());
-    //    foreach (var operations in _calculatorUsage.Operations)
-    //    {
-    //        switch (operations.OperationType)
-    //        {
-    //            case "Add":
-    //                previousCalculations.Add($"{operations.Operand1} + {operations.Operand2} = {operations.Result}");
-    //                break;
-    //            case "Subtract":
-    //                previousCalculations.Add($"{operations.Operand1} - {operations.Operand2} = {operations.Result}");
-    //                break;
-    //            case "Multiply":
-    //                previousCalculations.Add($"{operations.Operand1} X {operations.Operand2} = {operations.Result}");
-    //                break;
-    //            case "Divide":
-    //                previousCalculations.Add($"{operations.Operand1} / {operations.Operand2} = {operations.Result}");
-    //                break;
-    //        }
-    //    }
-
-    //    foreach (string calculations in previousCalculations)
-    //    {
-    //        Console.WriteLine(calculations);
-    //    }
-    //    Console.ReadLine();
-    //    return result;
-    //}
-
-    //public class JSONArray
-    //{
-    //    public double Operand1;
-    //    public double Operand2;
-    //    public string OperationType;
-    //    public double Result;
-    //}
-
-    //public class CalculatorUsageData()
-    //{
-    //    public List<JSONArray> Operations;
-    //    public int Usage;
-    //}
+    }   
 }
 
