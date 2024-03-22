@@ -60,11 +60,11 @@ public class Calculator
                 break;
             case "sin":
                 result = Sin(num1);
-                operation = "Sinus";
+                operation = "Sine";
                 break;
             case "cos":
                 result = Cos(num1);
-                operation = "CosSinus";
+                operation = "Cosine";
                 break;
             case "tan":
                 result = Tan(num1);

@@ -65,23 +65,22 @@ public static class Menu
     public static void DisplayCalculationMenu()
     {
         Console.WriteLine("Choose an operator from the following list:");
-        Console.WriteLine("\t+ - Add");
-        Console.WriteLine("\t- - Subtract");
-        Console.WriteLine("\t* - Multiply");
-        Console.WriteLine("\t/ - Divide");
-        Console.WriteLine("\t^ - Pow");
+        Console.WriteLine("\t+ -> Add");
+        Console.WriteLine("\t- -> Subtract");
+        Console.WriteLine("\t* -> Multiply");
+        Console.WriteLine("\t/ -> Divide");
+        Console.WriteLine("\t^ -> Pow");
         Console.Write("Your option? ");
     }
 
     public static void DisplayAdvancedCalculationMenu()
     {
         Console.WriteLine("Choose an operator from the following list:");
-        Console.WriteLine("\tsqrt - Square Root");
-        Console.WriteLine("\t10^ - 10^");
-        Console.WriteLine("\tsin - Sinus");
-        Console.WriteLine("\tcos - CosSinus");
-        Console.WriteLine("\ttan - Tangient");
-        //Console.WriteLine("\ttan - Tangient"); TODO:sftan()
+        Console.WriteLine("\tsqrt -> Square Root");
+        Console.WriteLine("\t10^ -> 10^");
+        Console.WriteLine("\tsin -> Sine");
+        Console.WriteLine("\tcos -> Cosine");
+        Console.WriteLine("\ttan -> Tangent");
         Console.Write("Your option? ");
     }
 
