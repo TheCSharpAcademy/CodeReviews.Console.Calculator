@@ -12,11 +12,11 @@ public static class CalculatorEngine
         
         double? num2 = null;
 
-        double num1 = UserInputHandler.AskForNumber();
+        double num1 = UserInputHandler.AskForNumber("Type first number");
 
         if (useSecondNumber == true)
         {
-            num2 = UserInputHandler.AskForNumber();
+            num2 = UserInputHandler.AskForNumber("Type second number");
             Menu.DisplayCalculationMenu();
         }
         else
@@ -25,6 +25,8 @@ public static class CalculatorEngine
         }
 
         ResultHander(num1, num2, calculator);
+
+        Printer.AskToContinueToMenu();
     }    
 
     public static void InitHistoryCalculator(Calculator calculator)
@@ -32,6 +34,7 @@ public static class CalculatorEngine
         if (calculations.Any() == false)
         {
             Console.WriteLine("You haven't performed any calculation yet.");
+            Printer.AskToContinueToMenu();
             return;
         }
 
@@ -40,6 +43,8 @@ public static class CalculatorEngine
 
         Menu.DisplayCalculationOptions();
         string choice = Console.ReadLine();
+
+        Console.Clear();
 
         if (choice != "p" && choice != "a")
         {
@@ -50,13 +55,13 @@ public static class CalculatorEngine
 
         if (choice == "p")
         {
-            Console.WriteLine("Please select two numbers, from the following list range, that correspond to the calculation history");                        
+            Console.WriteLine("\nPlease select two numbers, from the index range above, that correspond to the calculation result.");                        
 
-            int index1 = UserInputHandler.AskForInt();
+            int index1 = UserInputHandler.AskForInt("Enter first index");
             index1 = UserInputHandler.GetIntAfterOutOfBoundsCheck(index1, calculations.Count);
             num1 = calculations[index1 - 1].Result;
 
-            int index2 = UserInputHandler.AskForInt();
+            int index2 = UserInputHandler.AskForInt("Enter second index");
             index2 = UserInputHandler.GetIntAfterOutOfBoundsCheck(index2, calculations.Count);
             num2 = calculations[index2 - 1].Result;
 
@@ -65,9 +70,9 @@ public static class CalculatorEngine
         }
         else if (choice == "a")
         {
-            Console.WriteLine("Please select one number, from the following list range, that correspond to the calculation history");
+            Console.WriteLine("\nPlease select one number, from the index range above, that correspond to the calculation result.");
 
-            int index1 = UserInputHandler.AskForInt();
+            int index1 = UserInputHandler.AskForInt("Enter first index");
             index1 = UserInputHandler.GetIntAfterOutOfBoundsCheck(index1, calculations.Count);
             num1 = calculations[index1 - 1].Result;
 
@@ -75,6 +80,8 @@ public static class CalculatorEngine
         }
 
         ResultHander(num1, num2, calculator);
+
+        Printer.AskToContinueToMenu();
     }    
 
     private static void StoreCalculation(double firstOperand, double? secondOperand, string operation, double result)
@@ -98,6 +105,8 @@ public static class CalculatorEngine
 
         int index = 1;
 
+        Console.WriteLine("Calculations History\n");
+
         foreach (var calculation in calculations)
         {
             if (calculation.SecondOperand == null)
@@ -110,12 +119,15 @@ public static class CalculatorEngine
             }
             index++;
         }
+        Console.WriteLine();
     }
 
     public static void DeleteCalculations()
     {
         calculations.Clear();
         Console.WriteLine("All the Calculations have been deleted.");
+
+        Printer.AskToContinueToMenu();
     }
 
     private static void ResultHander(double num1, double? num2, Calculator calculator)
@@ -135,8 +147,6 @@ public static class CalculatorEngine
         Printer.PrintResult(result);
 
         StoreCalculation(num1, num2, operation, result);
-
-        Console.WriteLine("------------------------\n");
     }
 
     private static double GetResult(double firstNumber, double? secondNumber, string operation, Calculator calculator)

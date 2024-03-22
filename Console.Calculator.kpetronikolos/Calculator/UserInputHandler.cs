@@ -1,11 +1,10 @@
-﻿
-namespace CalculatorProgram;
+﻿namespace CalculatorProgram;
 
 public static class UserInputHandler
 {
-    public static double AskForNumber()
+    public static double AskForNumber(string message)
     {
-        Console.Write("Type a number, and then press Enter: ");
+        Console.Write($"{message}. Press Enter: ");
         string numInput = Console.ReadLine();
 
         double output = 0;
@@ -18,10 +17,12 @@ public static class UserInputHandler
         return output;
     }
 
-    public static int AskForInt()
+    public static int AskForInt(string message)
     {
-        Console.Write("Type number, and then press Enter: ");
+        Console.Write($"{message}. Press Enter: ");
         string numInput = Console.ReadLine();
+
+        Console.WriteLine();
 
         int output = 0;
         while (!int.TryParse(numInput, out output))
@@ -37,8 +38,17 @@ public static class UserInputHandler
     {
         while (index < 1 || index > calculationsCount)
         {
-            Console.Write($"This is not valid input. Please select a number from the following list range (1 - {calculationsCount}): ");
-            index = AskForInt();
+            if (calculationsCount == 1)
+            {
+                Console.Write($"This is not valid input. There is only one calculation, so kindly choose the following index: 1 ");
+            }
+            else
+            {
+                Console.Write($"This is not valid input. Please select a number from the following index range: 1 - {calculationsCount} ");
+            }
+            
+            Console.WriteLine();
+            index = AskForInt("Re-enter index");
         }
 
         return index;

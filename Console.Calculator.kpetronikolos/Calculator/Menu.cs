@@ -8,11 +8,15 @@ public static class Menu
     {
         bool endApp = false;
 
+        Printer.AskToContinueToMenu();
+
         while (!endApp)
         {
-            Menu.DisplayMainMenu();
+            DisplayMainMenu();
 
             string selection = Console.ReadLine();
+
+            Console.Clear();
 
             switch (selection.Trim().ToLower())
             {
@@ -27,6 +31,7 @@ public static class Menu
                     break;
                 case "v":
                     CalculatorEngine.PrintCalculations();
+                    Printer.AskToContinueToMenu();
                     break;
                 case "d":
                     CalculatorEngine.DeleteCalculations();
@@ -42,8 +47,6 @@ public static class Menu
                     Console.WriteLine("Invalid input. Please try again.\n");
                     break;
             }
-
-            Console.WriteLine("\n");
         }
     }
     private static void DisplayMainMenu()
