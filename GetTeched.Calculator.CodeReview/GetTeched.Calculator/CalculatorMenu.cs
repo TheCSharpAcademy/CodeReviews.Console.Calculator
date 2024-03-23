@@ -40,6 +40,9 @@ internal class CalculatorMenu
     }
     internal string CalculatorOptions()
     {
+        CalculatorData calculatorData = new();
+        string? operation;
+
         Console.Clear();
         Console.WriteLine("Choose an option from the following list:");
         Console.WriteLine("\ta - Add");
@@ -49,52 +52,76 @@ internal class CalculatorMenu
         Console.WriteLine("-----Calculator Options-----");
         Console.WriteLine("\tu - Statistics");
         Console.WriteLine("\tl - Previous Results");
-        Console.Write("Your option? ");
+        Console.Write("Your option? ");   
 
-        string operation = Console.ReadLine();
+        while(true)
+        {
+            operation = Console.ReadLine();
+            if (operation == null || !Regex.IsMatch(operation, "[a|s|m|d|l|u]"))
+            {
+                Console.WriteLine("Error: Unrecognized input.");
+            }
+            else if (Regex.IsMatch(operation, "l"))
+            {
+                calculator.Finish();
+
+                Console.Clear();
+                history.AddRange(calculatorData.CalculatorHistory());
+                Console.WriteLine("Here are all previous calculations performed by this calculator: \n");
+                foreach (string calculationHistory in history)
+                {
+                    Console.WriteLine(calculationHistory);
+                }
+                Console.WriteLine("Would you like to clear this list? Type Yes to clear list or any other key to continue.");
+                string? userInput = Console.ReadLine().ToLower().Trim();
+                if (userInput != null)
+                {
+                    if (userInput == "yes")
+                    {
+                        history.Clear();
+                        Console.WriteLine("Calculation history has been cleared. Press any key to return to the Main Menu.");
+                    }
+                    Console.WriteLine("Please try again.");
+                }
+
+                calculator.Start();
+                break;
+            }
+            else if (Regex.IsMatch(operation, "u"))
+            {
+                calculator.Finish();
+                history.AddRange(calculatorData.CalculatorHistory());
+                calculatorData.CalculatorStatistics();
+                calculator.Start();
+                break;
+            }
+            else break;
+
+        }
 
         return operation;
     }
     internal bool CalculatorOperation(double firstNumber, double secondNumber, string operation)
     {
-        CalculatorData calculatorData = new();
-
         double result = 0;
-        if (operation == null || !Regex.IsMatch(operation, "[a|s|m|d|l|u]"))
+
+        try
         {
-            Console.WriteLine("Error: Unrecognized input.");
-        }
-        else if (Regex.IsMatch(operation, "l"))
-        {
-            calculator.Finish();
-            history = calculatorData.CalculatorHistory();
-            calculator.Start();
-        }
-        else if (Regex.IsMatch(operation, "u"))
-        {
-            calculator.Finish();
-            calculatorData.CalculatorStatistics();
-            calculator.Start();
-        }
-        else
-        {
-            try
+            result = calculator.DoOperation(firstNumber, secondNumber, operation);
+            if (double.IsNaN(result))
             {
-                result = calculator.DoOperation(firstNumber, secondNumber, operation);
-                if (double.IsNaN(result))
-                {
-                    Console.WriteLine("This operation will result in a mathematical error.\n");
-                }
-                else
-                {
-                    Console.WriteLine("Your reslut: {0:0.##}\n", result);
-                }
+                Console.WriteLine("This operation will result in a mathematical error.\n");
             }
-            catch (Exception e)
+            else
             {
-                Console.WriteLine("Oh no! An exception occurred trying to do the math.\n - Details: " + e.Message);
+                Console.WriteLine("Your reslut: {0:0.##}\n", result);
             }
         }
+        catch (Exception e)
+        {
+            Console.WriteLine("Oh no! An exception occurred trying to do the math.\n - Details: " + e.Message);
+        }
+
         Console.WriteLine("------------------------\n");
 
         Console.Write("Press 'n' and Enter to close the app, or press any other key and Enter to continue: ");

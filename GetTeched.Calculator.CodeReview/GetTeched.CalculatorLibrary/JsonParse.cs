@@ -15,6 +15,12 @@ public class JsonParse
         public List<JSONArray> Operations;
         public int Usage;
     }
+    public class Caclulations()
+    {
+        public double firstNumber { get; set; }
+        public double secondNumber { get; set; }
+        public double result { get; set; }
+    }
     public int GetCalculatorUsageStats()
     {
         int result = 0; ;
