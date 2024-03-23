@@ -36,6 +36,15 @@ internal class CalculatorData
                 case "Power of X":
                     previousCalculations.Add($"{calculation.firstNumber}^{calculation.secondNumber} = {calculation.result}");
                     break;
+                case "Sin":
+                    previousCalculations.Add($"The sine of {calculation.firstNumber} degrees is {calculation.result}");
+                    break;
+                case "Cos":
+                    previousCalculations.Add($"The cosine of {calculation.firstNumber} degrees is {calculation.result}");
+                    break;
+                case "Tan":
+                    previousCalculations.Add($"The tangent of {calculation.firstNumber} degrees is {calculation.result}");
+                    break;
             }
         }
         return previousCalculations;

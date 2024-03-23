@@ -93,7 +93,7 @@ internal class CalculatorMenu
 
         try
         {
-            if(operation == "q" || operation == "x")
+            if(Regex.IsMatch(operation, "[q|x|sin|cos|tan]"))
             {
                 result = calculator.AdvanceDoOperation(firstNumber, operation);
             }

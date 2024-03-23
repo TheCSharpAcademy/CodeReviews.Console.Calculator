@@ -33,7 +33,7 @@ class Program
             {
                 endApplication = calculatorMenu.CalculatorOperation(0, 0, operation);
             }
-            else if (Regex.IsMatch(operation, "[q|x]"))
+            else if (Regex.IsMatch(operation, "[q|x|sin|cos|tan]"))
             {
                 double[] numbers = calculatorMenu.InputValues(true);
                 endApplication = calculatorMenu.CalculatorOperation(numbers[0], 0, operation);

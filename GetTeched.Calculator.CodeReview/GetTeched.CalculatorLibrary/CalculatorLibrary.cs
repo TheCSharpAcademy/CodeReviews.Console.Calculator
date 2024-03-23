@@ -69,13 +69,14 @@ public class Calculator
     public double AdvanceDoOperation(double number, string  operation)
     {
         double result = double.NaN;
+        double radians = number * Math.PI / 180;
         writer.WriteStartObject();
         writer.WritePropertyName("Operand1");
         writer.WriteValue(number);
         writer.WritePropertyName("OperationType");
 
         switch (operation)
-        {
+        {      
             case "q":
                 result = Math.Sqrt(number);
                 writer.WriteValue("Square Root");
@@ -84,6 +85,21 @@ public class Calculator
             case "x":
                 result = Math.Pow(number, 10);
                 writer.WriteValue("Power of 10");
+                calculatorUsage += 1;
+                break;
+            case "sin":
+                result = Math.Sin(radians);
+                writer.WriteValue("Sin");
+                calculatorUsage += 1;
+                break;
+            case "cos":
+                result = Math.Cos(radians);
+                writer.WriteValue("Cos");
+                calculatorUsage += 1;
+                break;
+            case "tan":
+                result = Math.Tan(radians);
+                writer.WriteValue("Tan");
                 calculatorUsage += 1;
                 break;
             default:
