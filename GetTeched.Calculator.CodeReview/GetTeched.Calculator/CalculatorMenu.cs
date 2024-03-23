@@ -50,7 +50,7 @@ internal class CalculatorMenu
         while (true)
         {
             operation = Console.ReadLine();
-            if (operation == null || !Regex.IsMatch(operation, "[a|s|m|d|l|u|r]"))
+            if (operation == null || !Regex.IsMatch(operation, "[a|s|m|d|l|u|r|q|p|x|sin|cos|tan]"))
             {
                 Console.WriteLine("Error: Unrecognized input.");
             }
@@ -81,7 +81,14 @@ internal class CalculatorMenu
 
         try
         {
-            result = calculator.DoOperation(firstNumber, secondNumber, operation);
+            if(operation == "q")
+            {
+                result = calculator.SquareRootDoOperation(firstNumber, operation);
+            }
+            else
+            {
+                result = calculator.StandardDoOperation(firstNumber, secondNumber, operation);
+            }
             if (double.IsNaN(result))
             {
                 Console.WriteLine("This operation will result in a mathematical error.\n");
@@ -116,7 +123,13 @@ internal class CalculatorMenu
         Console.WriteLine("\ts - Subtract");
         Console.WriteLine("\tm - Multiply");
         Console.WriteLine("\td - Divide");
-        if(displayOptions == true)
+        Console.WriteLine("\tq - Square Root");
+        Console.WriteLine("\tp - Power of X");
+        Console.WriteLine("\tx - Power of 10");
+        Console.WriteLine("\tsin - Sin");
+        Console.WriteLine("\tcos - Cos");
+        Console.WriteLine("\ttan - Tan");
+        if (displayOptions == true)
         {
             Console.WriteLine("-----Calculator Options-----");
             Console.WriteLine("\tu - Statistics");

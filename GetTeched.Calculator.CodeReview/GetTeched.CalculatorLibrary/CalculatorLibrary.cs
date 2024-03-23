@@ -17,7 +17,7 @@ public class Calculator
         writer.WritePropertyName("Operations");
         writer.WriteStartArray();
     }
-    public double DoOperation(double firstNumber, double secondNumber, string operation)
+    public double StandardDoOperation(double firstNumber, double secondNumber, string operation)
     {
         double result = double.NaN;
         writer.WriteStartObject();
@@ -51,6 +51,30 @@ public class Calculator
                     writer.WriteValue("Divide");
                     calculatorUsage += 1;
                 }
+                break;
+            default:
+                break;
+        }
+        writer.WritePropertyName("Result");
+        writer.WriteValue(result);
+        writer.WriteEndObject();
+        return result;
+    }
+
+    public double SquareRootDoOperation(double number, string  operation)
+    {
+        double result = double.NaN;
+        writer.WriteStartObject();
+        writer.WritePropertyName("Operand1");
+        writer.WriteValue(number);
+        writer.WritePropertyName("OperationType");
+
+        switch (operation)
+        {
+            case "q":
+                result = Math.Sqrt(number);
+                writer.WriteValue("Square Root");
+                calculatorUsage += 1;
                 break;
             default:
                 break;

@@ -27,6 +27,9 @@ internal class CalculatorData
                 case "Divide":
                     previousCalculations.Add($"{calculation.firstNumber} / {calculation.secondNumber} = {calculation.result}");
                     break;
+                case "Square Root":
+                    previousCalculations.Add($"{calculation.result} is the square root of {calculation.firstNumber}");
+                    break;
             }
         }
         return previousCalculations;

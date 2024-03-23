@@ -33,6 +33,11 @@ class Program
             {
                 endApplication = calculatorMenu.CalculatorOperation(0, 0, operation);
             }
+            else if (Regex.IsMatch(operation, "q"))
+            {
+                double[] numbers = calculatorMenu.InputValues();
+                endApplication = calculatorMenu.CalculatorOperation(numbers[0], 0, operation);
+            }
             else
             {
                 double[] numbers = calculatorMenu.InputValues();
