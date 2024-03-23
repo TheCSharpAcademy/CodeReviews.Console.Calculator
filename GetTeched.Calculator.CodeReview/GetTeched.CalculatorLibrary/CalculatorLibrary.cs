@@ -52,6 +52,11 @@ public class Calculator
                     calculatorUsage += 1;
                 }
                 break;
+            case "p":
+                result = Math.Pow(firstNumber, secondNumber);
+                writer.WriteValue("Power of X");
+                calculatorUsage += 1;
+                break;
             default:
                 break;
         }
