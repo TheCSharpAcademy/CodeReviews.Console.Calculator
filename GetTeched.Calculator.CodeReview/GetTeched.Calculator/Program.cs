@@ -33,14 +33,14 @@ class Program
             {
                 endApplication = calculatorMenu.CalculatorOperation(0, 0, operation);
             }
-            else if (Regex.IsMatch(operation, "q"))
+            else if (Regex.IsMatch(operation, "[q|x]"))
             {
-                double[] numbers = calculatorMenu.InputValues();
+                double[] numbers = calculatorMenu.InputValues(true);
                 endApplication = calculatorMenu.CalculatorOperation(numbers[0], 0, operation);
             }
             else
             {
-                double[] numbers = calculatorMenu.InputValues();
+                double[] numbers = calculatorMenu.InputValues(false);
                 endApplication = calculatorMenu.CalculatorOperation(numbers[0], numbers[1], operation);
             }
             

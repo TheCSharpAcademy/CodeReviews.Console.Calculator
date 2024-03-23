@@ -9,7 +9,7 @@ internal class CalculatorMenu
     List<string> history = new List<string>();
     List<double> results = new List<double>();
     CalculatorData calculatorData = new();
-    internal double[] InputValues()
+    internal double[] InputValues(bool singleNumber)
     {
         double[] numbers = new double[2];
 
@@ -19,25 +19,37 @@ internal class CalculatorMenu
 
         Console.WriteLine("Type a number, and then press Enter.");
         firstNumber = Console.ReadLine();
-
-        double cleanFirstNumber = 0;
-        while (!double.TryParse(firstNumber, out cleanFirstNumber))
+        if(singleNumber == false )
         {
-            Console.WriteLine("This is not a vaild input. Please enter an integer value: ");
-            firstNumber = Console.ReadLine();
-        }
+            double cleanFirstNumber = 0;
+            while (!double.TryParse(firstNumber, out cleanFirstNumber))
+            {
+                Console.WriteLine("This is not a vaild input. Please enter an integer value: ");
+                firstNumber = Console.ReadLine();
+            }
 
-        Console.WriteLine("Type a number, and then press Enter.");
-        secondNumber = Console.ReadLine();
-
-        double cleanSecondNumber = 0;
-        while (!double.TryParse(secondNumber, out cleanSecondNumber))
-        {
-            Console.WriteLine("This is not a vaild input. Please enter an integer value: ");
+            Console.WriteLine("Type a number, and then press Enter.");
             secondNumber = Console.ReadLine();
+
+            double cleanSecondNumber = 0;
+            while (!double.TryParse(secondNumber, out cleanSecondNumber))
+            {
+                Console.WriteLine("This is not a vaild input. Please enter an integer value: ");
+                secondNumber = Console.ReadLine();
+            }
+            numbers[0] = cleanFirstNumber;
+            numbers[1] = cleanSecondNumber;
         }
-        numbers[0] = cleanFirstNumber;
-        numbers[1] = cleanSecondNumber;
+        else
+        {
+            double cleanFirstNumber = 0;
+            while (!double.TryParse(firstNumber, out cleanFirstNumber))
+            {
+                Console.WriteLine("This is not a vaild input. Please enter an integer value: ");
+                firstNumber = Console.ReadLine();
+            }
+            numbers[0] = cleanFirstNumber;
+        }
         return numbers;
     }
     internal string CalculatorOptions()
@@ -81,9 +93,9 @@ internal class CalculatorMenu
 
         try
         {
-            if(operation == "q")
+            if(operation == "q" || operation == "x")
             {
-                result = calculator.SquareRootDoOperation(firstNumber, operation);
+                result = calculator.AdvanceDoOperation(firstNumber, operation);
             }
             else
             {

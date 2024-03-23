@@ -30,6 +30,9 @@ internal class CalculatorData
                 case "Square Root":
                     previousCalculations.Add($"{calculation.result} is the square root of {calculation.firstNumber}");
                     break;
+                case "Power of 10":
+                    previousCalculations.Add($"{calculation.result} is the power 10 of {calculation.firstNumber}");
+                    break;
             }
         }
         return previousCalculations;

@@ -61,7 +61,7 @@ public class Calculator
         return result;
     }
 
-    public double SquareRootDoOperation(double number, string  operation)
+    public double AdvanceDoOperation(double number, string  operation)
     {
         double result = double.NaN;
         writer.WriteStartObject();
@@ -74,6 +74,11 @@ public class Calculator
             case "q":
                 result = Math.Sqrt(number);
                 writer.WriteValue("Square Root");
+                calculatorUsage += 1;
+                break;
+            case "x":
+                result = Math.Pow(number, 10);
+                writer.WriteValue("Power of 10");
                 calculatorUsage += 1;
                 break;
             default:
