@@ -31,8 +31,8 @@ public class Calculator
             _data = JsonConvert.DeserializeObject<CalculatorData>(readFile);
             SetOperations();
         }
-        
-        var logFile = File.CreateText("logger.json");
+
+        using var logFile = File.CreateText("logger.json");
         logFile.AutoFlush = true;
     }
     
@@ -100,7 +100,7 @@ public class Calculator
 
     public void Finish()
     {
-        var summaryCount = _usedCount + (_data?.Count ?? 0);
+        var summaryCount = GetUsageCount();
         var outputObject = new
         {
             Count = summaryCount,

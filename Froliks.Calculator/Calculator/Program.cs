@@ -2,10 +2,10 @@
 
 namespace CalculatorProgram;
 
-public class Calculator
+public class Program
 {
     private static CalculatorLibrary.Calculator _calculator = new CalculatorLibrary.Calculator();
-    private static bool usePreviousResult;
+    private static bool _usePreviousResult;
 
     public static void Main(string[] args)
     {
@@ -17,31 +17,34 @@ public class Calculator
         var endApp = false;
         while (!endApp)
         {
+            var operationsCount = _calculator.GetOperationsCount();
+            
             Console.WriteLine("Console Calculator in C#\r");
             Console.WriteLine("\tc - Go to calculator");
 
-            if (_calculator.GetOperationsCount() != 0)
+            if (operationsCount != 0)
             {
                 Console.WriteLine("\tp - Use calculator with previous result");
+                Console.WriteLine("\td - Delete previous calculations");
             }
             
-            Console.WriteLine("\td - Delete previous calculations");
             Console.WriteLine("\te - Exit app");
             Console.Write("Your option? ");
+            
             
             switch (Console.ReadLine())
             {
                 case "c":
                     Console.Clear();
-                    usePreviousResult = false;
+                    _usePreviousResult = false;
                     ShowCalculator();
                     break;
-                case "p" when _calculator.GetOperationsCount() > 0:
+                case "p" when operationsCount > 0:
                     Console.Clear();
-                    usePreviousResult = true;
+                    _usePreviousResult = true;
                     ShowCalculator();
                     break;
-                case "d":
+                case "d" when operationsCount > 0:
                     _calculator.DeleteData();
                     break;
                 case "e":
@@ -63,7 +66,7 @@ public class Calculator
             var usageCount = _calculator.GetUsageCount();
             var cleanNum1 = 0.0;
             
-            if (usePreviousResult)
+            if (_usePreviousResult)
             {
                 cleanNum1 = _calculator.GetNumberFromData();
             }
