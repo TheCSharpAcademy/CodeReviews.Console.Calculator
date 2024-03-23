@@ -74,12 +74,16 @@ internal class CalculatorMenu
                 }
                 Console.WriteLine("Would you like to clear this list? Type Yes to clear list or any other key to continue.");
                 string? userInput = Console.ReadLine().ToLower().Trim();
-                if (userInput != null)
+                while(!String.IsNullOrEmpty(userInput))
                 {
                     if (userInput == "yes")
                     {
                         history.Clear();
                         Console.WriteLine("Calculation history has been cleared. Press any key to return to the Main Menu.");
+                    }
+                    else
+                    {
+                        break;
                     }
                     Console.WriteLine("Please try again.");
                 }
@@ -132,5 +136,10 @@ internal class CalculatorMenu
         }
         Console.WriteLine("\n");
         return false;
+    }
+
+    internal void CalculatorOptionValidation()
+    {
+        //TODO
     }
 }

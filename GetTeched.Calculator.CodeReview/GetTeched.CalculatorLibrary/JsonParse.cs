@@ -15,10 +15,11 @@ public class JsonParse
         public List<JSONArray> Operations;
         public int Usage;
     }
-    public class Caclulations()
+    public class Calculations()
     {
         public double firstNumber { get; set; }
         public double secondNumber { get; set; }
+        public string OperationType {  get; set; }
         public double result { get; set; }
     }
     public int GetCalculatorUsageStats()
@@ -30,9 +31,9 @@ public class JsonParse
         result = root.Usage;
         return result;
     }
-    public List<string> CalculationHistory()
+    public List<Calculations> GetCalculationHistory()
     {
-        List<string> previousCalculations = new();
+        List<Calculations> previousCalculations = new();
 
         string path = Path.Combine(Environment.CurrentDirectory, "calculator.json");
         string json = File.ReadAllText(path);
@@ -40,22 +41,10 @@ public class JsonParse
 
         foreach (var operations in root.Operations)
         {
-            switch (operations.OperationType)
-            {
-                case "Add":
-                    previousCalculations.Add($"{operations.Operand1} + {operations.Operand2} = {operations.Result}");
-                    break;
-                case "Subtract":
-                    previousCalculations.Add($"{operations.Operand1} - {operations.Operand2} = {operations.Result}");
-                    break;
-                case "Multiply":
-                    previousCalculations.Add($"{operations.Operand1} X {operations.Operand2} = {operations.Result}");
-                    break;
-                case "Divide":
-                    previousCalculations.Add($"{operations.Operand1} / {operations.Operand2} = {operations.Result}");
-                    break;
-            }
+            previousCalculations.Add(new Calculations { firstNumber = operations.Operand1, secondNumber = operations.Operand2, OperationType = operations.OperationType, result = operations.Result });
         }
+
+
         return previousCalculations;
     }
 }
