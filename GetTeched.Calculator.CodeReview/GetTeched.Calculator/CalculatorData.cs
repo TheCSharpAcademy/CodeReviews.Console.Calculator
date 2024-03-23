@@ -36,4 +36,15 @@ internal class CalculatorData
         int calculatorUsage = jsonParse.GetCalculatorUsageStats();
         Console.WriteLine($"This calculator has been used {calculatorUsage} of times");
     }
+
+    internal List<double> ResultHistory()
+    {
+        List<JsonParse.Calculations> calculations = new();
+        calculations = jsonParse.GetCalculationHistory();
+        List<double> previousResult = new();
+
+        calculations.ForEach(calculation => previousResult.Add(calculation.result));
+
+        return previousResult;
+    }
 }

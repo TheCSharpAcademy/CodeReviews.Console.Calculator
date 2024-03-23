@@ -7,6 +7,8 @@ internal class CalculatorMenu
 {
     Calculator calculator = new();
     List<string> history = new List<string>();
+    List<double> results = new List<double>();
+    CalculatorData calculatorData = new();
     internal double[] InputValues()
     {
         double[] numbers = new double[2];
@@ -40,63 +42,31 @@ internal class CalculatorMenu
     }
     internal string CalculatorOptions()
     {
-        CalculatorData calculatorData = new();
+        
         string? operation;
 
-        Console.Clear();
-        Console.WriteLine("Choose an option from the following list:");
-        Console.WriteLine("\ta - Add");
-        Console.WriteLine("\ts - Subtract");
-        Console.WriteLine("\tm - Multiply");
-        Console.WriteLine("\td - Divide");
-        Console.WriteLine("-----Calculator Options-----");
-        Console.WriteLine("\tu - Statistics");
-        Console.WriteLine("\tl - Previous Results");
-        Console.Write("Your option? ");   
+        MenuOptions(true);
 
-        while(true)
+        while (true)
         {
             operation = Console.ReadLine();
-            if (operation == null || !Regex.IsMatch(operation, "[a|s|m|d|l|u]"))
+            if (operation == null || !Regex.IsMatch(operation, "[a|s|m|d|l|u|r]"))
             {
                 Console.WriteLine("Error: Unrecognized input.");
             }
             else if (Regex.IsMatch(operation, "l"))
             {
-                calculator.Finish();
-
-                Console.Clear();
-                history.AddRange(calculatorData.CalculatorHistory());
-                Console.WriteLine("Here are all previous calculations performed by this calculator: \n");
-                foreach (string calculationHistory in history)
-                {
-                    Console.WriteLine(calculationHistory);
-                }
-                Console.WriteLine("Would you like to clear this list? Type Yes to clear list or any other key to continue.");
-                string? userInput = Console.ReadLine().ToLower().Trim();
-                while(!String.IsNullOrEmpty(userInput))
-                {
-                    if (userInput == "yes")
-                    {
-                        history.Clear();
-                        Console.WriteLine("Calculation history has been cleared. Press any key to return to the Main Menu.");
-                    }
-                    else
-                    {
-                        break;
-                    }
-                    Console.WriteLine("Please try again.");
-                }
-
-                calculator.Start();
+                PreviousCalculations();
                 break;
             }
             else if (Regex.IsMatch(operation, "u"))
             {
-                calculator.Finish();
-                history.AddRange(calculatorData.CalculatorHistory());
-                calculatorData.CalculatorStatistics();
-                calculator.Start();
+                Statistics();
+                break;
+            }
+            else if(Regex.IsMatch(operation, "r"))
+            {
+                Results(operation);
                 break;
             }
             else break;
@@ -138,8 +108,116 @@ internal class CalculatorMenu
         return false;
     }
 
-    internal void CalculatorOptionValidation()
+    internal void MenuOptions(bool displayOptions)
     {
-        //TODO
+        Console.Clear();
+        Console.WriteLine("Choose an option from the following list:");
+        Console.WriteLine("\ta - Add");
+        Console.WriteLine("\ts - Subtract");
+        Console.WriteLine("\tm - Multiply");
+        Console.WriteLine("\td - Divide");
+        if(displayOptions == true)
+        {
+            Console.WriteLine("-----Calculator Options-----");
+            Console.WriteLine("\tu - Statistics");
+            Console.WriteLine("\tl - Previous Calculations");
+            Console.WriteLine("\tr - Previous Results");
+        }
+        
+        Console.Write("Your option? ");
+    }
+
+    internal void PreviousCalculations()
+    {
+        calculator.Finish();
+        Console.Clear();
+        history.AddRange(calculatorData.CalculatorHistory());
+        Console.WriteLine("Here are all previous calculations performed by this calculator: \n");
+        foreach (string calculationHistory in history)
+        {
+            Console.WriteLine(calculationHistory);
+        }
+        Console.WriteLine("Would you like to clear this list? Type Yes to clear list or any other key to continue.");
+        string? userInput = Console.ReadLine().ToLower().Trim();
+        while (!String.IsNullOrEmpty(userInput))
+        {
+            if (userInput == "yes")
+            {
+                history.Clear();
+                Console.WriteLine("Calculation history has been cleared. Press any key to return to the Main Menu.");
+            }
+            else
+            {
+                break;
+            }
+            Console.WriteLine("Please try again.");
+        }
+        calculator.Start();
+    }
+
+    internal void Statistics()
+    {
+        calculator.Finish();
+        history.AddRange(calculatorData.CalculatorHistory());
+        calculatorData.CalculatorStatistics();
+        calculator.Start();
+    }
+
+    internal void Results(string operation)
+    {
+        calculator.Finish();
+
+        int entry = 1;
+        double firstNumber = 0;
+        double secondNumber = 0;
+
+        Console.Clear();
+        results.AddRange(calculatorData.ResultHistory());
+        Console.WriteLine("Here are all the previous results performed:\n");
+        foreach (double result in results)
+        {
+            Console.WriteLine($"{entry}) {result}");
+            entry++;
+        }
+        Console.WriteLine("Type the entry index number to select first number");
+        string? userInput = Console.ReadLine();
+        int value;
+        while (!String.IsNullOrEmpty(userInput) && int.TryParse(userInput, out value))
+        {
+            if (value < results.Count() + 1)
+            {
+                firstNumber = results[value - 1];
+                break;
+            }
+            Console.WriteLine("Error: Unrecognized input.");
+        }
+        Console.WriteLine("Type the entry index number to select second number");
+        userInput = Console.ReadLine();
+        while (!String.IsNullOrEmpty(userInput) && int.TryParse(userInput, out value))
+        {
+            if (value < results.Count() + 1)
+            {
+                secondNumber = results[value - 1];
+                break;
+            }
+            Console.WriteLine("Error: Unrecognized input.");
+        }
+        calculator.Start();
+
+        MenuOptions(false);
+
+        while (true)
+        {
+            operation = Console.ReadLine();
+            if (operation == null || !Regex.IsMatch(operation, "[a|s|m|d]"))
+            {
+                Console.WriteLine("Error: Unrecognized input.");
+            }
+            else
+            {
+                CalculatorOperation(firstNumber, secondNumber, operation);
+                break;
+            }
+        }
     }
 }

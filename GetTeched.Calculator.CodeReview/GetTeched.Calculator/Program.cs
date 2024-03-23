@@ -9,7 +9,7 @@
  *
  * Create a functionality that will count the amount of times the calculator was used. !!!!COMPLETED!!!!
  * Store a list with the latest calculations. And give the users the ability to delete that list. !!!!COMPLETED!!!!
- * Allow the users to use the results in the list above to perform new calculations.
+ * Allow the users to use the results in the list above to perform new calculations. !!!!COMPLETED!!!!
  * Add extra calculations: Square Root, Taking the Power, 10x, Trigonometry functions.
  */
 using System.Text.RegularExpressions;
