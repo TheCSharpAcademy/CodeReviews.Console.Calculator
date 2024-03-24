@@ -54,7 +54,7 @@ internal class CalculatorMenu
     }
     internal string CalculatorOptions()
     {
-        
+        string regexPattern = "^((a|s|m|d|l|u|r|q|p|x|sin|cos|tan),)*(a|s|m|d|l|u|r|q|p|x|sin|cos|tan)$";
         string? operation;
 
         MenuOptions(true);
@@ -62,7 +62,7 @@ internal class CalculatorMenu
         while (true)
         {
             operation = Console.ReadLine();
-            if (operation == null || !Regex.IsMatch(operation, "[a|s|m|d|l|u|r|q|p|x|sin|cos|tan]"))
+            if (operation == null || !Regex.IsMatch(operation, regexPattern))
             {
                 Console.WriteLine("Error: Unrecognized input.");
             }
@@ -90,10 +90,10 @@ internal class CalculatorMenu
     internal bool CalculatorOperation(double firstNumber, double secondNumber, string operation)
     {
         double result = 0;
-
+        string regexPattern = "^((q|x|sin|cos|tan),)*(q|x|sin|cos|tan)$";
         try
         {
-            if(Regex.IsMatch(operation, "[q|x|sin|cos|tan]"))
+            if(Regex.IsMatch(operation, regexPattern))
             {
                 result = calculator.AdvanceDoOperation(firstNumber, operation);
             }
@@ -195,6 +195,7 @@ internal class CalculatorMenu
         int entry = 1;
         double firstNumber = 0;
         double secondNumber = 0;
+        string regexPattern = "^((a|s|m|d|q|p|x|sin|cos|tan),)*(a|s|m|d|q|p|x|sin|cos|tan)$";
 
         Console.Clear();
         results.AddRange(calculatorData.ResultHistory());
@@ -234,7 +235,7 @@ internal class CalculatorMenu
         while (true)
         {
             operation = Console.ReadLine();
-            if (operation == null || !Regex.IsMatch(operation, "[a|s|m|d]"))
+            if (operation == null || !Regex.IsMatch(operation, regexPattern))
             {
                 Console.WriteLine("Error: Unrecognized input.");
             }
