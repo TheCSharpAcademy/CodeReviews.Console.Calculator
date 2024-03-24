@@ -18,7 +18,7 @@ public class Calculator
             calculatorUsage = 0;
             Console.ReadLine();
         }
-        
+
         StreamWriter logFile = File.CreateText("calculator.json");
         logFile.AutoFlush = true;
         writer = new JsonTextWriter(logFile);
@@ -76,7 +76,7 @@ public class Calculator
         return result;
     }
 
-    public double AdvanceDoOperation(double number, string  operation)
+    public double AdvanceDoOperation(double number, string operation)
     {
         double result = double.NaN;
         double radians = number * Math.PI / 180;
@@ -86,7 +86,7 @@ public class Calculator
         writer.WritePropertyName("OperationType");
 
         switch (operation)
-        {      
+        {
             case "q":
                 result = Math.Sqrt(number);
                 writer.WriteValue("Square Root");
@@ -122,15 +122,11 @@ public class Calculator
     }
     public void Finish()
     {
-        //JsonParse jsonParse = new();
-
         writer.WriteEndArray();
         writer.WritePropertyName("Usage");
         writer.WriteValue(calculatorUsage);
         writer.WriteEndObject();
         writer.Close();
-
-        //jsonParse.CalculationHistory();
     }
     public void Start()
     {
@@ -141,6 +137,6 @@ public class Calculator
         writer.WriteStartObject();
         writer.WritePropertyName("Operations");
         writer.WriteStartArray();
-    }   
+    }
 }
 

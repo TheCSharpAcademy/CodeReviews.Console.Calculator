@@ -19,7 +19,7 @@ public class JsonParse
     {
         public double firstNumber { get; set; }
         public double secondNumber { get; set; }
-        public string OperationType {  get; set; }
+        public string OperationType { get; set; }
         public double result { get; set; }
     }
     public int GetCalculatorUsageStats()
@@ -43,8 +43,6 @@ public class JsonParse
         {
             previousCalculations.Add(new Calculations { firstNumber = operations.Operand1, secondNumber = operations.Operand2, OperationType = operations.OperationType, result = operations.Result });
         }
-
-
         return previousCalculations;
     }
 }

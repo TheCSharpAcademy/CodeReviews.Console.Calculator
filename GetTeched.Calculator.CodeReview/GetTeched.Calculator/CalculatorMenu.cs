@@ -19,38 +19,31 @@ internal class CalculatorMenu
 
         Console.WriteLine("Type a number, and then press Enter.");
         firstNumber = Console.ReadLine();
-        if(singleNumber == false )
+        if (singleNumber == false)
         {
-            double cleanFirstNumber = 0;
-            while (!double.TryParse(firstNumber, out cleanFirstNumber))
-            {
-                Console.WriteLine("This is not a vaild input. Please enter an integer value: ");
-                firstNumber = Console.ReadLine();
-            }
-
+            double cleanFirstNumber = ParseInputValue(firstNumber);
             Console.WriteLine("Type a number, and then press Enter.");
             secondNumber = Console.ReadLine();
-
-            double cleanSecondNumber = 0;
-            while (!double.TryParse(secondNumber, out cleanSecondNumber))
-            {
-                Console.WriteLine("This is not a vaild input. Please enter an integer value: ");
-                secondNumber = Console.ReadLine();
-            }
+            double cleanSecondNumber = ParseInputValue(secondNumber);
             numbers[0] = cleanFirstNumber;
             numbers[1] = cleanSecondNumber;
         }
         else
         {
-            double cleanFirstNumber = 0;
-            while (!double.TryParse(firstNumber, out cleanFirstNumber))
-            {
-                Console.WriteLine("This is not a vaild input. Please enter an integer value: ");
-                firstNumber = Console.ReadLine();
-            }
+            double cleanFirstNumber = ParseInputValue(firstNumber);
             numbers[0] = cleanFirstNumber;
         }
         return numbers;
+    }
+    internal double ParseInputValue(string number)
+    {
+        double cleanNumber = 0;
+        while (!double.TryParse(number, out cleanNumber))
+        {
+            Console.WriteLine("This is not a vaild input. Please enter an integer value: ");
+            number = Console.ReadLine();
+        }
+        return cleanNumber;
     }
     internal string CalculatorOptions()
     {
@@ -66,15 +59,13 @@ internal class CalculatorMenu
             {
                 Console.WriteLine("Error: Unrecognized input.");
             }
-            else if(Regex.IsMatch(operation, "r"))
+            else if (Regex.IsMatch(operation, "r"))
             {
                 Results(operation);
-                MenuOptions(true );
+                MenuOptions(true);
             }
             else break;
-
         }
-
         return operation;
     }
     internal bool CalculatorOperation(double firstNumber, double secondNumber, string operation)
@@ -84,7 +75,7 @@ internal class CalculatorMenu
         bool returnToMenu = true;
         try
         {
-            if(Regex.IsMatch(operation, regexPattern))
+            if (Regex.IsMatch(operation, regexPattern))
             {
                 result = calculator.AdvanceDoOperation(firstNumber, operation);
                 if (double.IsNaN(result))
@@ -97,12 +88,12 @@ internal class CalculatorMenu
                     returnToMenu = false;
                 }
             }
-            else if(Regex.IsMatch(operation, "^u$"))
+            else if (Regex.IsMatch(operation, "^u$"))
             {
                 Statistics();
-                
+
             }
-            else if(Regex.IsMatch(operation, "^l$"))
+            else if (Regex.IsMatch(operation, "^l$"))
             {
                 PreviousCalculations();
                 returnToMenu = true;
@@ -120,14 +111,6 @@ internal class CalculatorMenu
                     returnToMenu = false;
                 }
             }
-            //if (double.IsNaN(result))
-            //{
-            //    Console.WriteLine("This operation will result in a mathematical error.\n");
-            //}
-            //else if(doCalculation == true)
-            //{
-            //    Console.WriteLine("Your reslut: {0:0.##}\n", result);
-            //}
         }
         catch (Exception e)
         {
@@ -169,7 +152,7 @@ internal class CalculatorMenu
             Console.WriteLine("\tl - Previous Calculations");
             Console.WriteLine("\tr - Previous Results");
         }
-        
+
         Console.Write("Your option? ");
     }
 
@@ -197,7 +180,7 @@ internal class CalculatorMenu
             else
             {
                 break;
-            }   
+            }
         }
         calculator.Start();
     }
@@ -214,39 +197,32 @@ internal class CalculatorMenu
     internal void Results(string operation)
     {
         calculator.Finish();
-
         int entry = 1;
-        
 
         Console.Clear();
         results.AddRange(calculatorData.ResultHistory());
         Console.WriteLine("Here are all the previous results performed:\n");
         if (results.Count > 0)
         {
-            
+
             foreach (double result in results)
             {
                 Console.WriteLine($"{entry}) {result}");
                 entry++;
             }
-
             Console.WriteLine("\nDo you want to use previous results?");
             Console.WriteLine("Type yes to use results or any other key to return to the menu.");
             Console.WriteLine("!!!Current implementation will always ask you to select two numbers.!!!");
 
             ResultsSelection(operation);
-            
         }
         else
         {
             calculator.Start();
             Console.WriteLine("No results found, press any key to return to the menu.");
             Console.ReadLine();
-            MenuOptions(true);          
+            MenuOptions(true);
         }
-        
-
-        
     }
 
     internal void ResultsSelection(string operation)
@@ -254,6 +230,7 @@ internal class CalculatorMenu
         double firstNumber = 0;
         double secondNumber = 0;
         string regexPattern = "^((a|s|m|d|q|p|x|sin|cos|tan),)*(a|s|m|d|q|p|x|sin|cos|tan)$";
+
         string? userInput = Console.ReadLine();
         if (Regex.IsMatch(userInput, "^((yes),)*(yes)$"))
         {
