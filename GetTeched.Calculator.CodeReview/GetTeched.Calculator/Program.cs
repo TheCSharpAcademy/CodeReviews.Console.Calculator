@@ -29,7 +29,7 @@ class Program
             Console.WriteLine("------------------------\n");
 
             string operation = calculatorMenu.CalculatorOptions();
-            if (Regex.IsMatch(operation, "^((l|u),)*(l|u)$");
+            if (Regex.IsMatch(operation, "^((l|u),)*(l|u)$"))
             {
                 endApplication = calculatorMenu.CalculatorOperation(0, 0, operation);
             }

@@ -71,11 +71,6 @@ internal class CalculatorMenu
                 PreviousCalculations();
                 break;
             }
-            else if (Regex.IsMatch(operation, "u"))
-            {
-                Statistics();
-                break;
-            }
             else if(Regex.IsMatch(operation, "r"))
             {
                 Results(operation);
@@ -91,11 +86,17 @@ internal class CalculatorMenu
     {
         double result = 0;
         string regexPattern = "^((q|x|sin|cos|tan),)*(q|x|sin|cos|tan)$";
+        bool doCalculation = true;
         try
         {
             if(Regex.IsMatch(operation, regexPattern))
             {
                 result = calculator.AdvanceDoOperation(firstNumber, operation);
+            }
+            else if(Regex.IsMatch(operation, "^((u),)*(u)$"))
+            {
+                Statistics();
+                doCalculation = false;
             }
             else
             {
@@ -105,7 +106,7 @@ internal class CalculatorMenu
             {
                 Console.WriteLine("This operation will result in a mathematical error.\n");
             }
-            else
+            else if(doCalculation == true)
             {
                 Console.WriteLine("Your reslut: {0:0.##}\n", result);
             }
