@@ -13,8 +13,8 @@ public class Calculator
         }
         catch (Exception e)
         {
-            Console.WriteLine($"No calculator usage value found, setting value to 0. Press any key to continue.\n");
             Console.WriteLine(e.Message);
+            Console.WriteLine($"\nNo calculator usage value found, setting value to 0. Press any key to continue.\n");
             calculatorUsage = 0;
             Console.ReadLine();
         }
