@@ -66,11 +66,6 @@ internal class CalculatorMenu
             {
                 Console.WriteLine("Error: Unrecognized input.");
             }
-            else if (Regex.IsMatch(operation, "l"))
-            {
-                PreviousCalculations();
-                break;
-            }
             else if(Regex.IsMatch(operation, "r"))
             {
                 Results(operation);
@@ -93,9 +88,14 @@ internal class CalculatorMenu
             {
                 result = calculator.AdvanceDoOperation(firstNumber, operation);
             }
-            else if(Regex.IsMatch(operation, "^((u),)*(u)$"))
+            else if(Regex.IsMatch(operation, "^u$"))
             {
                 Statistics();
+                doCalculation = false;
+            }
+            else if(Regex.IsMatch(operation, "^l$"))
+            {
+                PreviousCalculations();
                 doCalculation = false;
             }
             else
@@ -171,12 +171,12 @@ internal class CalculatorMenu
             {
                 history.Clear();
                 Console.WriteLine("Calculation history has been cleared. Press any key to return to the Main Menu.");
+                break;
             }
             else
             {
                 break;
-            }
-            Console.WriteLine("Please try again.");
+            }   
         }
         calculator.Start();
     }
