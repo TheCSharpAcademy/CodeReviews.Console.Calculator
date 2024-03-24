@@ -69,6 +69,7 @@ internal class CalculatorMenu
             else if(Regex.IsMatch(operation, "r"))
             {
                 Results(operation);
+                MenuOptions(true );
             }
             else break;
 
@@ -80,7 +81,7 @@ internal class CalculatorMenu
     {
         double result = 0;
         string regexPattern = "^((q|x|sin|cos|tan),)*(q|x|sin|cos|tan)$";
-        //bool doCalculation = true;
+        bool returnToMenu = true;
         try
         {
             if(Regex.IsMatch(operation, regexPattern))
@@ -93,17 +94,18 @@ internal class CalculatorMenu
                 else
                 {
                     Console.WriteLine("Your reslut: {0:0.##}\n", result);
+                    returnToMenu = false;
                 }
             }
             else if(Regex.IsMatch(operation, "^u$"))
             {
                 Statistics();
-                //doCalculation = false;
+                
             }
             else if(Regex.IsMatch(operation, "^l$"))
             {
                 PreviousCalculations();
-                //doCalculation = false;
+                returnToMenu = true;
             }
             else
             {
@@ -115,6 +117,7 @@ internal class CalculatorMenu
                 else
                 {
                     Console.WriteLine("Your reslut: {0:0.##}\n", result);
+                    returnToMenu = false;
                 }
             }
             //if (double.IsNaN(result))
@@ -132,12 +135,14 @@ internal class CalculatorMenu
         }
 
         Console.WriteLine("------------------------\n");
-
-        Console.Write("Press 'n' and Enter to close the app, or press any other key and Enter to continue: ");
-        if (Console.ReadLine() == "n")
+        if (!returnToMenu)
         {
-            calculator.Finish();
-            return true;
+            Console.Write("Press 'n' and Enter to close the app, or press any other key and Enter to continue: ");
+            if (Console.ReadLine() == "n")
+            {
+                calculator.Finish();
+                return true;
+            }
         }
         Console.WriteLine("\n");
         return false;
@@ -173,6 +178,7 @@ internal class CalculatorMenu
         calculator.Finish();
         Console.Clear();
         history.AddRange(calculatorData.CalculatorHistory());
+        results.AddRange(calculatorData.ResultHistory());
         Console.WriteLine("Here are all previous calculations performed by this calculator: \n");
         foreach (string calculationHistory in history)
         {
@@ -200,6 +206,7 @@ internal class CalculatorMenu
     {
         calculator.Finish();
         history.AddRange(calculatorData.CalculatorHistory());
+        results.AddRange(calculatorData.ResultHistory());
         calculatorData.CalculatorStatistics();
         calculator.Start();
     }
@@ -209,24 +216,50 @@ internal class CalculatorMenu
         calculator.Finish();
 
         int entry = 1;
-        double firstNumber = 0;
-        double secondNumber = 0;
-        string regexPattern = "^((a|s|m|d|q|p|x|sin|cos|tan),)*(a|s|m|d|q|p|x|sin|cos|tan)$";
+        
 
         Console.Clear();
         results.AddRange(calculatorData.ResultHistory());
         Console.WriteLine("Here are all the previous results performed:\n");
         if (results.Count > 0)
         {
+            
             foreach (double result in results)
             {
                 Console.WriteLine($"{entry}) {result}");
                 entry++;
             }
 
+            Console.WriteLine("\nDo you want to use previous results?");
+            Console.WriteLine("Type yes to use results or any other key to return to the menu.");
+            Console.WriteLine("!!!Current implementation will always ask you to select two numbers.!!!");
+
+            ResultsSelection(operation);
+            
+        }
+        else
+        {
+            calculator.Start();
+            Console.WriteLine("No results found, press any key to return to the menu.");
+            Console.ReadLine();
+            MenuOptions(true);          
+        }
+        
+
+        
+    }
+
+    internal void ResultsSelection(string operation)
+    {
+        double firstNumber = 0;
+        double secondNumber = 0;
+        string regexPattern = "^((a|s|m|d|q|p|x|sin|cos|tan),)*(a|s|m|d|q|p|x|sin|cos|tan)$";
+        string? userInput = Console.ReadLine();
+        if (Regex.IsMatch(userInput, "^((yes),)*(yes)$"))
+        {
             Console.WriteLine("Type the entry index number to select first number");
-            string? userInput = Console.ReadLine();
             int value;
+            userInput = Console.ReadLine();
             while (!String.IsNullOrEmpty(userInput) && int.TryParse(userInput, out value))
             {
                 if (value < results.Count() + 1)
@@ -268,12 +301,7 @@ internal class CalculatorMenu
         else
         {
             calculator.Start();
-            Console.WriteLine("No results found, press any key to return to the menu.");
-            Console.ReadLine();
-            MenuOptions(true);          
+            MenuOptions(true);
         }
-        
-
-        
     }
 }

@@ -52,7 +52,8 @@ internal class CalculatorData
     internal void CalculatorStatistics()
     {
         int calculatorUsage = jsonParse.GetCalculatorUsageStats();
-        Console.WriteLine($"This calculator has been used {calculatorUsage} of times");
+        Console.WriteLine($"This calculator has been used {calculatorUsage} of times. Press any key to return to the menu");
+        Console.ReadLine();
     }
 
     internal List<double> ResultHistory()
