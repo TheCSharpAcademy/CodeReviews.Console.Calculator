@@ -24,7 +24,7 @@ public class JsonParse
     }
     public int GetCalculatorUsageStats()
     {
-        int result = 0; ;
+        int result = 0;
         string path = Path.Combine(Environment.CurrentDirectory, "calculator.json");
         string json = File.ReadAllText(path);
         JsonRoot root = JsonConvert.DeserializeObject<JsonRoot>(json);
