@@ -7,4 +7,8 @@
         <Nullable>enable</Nullable>
     </PropertyGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\Calculator Library\Calculator Library.csproj" />
+    </ItemGroup>
+
 </Project>
