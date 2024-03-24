@@ -7,8 +7,18 @@ public class Calculator
     public Calculator()
     {
         JsonParse jsonParse = new();
-
-        calculatorUsage = jsonParse.GetCalculatorUsageStats();
+        try
+        {
+            calculatorUsage = jsonParse.GetCalculatorUsageStats();
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine($"No calculator usage value found, setting value to 0. Press any key to continue.\n");
+            Console.WriteLine(e.Message);
+            calculatorUsage = 0;
+            Console.ReadLine();
+        }
+        
         StreamWriter logFile = File.CreateText("calculator.json");
         logFile.AutoFlush = true;
         writer = new JsonTextWriter(logFile);
