@@ -3,31 +3,31 @@ namespace CalculatorLibrary;
 
 public class JsonParse
 {
-    public class JSONArray
+    public class JsonArray
     {
         public double Operand1;
         public double Operand2;
         public string OperationType;
         public double Result;
     }
-    public class JSONRoot()
+    public class JsonRoot()
     {
-        public List<JSONArray> Operations;
+        public List<JsonArray> Operations;
         public int Usage;
     }
     public class Calculations()
     {
-        public double firstNumber { get; set; }
-        public double secondNumber { get; set; }
+        public double FirstNumber { get; set; }
+        public double SecondNumber { get; set; }
         public string OperationType { get; set; }
-        public double result { get; set; }
+        public double Result { get; set; }
     }
     public int GetCalculatorUsageStats()
     {
         int result = 0; ;
         string path = Path.Combine(Environment.CurrentDirectory, "calculator.json");
         string json = File.ReadAllText(path);
-        JSONRoot root = JsonConvert.DeserializeObject<JSONRoot>(json);
+        JsonRoot root = JsonConvert.DeserializeObject<JsonRoot>(json);
         result = root.Usage;
         return result;
     }
@@ -37,11 +37,11 @@ public class JsonParse
 
         string path = Path.Combine(Environment.CurrentDirectory, "calculator.json");
         string json = File.ReadAllText(path);
-        JSONRoot root = JsonConvert.DeserializeObject<JSONRoot>(json);
+        JsonRoot root = JsonConvert.DeserializeObject<JsonRoot>(json);
 
         foreach (var operations in root.Operations)
         {
-            previousCalculations.Add(new Calculations { firstNumber = operations.Operand1, secondNumber = operations.Operand2, OperationType = operations.OperationType, result = operations.Result });
+            previousCalculations.Add(new Calculations { FirstNumber = operations.Operand1, SecondNumber = operations.Operand2, OperationType = operations.OperationType, Result = operations.Result });
         }
         return previousCalculations;
     }

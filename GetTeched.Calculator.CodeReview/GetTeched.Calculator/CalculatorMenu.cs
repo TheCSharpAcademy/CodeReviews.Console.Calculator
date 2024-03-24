@@ -15,7 +15,6 @@ internal class CalculatorMenu
 
         string? firstNumber = "";
         string? secondNumber = "";
-        //double result = 0;
 
         Console.WriteLine("Type a number, and then press Enter.");
         firstNumber = Console.ReadLine();

@@ -16,34 +16,34 @@ internal class CalculatorData
             switch(calculation.OperationType)
             {
                 case "Add":
-                    previousCalculations.Add($"{calculation.firstNumber} + {calculation.secondNumber} = {calculation.result}");
+                    previousCalculations.Add($"{calculation.FirstNumber} + {calculation.SecondNumber} = {calculation.Result}");
                     break;
                 case "Subtract":
-                    previousCalculations.Add($"{calculation.firstNumber} - {calculation.secondNumber} = {calculation.result}");
+                    previousCalculations.Add($"{calculation.FirstNumber} - {calculation.SecondNumber} = {calculation.Result}");
                     break;
                 case "Multiply":
-                    previousCalculations.Add($"{calculation.firstNumber} X {calculation.secondNumber} = {calculation.result}");
+                    previousCalculations.Add($"{calculation.FirstNumber} X {calculation.SecondNumber} = {calculation.Result}");
                     break;
                 case "Divide":
-                    previousCalculations.Add($"{calculation.firstNumber} / {calculation.secondNumber} = {calculation.result}");
+                    previousCalculations.Add($"{calculation.FirstNumber} / {calculation.SecondNumber} = {calculation.Result}");
                     break;
                 case "Square Root":
-                    previousCalculations.Add($"{calculation.result} is the square root of {calculation.firstNumber}");
+                    previousCalculations.Add($"{calculation.Result} is the square root of {calculation.FirstNumber}");
                     break;
                 case "Power of 10":
-                    previousCalculations.Add($"{calculation.firstNumber}^10 = {calculation.result}");
+                    previousCalculations.Add($"{calculation.FirstNumber}^10 = {calculation.Result}");
                     break;
                 case "Power of X":
-                    previousCalculations.Add($"{calculation.firstNumber}^{calculation.secondNumber} = {calculation.result}");
+                    previousCalculations.Add($"{calculation.FirstNumber}^{calculation.SecondNumber} = {calculation.Result}");
                     break;
                 case "Sin":
-                    previousCalculations.Add($"The sine of {calculation.firstNumber} degrees is {calculation.result}");
+                    previousCalculations.Add($"The sine of {calculation.FirstNumber} degrees is {calculation.Result}");
                     break;
                 case "Cos":
-                    previousCalculations.Add($"The cosine of {calculation.firstNumber} degrees is {calculation.result}");
+                    previousCalculations.Add($"The cosine of {calculation.FirstNumber} degrees is {calculation.Result}");
                     break;
                 case "Tan":
-                    previousCalculations.Add($"The tangent of {calculation.firstNumber} degrees is {calculation.result}");
+                    previousCalculations.Add($"The tangent of {calculation.FirstNumber} degrees is {calculation.Result}");
                     break;
             }
         }
@@ -62,7 +62,7 @@ internal class CalculatorData
         calculations = jsonParse.GetCalculationHistory();
         List<double> previousResult = new();
 
-        calculations.ForEach(calculation => previousResult.Add(calculation.result));
+        calculations.ForEach(calculation => previousResult.Add(calculation.Result));
 
         return previousResult;
     }
