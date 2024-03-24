@@ -1,5 +1,8 @@
 ﻿using System.Text.RegularExpressions;
 using Calculator_Library;
+
+namespace CSharpAcademy_Calculator;
+
 class Program
 {
     static void Main(string[] args)
@@ -82,9 +85,9 @@ class Program
             Console.Write("Press 'n' and Enter to close the app, or press any other key and Enter to continue: ");
             if (Console.ReadLine() == "n") endApp = true;
 
-            Console.WriteLine("\n"); // Friendly linespacing.
+            Console.WriteLine("\n"); // Friendly line spacing.
         }
         calculator.Finish();
-        return;
+        
     }
 }

@@ -5,7 +5,7 @@ namespace Calculator_Library;
 public class Calculator
 {
     private JsonWriter writer;
-
+    
     public Calculator()
     {
         StreamWriter logfile = File.CreateText("calculatorlog.json");
