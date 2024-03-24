@@ -69,7 +69,6 @@ internal class CalculatorMenu
             else if(Regex.IsMatch(operation, "r"))
             {
                 Results(operation);
-                break;
             }
             else break;
 
@@ -81,35 +80,51 @@ internal class CalculatorMenu
     {
         double result = 0;
         string regexPattern = "^((q|x|sin|cos|tan),)*(q|x|sin|cos|tan)$";
-        bool doCalculation = true;
+        //bool doCalculation = true;
         try
         {
             if(Regex.IsMatch(operation, regexPattern))
             {
                 result = calculator.AdvanceDoOperation(firstNumber, operation);
+                if (double.IsNaN(result))
+                {
+                    Console.WriteLine("This operation will result in a mathematical error.\n");
+                }
+                else
+                {
+                    Console.WriteLine("Your reslut: {0:0.##}\n", result);
+                }
             }
             else if(Regex.IsMatch(operation, "^u$"))
             {
                 Statistics();
-                doCalculation = false;
+                //doCalculation = false;
             }
             else if(Regex.IsMatch(operation, "^l$"))
             {
                 PreviousCalculations();
-                doCalculation = false;
+                //doCalculation = false;
             }
             else
             {
                 result = calculator.StandardDoOperation(firstNumber, secondNumber, operation);
+                if (double.IsNaN(result))
+                {
+                    Console.WriteLine("This operation will result in a mathematical error.\n");
+                }
+                else
+                {
+                    Console.WriteLine("Your reslut: {0:0.##}\n", result);
+                }
             }
-            if (double.IsNaN(result))
-            {
-                Console.WriteLine("This operation will result in a mathematical error.\n");
-            }
-            else if(doCalculation == true)
-            {
-                Console.WriteLine("Your reslut: {0:0.##}\n", result);
-            }
+            //if (double.IsNaN(result))
+            //{
+            //    Console.WriteLine("This operation will result in a mathematical error.\n");
+            //}
+            //else if(doCalculation == true)
+            //{
+            //    Console.WriteLine("Your reslut: {0:0.##}\n", result);
+            //}
         }
         catch (Exception e)
         {
@@ -201,50 +216,64 @@ internal class CalculatorMenu
         Console.Clear();
         results.AddRange(calculatorData.ResultHistory());
         Console.WriteLine("Here are all the previous results performed:\n");
-        foreach (double result in results)
+        if (results.Count > 0)
         {
-            Console.WriteLine($"{entry}) {result}");
-            entry++;
-        }
-        Console.WriteLine("Type the entry index number to select first number");
-        string? userInput = Console.ReadLine();
-        int value;
-        while (!String.IsNullOrEmpty(userInput) && int.TryParse(userInput, out value))
-        {
-            if (value < results.Count() + 1)
+            foreach (double result in results)
             {
-                firstNumber = results[value - 1];
-                break;
+                Console.WriteLine($"{entry}) {result}");
+                entry++;
             }
-            Console.WriteLine("Error: Unrecognized input.");
-        }
-        Console.WriteLine("Type the entry index number to select second number");
-        userInput = Console.ReadLine();
-        while (!String.IsNullOrEmpty(userInput) && int.TryParse(userInput, out value))
-        {
-            if (value < results.Count() + 1)
-            {
-                secondNumber = results[value - 1];
-                break;
-            }
-            Console.WriteLine("Error: Unrecognized input.");
-        }
-        calculator.Start();
 
-        MenuOptions(false);
-
-        while (true)
-        {
-            operation = Console.ReadLine();
-            if (operation == null || !Regex.IsMatch(operation, regexPattern))
+            Console.WriteLine("Type the entry index number to select first number");
+            string? userInput = Console.ReadLine();
+            int value;
+            while (!String.IsNullOrEmpty(userInput) && int.TryParse(userInput, out value))
             {
+                if (value < results.Count() + 1)
+                {
+                    firstNumber = results[value - 1];
+                    break;
+                }
                 Console.WriteLine("Error: Unrecognized input.");
             }
-            else
+
+            Console.WriteLine("Type the entry index number to select second number");
+            userInput = Console.ReadLine();
+            while (!String.IsNullOrEmpty(userInput) && int.TryParse(userInput, out value))
             {
-                CalculatorOperation(firstNumber, secondNumber, operation);
-                break;
+                if (value < results.Count() + 1)
+                {
+                    secondNumber = results[value - 1];
+                    break;
+                }
+                Console.WriteLine("Error: Unrecognized input.");
+            }
+
+            calculator.Start();
+            MenuOptions(false);
+            while (true)
+            {
+                operation = Console.ReadLine();
+                if (operation == null || !Regex.IsMatch(operation, regexPattern))
+                {
+                    Console.WriteLine("Error: Unrecognized input.");
+                }
+                else
+                {
+                    CalculatorOperation(firstNumber, secondNumber, operation);
+                    break;
+                }
             }
         }
+        else
+        {
+            calculator.Start();
+            Console.WriteLine("No results found, press any key to return to the menu.");
+            Console.ReadLine();
+            MenuOptions(true);          
+        }
+        
+
+        
     }
 }
