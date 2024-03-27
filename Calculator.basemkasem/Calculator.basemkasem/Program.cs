@@ -108,7 +108,7 @@ class Program
             if (userInput == "clear") calculator.ClearHistory();
             if (userInput== "n") endApp = true;
 
-            Console.WriteLine("\n"); // Friendly linespacing.
+            Console.WriteLine("\n"); 
         }
         Console.WriteLine($"Calculator were used {calculator.calculationsAmount} times.");
         calculator.Finish();

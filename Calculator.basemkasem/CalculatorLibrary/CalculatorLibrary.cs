@@ -6,11 +6,11 @@ namespace CalculatorLibrary;
 public class Calculator
 {
     internal static List<Operation> operations = new();
+    public int calculationsAmount = 0;
     JsonWriter writer;
     public Calculator()
     {
         StreamWriter logFile = File.CreateText("calculator.log");
-        Trace.AutoFlush = true;
         writer = new JsonTextWriter(logFile);
         writer.Formatting = Formatting.Indented;
         writer.WriteStartObject();
