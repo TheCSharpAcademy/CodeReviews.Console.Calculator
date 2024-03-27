@@ -6,7 +6,7 @@ namespace CalculatorLibrary;
 public class Calculator
 {
     internal static List<Operation> operations = new();
-    public int calculationsAmount = 0;
+    public int calculationsAmount;
     JsonWriter writer;
     public Calculator()
     {
