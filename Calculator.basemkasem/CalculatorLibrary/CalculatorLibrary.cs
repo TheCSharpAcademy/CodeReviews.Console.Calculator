@@ -1,5 +1,4 @@
-﻿using System.Diagnostics;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using CalculatorLibrary.Models;
 
 namespace CalculatorLibrary;
@@ -8,7 +7,6 @@ public class Calculator
 {
     internal static List<Operation> operations = new();
     JsonWriter writer;
-    public int calculationsAmount = 0;
     public Calculator()
     {
         StreamWriter logFile = File.CreateText("calculator.log");
