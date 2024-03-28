@@ -5,8 +5,8 @@ namespace CalculatorLibrary;
 public class Calculator
 {
     JsonWriter writer;
-    public int numsOfTimesUsed { get; set; }
-    public List<double> resultsHistory { get; set; } = new();
+    public int NumsOfTimesUsed { get; set; }
+    public List<double> ResultsHistory { get; set; } = new();
 
     public Calculator()
     {
@@ -18,7 +18,7 @@ public class Calculator
         writer.WritePropertyName("Operations");
         writer.WriteStartArray();
 
-        numsOfTimesUsed = 0;
+        NumsOfTimesUsed = 0;
     }
 
     public double DoOperation(double num1, double num2, string op)
@@ -35,20 +35,20 @@ public class Calculator
         {
             case "a":
                 result = num1 + num2;
-                numsOfTimesUsed++;
-                resultsHistory.Add(result);
+                NumsOfTimesUsed++;
+                ResultsHistory.Add(result);
                 writer.WriteValue("Add");
                 break;
             case "s":
                 result = num1 - num2;
-                numsOfTimesUsed++;
-                resultsHistory.Add(result);
+                NumsOfTimesUsed++;
+                ResultsHistory.Add(result);
                 writer.WriteValue("Subtract");
                 break;
             case "m":
                 result = num1 * num2;
-                numsOfTimesUsed++;
-                resultsHistory.Add(result);
+                NumsOfTimesUsed++;
+                ResultsHistory.Add(result);
                 writer.WriteValue("Multiply");
                 break;
             case "d":
@@ -57,26 +57,26 @@ public class Calculator
                 {
                     result = num1 / num2;
                 }
-                numsOfTimesUsed++;
-                resultsHistory.Add(result);
+                NumsOfTimesUsed++;
+                ResultsHistory.Add(result);
                 writer.WriteValue("Divide");
                 break;
             case "r":
                 result = Math.Sqrt(num1);
-                numsOfTimesUsed++;
-                resultsHistory.Add(result);
+                NumsOfTimesUsed++;
+                ResultsHistory.Add(result);
                 writer.WriteValue("SquareRoot");
                 break;
             case "p":
-                result = Math.Pow(num1, num2); ;
-                numsOfTimesUsed++;
-                resultsHistory.Add(result);
+                result = Math.Pow(num1, num2);
+                NumsOfTimesUsed++;
+                ResultsHistory.Add(result);
                 writer.WriteValue("Taking the power");
                 break;
             case "t":
                 result = Math.Tan(num1);
-                numsOfTimesUsed++;
-                resultsHistory.Add(result);
+                NumsOfTimesUsed++;
+                ResultsHistory.Add(result);
                 writer.WriteValue("Tangent");
                 break;
             // Return text for an incorrect option entry.
@@ -97,5 +97,5 @@ public class Calculator
         writer.Close();
     }
 
-    public int getNumsOfTimesUsed() {  return numsOfTimesUsed; }
+    public int GetNumsOfTimesUsed() {  return NumsOfTimesUsed; }
 }
