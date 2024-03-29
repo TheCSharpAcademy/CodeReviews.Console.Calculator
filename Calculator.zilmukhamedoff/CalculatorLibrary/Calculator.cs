@@ -11,7 +11,7 @@ namespace CalculatorLibrary
         private readonly string infoMessage;
         private readonly string[] subMenu;
         private readonly string errorMessage;
-        private int PerformedCalculations { get; set; } = 0;
+        private int PerformedCalculations { get; set; }
         private List<string> ListOfCalculations { get; set; } = [];
         private List<double> ListOfResults { get; set; } = [];
         private readonly Utf8JsonWriter writer;
