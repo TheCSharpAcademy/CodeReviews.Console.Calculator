@@ -1,4 +1,4 @@
-# ConsoleCalculator
+ConsoleCalculator
 
 ## Description
 
@@ -37,6 +37,6 @@ various mathematical operations.
 - **SDK**: Dotnet 8
 
 ## git clone
-```
+```bash
 git clone https://github.com/zilmukhamedoff/ConsoleCalculator.git
 ```
