@@ -4,16 +4,16 @@ namespace calculador.Models
 {
     public class Results
     {   
-        public List<double> resultsOperations { get; set; }
+        public List<double> ResultsOperations { get; set; }
 
         public Results()
         {
-            resultsOperations = new List<double>();
+            ResultsOperations = new List<double>();
         }
 
-        public void addResultToList(double result)
+        public void AddResultToList(double result)
         {
-            resultsOperations.Add(result);
+            ResultsOperations.Add(result);
         }
         public void ListOfResults()
         {   
@@ -32,13 +32,13 @@ namespace calculador.Models
             }
             if (op == "1")
             {
-                foreach (double item in resultsOperations)
+                foreach (double item in ResultsOperations)
                 {
                     Console.WriteLine(item);
                 }
             } else if (op == "2")
             {
-                resultsOperations.Clear();
+                ResultsOperations.Clear();
             }
         }
 
