@@ -24,15 +24,15 @@ public class Calculator
         result = num1 * num2;
         break;
       case Operations.Divide:
+        while (num2 == 0)
         {
-          while (num2 == 0)
-          {
-            Console.WriteLine("Please enter non-zero number.");
-            num2 = Convert.ToDouble(Console.ReadLine());
-          }
-          result = num1 / num2;
-          break;
-        };
+          Console.WriteLine("Please enter non-zero number.");
+          num2 = Convert.ToDouble(Console.ReadLine());
+        }
+        result = num1 / num2;
+        break;
+      default:
+        break;
     }
     return result;
   }
