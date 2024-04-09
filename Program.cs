@@ -7,7 +7,7 @@ bool firstTermFound = false;
 string? readInput;
 
 Console.WriteLine("Calculator");
-Console.WriteLine("Enter an expression(ex. 1 + 1):");
+Console.WriteLine("Enter an expression(ex. 1 x 1):");
 
 readInput = Console.ReadLine();
 
@@ -23,7 +23,7 @@ if (readInput != null)
     {
         char[] terms = expressionArray[i].ToCharArray();
 
-        foreach(char term in terms)
+        foreach (char term in terms)
         {
             if (term == 'x' || term == '/' || term == '+' || term == '-')
             {
@@ -41,7 +41,7 @@ if (readInput != null)
                 else
                 {
                     expression += term;
-                }   
+                }
             }
         }
     }
