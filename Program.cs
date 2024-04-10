@@ -29,7 +29,7 @@ do
 
     if (readInput != null)
     {
-        if (CheckIfBack(readInput))
+        if (CheckIfBackOrClose(readInput))
         {
             isDone = true;
         }
@@ -74,7 +74,7 @@ void BasicCalculations()
 
         if (readInput != null)
         {
-            if (!CheckIfBack(readInput))
+            if (!CheckIfBackOrClose(readInput))
             {
                 expression = readInput;
                 string[] expressionArray = expression.Split(' ');
@@ -154,7 +154,7 @@ void SquareRoot()
 
         if (readInput != null)
         {
-            if (!CheckIfBack(readInput))
+            if (!CheckIfBackOrClose(readInput))
             {
                 validInput = int.TryParse(readInput, out num);
 
@@ -186,7 +186,7 @@ void Power()
 
         if (readInput != null)
         {
-            if (!CheckIfBack(readInput))
+            if (!CheckIfBackOrClose(readInput))
             {
                 expression = readInput;
 
@@ -255,7 +255,7 @@ void TenX()
 
         if (readInput != null)
         {
-            if (!CheckIfBack(readInput))
+            if (!CheckIfBackOrClose(readInput))
             {
                 validInput = long.TryParse(readInput, out long result);
 
@@ -286,7 +286,7 @@ void Trigonometry()
 
         if (readInput != null)
         {
-            if (!CheckIfBack(readInput))
+            if (!CheckIfBackOrClose(readInput))
             {
                 expression = readInput;
 
@@ -333,7 +333,7 @@ void Trigonometry()
     } while (goBack == false);
 }
 
-bool CheckIfBack(string input)
+bool CheckIfBackOrClose(string input)
 {
     return input.ToLower() == "back" || input.ToLower() == "exit";
 }
