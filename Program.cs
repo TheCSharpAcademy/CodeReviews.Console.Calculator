@@ -297,15 +297,10 @@ void Trigonometry()
                 {
                     string temp = tempArray[i].Trim();
 
-                    if (int.TryParse(temp, out array[i]))
-                    {
-
-                    }
-                    else
+                    if (!int.TryParse(temp, out array[i]))
                     {
                         Console.WriteLine("Error: String inputted instead of an integer.");
                     }
-
                 }
 
                 Array.Sort(array);
