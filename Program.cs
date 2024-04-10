@@ -115,7 +115,10 @@ void BasicCalculations()
                         break;
 
                     case '/':
-                        num /= int.Parse(expression);
+                        if (int.Parse(expression) != 0)
+                            num /= int.Parse(expression);
+                        else
+                            Console.WriteLine("Error: Can't divide a number by zero.");
                         break;
 
                     case '+':
@@ -224,7 +227,7 @@ void Power()
                         result = Math.Pow(num, double.Parse(expression));
                         break;
                     default:
-                        Console.WriteLine("Enter a valid expression!");
+                        Console.WriteLine("Error: Invalid expression.");
                         break;
                 }
 
@@ -300,7 +303,7 @@ void Trigonometry()
                     }
                     else
                     {
-                        Console.WriteLine("Please enter a number.");
+                        Console.WriteLine("Error: String inputted instead of an integer.");
                     }
 
                 }
