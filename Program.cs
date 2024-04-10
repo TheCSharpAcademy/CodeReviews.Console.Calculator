@@ -1,7 +1,7 @@
 ﻿int numberOfUse = 0;
 
 bool isDone = false;
-bool useAgain = true;
+bool goBack = false;
 bool validInput = false;
 
 int num = 0;
@@ -24,6 +24,7 @@ do
     Console.WriteLine("5. Trigonometry");
     Console.WriteLine();
 
+    goBack = false;
     readInput = Console.ReadLine();
 
     if (readInput != null)
@@ -56,343 +57,280 @@ do
                     break;
             }
         }
-
-
     }
-
-
 
     numberOfUse++;
 } while (isDone == false);
 
 void BasicCalculations()
 {
+    Console.Clear();
+    Console.WriteLine("Basic Calculations");
+    Console.WriteLine("Enter an expression(ex. 1 x 1). Type 'back' to go back to the main menu:");
+
     do
     {
-        Console.Clear();
-        Console.WriteLine("Basic Calculations");
-        Console.WriteLine("Enter an expression(ex. 1 x 1):");
-
         readInput = Console.ReadLine();
 
         if (readInput != null)
         {
-            expression = readInput;
-
-            string[] expressionArray = expression.Split(' ');
-            int expressionLength = expressionArray.Length;
-            expression = "";
-
-            for (int i = 0; i < expressionLength; i++)
+            if (readInput.ToLower() != "back")
             {
-                char[] terms = expressionArray[i].ToCharArray();
+                expression = readInput;
+                string[] expressionArray = expression.Split(' ');
+                int expressionLength = expressionArray.Length;
+                expression = "";
 
-                foreach (char term in terms)
+                for (int i = 0; i < expressionLength; i++)
                 {
-                    if (term == 'x' || term == '/' || term == '+' || term == '-')
+                    char[] terms = expressionArray[i].ToCharArray();
+
+                    foreach (char term in terms)
                     {
-                        operation = term;
-                        firstTermFound = true;
-                        num = int.Parse(expression);
-                        expression = "";
-                    }
-                    else
-                    {
-                        if (firstTermFound == false)
+                        if (term == 'x' || term == '/' || term == '+' || term == '-')
                         {
-                            expression += term;
+                            operation = term;
+                            firstTermFound = true;
+                            num = int.Parse(expression);
+                            expression = "";
                         }
                         else
                         {
-                            expression += term;
+                            if (firstTermFound == false)
+                            {
+                                expression += term;
+                            }
+                            else
+                            {
+                                expression += term;
+                            }
                         }
                     }
                 }
+
+                switch (operation)
+                {
+                    case 'x':
+                        num *= int.Parse(expression);
+                        break;
+
+                    case '/':
+                        num /= int.Parse(expression);
+                        break;
+
+                    case '+':
+                        num += int.Parse(expression);
+                        break;
+
+                    case '-':
+                        num -= int.Parse(expression);
+                        break;
+                }
+
+                Console.WriteLine(num);
             }
-
-            switch (operation)
+            else
             {
-                case 'x':
-                    num *= int.Parse(expression);
-                    break;
-
-                case '/':
-                    num /= int.Parse(expression);
-                    break;
-
-                case '+':
-                    num += int.Parse(expression);
-                    break;
-
-                case '-':
-                    num -= int.Parse(expression);
-                    break;
-            }
-
-            Console.WriteLine(num);
-        }
-
-        Console.WriteLine();
-        Console.WriteLine("Do you want to use this again? Type 'yes' to use again. Type 'no' to return to the main menu.");
-        readInput = Console.ReadLine();
-
-        if (readInput != null)
-        {
-            string choice = readInput.ToLower();
-
-            if (choice == "yes" || choice == "y")
-            {
-                useAgain = true;
-            }
-            else if (choice == "no" || choice == "n")
-            {
-                useAgain = false;
+                goBack = true;
             }
         }
 
-    } while (useAgain != false);
+    } while (goBack == false);
 
 }
 
 void SquareRoot()
 {
+    Console.Clear();
+    Console.WriteLine("Square Root");
+    Console.WriteLine("Enter a number to square root. Type 'back' to go back to the main menu:");
+
     do
     {
-        Console.Clear();
-        Console.WriteLine("Square Root");
-        Console.WriteLine("Enter a number to square root:");
-
         readInput = Console.ReadLine();
 
         if (readInput != null)
         {
-            validInput = int.TryParse(readInput, out num);
-
-            if (validInput)
+            if (readInput.ToLower() != "back")
             {
-                Console.WriteLine(Math.Sqrt(num));
+                validInput = int.TryParse(readInput, out num);
+
+                if (validInput)
+                {
+                    Console.WriteLine(Math.Sqrt(num));
+                }
             }
-
-        }
-
-        Console.WriteLine();
-        Console.WriteLine("Do you want to use this again? Type 'yes' to use again. Type 'no' to return to the main menu.");
-        readInput = Console.ReadLine();
-
-        if (readInput != null)
-        {
-            string choice = readInput.ToLower();
-
-            if (choice == "yes" || choice == "y")
+            else
             {
-                useAgain = true;
-            }
-            else if (choice == "no" || choice == "n")
-            {
-                useAgain = false;
+                goBack = true;
             }
         }
 
-    } while (useAgain != false);
+    } while (goBack == false);
 }
 
 void Power()
 {
     double result = 0;
 
+    Console.Clear();
+    Console.WriteLine("Power");
+    Console.WriteLine("Enter the exponential expression(ex. 2 ^ 4). Type 'back' to go back to the main menu: ");
+
     do
     {
-        Console.Clear();
-        Console.WriteLine("Power");
-        Console.WriteLine("Enter the exponential expression(ex. 2 ^ 4): ");
-
         readInput = Console.ReadLine();
 
         if (readInput != null)
         {
-            expression = readInput;
-
-            string[] expressionArray = expression.Split(' ');
-            int expressionLength = expressionArray.Length;
-            expression = "";
-
-            for (int i = 0; i < expressionLength; i++)
+            if (readInput.ToLower() != "back")
             {
-                char[] terms = expressionArray[i].ToCharArray();
+                expression = readInput;
 
-                foreach (char term in terms)
+                string[] expressionArray = expression.Split(' ');
+                int expressionLength = expressionArray.Length;
+                expression = "";
+
+                for (int i = 0; i < expressionLength; i++)
                 {
-                    if (term == '^')
+                    char[] terms = expressionArray[i].ToCharArray();
+
+                    foreach (char term in terms)
                     {
-                        operation = term;
-                        firstTermFound = true;
-                        num = int.Parse(expression);
-                        expression = "";
-                    }
-                    else
-                    {
-                        if (firstTermFound == false)
+                        if (term == '^')
                         {
-                            expression += term;
+                            operation = term;
+                            firstTermFound = true;
+                            num = int.Parse(expression);
+                            expression = "";
                         }
                         else
                         {
-                            expression += term;
+                            if (firstTermFound == false)
+                            {
+                                expression += term;
+                            }
+                            else
+                            {
+                                expression += term;
+                            }
                         }
                     }
                 }
+
+                switch (operation)
+                {
+                    case '^':
+                        result = Math.Pow(num, double.Parse(expression));
+                        break;
+                    default:
+                        Console.WriteLine("Enter a valid expression!");
+                        break;
+                }
+
+                Console.WriteLine(result);
             }
-
-            switch (operation)
+            else
             {
-                case '^':
-                    result = Math.Pow(num, double.Parse(expression));
-                    break;
-                default:
-                    Console.WriteLine("Enter a valid expression!");
-                    break;
-            }
-
-            Console.WriteLine(result);
-        }
-
-        Console.WriteLine();
-        Console.WriteLine("Do you want to use this again? Type 'yes' to use again. Type 'no' to return to the main menu.");
-        readInput = Console.ReadLine();
-
-        if (readInput != null)
-        {
-            string choice = readInput.ToLower();
-
-            if (choice == "yes" || choice == "y")
-            {
-                useAgain = true;
-            }
-            else if (choice == "no" || choice == "n")
-            {
-                useAgain = false;
+                goBack = true;
             }
         }
 
-    } while (useAgain != false);
+    } while (goBack == false);
 
 }
 
 void TenX()
 {
+    Console.Clear();
+    Console.WriteLine("10x");
+    Console.WriteLine("Enter a number to 10x. Type 'back' to go back to the main menu:");
+
     do
     {
-        Console.Clear();
-        Console.WriteLine("10x");
-        Console.WriteLine("Enter a number to 10x:");
-
         readInput = Console.ReadLine();
 
         if (readInput != null)
         {
-            validInput = long.TryParse(readInput, out long result);
-
-            if (validInput)
+            if (readInput.ToLower() != "back")
             {
-                Console.WriteLine($"{result * 10}");
+                validInput = long.TryParse(readInput, out long result);
+
+                if (validInput)
+                {
+                    Console.WriteLine($"{result * 10}");
+                }
+            }
+            else
+            {
+                goBack = true;
             }
         }
 
-        Console.WriteLine();
-        Console.WriteLine("Do you want to use this again? Type 'yes' to use again. Type 'no' to return to the main menu.");
-        readInput = Console.ReadLine();
-
-        if (readInput != null)
-        {
-            string choice = readInput.ToLower();
-
-            if (choice == "yes" || choice == "y")
-            {
-                useAgain = true;
-            }
-            else if (choice == "no" || choice == "n")
-            {
-                useAgain = false;
-            }
-        }
-
-    } while (useAgain != false);
+    } while (goBack == false);
 }
 
 void Trigonometry()
 {
     int a, b, c;
+    Console.Clear();
+    Console.WriteLine("Trigonometry");
+    Console.WriteLine("Enter the sides of the right triangle, respectively as a, b, c (ex. 3, 4, 5). Type 'back' to go back to the main menu:");
 
     do
     {
-        Console.Clear();
-        Console.WriteLine("Trigonometry");
-        Console.WriteLine("Enter the sides of the right triangle, respectively as a, b, c (ex. 3, 4, 5)");
-
         readInput = Console.ReadLine();
 
         if (readInput != null)
         {
-            expression = readInput;
-
-            string[] tempArray = expression.Split(",");
-            int[] array = new int[tempArray.Length];
-
-            for (int i = 0; i < tempArray.Length; i++)
+            if (readInput.ToLower() != "back")
             {
-                string temp = tempArray[i].Trim();
+                expression = readInput;
 
-                if (int.TryParse(temp, out array[i]))
+                string[] tempArray = expression.Split(",");
+                int[] array = new int[tempArray.Length];
+
+                for (int i = 0; i < tempArray.Length; i++)
                 {
+                    string temp = tempArray[i].Trim();
+
+                    if (int.TryParse(temp, out array[i]))
+                    {
+
+                    }
+                    else
+                    {
+                        Console.WriteLine("Please enter a number.");
+                    }
 
                 }
-                else
-                {
-                    Console.WriteLine("Failed to parse.");
-                }
 
+                Array.Sort(array);
+
+                if (array.Length == 3)
+                {
+                    a = array[0];
+                    b = array[1];
+                    c = array[2];
+
+
+                    if (a + b > c && a + c > b && b + c > a)
+                    {
+                        Console.WriteLine($"sin: {(double)a / c}");
+                        Console.WriteLine($"cos: {(double)b / c}");
+                        Console.WriteLine($"tan: {(double)a / b}");
+                    }
+                    else
+                    {
+                        Console.WriteLine("Error: The length of any side must be less than the sum of the lengths of the other two sides.");
+                    }
+                }
             }
-
-            Array.Sort(array);
-
-            if (array.Length == 3)
+            else
             {
-                a = array[0];
-                b = array[1];
-                c = array[2];
-
-
-                if (a + b > c && a + c > b && b + c > a)
-                {
-                    Console.WriteLine($"sin: {(double)a / c}");
-                    Console.WriteLine($"cos: {(double)b / c}");
-                    Console.WriteLine($"tan: {(double)a / b}");
-                }
-                else
-                {
-                    Console.WriteLine("Error: The length of any side must be less than the sum of the lengths of the other two sides.");
-                }
-            }
-
-        }
-
-        Console.WriteLine();
-        Console.WriteLine("Do you want to use this again? Type 'yes' to use again. Type 'no' to return to the main menu.");
-        readInput = Console.ReadLine();
-
-        if (readInput != null)
-        {
-            string choice = readInput.ToLower();
-
-            if (choice == "yes" || choice == "y")
-            {
-                useAgain = true;
-            }
-            else if (choice == "no" || choice == "n")
-            {
-                useAgain = false;
+                goBack = true;
             }
         }
 
-    } while (useAgain != false);
+    } while (goBack == false);
 }
