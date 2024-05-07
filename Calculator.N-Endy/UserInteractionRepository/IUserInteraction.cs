@@ -7,5 +7,6 @@ namespace Calculator.N_Endy.UserInteractionRepository
         void ShowMessage(string message, double result);
         double GetNumberFromUser();
         string GetOperatorFromUser();
+        string GetInputFromUser();
     }
 }

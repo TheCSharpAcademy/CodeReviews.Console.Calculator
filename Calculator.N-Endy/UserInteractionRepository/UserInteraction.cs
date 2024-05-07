@@ -47,5 +47,10 @@ namespace Calculator.N_Endy.UserInteractionRepository
 
             return op;
         }
+
+        public string GetInputFromUser()
+        {
+            return Console.ReadLine();
+        }
     }
 }

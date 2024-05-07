@@ -14,31 +14,46 @@ namespace Calculator.N_Endy.CalculatorEngine
             _calculator = calculator;
 
         }
+
+        private bool endApp = false;
+
         public void Run()
         {
-            // Declare variables and set to empty.
-            // Use Nullable types (with ?) to match type of System.Console.ReadLine
-            double numInput1 = 0;
-            double numInput2 = 0;
-
-            // Display Introductory message
-            _userInteraction.DisplayIntroductoryMessage();
-
-            // Ask user for first number
-            numInput1 = _userInteraction.GetNumberFromUser();
-
-            // Ask user for second number
-            numInput2 = _userInteraction.GetNumberFromUser();
-
-            // Ask user for operator
-            string op = "";
-            do
+            while (!endApp)
             {
-                op = _userInteraction.GetOperatorFromUser();
-            } while (! ValidateOperator(op));
 
-            // Calculate and Display result
-            DisplayResult(op, numInput1, numInput2);
+                // Declare variables and set to empty.
+                // Use Nullable types (with ?) to match type of System.Console.ReadLine
+                double numInput1 = 0;
+                double numInput2 = 0;
+
+                // Display Introductory message
+                _userInteraction.DisplayIntroductoryMessage();
+
+                // Ask user for first number
+                numInput1 = _userInteraction.GetNumberFromUser();
+
+                // Ask user for second number
+                numInput2 = _userInteraction.GetNumberFromUser();
+
+                // Ask user for operator
+                string op = "";
+                do
+                {
+                    op = _userInteraction.GetOperatorFromUser();
+                } while (!ValidateOperator(op));
+
+                // Calculate and Display result
+                DisplayResult(op, numInput1, numInput2);
+
+                _userInteraction.ShowMessage("--------------------------------\n\n");
+
+                // Ask to continue
+                _userInteraction.ShowMessage("Press 'n' and Enter to close the app, or press any other key and Enter to continue: ");
+
+                string continueCalculation = _userInteraction.GetInputFromUser();
+                if (continueCalculation == "n") endApp = true;
+            }
 
         }
 
@@ -46,7 +61,7 @@ namespace Calculator.N_Endy.CalculatorEngine
         // Validate operator input is not null and matches the pattern
         public bool ValidateOperator(string op)
         {
-            if (op == null || Regex.IsMatch(op, "[a|s|m|d]"))
+            if (op == null || ! Regex.IsMatch(op, "[a|s|m|d]"))
             {
                 _userInteraction.ShowMessage("Error: Invalid operator\n");
                 return false;

@@ -1,7 +1,9 @@
-﻿// Display Introductory message
+﻿using Calculator.N_Endy.CalculatorEngine;
+using Calculator.N_Endy.UserInteractionRepository;
 
-// Ask user for first number
-// Ask user for second number
-// Ask user for operator
-// Calculate and display result
-// Ask to play again
+IUserInteraction userInteraction = new UserInteraction();
+CalculatorLibrary.Calculator calculatorLibrary = new CalculatorLibrary.Calculator();
+
+CalculatorEngine calculatorEngine = new CalculatorEngine(userInteraction, calculatorLibrary);
+
+calculatorEngine.Run();
