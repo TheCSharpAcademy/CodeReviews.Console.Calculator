@@ -1,33 +1,35 @@
-﻿namespace CalculatorLibrary;
-
-public class Calculator
+﻿namespace CalculatorLibrary
 {
-    public double DoOperation(double num1, double num2, string op)
+
+    public class Calculator
     {
-        double result = double.NaN; // Default value is "not-a-number" if an operation, such as division, could result in an error.
-
-        switch (op)
+        public double DoOperation(double num1, double num2, string op)
         {
-            case "a":
-                result = num1 + num2;
-                break;
-            case "s":
-                result = num1 - num2;
-                break;
-            case "m":
-                result = num1 * num2;
-                break;
-            case "d":
-                // Ask the user to enter a non-zero divisor.
-                if (num2 != 0)
-                {
-                    result = num1 / num2;
-                }
-                break;
-            default:
-                break;
-        }
+            double result = double.NaN; // Default value is "not-a-number" if an operation, such as division, could result in an error.
 
-        return result;
+            switch (op)
+            {
+                case "a":
+                    result = num1 + num2;
+                    break;
+                case "s":
+                    result = num1 - num2;
+                    break;
+                case "m":
+                    result = num1 * num2;
+                    break;
+                case "d":
+                    // Ask the user to enter a non-zero divisor.
+                    if (num2 != 0)
+                    {
+                        result = num1 / num2;
+                    }
+                    break;
+                default:
+                    break;
+            }
+
+            return result;
+        }
     }
 }

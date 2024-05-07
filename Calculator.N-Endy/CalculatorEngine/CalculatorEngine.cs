@@ -6,10 +6,13 @@ namespace Calculator.N_Endy.CalculatorEngine
     public class CalculatorEngine
     {
         private readonly IUserInteraction _userInteraction;
+        private readonly CalculatorLibrary.Calculator _calculator;
 
-        public CalculatorEngine(IUserInteraction userInteraction)
+        public CalculatorEngine(IUserInteraction userInteraction, CalculatorLibrary.Calculator calculator)
         {
             _userInteraction = userInteraction;
+            _calculator = calculator;
+
         }
         public void Run()
         {
@@ -33,6 +36,10 @@ namespace Calculator.N_Endy.CalculatorEngine
             {
                 op = _userInteraction.GetOperatorFromUser();
             } while (! ValidateOperator(op));
+
+            // Calculate and Display result
+            DisplayResult(op, numInput1, numInput2);
+
         }
 
 
@@ -47,6 +54,22 @@ namespace Calculator.N_Endy.CalculatorEngine
             else
             {
                 return true;
+            }
+        }
+
+        public void DisplayResult(string op, double num1, double num2)
+        {
+            try
+            {
+                double result = _calculator.DoOperation(num1, num2, op);
+                if (double.IsNaN(result))
+                    _userInteraction.ShowMessage("This operation will result in a mathematical error.\n");
+                else
+                    _userInteraction.ShowMessage("Your result: {0:0.##}\n", result);
+            }
+            catch (Exception e)
+            {
+                _userInteraction.ShowMessage("Oh no! An exception occurred while trying to do the math.\n - Details: " + e.Message);
             }
         }
         // Ask user for first number

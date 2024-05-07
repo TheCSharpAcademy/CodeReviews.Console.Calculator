@@ -13,6 +13,11 @@ namespace Calculator.N_Endy.UserInteractionRepository
             Console.WriteLine(message);
         }
 
+        public void ShowMessage(string message, double result)
+        {
+            Console.WriteLine(message, result);
+        }
+
         public double GetNumberFromUser()
         {
             Console.Write("Type a number, and then press 'Enter': ");
