@@ -4,8 +4,7 @@ namespace Calculator.N_Endy.UserInteractionRepository
     {
         void DisplayIntroductoryMessage();
         void ShowMessage(string message);
-        string GetNumberFromUser();
-        double CleanNumberFromUser();
+        double GetNumberFromUser();
         string GetOperatorFromUser();
     }
 }

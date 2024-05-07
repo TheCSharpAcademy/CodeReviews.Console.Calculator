@@ -1,6 +1,6 @@
 ﻿namespace CalculatorLibrary;
 
-public class Class1
+public class Calculator
 {
 
 }
