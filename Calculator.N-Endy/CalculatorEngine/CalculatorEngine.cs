@@ -1,14 +1,15 @@
 using System.Text.RegularExpressions;
 using Calculator.N_Endy.UserInteractionRepository;
+using MyCalculator = CalculatorLibrary.Calculator;
 
 namespace Calculator.N_Endy.CalculatorEngine
 {
     public class CalculatorEngine
     {
         private readonly IUserInteraction _userInteraction;
-        private readonly CalculatorLibrary.Calculator _calculator;
+        private readonly MyCalculator _calculator;
 
-        public CalculatorEngine(IUserInteraction userInteraction, CalculatorLibrary.Calculator calculator)
+        public CalculatorEngine(IUserInteraction userInteraction, MyCalculator calculator)
         {
             _userInteraction = userInteraction;
             _calculator = calculator;

@@ -21,7 +21,7 @@ namespace Calculator.N_Endy.UserInteractionRepository
         public double GetNumberFromUser()
         {
             Console.Write("Type a number, and then press 'Enter': ");
-            string numInput = Console.ReadLine();
+            string? numInput = Console.ReadLine();
             
             double cleanNum = 0;
 

@@ -1,9 +1,10 @@
 ﻿using Calculator.N_Endy.CalculatorEngine;
 using Calculator.N_Endy.UserInteractionRepository;
+using MyCalculator = CalculatorLibrary.Calculator;
 
 IUserInteraction userInteraction = new UserInteraction();
-CalculatorLibrary.Calculator calculatorLibrary = new CalculatorLibrary.Calculator();
+MyCalculator calculatorLibrary = new();
 
-CalculatorEngine calculatorEngine = new CalculatorEngine(userInteraction, calculatorLibrary);
+CalculatorEngine calculatorEngine = new(userInteraction, calculatorLibrary);
 
 calculatorEngine.Run();
