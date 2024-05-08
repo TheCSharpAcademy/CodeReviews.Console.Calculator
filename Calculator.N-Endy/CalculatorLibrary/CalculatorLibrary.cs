@@ -63,5 +63,12 @@ namespace CalculatorLibrary
 
             return result;
         }
+
+        public void Finish()
+        {
+            writer.WriteEndArray();
+            writer.WriteEndObject();
+            writer.Close();
+        }
     }
 }
