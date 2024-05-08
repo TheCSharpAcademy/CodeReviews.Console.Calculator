@@ -54,7 +54,9 @@ namespace Calculator.N_Endy.CalculatorEngine
                 string continueCalculation = _userInteraction.GetInputFromUser();
                 if (continueCalculation == "n") endApp = true;
             }
-
+            // Add call to close the JSON writer.
+            _calculator.Finish();
+            return;
         }
 
 
@@ -87,10 +89,5 @@ namespace Calculator.N_Endy.CalculatorEngine
                 _userInteraction.ShowMessage("Oh no! An exception occurred while trying to do the math.\n - Details: " + e.Message);
             }
         }
-        // Ask user for first number
-        // Ask user for second number
-        // Ask user for operator
-        // Calculate and display result
-        // Ask to play again
     }
 }
