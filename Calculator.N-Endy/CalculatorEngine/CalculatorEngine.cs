@@ -9,6 +9,7 @@ namespace Calculator.N_Endy.CalculatorEngine
         private readonly IUserInteraction _userInteraction;
         private readonly MyCalculator _calculator;
         private int _numOfAppRuns;
+        private readonly List<string> _listOfPreviousCalculations;
 
         public CalculatorEngine(IUserInteraction userInteraction, MyCalculator calculator)
         {
@@ -75,7 +76,7 @@ namespace Calculator.N_Endy.CalculatorEngine
             
             // Store updated number of app runs in the "apprun.txt" file.
             File.WriteAllText("apprun.txt", _numOfAppRuns.ToString());
-            
+
             // Add call to close the JSON writer.
             _calculator.Finish();
 
@@ -106,11 +107,19 @@ namespace Calculator.N_Endy.CalculatorEngine
                     _userInteraction.ShowMessage("This operation will result in a mathematical error.\n");
                 else
                     _userInteraction.ShowMessage("Your result: {0:0.##}\n", result);
+
+                // Add previous result to list
+                AddPreviousCalculations(num1, num2, op, result);
             }
             catch (Exception e)
             {
                 _userInteraction.ShowMessage("Oh no! An exception occurred while trying to do the math.\n - Details: " + e.Message);
             }
+        }
+
+        public void AddPreviousCalculations(double num1, double num2, string op, double result)
+        {
+            _listOfPreviousCalculations.Add($"{num1} {op} {num2} = {result}");
         }
     }
 }
