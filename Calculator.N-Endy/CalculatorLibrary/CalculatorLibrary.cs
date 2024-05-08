@@ -7,6 +7,7 @@ namespace CalculatorLibrary
     public class Calculator
     {
         readonly JsonWriter writer;
+        // private readonly List<string> _listOfPreviousCalculations;
         public Calculator()
         {
             // StreamWriter logFile = File.CreateText("calculator.log");
@@ -62,6 +63,14 @@ namespace CalculatorLibrary
                         writer.WriteValue("Divide");
                     }
                     break;
+                // case "p":
+                //     // Print previous calculation list
+                //     ShowList(_listOfPreviousCalculations);
+                //     break;
+                // case "r":
+                //     // Delete previous calculation list
+                //     DeleteList(_listOfPreviousCalculations);
+                //     break;
                 default:
                     break;
             }
@@ -71,6 +80,28 @@ namespace CalculatorLibrary
 
             return result;
         }
+
+        // public void DeleteList(List<string> list)
+        // {
+        //     list.Clear();
+        // }
+
+        // public void ShowList(List<string> list)
+        // {
+        //     var num = 0;
+        //     foreach (var item in list)
+        //     {
+        //         Console.WriteLine("-------------------");
+        //         Console.WriteLine("Previous Calculations");
+        //         Console.WriteLine($"{num++} - {item}");
+        //         Console.WriteLine("-------------------");
+        //     }
+        // }
+
+        // public void AddPreviousCalculations(double num1, double num2, string op, double result)
+        // {
+        //     _listOfPreviousCalculations.Add($"{num1} {op} {num2} = {result}");
+        // }
 
         public void Finish()
         {

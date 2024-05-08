@@ -2,9 +2,9 @@
   "Operations": [
     {
       "Num1": 3.0,
-      "Num2": 5.0,
-      "Operation": "Divide",
-      "Result": 0.6
+      "Num2": 4.0,
+      "Operation": "Add",
+      "Result": 7.0
     }
   ]
 }
