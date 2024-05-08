@@ -8,6 +8,7 @@ namespace Calculator.N_Endy.CalculatorEngine
     {
         private readonly IUserInteraction _userInteraction;
         private readonly MyCalculator _calculator;
+        private int _numOfAppRuns;
 
         public CalculatorEngine(IUserInteraction userInteraction, MyCalculator calculator)
         {
@@ -20,6 +21,22 @@ namespace Calculator.N_Endy.CalculatorEngine
 
         public void Run()
         {
+            // Check if "apprun.txt" file exists.
+            if (File.Exists("apprun.txt"))
+            {
+                // Read the number of app runs from the file.
+                string runsText = File.ReadAllText("apprun.txt");
+                int.TryParse(runsText, out _numOfAppRuns);
+            }
+            else
+            {
+                _numOfAppRuns = 0;
+            }
+            // Increment the number of app runs
+            _numOfAppRuns++;
+            // Display number of app runs.
+            _userInteraction.ShowMessage("Number of app runs: " + _numOfAppRuns + "\n");
+
             while (!endApp)
             {
 
@@ -55,8 +72,13 @@ namespace Calculator.N_Endy.CalculatorEngine
                 string continueCalculation = _userInteraction.GetInputFromUser();
                 if (continueCalculation == "n") endApp = true;
             }
+            
+            // Store updated number of app runs in the "apprun.txt" file.
+            File.WriteAllText("apprun.txt", _numOfAppRuns.ToString());
+            
             // Add call to close the JSON writer.
             _calculator.Finish();
+
             return;
         }
 

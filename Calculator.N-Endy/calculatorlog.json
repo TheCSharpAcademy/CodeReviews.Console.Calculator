@@ -1,6 +1,10 @@
 {
   "Operations": [
     {
-      "Num1": 1.0,
-      "Num2": 0.0,
-      "Operation":
+      "Num1": 3.0,
+      "Num2": 5.0,
+      "Operation": "Divide",
+      "Result": 0.6
+    }
+  ]
+}
