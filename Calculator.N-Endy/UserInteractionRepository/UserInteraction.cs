@@ -41,8 +41,6 @@ namespace Calculator.N_Endy.UserInteractionRepository
             Console.WriteLine("\ts - Subtract");
             Console.WriteLine("\tm - Multiply");
             Console.WriteLine("\td - Divide");
-            Console.WriteLine("\tp - Print previous calculations");
-            Console.WriteLine("\tr - Remove previous calculations");
             Console.Write("Your option? ");
 
             string? op = Console.ReadLine();
