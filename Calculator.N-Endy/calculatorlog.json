@@ -1,10 +1,10 @@
 {
   "Operations": [
     {
-      "Num1": 3.0,
-      "Num2": 4.0,
+      "Num1": 2.0,
+      "Num2": 3.0,
       "Operation": "Add",
-      "Result": 7.0
+      "Result": 5.0
     }
   ]
 }

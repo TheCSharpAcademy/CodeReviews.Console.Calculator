@@ -17,7 +17,7 @@ namespace Calculator.N_Endy.CalculatorEngine
 
         }
 
-        private bool endApp = false;
+        private bool endApp;
 
         public void Run()
         {
