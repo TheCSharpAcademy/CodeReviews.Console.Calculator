@@ -86,10 +86,11 @@ namespace CalculatorLibrary
                     _writer.WriteValue("Multiply");
                     break;
                 case "d":
-                    while (num2 != 0)
+                    if (num2 != 0) 
                     {
-                        result = num1 / num2;
+                      result = num1 / num2;
                     }
+                    
                     _writer.WriteValue("Divide");
                     break;
                 case "p":
