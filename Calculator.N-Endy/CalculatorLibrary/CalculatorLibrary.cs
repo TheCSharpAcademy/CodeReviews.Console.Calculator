@@ -1,5 +1,4 @@
-﻿using System.Diagnostics;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
 namespace CalculatorLibrary
 {
@@ -7,15 +6,8 @@ namespace CalculatorLibrary
     public class Calculator
     {
         readonly JsonWriter writer;
-        // private readonly List<string> _listOfPreviousCalculations;
         public Calculator()
         {
-            // StreamWriter logFile = File.CreateText("calculator.log");
-            // Trace.Listeners.Add(new TextWriterTraceListener(logFile));
-            // Trace.AutoFlush = true;
-            // Trace.WriteLine("Starting Calculator Log");
-            // Trace.WriteLine(String.Format("Started {0}", System.DateTime.Now.ToString()));
-
             StreamWriter logFile = File.CreateText("calculatorlog.json");
             logFile.AutoFlush = true;
             writer = new JsonTextWriter(logFile)
@@ -41,17 +33,14 @@ namespace CalculatorLibrary
             {
                 case "a":
                     result = num1 + num2;
-                    //Trace.WriteLine(String.Format("{0} + {1} = {2}", num1, num2, result));
                     writer.WriteValue("Add");
                     break;
                 case "s":
                     result = num1 - num2;
-                    //Trace.WriteLine(String.Format("{0} - {1} = {2}", num1, num2, result));
                     writer.WriteValue("Subtract");
                     break;
                 case "m":
                     result = num1 * num2;
-                    //Trace.WriteLine(String.Format("{0} * {1} = {2}", num1, num2, result));
                     writer.WriteValue("Multiply");
                     break;
                 case "d":
@@ -59,18 +48,9 @@ namespace CalculatorLibrary
                     if (num2 != 0)
                     {
                         result = num1 / num2;
-                        //Trace.WriteLine(String.Format("{0} / {1} = {2}", num1, num2, result));
                         writer.WriteValue("Divide");
                     }
                     break;
-                // case "p":
-                //     // Print previous calculation list
-                //     ShowList(_listOfPreviousCalculations);
-                //     break;
-                // case "r":
-                //     // Delete previous calculation list
-                //     DeleteList(_listOfPreviousCalculations);
-                //     break;
                 default:
                     break;
             }
@@ -80,28 +60,6 @@ namespace CalculatorLibrary
 
             return result;
         }
-
-        // public void DeleteList(List<string> list)
-        // {
-        //     list.Clear();
-        // }
-
-        // public void ShowList(List<string> list)
-        // {
-        //     var num = 0;
-        //     foreach (var item in list)
-        //     {
-        //         Console.WriteLine("-------------------");
-        //         Console.WriteLine("Previous Calculations");
-        //         Console.WriteLine($"{num++} - {item}");
-        //         Console.WriteLine("-------------------");
-        //     }
-        // }
-
-        // public void AddPreviousCalculations(double num1, double num2, string op, double result)
-        // {
-        //     _listOfPreviousCalculations.Add($"{num1} {op} {num2} = {result}");
-        // }
 
         public void Finish()
         {

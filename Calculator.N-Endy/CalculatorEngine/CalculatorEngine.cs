@@ -105,9 +105,6 @@ namespace Calculator.N_Endy.CalculatorEngine
                     _userInteraction.ShowMessage("This operation will result in a mathematical error.\n");
                 else
                     _userInteraction.ShowMessage("Your result: {0:0.##}\n", result);
-
-                // Add previous result to list
-                // _calculator.AddPreviousCalculations(num1, num2, op, result);
             }
             catch (Exception e)
             {
