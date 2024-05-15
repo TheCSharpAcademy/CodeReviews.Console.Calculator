@@ -1,7 +1,7 @@
-﻿using Patryk_MM.Console.Calculator;
-using System.Net.Http.Headers;
+﻿using CalculatorLibrary;
 using System.Text.RegularExpressions;
 
+Calculator calculator = new Calculator();
 bool endApp = false;
 //Display title as the C# console calculator app.
 Console.WriteLine("Console Calculator in C#\r");
@@ -49,7 +49,7 @@ while (!endApp) {
         Console.WriteLine("Error: Unrecognized input.");
     } else {
         try {
-            result = Calculator.DoOperation(cleanNum1, cleanNum2, op);
+            result = calculator.DoOperation(cleanNum1, cleanNum2, op);
             if (double.IsNaN(result)) {
                 Console.WriteLine("Your operation will result in a mathematical error.");
             } else Console.WriteLine($"Your result: {result:0.##}");
@@ -61,7 +61,8 @@ while (!endApp) {
     Console.Write("Press n to close the app, press any other key to continue to next operation. ");
     if (Console.ReadLine() == "n") endApp = true;
     Console.WriteLine("\n");
-    
+ 
 }
 
+calculator.Finish();
 

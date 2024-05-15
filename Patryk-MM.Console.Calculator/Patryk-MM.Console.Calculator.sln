@@ -5,6 +5,8 @@ VisualStudioVersion = 17.9.34622.214
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Patryk-MM.Console.Calculator", "Patryk-MM.Console.Calculator\Patryk-MM.Console.Calculator.csproj", "{3C575982-7173-4710-AE3D-82B883B6C0CF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Patryk-MM.Console.CalculatorLibrary", "CalculatorLibrary\Patryk-MM.Console.CalculatorLibrary.csproj", "{20695036-646E-49AD-B058-1FB53113EAB4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{3C575982-7173-4710-AE3D-82B883B6C0CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3C575982-7173-4710-AE3D-82B883B6C0CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3C575982-7173-4710-AE3D-82B883B6C0CF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{20695036-646E-49AD-B058-1FB53113EAB4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{20695036-646E-49AD-B058-1FB53113EAB4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{20695036-646E-49AD-B058-1FB53113EAB4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{20695036-646E-49AD-B058-1FB53113EAB4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
