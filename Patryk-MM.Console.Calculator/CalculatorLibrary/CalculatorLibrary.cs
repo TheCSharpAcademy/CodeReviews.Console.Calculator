@@ -1,61 +1,80 @@
 ﻿using Newtonsoft.Json;
 using System.Diagnostics;
+using System.Runtime.CompilerServices;
 using System.Text.Json;
 
 namespace CalculatorLibrary;
 public class Calculator {
-    JsonWriter writer;
+    private const string FilePath = "calculator.json";
+    public int UseCount { get; set; }
+    public List<Calculation> Calculations { get; set; } = new List<Calculation>();
     public Calculator() {
-        StreamWriter logFile = File.CreateText("calculator.json");
-        logFile.AutoFlush = true;
-        writer = new JsonTextWriter(logFile);
-        writer.Formatting = Formatting.Indented;
-        writer.WriteStartObject();
-        writer.WritePropertyName("Operations");
-        writer.WriteStartArray();
+        ClearJsonFile();
     }
-    public double DoOperation(double num1, double num2, string op) {
-        double result = double.NaN; //
-        writer.WriteStartObject();
-        writer.WritePropertyName("Operand1");
-        writer.WriteValue(num1);
-        writer.WritePropertyName("Operand2");
-        writer.WriteValue(num2);
-        writer.WritePropertyName("Operation");
 
-        //Use switch statement to do the math
-        switch (op) {
-            case "a":
-                result = num1 + num2;
-                writer.WriteValue("Add");
+    private void ClearJsonFile() {
+        try {
+            File.WriteAllText(FilePath, "");
+        } catch (IOException e) {
+            Console.WriteLine("An error occurred while clearing the file: " + e.Message);
+        }
+    }
+
+    public Calculation HandleTwoParameterOperation(Calculation calc) {
+        switch (calc.Operation) {
+            case '+': // Addition
+                calc.Result = calc.Num1 + calc.Num2;
                 break;
-            case "s":
-                result = num1 - num2;
-                writer.WriteValue("Subtract");
+            case '-': // Subtraction
+                calc.Result = calc.Num1 + calc.Num2;
                 break;
-            case "m":
-                result = num1 * num2;
-                writer.WriteValue("Multiply");
+            case '*': // Multiplication
+                calc.Result = calc.Num1 + calc.Num2;
                 break;
-            case "d":
-                if (num1 != 0) {
-                    result = num1 / num2;
-                    writer.WriteValue("Divide");
+            case '/': // Division
+                while (calc.Num2 == 0) {
+                    Console.Write("Please provide a non-zero divisor:");
+                    double temp;
+
+                    while (!double.TryParse(Console.ReadLine(), out temp)) {
+                        Console.Write("Please input a valid numeric value: ");
+                    }
+                    calc.Num2 = temp;
                 }
+                calc.Result = calc.Num1 / calc.Num2;
                 break;
-            default:
+            case 'E': // Exponentiation
+                calc.Result = Math.Pow(calc.Num1, calc.Num2);
                 break;
         }
+        Console.WriteLine($"\rResult: {calc.Result}");
 
-        writer.WritePropertyName("Result");
-        writer.WriteValue(result);
-        writer.WriteEndObject();
-        return result;
+        return calc;
     }
 
-    public void Finish() {
-        writer.WriteEndArray();
-        writer.WriteEndObject();
-        writer.Close();
+    public Calculation HandleSingleParameterOperation(Calculation calc) {
+
+        switch (calc.Operation) {
+            case 'R': // Square Root
+                calc.Result = Math.Sqrt(calc.Num1);
+                break;
+            case 'P': // 10^x
+                calc.Result = Math.Pow(10, calc.Num1);
+                break;
+            case 'S': // Sine
+                calc.Result = Math.Sin(calc.Num1);
+                break;
+            case 'C': // Cosine
+                calc.Result = Math.Cos(calc.Num1);
+                break;
+            case 'T': // Tangent
+                calc.Result = Math.Tan(calc.Num1);
+                break;
+            default:
+                throw new ArgumentException("Invalid operation");
+        }
+        Console.WriteLine($"\rResult: {calc.Result}");
+        return calc;
     }
+
 }

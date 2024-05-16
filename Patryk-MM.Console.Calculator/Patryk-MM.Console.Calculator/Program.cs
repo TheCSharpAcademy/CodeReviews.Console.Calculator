@@ -1,68 +1,110 @@
 ﻿using CalculatorLibrary;
+using System.Runtime.CompilerServices;
 using System.Text.RegularExpressions;
 
+char[] validMenuInputs = ['P', 'L', 'N', 'Q'];
+char[] validTwoParamInputs = { '+', '-', '*', '/', 'E' };
+char[] validSingleParamInputs = { 'R', 'P', 'S', 'C', 'T' };
+
+
+
+Dictionary<char, string> operations = new Dictionary<char, string>() {
+    {'+', "Addition"},
+    {'-', "Subtraction"},
+    {'*', "Multiplication"},
+    {'/', "Division"},
+    {'E', "Exponentiation (x^y)"},
+    {'R', "Square Root"},
+    {'P', "10^x"},
+    {'S', "Sine"},
+    {'C', "Cosine"},
+    {'T', "Tangent"}
+};
+
 Calculator calculator = new Calculator();
-bool endApp = false;
+
+
+
 //Display title as the C# console calculator app.
 Console.WriteLine("Console Calculator in C#\r");
 Console.WriteLine("------------------------\n");
 
-while (!endApp) {
-    //Declare variables and set to empty.
-    //Use Nullable types to match type of System.Console.ReadLine
-    string? numInput1 = "";
-    string? numInput2 = "";
-    double result = 0;
+while (true) {
+    PrintMenu();
+    char input = GetValidInput("\nChoose the option (press Q for displaying menu): ", validMenuInputs);
+    
+    switch (input) {
+        case 'P':
+            PrintOperations();
+            char operationChoice = GetValidInput("Choose the operation you want to perform: ", validTwoParamInputs.Concat(validSingleParamInputs).ToArray());
 
-    //Ask the user to input the first number.
-    Console.Write("Type a number, and then press Enter: ");
-    numInput1 = Console.ReadLine();
+            if (validTwoParamInputs.Contains(operationChoice)) {
+                double num1 = GetNumber("Enter the first number: ");
+                double num2 = GetNumber("Enter the second number: ");
+                //Call below both handles the calculation and adds it to the start of the list.
+                calculator.Calculations.Insert(0, calculator.HandleTwoParameterOperation(new Calculation(num1, num2, operationChoice)));
+            } else if (validSingleParamInputs.Contains(operationChoice)) {
+                double num = GetNumber("Enter the number: ");
+                //Call below both handles the calculation and adds it to the list.
+                calculator.Calculations.Insert(0, calculator.HandleSingleParameterOperation(new Calculation(num, operationChoice)));
+            }
 
-    double cleanNum1 = 0;
-    while (!double.TryParse(numInput1, out cleanNum1)) {
-        Console.Write("This is not a valid input. Please enter a numeric value: ");
-        numInput1 = Console.ReadLine();
+            break;
+        case 'L':
+
+            Console.WriteLine("Calculation history:");
+            foreach (var calc in calculator.Calculations) {
+                if (validTwoParamInputs.Contains(calc.Operation)) {
+                    Console.WriteLine($"\t{calculator.Calculations.IndexOf(calc) + 1, -2} " +
+                        $"| Operation: {operations[calc.Operation], -20} | Numbers: {calc.Num1}, {calc.Num2} | Result: {calc.Result}");
+                } else {
+                    Console.WriteLine($"\t{calculator.Calculations.IndexOf(calc) + 1, -2} " +
+                        $"| Operation: {operations[calc.Operation], -20} | Number: {calc.Num1} | Result: {calc.Result:0.##}");
+                }
+            }
+            break;
+        case 'Q':
+            PrintMenu();
+            break;
     }
 
-    //Ask the user to input the second number.
-    Console.Write("Type a number, and then press Enter: ");
-    numInput2 = Console.ReadLine();
-
-    double cleanNum2 = 0;
-    while (!double.TryParse(numInput2, out cleanNum2)) {
-        Console.Write("This is not a valid input. Please enter a numeric value: ");
-        numInput2 = Console.ReadLine();
-    }
-
-    // Ask the user to choose an operator.
-    Console.WriteLine("Choose an operator from the following list:");
-    Console.WriteLine("\ta - Add");
-    Console.WriteLine("\ts - Subtract");
-    Console.WriteLine("\tm - Multiply");
-    Console.WriteLine("\td - Divide");
-    Console.Write("Your option? ");
-
-    string? op = Console.ReadLine();
-
-    //Validate if input is not null and matches the pattern
-    if (op == null || !Regex.IsMatch(op, "[a|s|m|d]")) {
-        Console.WriteLine("Error: Unrecognized input.");
-    } else {
-        try {
-            result = calculator.DoOperation(cleanNum1, cleanNum2, op);
-            if (double.IsNaN(result)) {
-                Console.WriteLine("Your operation will result in a mathematical error.");
-            } else Console.WriteLine($"Your result: {result:0.##}");
-        } catch (Exception e) { Console.WriteLine("An error occured during the operation.\n" + e.Message); }
-    }
-    Console.WriteLine("------------------------\n");
-
-    //Wait for the user to respond before closing.
-    Console.Write("Press n to close the app, press any other key to continue to next operation. ");
-    if (Console.ReadLine() == "n") endApp = true;
-    Console.WriteLine("\n");
- 
+    //What happens after each calculation
 }
 
-calculator.Finish();
+void PrintMenu() {
+    Console.WriteLine("\nMenu:");
+    Console.WriteLine("\tP - Perform an mathematical operation.");
+    Console.WriteLine("\tL - View a list of recent operations.");
+    Console.WriteLine("\tN - Exit the game");
+}
+void PrintOperations() {
+    Console.WriteLine("\nOperations:");
+    foreach (var operation in operations) {
+        Console.WriteLine($"\t{operation.Key} - {operation.Value}");
+    }
+}
 
+
+static char GetValidInput(string prompt, char[] validInputs) {
+    char input;
+    do {
+        Console.Write(prompt);
+        input = Char.ToUpper(Console.ReadKey().KeyChar);
+        Console.WriteLine();
+        if (!validInputs.Contains(input)) {
+            Console.WriteLine("\nPlease provide a valid option from the menu.\n");
+        }
+    } while (!validInputs.Contains(input));
+    return input;
+}
+
+static double GetNumber(string prompt) {
+    double number;
+    while (true) {
+        Console.Write(prompt);
+        if (double.TryParse(Console.ReadLine(), out number)) {
+            return number;
+        }
+        Console.WriteLine("Invalid input. Please enter a valid number.");
+    }
+}
