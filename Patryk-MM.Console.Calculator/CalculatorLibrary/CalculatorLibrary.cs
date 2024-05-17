@@ -1,7 +1,4 @@
 ﻿using Newtonsoft.Json;
-using System.Diagnostics;
-using System.Runtime.CompilerServices;
-using System.Text.Json;
 
 namespace CalculatorLibrary;
 public class Calculator {
@@ -10,6 +7,13 @@ public class Calculator {
     public List<Calculation> Calculations { get; set; } = new List<Calculation>();
     public Calculator() {
         ClearJsonFile();
+    }
+
+    public void WriteToJson() {
+        using(StreamWriter sw = new(FilePath)) {
+            string json = JsonConvert.SerializeObject(Calculations, Formatting.Indented);
+            sw.WriteLine(json);
+        }
     }
 
     private void ClearJsonFile() {
@@ -26,18 +30,18 @@ public class Calculator {
                 calc.Result = calc.Num1 + calc.Num2;
                 break;
             case '-': // Subtraction
-                calc.Result = calc.Num1 + calc.Num2;
+                calc.Result = calc.Num1 - calc.Num2;
                 break;
             case '*': // Multiplication
-                calc.Result = calc.Num1 + calc.Num2;
+                calc.Result = calc.Num1 * calc.Num2;
                 break;
             case '/': // Division
                 while (calc.Num2 == 0) {
-                    Console.Write("Please provide a non-zero divisor:");
+                    TextFormat.Write("Please provide a non-zero divisor: ", ConsoleColor.Red);
                     double temp;
 
                     while (!double.TryParse(Console.ReadLine(), out temp)) {
-                        Console.Write("Please input a valid numeric value: ");
+                        TextFormat.Write("Please input a valid numeric value: ", ConsoleColor.Red);
                     }
                     calc.Num2 = temp;
                 }
@@ -47,8 +51,7 @@ public class Calculator {
                 calc.Result = Math.Pow(calc.Num1, calc.Num2);
                 break;
         }
-        Console.WriteLine($"\rResult: {calc.Result}");
-
+        TextFormat.WriteLine($"\rResult: {calc.Result}", ConsoleColor.Cyan);
         return calc;
     }
 
@@ -73,8 +76,9 @@ public class Calculator {
             default:
                 throw new ArgumentException("Invalid operation");
         }
-        Console.WriteLine($"\rResult: {calc.Result}");
+        TextFormat.WriteLine($"\rResult: {calc.Result}", ConsoleColor.Cyan);
         return calc;
     }
+
 
 }

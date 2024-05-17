@@ -9,6 +9,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="ConsoleTables" Version="2.6.1" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\CalculatorLibrary\Patryk-MM.Console.CalculatorLibrary.csproj" />
   </ItemGroup>
 
