@@ -24,9 +24,9 @@ Calculator calculator = new Calculator();
 //Display title as the C# console calculator app.
 TextFormat.WriteLine("Console Calculator in C#", ConsoleColor.Magenta);
 TextFormat.WriteLine("------------------------", ConsoleColor.Magenta);
+PrintMenu();
 
 while (true) {
-    PrintMenu();
     char input = GetValidInput("Choose the option (press Q for displaying menu): ", validMenuInputs);
 
     switch (input) {
@@ -44,15 +44,17 @@ while (true) {
                 //Call below both handles the calculation and adds it to the list.
                 calculator.Calculations.Add(calculator.HandleSingleParameterOperation(new Calculation(num, operationChoice)));
             }
+            PrintMenu();
             break;
         case 'L':
             GetCalculationHistory();
+            PrintMenu();
             break;
         case 'Q':
             PrintMenu();
             break;
         case 'N':
-            TextFormat.WriteLine("Thank you for using my calculator!", ConsoleColor.Magenta);
+            TextFormat.WriteLine("Thank you for using my calculator! :)", ConsoleColor.Magenta);
             return;
     }
     calculator.WriteToJson();
