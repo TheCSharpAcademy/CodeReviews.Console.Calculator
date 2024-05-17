@@ -45,12 +45,17 @@ namespace CalculatorLibrary
                     break;
                 case "d":
                     // Ask the user to enter a non-zero divisor.
-                    if (num2 != 0)
+                    if (num2 == 0)
+                    {
+                        writer.WriteValue("Divide");
+                        break;
+                    }
+                    else
                     {
                         result = num1 / num2;
                         writer.WriteValue("Divide");
-                    }
                     break;
+                    }
                 default:
                     break;
             }
