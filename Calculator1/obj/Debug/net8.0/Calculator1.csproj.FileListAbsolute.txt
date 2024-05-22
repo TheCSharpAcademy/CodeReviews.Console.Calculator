@@ -1,0 +1,14 @@
+E:\visual\CsharpProjects\Calculator1\bin\Debug\net8.0\Calculator1.exe
+E:\visual\CsharpProjects\Calculator1\bin\Debug\net8.0\Calculator1.deps.json
+E:\visual\CsharpProjects\Calculator1\bin\Debug\net8.0\Calculator1.runtimeconfig.json
+E:\visual\CsharpProjects\Calculator1\bin\Debug\net8.0\Calculator1.dll
+E:\visual\CsharpProjects\Calculator1\bin\Debug\net8.0\Calculator1.pdb
+E:\visual\CsharpProjects\Calculator1\obj\Debug\net8.0\Calculator1.GeneratedMSBuildEditorConfig.editorconfig
+E:\visual\CsharpProjects\Calculator1\obj\Debug\net8.0\Calculator1.AssemblyInfoInputs.cache
+E:\visual\CsharpProjects\Calculator1\obj\Debug\net8.0\Calculator1.AssemblyInfo.cs
+E:\visual\CsharpProjects\Calculator1\obj\Debug\net8.0\Calculator1.csproj.CoreCompileInputs.cache
+E:\visual\CsharpProjects\Calculator1\obj\Debug\net8.0\Calculator1.dll
+E:\visual\CsharpProjects\Calculator1\obj\Debug\net8.0\refint\Calculator1.dll
+E:\visual\CsharpProjects\Calculator1\obj\Debug\net8.0\Calculator1.pdb
+E:\visual\CsharpProjects\Calculator1\obj\Debug\net8.0\Calculator1.genruntimeconfig.cache
+E:\visual\CsharpProjects\Calculator1\obj\Debug\net8.0\ref\Calculator1.dll
