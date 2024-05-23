@@ -1,5 +1,6 @@
-﻿using System.Text.RegularExpressions;
-using Console.Calculator.TanukiLoop;
+﻿namespace CalculatorProgram;
+using System.Text.RegularExpressions;
+using CalculatorLibrary;
 
 class Program
 {
@@ -10,6 +11,8 @@ class Program
         System.Console.WriteLine("Console Calculator in C#\r");
         System.Console.WriteLine("------------------------\n");
 
+
+        Calculator calculator = new Calculator();
 
         while (!endApp)
         {
@@ -60,7 +63,7 @@ class Program
             {
                 try
                 {
-                    result = Calculator.DoOperation(cleanNum1, cleanNum2, op);
+                    result = calculator.DoOperation(cleanNum1, cleanNum2, op);
 
                     if (double.IsNaN(result))
                     {
