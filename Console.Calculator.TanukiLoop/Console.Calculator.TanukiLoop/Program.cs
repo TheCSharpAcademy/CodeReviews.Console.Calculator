@@ -94,6 +94,7 @@ class Program
             System.Console.WriteLine("\n");
         }
 
+        calculator.Finish();
         return;
     }
 }
