@@ -1,49 +1,93 @@
-﻿// Declare variables and then initialize to zero.
-double num1 = 0; double num2 = 0;
+﻿using System.Text.RegularExpressions;
+using Console.Calculator.TanukiLoop;
 
-// Display title as the C# console calculator app.
-Console.WriteLine("Console Calculator in C#\r");
-Console.WriteLine("------------------------\n");
-
-// Ask the user to type the first number.
-Console.WriteLine("Type a number, and then press Enter");
-num1 = Convert.ToDouble(Console.ReadLine());
-
-// Ask the user to type the second number.
-Console.WriteLine("Type another number, and then press Enter");
-num2 = Convert.ToDouble(Console.ReadLine());
-
-// Ask the user to choose an option.
-Console.WriteLine("Choose an option from the following list:");
-Console.WriteLine("\ta - Add");
-Console.WriteLine("\ts - Subtract");
-Console.WriteLine("\tm - Multiply");
-Console.WriteLine("\td - Divide");
-Console.Write("Your option? ");
-
-// Use a switch statement to do the math.
-switch (Console.ReadLine())
+class Program
 {
-    case "a" :
-        Console.WriteLine($"Your result: {num1} + {num2} = " + (num1 + num2));
-        break;
-    case "s":
-        Console.WriteLine($"Your result: {num1} - {num2} = " + (num1 - num2));
-        break;
-    case "m":
-        Console.WriteLine($"Your result: {num1} * {num2} = " + (num1 * num2));
-        break;
-    case "d":
-        // Ask the user to enter a non-zero divisor until they do so.
-        while (num2 == 0)
+    static void Main(string[] args)
+    {
+        bool endApp = false;
+        // Display the title as the C# console calculator app.
+        System.Console.WriteLine("Console Calculator in C#\r");
+        System.Console.WriteLine("------------------------\n");
+
+
+        while (!endApp)
         {
-            Console.WriteLine("Enter a non-zero divisor: ");
-            num2 = Convert.ToDouble(Console.ReadLine());
+            // Declare variables and set to empty
+            // Use Nullable types (with ?) to match type of System.Console.ReadLine
+            string? numInput1 = "";
+            string? numInput2 = "";
+            double result = 0;
+            
+            // Ask the user to type the first character
+            System.Console.Write("Type a number, and then press Enter: ");
+            numInput1 = System.Console.ReadLine();
+
+            double cleanNum1 = 0;
+            while (!double.TryParse(numInput1, out cleanNum1))
+            {
+                System.Console.Write("This is not valid input. Please enter a numeric value: ");
+                numInput1 = System.Console.ReadLine();
+            }
+            
+            // Ask the user to type the second number.
+            System.Console.Write("Type another number, and then press Enter: ");
+            numInput2 = System.Console.ReadLine();
+
+            double cleanNum2 = 0;
+            while (!double.TryParse(numInput2, out cleanNum2))
+            {
+                System.Console.Write("This is not valid input. Please enter a numeric value: ");
+                numInput2 = System.Console.ReadLine();
+            }
+            
+            // Ask the user to choose an operator.
+            System.Console.WriteLine("Choose an operator from the following list:");
+            System.Console.WriteLine("\ta - Add");
+            System.Console.WriteLine("\ts - Subtract");
+            System.Console.WriteLine("\tm - Multiply");
+            System.Console.WriteLine("\td 0 Divide");
+            System.Console.Write("Your option? ");
+
+            string? op = System.Console.ReadLine();
+            
+            // VAlidate input is not null, and matches the pattern
+            if (op == null || !Regex.IsMatch(op, "[a|s|m|d]"))
+            {
+                System.Console.WriteLine("Error: Unrecognized input.");
+            }
+            else
+            {
+                try
+                {
+                    result = Calculator.DoOperation(cleanNum1, cleanNum2, op);
+
+                    if (double.IsNaN(result))
+                    {
+                        System.Console.WriteLine("This operation will result in a mathermatical error.\n");
+                    }
+                    else
+                    {
+                        System.Console.WriteLine("Your result: {0:0.##}\n", result);
+                    }
+                }
+                catch (Exception e)
+                {
+                    System.Console.WriteLine("Oh no! An exception occured trying to do the math.\n - Details: " + e.Message);
+                }
+            }
+            System.Console.WriteLine("------------------------\n");
+            
+            // Wait for the user to respond before closing.
+            System.Console.Write("Press 'n' and Enter to close the app, or press any other key and Enter to continue: ");
+            if (System.Console.ReadLine() == "n")
+            {
+                endApp = true;
+            }
+            
+            System.Console.WriteLine("\n");
+
         }
-        Console.WriteLine($"Your result: {num1} / {num2} = " + (num1 / num2));
-        break;
+        return;
+    }
 }
-
-// Wait for the user to respond before closing.
-
-Console.WriteLine("Press any key to close the Calculator console app...");
