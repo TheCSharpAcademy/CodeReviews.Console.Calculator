@@ -18,7 +18,7 @@ class Program
             string? numInput1 = "";
             string? numInput2 = "";
             double result = 0;
-            
+
             // Ask the user to type the first character
             System.Console.Write("Type a number, and then press Enter: ");
             numInput1 = System.Console.ReadLine();
@@ -29,7 +29,7 @@ class Program
                 System.Console.Write("This is not valid input. Please enter a numeric value: ");
                 numInput1 = System.Console.ReadLine();
             }
-            
+
             // Ask the user to type the second number.
             System.Console.Write("Type another number, and then press Enter: ");
             numInput2 = System.Console.ReadLine();
@@ -40,7 +40,7 @@ class Program
                 System.Console.Write("This is not valid input. Please enter a numeric value: ");
                 numInput2 = System.Console.ReadLine();
             }
-            
+
             // Ask the user to choose an operator.
             System.Console.WriteLine("Choose an operator from the following list:");
             System.Console.WriteLine("\ta - Add");
@@ -50,7 +50,7 @@ class Program
             System.Console.Write("Your option? ");
 
             string? op = System.Console.ReadLine();
-            
+
             // VAlidate input is not null, and matches the pattern
             if (op == null || !Regex.IsMatch(op, "[a|s|m|d]"))
             {
@@ -73,21 +73,24 @@ class Program
                 }
                 catch (Exception e)
                 {
-                    System.Console.WriteLine("Oh no! An exception occured trying to do the math.\n - Details: " + e.Message);
+                    System.Console.WriteLine("Oh no! An exception occured trying to do the math.\n - Details: " +
+                                             e.Message);
                 }
             }
+
             System.Console.WriteLine("------------------------\n");
-            
+
             // Wait for the user to respond before closing.
-            System.Console.Write("Press 'n' and Enter to close the app, or press any other key and Enter to continue: ");
+            System.Console.Write(
+                "Press 'n' and Enter to close the app, or press any other key and Enter to continue: ");
             if (System.Console.ReadLine() == "n")
             {
                 endApp = true;
             }
-            
-            System.Console.WriteLine("\n");
 
+            System.Console.WriteLine("\n");
         }
+
         return;
     }
 }
