@@ -1,0 +1,17 @@
+{
+  "Operations": [
+    {
+      "Operand1": 23.0,
+      "Operand2": 45.0,
+      "Operation": "Add",
+      "Result": 68.0
+    },
+    {
+      "Operand1": 23.0,
+      "Operand2": 23.0,
+      "Operation": "Add",
+      "Result": 46.0
+    }
+  ],
+  "Number of times the calculator was used": 2
+}
