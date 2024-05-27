@@ -8,6 +8,7 @@ namespace CalculatorProgram
     {
         static void Main(string[] args)
         {
+            int count = 0;
             bool endApp = false;
             // Display title as the C# console calculator app.
             Console.WriteLine("Console Calculator in C#\r");
@@ -55,25 +56,30 @@ namespace CalculatorProgram
                 string? op = Console.ReadLine();
 
                 // Validate input is not null, and matches the pattern
-                if (op == null || ! Regex.IsMatch(op, "[a|s|m|d]"))
+                if (op == null || !Regex.IsMatch(op, "[a|s|m|d]"))
                 {
-                   Console.WriteLine("Error: Unrecognized input.");
+                    Console.WriteLine("Error: Unrecognized input.");
                 }
                 else
-                { 
-                   try
-                   {
-                       result = calculator.DoOperation(cleanNum1, cleanNum2, op); 
-                       if (double.IsNaN(result))
-                       {
-                           Console.WriteLine("This operation will result in a mathematical error.\n");
-                       }
-                       else Console.WriteLine("Your result: {0:0.##}\n", result);
-                   }
-                   catch (Exception e)
-                   {
-                       Console.WriteLine("Oh no! An exception occurred trying to do the math.\n - Details: " + e.Message);
-                   }
+                {
+                    try
+                    {
+                        result = calculator.DoOperation(cleanNum1, cleanNum2, op);
+                        if (double.IsNaN(result))
+                        {
+                            Console.WriteLine("This operation will result in a mathematical error.\n");
+                        }
+                        else
+                        {
+                            count++;
+                            Console.WriteLine("Your result: {0:0.##}\n", result);
+                            Console.WriteLine($"Calculator has been used {count} times this session.");
+                        }
+                    }
+                    catch (Exception e)
+                    {
+                        Console.WriteLine("Oh no! An exception occurred trying to do the math.\n - Details: " + e.Message);
+                    }
                 }
                 Console.WriteLine("------------------------\n");
 
