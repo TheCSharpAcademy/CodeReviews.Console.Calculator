@@ -1,96 +1,72 @@
 ﻿using CalculatorLibrary;
 using System.Text.RegularExpressions;
 
-namespace CalculatorProgram
+var userInteractions = new UserInteractions();
+var calculator = new Calculator();
+var calculationsList = new List<Calculations>();
+int count = 0;
+
+userInteractions.Intro();
+
+while (true)
 {
+    bool usePreviousCalc = false;
+    string? option = "";
+    double cleanNum1 = 0, cleanNum2 = 0;
 
-    class Program
+    // only show previous calculation menu if we have calculations already
+    if (calculationsList.Count > 0) option = userInteractions.CalculationsOptions();
+
+    switch (option?.ToLower())
     {
-        static void Main(string[] args)
-        {
-            int count = 0;
-            bool endApp = false;
-            // Display title as the C# console calculator app.
-            Console.WriteLine("Console Calculator in C#\r");
-            Console.WriteLine("------------------------\n");
-
-            Calculator calculator = new Calculator();
-            while (!endApp)
+        case "p" when calculationsList.Count > 0:
             {
-                // Declare variables and set to empty.
-                // Use Nullable types (with ?) to match type of System.Console.ReadLine
-                string? numInput1 = "";
-                string? numInput2 = "";
-                double result = 0;
-
-                // Ask the user to type the first number.
-                Console.Write("Type a number, and then press Enter: ");
-                numInput1 = Console.ReadLine();
-
-                double cleanNum1 = 0;
-                while (!double.TryParse(numInput1, out cleanNum1))
-                {
-                    Console.Write("This is not valid input. Please enter an integer value: ");
-                    numInput1 = Console.ReadLine();
-                }
-
-                // Ask the user to type the second number.
-                Console.Write("Type another number, and then press Enter: ");
-                numInput2 = Console.ReadLine();
-
-                double cleanNum2 = 0;
-                while (!double.TryParse(numInput2, out cleanNum2))
-                {
-                    Console.Write("This is not valid input. Please enter an integer value: ");
-                    numInput2 = Console.ReadLine();
-                }
-
-                // Ask the user to choose an operator.
-                Console.WriteLine("Choose an operator from the following list:");
-                Console.WriteLine("\ta - Add");
-                Console.WriteLine("\ts - Subtract");
-                Console.WriteLine("\tm - Multiply");
-                Console.WriteLine("\td - Divide");
-                Console.Write("Your option? ");
-
-                string? op = Console.ReadLine();
-
-                // Validate input is not null, and matches the pattern
-                if (op == null || !Regex.IsMatch(op, "[a|s|m|d]"))
-                {
-                    Console.WriteLine("Error: Unrecognized input.");
-                }
-                else
-                {
-                    try
-                    {
-                        result = calculator.DoOperation(cleanNum1, cleanNum2, op);
-                        if (double.IsNaN(result))
-                        {
-                            Console.WriteLine("This operation will result in a mathematical error.\n");
-                        }
-                        else
-                        {
-                            count++;
-                            Console.WriteLine("Your result: {0:0.##}\n", result);
-                            Console.WriteLine($"Calculator has been used {count} times this session.");
-                        }
-                    }
-                    catch (Exception e)
-                    {
-                        Console.WriteLine("Oh no! An exception occurred trying to do the math.\n - Details: " + e.Message);
-                    }
-                }
-                Console.WriteLine("------------------------\n");
-
-                // Wait for the user to respond before closing.
-                Console.Write("Press 'n' and Enter to close the app, or press any other key and Enter to continue: ");
-                if (Console.ReadLine() == "n") endApp = true;
-
-                Console.WriteLine("\n"); // Friendly linespacing.
+                usePreviousCalc = true;
+                userInteractions.DisplayCalculations(calculationsList);
+                int selectedIndex = userInteractions.SelectCalculation(calculationsList);
+                cleanNum1 = calculationsList[selectedIndex].num1;
+                cleanNum2 = calculationsList[selectedIndex].num2;
+                break;
             }
-            calculator.Finish();
-            return;
+        case "d" when calculationsList.Count > 0:
+            userInteractions.ClearCalculations(calculationsList);
+            break;
+    }
+
+    if (!usePreviousCalc)
+    {
+        Console.Write("Type a number, and then press Enter: ");
+        cleanNum1 = userInteractions.GetNumInput(Console.ReadLine());
+
+        Console.Write("Type another number, and then press Enter: ");
+        cleanNum2 = userInteractions.GetNumInput(Console.ReadLine());
+    }
+
+    string? op = userInteractions.ChooseOperation();
+
+    if (op == null || !Regex.IsMatch(op, "[a|s|m|d]")) userInteractions.InvalidInput();
+
+    else
+    {
+        try
+        {
+            double result = calculator.DoOperation(cleanNum1, cleanNum2, op);
+
+            if (double.IsNaN(result)) userInteractions.InvalidInput();
+
+            else
+            {
+                count++;
+                calculationsList.Add(new Calculations(cleanNum1, cleanNum2, op, result));
+                Console.WriteLine("Your result: {0:0.##}\n", result);
+                userInteractions.TimesRan(count);
+            }
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine("Oh no! An exception occurred trying to do the math.\n - Details: " + e.Message);
         }
     }
+    userInteractions.EndOptions();
+    Console.Clear();
 }
