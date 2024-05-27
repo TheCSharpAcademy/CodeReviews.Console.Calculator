@@ -5,9 +5,9 @@ VisualStudioVersion = 17.7.34003.232
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Console.Calculator.Johay90", "Console.Calculator.Johay90.csproj", "{C6470216-A6D6-444B-B9AE-9470A55E2A34}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NewFolder1", "NewFolder1", "{D039802A-1DA3-4AA3-9E52-96E62ABA2259}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CalculatorLibrary", "CalculatorLibrary", "{D039802A-1DA3-4AA3-9E52-96E62ABA2259}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CalculatorLibrary", "CalculatorLibrary\CalculatorLibrary.csproj", "{44CC9A42-3AA3-4BFD-8CBE-3F2E00A8EB2B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CalculatorLibrary", "CalculatorLibrary\CalculatorLibrary.csproj", "{44CC9A42-3AA3-4BFD-8CBE-3F2E00A8EB2B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
