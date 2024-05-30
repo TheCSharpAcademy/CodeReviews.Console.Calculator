@@ -34,7 +34,7 @@ namespace CalculatorProgram
                 while (!double.TryParse(numInput2, out cleanNum2))
                 {
                     Console.Write("This is not valid input. Please enter a numeric value: ");
-                    numInput1 = Console.ReadLine();
+                    numInput2 = Console.ReadLine();
                 }
 
                 Console.WriteLine("Choose an operator from the following list:");
