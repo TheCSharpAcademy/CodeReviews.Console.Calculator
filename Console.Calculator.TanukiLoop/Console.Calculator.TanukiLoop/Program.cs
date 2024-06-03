@@ -49,7 +49,7 @@ class Program
             System.Console.WriteLine("\ta - Add");
             System.Console.WriteLine("\ts - Subtract");
             System.Console.WriteLine("\tm - Multiply");
-            System.Console.WriteLine("\td 0 Divide");
+            System.Console.WriteLine("\td - Divide");
             System.Console.Write("Your option? ");
 
             string? op = System.Console.ReadLine();
