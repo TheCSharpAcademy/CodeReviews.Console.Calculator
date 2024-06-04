@@ -1,8 +1,4 @@
-﻿using Spectre.Console;
-
-namespace CalculatorProgram;
-
-using System.Text.RegularExpressions;
+﻿namespace CalculatorProgram;
 using CalculatorLibrary;
 
 class Program
@@ -13,20 +9,12 @@ class Program
         // Display the title as the C# console calculator app.
         System.Console.WriteLine("Console Calculator in C#\r");
         System.Console.WriteLine("------------------------\n");
-
-
+        
         CalculatorPlus calculator = new();
-        // calculator.DoOperation(1, 5, "a");
-        // calculator.DoOperation(2, 8, "a");
 
-        // UserInterface.PreviousCalculationResultPrompt(calculator.History);
-
-
-        //
         while (!endApp)
         {
             var menuSelection = UserInterface.MainMenuPrompt(calculator.History);
-
 
             switch (menuSelection)
             {
@@ -51,21 +39,20 @@ class Program
                         var result = calculator.DoOperation(operand1, operand2, operationLetter);
                         if (double.IsNaN(result))
                         {
-                            System.Console.WriteLine("This operation will result in a mathermatical error.\n");
+                            Console.WriteLine("This operation will result in a mathermatical error.\n");
                         }
                         else
                         {
-                            System.Console.WriteLine("Your result: {0:0.##}\n", result);
+                            Console.WriteLine("Your result: {0:0.##}\n", result);
                         }
 
-                        // AnsiConsole.WriteLine($"Result: {result}");
                         Console.WriteLine("Press any key to continue");
                         Console.ReadKey();
                     }
                     catch (Exception e)
                     {
-                        System.Console.WriteLine("Oh no! An exception occured trying to do the math.\n - Details: " +
-                                                 e.Message);
+                        Console.WriteLine("Oh no! An exception occured trying to do the math.\n - Details: " +
+                                          e.Message);
                     }
 
                     break;
