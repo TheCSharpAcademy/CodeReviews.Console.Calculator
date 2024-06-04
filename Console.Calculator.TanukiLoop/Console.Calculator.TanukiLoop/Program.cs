@@ -1,4 +1,7 @@
-﻿namespace CalculatorProgram;
+﻿using Spectre.Console;
+
+namespace CalculatorProgram;
+
 using System.Text.RegularExpressions;
 using CalculatorLibrary;
 
@@ -12,89 +15,61 @@ class Program
         System.Console.WriteLine("------------------------\n");
 
 
-        Calculator calculator = new Calculator();
+        CalculatorPlus calculator = new();
+        // calculator.DoOperation(1, 5, "a");
+        // calculator.DoOperation(2, 8, "a");
 
+        // UserInterface.PreviousCalculationResultPrompt(calculator.History);
+
+
+        //
         while (!endApp)
         {
-            // Declare variables and set to empty
-            // Use Nullable types (with ?) to match type of System.Console.ReadLine
-            string? numInput1 = "";
-            string? numInput2 = "";
-            double result = 0;
+            var menuSelection = UserInterface.MainMenuPrompt(calculator.History);
 
-            // Ask the user to type the first character
-            System.Console.Write("Type a number, and then press Enter: ");
-            numInput1 = System.Console.ReadLine();
 
-            double cleanNum1 = 0;
-            while (!double.TryParse(numInput1, out cleanNum1))
+            switch (menuSelection)
             {
-                System.Console.Write("This is not valid input. Please enter a numeric value: ");
-                numInput1 = System.Console.ReadLine();
-            }
+                case "Clear Calculation History":
+                    calculator.ClearHistory();
+                    break;
+                case "Quit":
+                    endApp = true;
+                    Environment.Exit(0);
+                    break;
+                // Add, Subtract, Multiply, Divide at this point
+                default:
+                    // Ask for operands
 
-            // Ask the user to type the second number.
-            System.Console.Write("Type another number, and then press Enter: ");
-            numInput2 = System.Console.ReadLine();
+                    var operand1 = UserInterface.PromptForNumberOrCalculationResult(calculator.History);
+                    var operand2 = UserInterface.PromptForNumberOrCalculationResult(calculator.History);
 
-            double cleanNum2 = 0;
-            while (!double.TryParse(numInput2, out cleanNum2))
-            {
-                System.Console.Write("This is not valid input. Please enter a numeric value: ");
-                numInput2 = System.Console.ReadLine();
-            }
-
-            // Ask the user to choose an operator.
-            System.Console.WriteLine("Choose an operator from the following list:");
-            System.Console.WriteLine("\ta - Add");
-            System.Console.WriteLine("\ts - Subtract");
-            System.Console.WriteLine("\tm - Multiply");
-            System.Console.WriteLine("\td - Divide");
-            System.Console.Write("Your option? ");
-
-            string? op = System.Console.ReadLine();
-
-            // VAlidate input is not null, and matches the pattern
-            if (op == null || !Regex.IsMatch(op, "[a|s|m|d]"))
-            {
-                System.Console.WriteLine("Error: Unrecognized input.");
-            }
-            else
-            {
-                try
-                {
-                    result = calculator.DoOperation(cleanNum1, cleanNum2, op);
-
-                    if (double.IsNaN(result))
+                    // convert to operation string
+                    var operationLetter = menuSelection.ToLower().Substring(0, 1);
+                    try
                     {
-                        System.Console.WriteLine("This operation will result in a mathermatical error.\n");
+                        var result = calculator.DoOperation(operand1, operand2, operationLetter);
+                        if (double.IsNaN(result))
+                        {
+                            System.Console.WriteLine("This operation will result in a mathermatical error.\n");
+                        }
+                        else
+                        {
+                            System.Console.WriteLine("Your result: {0:0.##}\n", result);
+                        }
+
+                        // AnsiConsole.WriteLine($"Result: {result}");
+                        Console.WriteLine("Press any key to continue");
+                        Console.ReadKey();
                     }
-                    else
+                    catch (Exception e)
                     {
-                        System.Console.WriteLine("Your result: {0:0.##}\n", result);
+                        System.Console.WriteLine("Oh no! An exception occured trying to do the math.\n - Details: " +
+                                                 e.Message);
                     }
-                }
-                catch (Exception e)
-                {
-                    System.Console.WriteLine("Oh no! An exception occured trying to do the math.\n - Details: " +
-                                             e.Message);
-                }
+
+                    break;
             }
-
-            System.Console.WriteLine("------------------------\n");
-
-            // Wait for the user to respond before closing.
-            System.Console.Write(
-                "Press 'n' and Enter to close the app, or press any other key and Enter to continue: ");
-            if (System.Console.ReadLine() == "n")
-            {
-                endApp = true;
-            }
-
-            System.Console.WriteLine("\n");
         }
-
-        calculator.Finish();
-        return;
     }
 }

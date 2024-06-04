@@ -1,10 +1,10 @@
 ﻿using Newtonsoft.Json;
 
 namespace CalculatorLibrary;
+
 public class Calculator
 {
     private JsonWriter _writer;
-
     public Calculator()
     {
         StreamWriter logFile = File.CreateText("calculator.log");
@@ -16,7 +16,7 @@ public class Calculator
         _writer.WriteStartArray();
     }
 
-    public double DoOperation(double num1, double num2, string op)
+    public virtual double DoOperation(double num1, double num2, string op)
     {
         double result = double.NaN; // Default is NAN if an operation, such as division could result in an error.
         _writer.WriteStartObject();
@@ -25,7 +25,7 @@ public class Calculator
         _writer.WritePropertyName("Operand2");
         _writer.WriteValue(num2);
         _writer.WritePropertyName("Operation");
-        
+
         // Use a switch statement to do the math.
         switch (op)
         {
@@ -47,12 +47,13 @@ public class Calculator
                 if (num2 != 0)
                 {
                     result = num1 / num2;
-                _writer.WriteValue("Divide");
+                    _writer.WriteValue("Divide");
                 }
+
                 break;
             default:
                 break;
-            
+
         }
 
         _writer.WritePropertyName("Result");
@@ -66,6 +67,8 @@ public class Calculator
         _writer.WriteEndArray();
         _writer.WriteEndObject();
         _writer.Close();
-    }
 
+
+
+    }
 }
