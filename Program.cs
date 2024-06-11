@@ -42,31 +42,31 @@ while (true)
 
         if (currentOperator == '+' && !(operation[0].Contains('.') || operation[1].Contains('.')))
         {
-            Console.WriteLine("Answer: " + intAddition(operation[0], operation[1]));
+            Console.WriteLine("Answer: " + IntAddition(operation[0], operation[1]));
         }
         else if (currentOperator == '+' && (operation[0].Contains('.') || operation[1].Contains('.')))
         {
-            Console.WriteLine("Answer: " + decAddition(operation[0], operation[1]));
+            Console.WriteLine("Answer: " + DecAddition(operation[0], operation[1]));
         }
         else if (currentOperator == '-' && !(operation[0].Contains('.') || operation[1].Contains('.')))
         {
-            Console.WriteLine("Answer: " + intSubtraction(operation[0], operation[1]));
+            Console.WriteLine("Answer: " + IntSubtraction(operation[0], operation[1]));
         }
         else if (currentOperator == '-' && (operation[0].Contains('.') || operation[1].Contains('.')))
         {
-            Console.WriteLine("Answer: " + decSubtraction(operation[0], operation[1]));
+            Console.WriteLine("Answer: " + DecSubtraction(operation[0], operation[1]));
         }
         else if (currentOperator == '*' && !(operation[0].Contains('.') || operation[1].Contains('.')))
         {
-            Console.WriteLine("Answer: " + intMulti(operation[0], operation[1]));
+            Console.WriteLine("Answer: " + IntMulti(operation[0], operation[1]));
         }
         else if (currentOperator == '*' && (operation[0].Contains('.') || operation[1].Contains('.')))
         {
-            Console.WriteLine("Answer: " + decMulti(operation[0], operation[1]));
+            Console.WriteLine("Answer: " + DecMulti(operation[0], operation[1]));
         }
         else if (currentOperator == '/')
         {
-            Console.WriteLine("Answer: " + division(operation[0], operation[1]));
+            Console.WriteLine("Answer: " + Division(operation[0], operation[1]));
         }
     }
     catch (Exception e)
@@ -101,7 +101,7 @@ static bool checkBadStr(string str)
     }
 }
 
-static int intAddition(string a, string b)
+static int IntAddition(string a, string b)
 {
     if (int.TryParse(a, out int arg1) && int.TryParse(b, out int arg2))
     {
@@ -110,7 +110,7 @@ static int intAddition(string a, string b)
     throw new ArgumentException("Integer addition failed, validate input and try again.");
 }
 
-static decimal decAddition(string a, string b)
+static decimal DecAddition(string a, string b)
 {
     if (decimal.TryParse(a, out decimal arg1) && decimal.TryParse(b, out decimal arg2))
     {
@@ -119,7 +119,7 @@ static decimal decAddition(string a, string b)
     throw new ArgumentException("Decimal addition failed, validate input and try again.");
 }
 
-static int intSubtraction(string a, string b)
+static int IntSubtraction(string a, string b)
 {
     if (int.TryParse(a, out int arg1) && int.TryParse(b, out int arg2))
     {
@@ -128,7 +128,7 @@ static int intSubtraction(string a, string b)
     throw new ArgumentException("Integer subtraction failed, validate input and try again.");
 }
 
-static decimal decSubtraction(string a, string b)
+static decimal DecSubtraction(string a, string b)
 {
     if (decimal.TryParse(a, out decimal arg1) && decimal.TryParse(b, out decimal arg2))
     {
@@ -137,7 +137,7 @@ static decimal decSubtraction(string a, string b)
     throw new ArgumentException("Decimal subtraction failed, validate input and try again.");
 }
 
-static int intMulti(string a, string b)
+static int IntMulti(string a, string b)
 {
     if (int.TryParse(a, out int arg1) && int.TryParse(b, out int arg2))
     {
@@ -146,7 +146,7 @@ static int intMulti(string a, string b)
     throw new ArgumentException("Integer multiplication failed, validate input and try again.");
 }
 
-static decimal decMulti(string a, string b)
+static decimal DecMulti(string a, string b)
 {
     if (decimal.TryParse(a, out decimal arg1) && decimal.TryParse(b, out decimal arg2))
     {
@@ -155,7 +155,7 @@ static decimal decMulti(string a, string b)
     throw new ArgumentException("Decimal multiplication failed, validate input and try again.");
 }
 
-static decimal division(string a, string b)
+static decimal Division(string a, string b)
 {
     if (decimal.TryParse(a, out decimal arg1) && decimal.TryParse(b, out decimal arg2))
     {
