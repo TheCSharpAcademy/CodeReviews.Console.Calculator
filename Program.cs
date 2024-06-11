@@ -15,7 +15,7 @@ while (true)
             Welcome();
             continue;
         }
-        else if (checkBadStr(input))
+        else if (CheckBadStr(input))
         {
             throw new ArgumentException("The operation specified was invalid. Please try again.");
         }
@@ -84,7 +84,7 @@ static void Welcome()
     Console.WriteLine("Type 'clear' to reset the log and type 'quit' to exit.");
 }
 
-static bool checkBadStr(string str)
+static bool CheckBadStr(string str)
 {
     switch (true)
     {
