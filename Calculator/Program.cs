@@ -1,5 +1,4 @@
 ﻿using CalculatorLibrary;
-using System.Runtime.CompilerServices;
 using System.Text.RegularExpressions;
 namespace CalculatorProgram;
 

@@ -60,8 +60,7 @@ public class Helpers
     {
         double logResult = 0;
         bool usingPastResult = false;
-
-        //Console.WriteLine("Press H to view history.\n");        
+     
         Console.Write("Type a number, and then press Enter: ");
         input = Console.ReadLine();
 
