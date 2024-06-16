@@ -1,0 +1,12 @@
+{
+  "Operations": [Starting Calculator Log
+Started 17/06/2024 6:30:18 AM
+
+    {
+      "Operand1": 1.0,
+      "Operand2": 1.0,
+      "Operation": "Multiply",
+      "Result": 1.0
+    }
+  ]
+}
