@@ -1,0 +1,73 @@
+﻿using System.Diagnostics;
+using Newtonsoft.Json;
+
+namespace CalculatorLibrary{
+  
+        public class Calculator
+        {
+        JsonWriter writer;
+
+        public Calculator()
+        {
+            StreamWriter logFile = File.CreateText("calculatorlog.json");
+            logFile.AutoFlush = true;
+            writer = new JsonTextWriter(logFile);
+            writer.Formatting = Formatting.Indented;
+            writer.WriteStartObject();
+            writer.WritePropertyName("Operations");
+            writer.WriteStartArray();
+        }
+        public double DoOperation(double num1, double num2, string operation)
+            {
+                double result = double.NaN;
+            writer.WriteStartObject();
+            writer.WritePropertyName("Operand1");
+            writer.WriteValue(num1);
+            writer.WritePropertyName("Operand2");
+            writer.WriteValue(num2);
+            writer.WritePropertyName("Operation");
+
+
+                switch (operation)
+                {
+                    case "a":
+                        result = num1 + num2;
+                        writer.WriteValue("Add");
+                        break;
+                    case "m":
+                        result = num2 * num1;
+                        writer.WriteValue("Multiply");
+                        break;
+                    case "d":
+                        while (num2 == 0)
+                        {
+                            Console.WriteLine("Please enter a non-zero divisor");
+                            num2 = Convert.ToDouble(Console.ReadLine());
+                        }
+                        result = num1 / num2;
+                        writer.WriteValue("Divide");
+                        break;
+                    case "s":
+                        result = num1 - num2;
+                    writer.WriteValue("Subtract");
+                        break;
+                    default:
+                        break;
+                }
+            writer.WritePropertyName("result");
+            writer.WriteValue(result);
+            writer.WriteEndObject();
+
+                return result;
+            }
+
+        public void Finish()
+        {
+            writer.WriteEndArray();
+            writer.WriteEndObject();
+            writer.Close();
+        }
+
+        }
+   }
+
