@@ -7,6 +7,8 @@ namespace CalculatorLibrary
     {
         JsonWriter writer;
 
+        private int operationCount = 0;
+
         public Calculator()
         {
             StreamWriter logFile = File.CreateText("calculatorlog.json");
@@ -20,6 +22,9 @@ namespace CalculatorLibrary
         public double DoOperation(double num1, double num2, string op)
         {
             double result = double.NaN; // Default value is "not-a-number" if an operation, such as division, could result in an error.
+
+            operationCount++;
+
             writer.WriteStartObject();
             writer.WritePropertyName("Operand1");
             writer.WriteValue(num1);
@@ -63,6 +68,10 @@ namespace CalculatorLibrary
         public void Finish()
         {
             writer.WriteEndArray();
+
+            writer.WritePropertyName("OperationCount");
+            writer.WriteValue(operationCount);
+
             writer.WriteEndObject();
             writer.Close();
         }
