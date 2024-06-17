@@ -31,6 +31,7 @@ namespace CalculatorProgram
                 Console.WriteLine("\tm - Multiply");
                 Console.WriteLine("\td - Divide");
                 Console.WriteLine("\tsr - Square Root");
+                Console.WriteLine("\tp - Power");
                 Console.WriteLine("\tv - View history");
                 Console.WriteLine("\tc - Clear history");
                 Console.Write("Your option? ");
@@ -38,7 +39,7 @@ namespace CalculatorProgram
                 string? op = Console.ReadLine();
 
                 // Validate input is not null, and matches the pattern
-                if (op == null || !Regex.IsMatch(op, "[a|s|m|d|sr|v|c]"))
+                if (op == null || !Regex.IsMatch(op, "[a|s|m|d|sr|p|v|c]"))
                 {
                     Console.WriteLine("Error: Unrecognized input.");
                 }

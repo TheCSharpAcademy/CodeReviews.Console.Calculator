@@ -66,6 +66,11 @@ namespace CalculatorLibrary
                     symbol = "√";
                     writer.WriteValue("SquareRoot");
                     break;
+                case "p":
+                    result = Math.Pow(num1, num2);
+                    symbol = "^";
+                    writer.WriteValue("Power");
+                    break;
                 // Return text for an incorrect option entry.
                 default:
                     break;
