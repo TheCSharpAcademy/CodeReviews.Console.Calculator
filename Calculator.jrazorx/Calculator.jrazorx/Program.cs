@@ -21,28 +21,7 @@ namespace CalculatorProgram
                 string? numInput2 = "";
                 double result = 0;
 
-                // Ask the user to type the first number.
-                Console.Write("Type a number, and then press Enter: ");
-                numInput1 = Console.ReadLine();
-
-                double cleanNum1 = 0;
-                while (!double.TryParse(numInput1, out cleanNum1))
-                {
-                    Console.Write("This is not valid input. Please enter an integer value: ");
-                    numInput1 = Console.ReadLine();
-                }
-
-                // Ask the user to type the second number.
-                Console.Write("Type another number, and then press Enter: ");
-                numInput2 = Console.ReadLine();
-
-                double cleanNum2 = 0;
-                while (!double.TryParse(numInput2, out cleanNum2))
-                {
-                    Console.Write("This is not valid input. Please enter an integer value: ");
-                    numInput2 = Console.ReadLine();
-                }
-
+                Console.Clear();
                 // Ask the user to choose an operator.
                 Console.WriteLine("Choose an operator from the following list:");
                 Console.WriteLine("\ta - Add");
@@ -79,6 +58,27 @@ namespace CalculatorProgram
                     }
                     else
                     {
+                        // Ask the user to type the first number.
+                        Console.Write("Type a number, and then press Enter: ");
+                        numInput1 = Console.ReadLine();
+
+                        double cleanNum1 = 0;
+                        while (!double.TryParse(numInput1, out cleanNum1))
+                        {
+                            Console.Write("This is not valid input. Please enter an integer value: ");
+                            numInput1 = Console.ReadLine();
+                        }
+
+                        // Ask the user to type the second number.
+                        Console.Write("Type another number, and then press Enter: ");
+                        numInput2 = Console.ReadLine();
+
+                        double cleanNum2 = 0;
+                        while (!double.TryParse(numInput2, out cleanNum2))
+                        {
+                            Console.Write("This is not valid input. Please enter an integer value: ");
+                            numInput2 = Console.ReadLine();
+                        }
                         try
                         {
                             result = calculator.DoOperation(cleanNum1, cleanNum2, op);
