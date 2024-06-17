@@ -9,6 +9,8 @@ namespace CalculatorLibrary
 
         private int operationCount = 0;
 
+        private List<string> history = new List<string>();
+
         public Calculator()
         {
             StreamWriter logFile = File.CreateText("calculatorlog.json");
@@ -22,6 +24,7 @@ namespace CalculatorLibrary
         public double DoOperation(double num1, double num2, string op)
         {
             double result = double.NaN; // Default value is "not-a-number" if an operation, such as division, could result in an error.
+            string symbol = "";
 
             operationCount++;
 
@@ -36,14 +39,17 @@ namespace CalculatorLibrary
             {
                 case "a":
                     result = num1 + num2;
+                    symbol = "+";
                     writer.WriteValue("Add");
                     break;
                 case "s":
                     result = num1 - num2;
+                    symbol = "-";
                     writer.WriteValue("Subtract");
                     break;
                 case "m":
                     result = num1 * num2;
+                    symbol = "*";
                     writer.WriteValue("Multiply");
                     break;
                 case "d":
@@ -52,6 +58,7 @@ namespace CalculatorLibrary
                     {
                         result = num1 / num2;
                     }
+                    symbol = "/";
                     writer.WriteValue("Divide");
                     break;
                 // Return text for an incorrect option entry.
@@ -62,7 +69,19 @@ namespace CalculatorLibrary
             writer.WriteValue(result);
             writer.WriteEndObject();
 
+            history.Add($"{num1} {symbol} {num2} = {result}");
+
             return result;
+        }
+
+        public void ClearHistory()
+        {
+            history.Clear();
+        }
+
+        public List<string> GetHistory()
+        {
+            return history;
         }
 
         public void Finish()

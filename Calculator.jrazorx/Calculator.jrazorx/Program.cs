@@ -49,29 +49,49 @@ namespace CalculatorProgram
                 Console.WriteLine("\ts - Subtract");
                 Console.WriteLine("\tm - Multiply");
                 Console.WriteLine("\td - Divide");
+                Console.WriteLine("\tv - View history");
+                Console.WriteLine("\tc - Clear history");
                 Console.Write("Your option? ");
 
                 string? op = Console.ReadLine();
 
                 // Validate input is not null, and matches the pattern
-                if (op == null || !Regex.IsMatch(op, "[a|s|m|d]"))
+                if (op == null || !Regex.IsMatch(op, "[a|s|m|d|v|c]"))
                 {
                     Console.WriteLine("Error: Unrecognized input.");
                 }
                 else
                 {
-                    try
+                    if (op == "c")
                     {
-                        result = calculator.DoOperation(cleanNum1, cleanNum2, op);
-                        if (double.IsNaN(result))
-                        {
-                            Console.WriteLine("This operation will result in a mathematical error.\n");
-                        }
-                        else Console.WriteLine("Your result: {0:0.##}\n", result);
+                        calculator.ClearHistory();
+                        Console.WriteLine("History cleared.");
                     }
-                    catch (Exception e)
+                    // If the user chooses 'v', view the history
+                    else if (op == "v")
                     {
-                        Console.WriteLine("Oh no! An exception occurred trying to do the math.\n - Details: " + e.Message);
+                        var history = calculator.GetHistory();
+                        Console.WriteLine("History:");
+                        foreach (var operation in history)
+                        {
+                            Console.WriteLine(operation);
+                        }
+                    }
+                    else
+                    {
+                        try
+                        {
+                            result = calculator.DoOperation(cleanNum1, cleanNum2, op);
+                            if (double.IsNaN(result))
+                            {
+                                Console.WriteLine("This operation will result in a mathematical error.\n");
+                            }
+                            else Console.WriteLine("Your result: {0:0.##}\n", result);
+                        }
+                        catch (Exception e)
+                        {
+                            Console.WriteLine("Oh no! An exception occurred trying to do the math.\n - Details: " + e.Message);
+                        }
                     }
                 }
                 Console.WriteLine("------------------------\n");
