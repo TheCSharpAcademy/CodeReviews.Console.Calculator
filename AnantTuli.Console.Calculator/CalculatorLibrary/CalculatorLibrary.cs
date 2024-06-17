@@ -1,71 +1,87 @@
-﻿using Newtonsoft.Json;
-
-namespace CalculatorLibrary
+﻿namespace CalculatorLibrary
 {
     public class Calculator
     {
+        public CalculationData calculationData;
 
-        JsonWriter writer;
-
-        public Calculator()
+        public Calculator(CalculationData calculationData)
         {
-            StreamWriter logFile = File.CreateText("calculatorlog.json");
-            logFile.AutoFlush = true;
-            writer = new JsonTextWriter(logFile);
-            writer.Formatting = Formatting.Indented;
-            writer.WriteStartObject();
-            writer.WritePropertyName("Operations");
-            writer.WriteStartArray();
+            this.calculationData = calculationData;
         }
 
-        public double DoOperation(double num1, double num2, string op)
+        public double DoUnaryOperation(double num, string op)
         {
-            double result = double.NaN; // Default value is "not-a-number" if an operation, such as division, could result in an error.
-            writer.WriteStartObject();
-            writer.WritePropertyName("Operand1");
-            writer.WriteValue(num1);
-            writer.WritePropertyName("Operand2");
-            writer.WriteValue(num2);
-            writer.WritePropertyName("Operation");
-            // Use a switch statement to do the math.
+            double result = double.NaN;
+
+            string prettyMathOperator = op;
+
+            switch (op)
+            {
+                case "r":
+                    result = Math.Sqrt(num);
+                    prettyMathOperator = "Sqrt";
+                    break;
+                case "x":
+                    result = num * 10;
+                    prettyMathOperator = "10x";
+                    break;
+                case "n":
+                    result = Math.Sin(num);
+                    prettyMathOperator = "Sin(x)";
+                    break;
+                case "c":
+                    result = Math.Cos(num);
+                    prettyMathOperator = "Cos(x)";
+                    break;
+                default:
+                    break;
+            }
+
+            this.calculationData.AddCalculation(new Calculation(op, [num], result, prettyMathOperator));
+            return result;
+        }
+
+        public double DoBinaryOperation(double num1, double num2, string op)
+        {
+            double result = double.NaN;
+            string prettyMathOperator = op;
+
             switch (op)
             {
                 case "a":
                     result = num1 + num2;
-                    writer.WriteValue("Add");
+                    prettyMathOperator = "+";
                     break;
                 case "s":
                     result = num1 - num2;
-                    writer.WriteValue("Subtract");
+                    prettyMathOperator = "-";
                     break;
                 case "m":
                     result = num1 * num2;
-                    writer.WriteValue("Multiply");
+                    prettyMathOperator = "*";
                     break;
                 case "d":
-                    // Ask the user to enter a non-zero divisor.
                     if (num2 != 0)
                     {
                         result = num1 / num2;
+                        prettyMathOperator = "/";
                     }
-                    writer.WriteValue("Divide");
                     break;
-                // Return text for an incorrect option entry.
+                case "p":
+                    result = Math.Pow(num1, num2);
+                    prettyMathOperator = "^";
+                    break;
                 default:
                     break;
             }
-            writer.WritePropertyName("Result");
-            writer.WriteValue(result);
-            writer.WriteEndObject();
 
+            this.calculationData.AddCalculation(new Calculation(op, [num1, num2], result, prettyMathOperator));
             return result;
         }
 
         public void Finish()
         {
-            writer.WriteEndArray();
-            writer.WriteEndObject();
-            writer.Close();
+            this.calculationData.WriteToFile(this.calculationData);
         }
     }
 }

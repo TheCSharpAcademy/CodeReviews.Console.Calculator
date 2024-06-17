@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Calculator", "Calculator\Calculator.csproj", "{152509B7-46ED-4837-99A1-431911B80685}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CalculatorProgram", "CalculatorProgram\CalculatorProgram.csproj", "{152509B7-46ED-4837-99A1-431911B80685}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CalculatorLibrary", "CalculatorLibrary\CalculatorLibrary.csproj", "{1659D6F8-88F3-4528-B492-00470A76139D}"
 EndProject

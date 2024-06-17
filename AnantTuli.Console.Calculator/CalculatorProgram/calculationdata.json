@@ -1,0 +1,41 @@
+{
+  "calculations": [
+    {
+      "op": "a",
+      "nums": [
+        2.0,
+        2.0
+      ],
+      "result": 4.0,
+      "mathematicalOperator": "+"
+    },
+    {
+      "op": "s",
+      "nums": [
+        2.0,
+        2.0
+      ],
+      "result": 0.0,
+      "mathematicalOperator": "-"
+    },
+    {
+      "op": "m",
+      "nums": [
+        2.0,
+        2.0
+      ],
+      "result": 4.0,
+      "mathematicalOperator": "*"
+    },
+    {
+      "op": "r",
+      "nums": [
+        36.0
+      ],
+      "result": 6.0,
+      "mathematicalOperator": "Sqrt"
+    }
+  ],
+  "numCalculatorLaunches": 14,
+  "filePath": "calculationdata.json"
+}
