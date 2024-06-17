@@ -1,7 +1,4 @@
-﻿using System.Diagnostics;
-using System.Formats.Asn1;
-using System.Xml;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
 namespace CalculatorLibrary
 {
