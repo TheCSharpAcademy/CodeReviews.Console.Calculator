@@ -71,6 +71,11 @@ namespace CalculatorLibrary
                     symbol = "^";
                     writer.WriteValue("Power");
                     break;
+                case "p10":
+                    result = Math.Pow(10, num1);
+                    symbol = "10^";
+                    writer.WriteValue("PowerOf10");
+                    break;
                 // Return text for an incorrect option entry.
                 default:
                     break;
