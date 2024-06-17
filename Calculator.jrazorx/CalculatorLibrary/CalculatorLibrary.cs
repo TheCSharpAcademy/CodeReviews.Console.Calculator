@@ -61,6 +61,11 @@ namespace CalculatorLibrary
                     symbol = "/";
                     writer.WriteValue("Divide");
                     break;
+                case "sr":
+                    result = Math.Sqrt(num1);
+                    symbol = "√";
+                    writer.WriteValue("SquareRoot");
+                    break;
                 // Return text for an incorrect option entry.
                 default:
                     break;

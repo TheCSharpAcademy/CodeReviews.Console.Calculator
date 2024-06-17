@@ -30,6 +30,7 @@ namespace CalculatorProgram
                 Console.WriteLine("\ts - Subtract");
                 Console.WriteLine("\tm - Multiply");
                 Console.WriteLine("\td - Divide");
+                Console.WriteLine("\tsr - Square Root");
                 Console.WriteLine("\tv - View history");
                 Console.WriteLine("\tc - Clear history");
                 Console.Write("Your option? ");
@@ -37,7 +38,7 @@ namespace CalculatorProgram
                 string? op = Console.ReadLine();
 
                 // Validate input is not null, and matches the pattern
-                if (op == null || !Regex.IsMatch(op, "[a|s|m|d|v|c]"))
+                if (op == null || !Regex.IsMatch(op, "[a|s|m|d|sr|v|c]"))
                 {
                     Console.WriteLine("Error: Unrecognized input.");
                 }
@@ -60,11 +61,13 @@ namespace CalculatorProgram
                     }
                     else
                     {
+                        double cleanNum1 = 0;
+                        double cleanNum2 = 0;
+
                         // Ask the user to type the first number.
                         Console.Write("Type a number, or 'r' to use the result of the last operation, and then press Enter: ");
                         numInput1 = Console.ReadLine();
 
-                        double cleanNum1 = 0;
                         if (numInput1 == "r")
                         {
                             cleanNum1 = lastResult;
@@ -77,23 +80,25 @@ namespace CalculatorProgram
                                 numInput1 = Console.ReadLine();
                             }
                         }
-                        
-                        // Ask the user to type the second number.
-                        Console.Write("Type another number, or 'r' to use the result of the last operation, and then press Enter: ");
-                        numInput2 = Console.ReadLine();
 
-                        double cleanNum2 = 0;
-                        if (numInput2 == "r")
+                        // Only ask for a second number if the operation is not square root
+                        if (op != "sr")
                         {
-                            cleanNum2 = lastResult;
-                        }
-                        else
-                        {
-                            while (!double.TryParse(numInput2, out cleanNum2))
+                            Console.Write("Type another number, or 'r' to use the result of the last operation, and then press Enter: ");
+                            numInput2 = Console.ReadLine();
+
+                            if (numInput2 == "r")
                             {
-                                Console.Write("This is not valid input. Please enter an integer value: ");
-                                numInput2 = Console.ReadLine();
+                                cleanNum2 = lastResult;
                             }
+                            else
+                            {
+                                while (!double.TryParse(numInput2, out cleanNum2))
+                                {
+                                    Console.Write("This is not valid input. Please enter an integer value: ");
+                                    numInput2 = Console.ReadLine();
+                                }
+                            } 
                         }
                             
                         try
