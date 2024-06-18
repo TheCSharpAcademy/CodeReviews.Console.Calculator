@@ -33,6 +33,9 @@ namespace CalculatorProgram
                 Console.WriteLine("\tsr - Square Root");
                 Console.WriteLine("\tp - Power");
                 Console.WriteLine("\tp10 - Power of 10");
+                Console.WriteLine("\tsin - Sine");
+                Console.WriteLine("\tcos - Cosine");
+                Console.WriteLine("\ttan - Tangent");
                 Console.WriteLine("\tv - View history");
                 Console.WriteLine("\tc - Clear history");
                 Console.Write("Your option? ");
@@ -40,7 +43,7 @@ namespace CalculatorProgram
                 string? op = Console.ReadLine();
 
                 // Validate input is not null, and matches the pattern
-                if (op == null || !Regex.IsMatch(op, "[a|s|m|d|sr|p|p10|v|c]"))
+                if (op == null || !Regex.IsMatch(op, "[a|s|m|d|sr|p|p10|sin|cos|tan|v|c]"))
                 {
                     Console.WriteLine("Error: Unrecognized input.");
                 }
@@ -83,8 +86,8 @@ namespace CalculatorProgram
                             }
                         }
 
-                        // Only ask for a second number if the operation is not square root
-                        if (op != "sr")
+                        // Only ask for a second number if the operation is not square root / Power of 10 / Sine / Cosine / Tangent
+                        if (op != "sr" && op != "p10" && op != "sin" && op != "cos" && op != "tan")
                         {
                             Console.Write("Type another number, or 'r' to use the result of the last operation, and then press Enter: ");
                             numInput2 = Console.ReadLine();

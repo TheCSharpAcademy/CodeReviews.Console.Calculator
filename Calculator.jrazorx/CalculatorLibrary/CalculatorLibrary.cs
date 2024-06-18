@@ -76,6 +76,21 @@ namespace CalculatorLibrary
                     symbol = "10^";
                     writer.WriteValue("PowerOf10");
                     break;
+                case "sin":
+                    result = Math.Sin(num1 * Math.PI / 180);
+                    symbol = "sin";
+                    writer.WriteValue("Sine");
+                    break;
+                case "cos":
+                    result = Math.Cos(num1 * Math.PI / 180);
+                    symbol = "cos";
+                    writer.WriteValue("Cosine");
+                    break;
+                case "tan":
+                    result = Math.Tan(num1 * Math.PI / 180);
+                    symbol = "tan";
+                    writer.WriteValue("Tangent");
+                    break;
                 // Return text for an incorrect option entry.
                 default:
                     break;
@@ -84,7 +99,7 @@ namespace CalculatorLibrary
             writer.WriteValue(result);
             writer.WriteEndObject();
 
-            if (op == "sr" || op == "p10")
+            if (op == "sr" || op == "p10" || op == "sin" || op == "cos" || op == "tan")
                 history.Add($"{symbol}{num1} = {result}");
             else
                 history.Add($"{num1} {symbol} {num2} = {result}");
