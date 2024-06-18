@@ -44,7 +44,7 @@ namespace CalculatorLibrary
             writer.WriteValue(num2);
             writer.WritePropertyName("Operation");
             // Use a switch statement to do the math.
-            switch (op)
+            switch (op.ToLower())
             {
                 case "a":
                     result = num1 + num2;
@@ -75,7 +75,7 @@ namespace CalculatorLibrary
                     result = Math.Pow(num1, num2);
                     writer.WriteValue($"Power of {num2}");
                     break;
-                case "t":
+                case "x10":
                     result = num1 * 10;
                     writer.WriteValue("Times 10");
                     break;
@@ -179,7 +179,7 @@ namespace CalculatorLibrary
                     Console.WriteLine("Invalid input, try again");
                     continue;
                 }
-                else if (parsedIndex < 0 ||  parsedIndex >= calculationsResults.Count)
+                else if (parsedIndex < 0 || parsedIndex >= calculationsResults.Count)
                 {
                     Console.WriteLine("Invalid input, try again");
                     continue;
@@ -200,6 +200,23 @@ namespace CalculatorLibrary
         public bool IsMemoryEmpty()
         {
             return calculationsResults.Count == 0;
+        }
+
+        /// <summary>
+        /// Helper method for determining whether the specified operation requires two operands
+        /// </summary>
+        /// <param name="operation">Math operation that needs to be checked</param>
+        /// <returns>True if the operation needs two operands, false otherwise</returns>
+        public static bool TwoOperandsRequired(string operation)
+        {
+            string[] twoOperands = { "a", "s", "m", "d", "root", "pow" };
+
+            if (twoOperands.Contains(operation))
+            {
+                return true;
+            }
+
+            return false;
         }
     }
 }
