@@ -31,7 +31,6 @@ public class CalculationData
         {
             string jsonString = JsonConvert.SerializeObject(data, Formatting.Indented);
             File.WriteAllText(filePath, jsonString);
-
         }
         catch
         {

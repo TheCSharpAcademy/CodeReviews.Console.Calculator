@@ -12,7 +12,6 @@
         public double DoUnaryOperation(double num, string op)
         {
             double result = double.NaN;
-
             string prettyMathOperator = op;
 
             switch (op)
