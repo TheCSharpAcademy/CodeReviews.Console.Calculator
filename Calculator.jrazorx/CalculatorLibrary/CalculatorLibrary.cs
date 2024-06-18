@@ -84,7 +84,10 @@ namespace CalculatorLibrary
             writer.WriteValue(result);
             writer.WriteEndObject();
 
-            history.Add($"{num1} {symbol} {num2} = {result}");
+            if (op == "sr" || op == "p10")
+                history.Add($"{symbol}{num1} = {result}");
+            else
+                history.Add($"{num1} {symbol} {num2} = {result}");
 
             return result;
         }
