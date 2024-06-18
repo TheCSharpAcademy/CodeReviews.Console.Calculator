@@ -76,7 +76,7 @@ namespace CalculatorProgram
 
                             if (isBinaryOperation)
                             {
-                                result = calculator.DoOperation(num1, GetNumericalInput(), op);
+                                result = calculator.DoBinaryOperation(num1, GetNumericalInput(), op);
                             }
                             else if (isUnaryOperation)
                             {
