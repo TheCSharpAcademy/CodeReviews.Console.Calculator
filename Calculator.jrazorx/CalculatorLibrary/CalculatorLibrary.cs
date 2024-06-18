@@ -1,5 +1,4 @@
-﻿using System.Diagnostics;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
 namespace CalculatorLibrary
 {
@@ -7,7 +6,7 @@ namespace CalculatorLibrary
     {
         JsonWriter writer;
 
-        private int operationCount = 0;
+        private int operationCount;
 
         private List<string> history = new List<string>();
 
