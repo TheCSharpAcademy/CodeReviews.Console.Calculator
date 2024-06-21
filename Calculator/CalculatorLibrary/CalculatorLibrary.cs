@@ -5,6 +5,7 @@ namespace CalculatorLibrary
 	public class Calculator
 	{
 		JsonWriter writer;
+		public int OpsConducted { get; set; } = 0;
 		public Calculator()
 		{
 			StreamWriter logfile = File.CreateText("calculatorlog.json");
@@ -55,6 +56,8 @@ namespace CalculatorLibrary
 			writer.WritePropertyName("Result");
 			writer.WriteValue(result);
 			writer.WriteEndObject();
+
+			this.OpsConducted++;
 			return result;
 		}
 
@@ -65,5 +68,7 @@ namespace CalculatorLibrary
 			writer.WriteEndObject();
 			writer.Close();
 		}
+
+
 	}
 }
