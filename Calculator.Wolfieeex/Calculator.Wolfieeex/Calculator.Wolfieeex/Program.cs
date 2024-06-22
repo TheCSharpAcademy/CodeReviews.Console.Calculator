@@ -1,5 +1,7 @@
-﻿using Calculator.Wolfieeex;
+﻿using CalculatorLibrary;
 using System.Text.RegularExpressions;
+
+namespace CalculatorProgram;
 
 class Program
 {
@@ -14,11 +16,11 @@ class Program
             double firstNumber = 0;
             double secondNumber = 0;
 
-            HelperMethods.AskForNumber("first");
-            HelperMethods.ReadNumericInput(ref firstNumber, "first");
+            Classes.HelperMethods.AskForNumber("first");
+            Classes.HelperMethods.ReadNumericInput(ref firstNumber, "first");
 
-            HelperMethods.AskForNumber("second");
-            HelperMethods.ReadNumericInput(ref secondNumber, "second");
+            Classes.HelperMethods.AskForNumber("second");
+            Classes.HelperMethods.ReadNumericInput(ref secondNumber, "second");
             Console.WriteLine($"{new string('-', Console.BufferWidth)}");
 
             Console.WriteLine("\nChoose one of the options below: ");
@@ -30,10 +32,10 @@ class Program
             Console.Write($"Please select your option: ");
 
             string? userOption = null;
-            HelperMethods.ReadMatchingInput(ref userOption, @"^[asmd]$");
+            Classes.HelperMethods.ReadMatchingInput(ref userOption, @"^[asmd]$");
             try
             {
-                double result = CalculatorEngine.CalculateResult(ref firstNumber, ref secondNumber, userOption);
+                double result = Classes.CalculatorEngine.CalculateResult(ref firstNumber, ref secondNumber, userOption);
 
                 if (double.IsNaN(result))
                     Console.WriteLine("This operation will result in a mathematical error.\n");
