@@ -2,7 +2,7 @@
 
     public class Calculator
     {
-        private int calculatorUsageCount = 0;
+        private int calculatorUsageCount;
         struct UsersResult {
             public string previousCalculations;
             public double result;
