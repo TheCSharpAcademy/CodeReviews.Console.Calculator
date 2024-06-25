@@ -7,6 +7,8 @@ class Program
 {
     static void Main(string[] args)
     {
+        CalculatorEngine calculatorEngine = new CalculatorEngine();
+
         Console.WriteLine("Welcome to Console Calculator in C#!\r");
         Console.WriteLine($"{new string('-', Console.BufferWidth)}\n");
 
@@ -16,11 +18,11 @@ class Program
             double firstNumber = 0;
             double secondNumber = 0;
 
-            Classes.HelperMethods.AskForNumber("first");
-            Classes.HelperMethods.ReadNumericInput(ref firstNumber, "first");
+            HelperMethods.AskForNumber("first");
+            HelperMethods.ReadNumericInput(ref firstNumber, "first");
 
-            Classes.HelperMethods.AskForNumber("second");
-            Classes.HelperMethods.ReadNumericInput(ref secondNumber, "second");
+            HelperMethods.AskForNumber("second");
+            HelperMethods.ReadNumericInput(ref secondNumber, "second");
             Console.WriteLine($"{new string('-', Console.BufferWidth)}");
 
             Console.WriteLine("\nChoose one of the options below: ");
@@ -32,10 +34,12 @@ class Program
             Console.Write($"Please select your option: ");
 
             string? userOption = null;
-            Classes.HelperMethods.ReadMatchingInput(ref userOption, @"^[asmd]$");
+            
+
+            HelperMethods.ReadMatchingInput(ref userOption, @"^[asmd]$");
             try
             {
-                double result = Classes.CalculatorEngine.CalculateResult(ref firstNumber, ref secondNumber, userOption);
+                double result = calculatorEngine.CalculateResult(ref firstNumber, ref secondNumber, userOption);
 
                 if (double.IsNaN(result))
                     Console.WriteLine("This operation will result in a mathematical error.\n");
@@ -60,7 +64,7 @@ class Program
             }
             Console.Clear();
         }
-
+        calculatorEngine.Deconstructor();
         Console.Write("Thank you for using this application! Press any key to exit: ");
         Console.ReadKey();
     }

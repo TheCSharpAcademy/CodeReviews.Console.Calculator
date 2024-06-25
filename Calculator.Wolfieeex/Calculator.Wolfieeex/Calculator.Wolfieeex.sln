@@ -4,8 +4,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 17.10.35004.147
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Calculator.Wolfieeex", "Calculator.Wolfieeex\Calculator.Wolfieeex.csproj", "{BF47179E-011B-4AEF-A5C4-98B4D6FD18F9}"
+	ProjectSection(ProjectDependencies) = postProject
+		{597E1C57-CBEF-45F9-BFB6-7D9EA10F19DA} = {597E1C57-CBEF-45F9-BFB6-7D9EA10F19DA}
+	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CalculatorLibrary", "CalculatorLibrary\CalculatorLibrary.csproj", "{86CB0E38-9BA5-4A6F-9CCB-1FD7B1D0C6FD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CalculatorLibrary", "CalculatorLibrary\CalculatorLibrary.csproj", "{86CB0E38-9BA5-4A6F-9CCB-1FD7B1D0C6FD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScreenManager", "ScreenManager\ScreenManager.csproj", "{597E1C57-CBEF-45F9-BFB6-7D9EA10F19DA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +26,10 @@ Global
 		{86CB0E38-9BA5-4A6F-9CCB-1FD7B1D0C6FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{86CB0E38-9BA5-4A6F-9CCB-1FD7B1D0C6FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{86CB0E38-9BA5-4A6F-9CCB-1FD7B1D0C6FD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{597E1C57-CBEF-45F9-BFB6-7D9EA10F19DA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{597E1C57-CBEF-45F9-BFB6-7D9EA10F19DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{597E1C57-CBEF-45F9-BFB6-7D9EA10F19DA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{597E1C57-CBEF-45F9-BFB6-7D9EA10F19DA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
