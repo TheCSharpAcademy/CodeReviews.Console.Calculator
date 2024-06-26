@@ -16,6 +16,5 @@ internal class Program
             stop = Menu.DisplayAgainOption();
             Menu.DisplayUseCount();
         }
-        //BrainCount.SaveBrainCount(Brain.count);
     }
 }

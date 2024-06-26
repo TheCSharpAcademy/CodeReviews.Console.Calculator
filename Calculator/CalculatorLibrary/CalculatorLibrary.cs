@@ -3,8 +3,8 @@
 public class Brain
 {
     internal delegate string MathDelegate(decimal a, decimal b, out decimal c);
-    public static int count = 0;
-    public static int total = 0;
+    public static int count;
+    public static int total;
     internal static void Calculate()
     {
         count++;
