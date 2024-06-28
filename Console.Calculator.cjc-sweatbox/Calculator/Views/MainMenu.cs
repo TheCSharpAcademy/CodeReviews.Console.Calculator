@@ -12,7 +12,7 @@ using CalculatorProgram.Utilities;
 
 namespace CalculatorProgram.Views;
 
-internal class MainMenu
+internal class MainMenu : BasePage
 {
     #region Constants
 
@@ -33,23 +33,18 @@ internal class MainMenu
 
     #endregion
     #region Properties
-    
+
     internal static string MenuText
     {
         get
         {
             var sb = new StringBuilder();
-            sb.AppendLine("----------------------------------------");
-            sb.AppendLine($"{Application.Title}: {PageTitle}");
-            sb.AppendLine("----------------------------------------");
-            sb.AppendLine("");
             sb.AppendLine("N - New calculation");
             sb.AppendLine("R - Recall a result and perform a new calculation");
             sb.AppendLine("V - View history");
             sb.AppendLine("C - Clear history");
             sb.AppendLine("Q - Quit the application");
-            sb.AppendLine("");
-            
+
             return sb.ToString();
         }
     }
@@ -59,9 +54,10 @@ internal class MainMenu
 
     internal ProgramStatus Show()
     {
-        Console.Clear();
+        WriteHeader(PageTitle);
+
         Console.Write(MenuText);
-        
+
         var option = UserInputReader.GetChar("Enter your selection: ", AllowedChars.MainMenuInput);
 
         return PerformOption(option);

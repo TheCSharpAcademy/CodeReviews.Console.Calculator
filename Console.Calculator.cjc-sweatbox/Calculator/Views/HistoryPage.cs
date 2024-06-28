@@ -1,15 +1,14 @@
 ﻿// -------------------------------------------------------------------------------------------------
-// CalculatorProgram.Views.HistoryMenu
+// CalculatorProgram.Views.HistoryPage
 // -------------------------------------------------------------------------------------------------
 // The history page console view of the application.
 // -------------------------------------------------------------------------------------------------
 using System.Text;
-using CalculatorLibrary.Constants;
 using CalculatorLibrary.Models;
 
 namespace CalculatorProgram.Views;
 
-internal class HistoryPage
+internal class HistoryPage : BasePage
 {
     #region Constants
 
@@ -20,22 +19,22 @@ internal class HistoryPage
 
     internal static void Show(List<Calculation> history)
     {
-        Console.Clear();
-        Console.Write(MenuText(history));
-        Console.WriteLine("Press any key to continue...");
+        WriteHeader(PageTitle);
+
+        Console.Write(GetMenuText(history));
+
+        WriteFooter();
+
+        // Await user input to contine.
         Console.Read();
     }
 
     #endregion
     #region Methods: Private Static
 
-    private static string MenuText(List<Calculation> history)
+    private static string GetMenuText(List<Calculation> history)
     {
         var sb = new StringBuilder();
-        sb.AppendLine("----------------------------------------");
-        sb.AppendLine($"{Application.Title}: {PageTitle}");
-        sb.AppendLine("----------------------------------------");
-        sb.AppendLine("");
         if (history.Count > 0)
         {
             foreach (var item in history)
@@ -47,8 +46,7 @@ internal class HistoryPage
         {
             sb.AppendLine("History empty.");
         }
-        sb.AppendLine("");
-        
+
         return sb.ToString();
     }
 

@@ -10,7 +10,7 @@ using CalculatorProgram.Utilities;
 
 namespace CalculatorProgram.Views;
 
-internal class CalculationPage
+internal class CalculationPage : BasePage
 {
     #region Constants
 
@@ -18,20 +18,6 @@ internal class CalculationPage
 
     #endregion
     #region Properties
-
-    internal static string MenuText
-    {
-        get
-        {
-            var sb = new StringBuilder();
-            sb.AppendLine("----------------------------------------");
-            sb.AppendLine($"{Application.Title}: {PageTitle}");
-            sb.AppendLine("----------------------------------------");
-            sb.AppendLine("");
-             
-            return sb.ToString();
-        }
-    }
 
     internal static string OperatorQuestionText
     {
@@ -60,8 +46,7 @@ internal class CalculationPage
 
     internal static Calculation Show(double firstNumber = double.NaN)
     {
-        Console.Clear();
-        Console.Write(MenuText);
+        WriteHeader(PageTitle);
 
         return GetCalculation(firstNumber);
     }
@@ -88,11 +73,11 @@ internal class CalculationPage
         }
 
         // Ask the user to choose an operator.
-        char option = UserInputReader.GetChar(OperatorQuestionText.ToString(), [.. AllowedChars.OneNumberCalculation, .. AllowedChars.TwoNumberCalculation]);
+        char option = UserInputReader.GetChar(OperatorQuestionText, [.. AllowedChars.OneNumberCalculation, .. AllowedChars.TwoNumberCalculation]);
 
         // Only need to get a second number if the calculation option needs it.
-        if (AllowedChars.TwoNumberCalculation.Contains(option)) 
-        { 
+        if (AllowedChars.TwoNumberCalculation.Contains(option))
+        {
             // Ask the user to type the second number.
             numInput2 = UserInputReader.GetDouble("Type another number, and then press Enter: ");
         }
