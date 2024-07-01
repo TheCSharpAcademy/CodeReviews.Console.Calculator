@@ -82,6 +82,8 @@ namespace Calculator
 
                 Console.WriteLine("\n"); // Friendly linespacing.
             }
+
+            calculatorHandler.Finish();
             return;
         }
     }
