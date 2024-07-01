@@ -1,4 +1,5 @@
-﻿using System.Text.RegularExpressions;
+﻿using CalculatorLibrary;
+using System.Text.RegularExpressions;
 
 namespace Calculator
 {
@@ -10,6 +11,7 @@ namespace Calculator
             // Display title as the C# console calculator app.
             Console.WriteLine("Console Calculator in C#\r");
             Console.WriteLine("------------------------\n");
+            CalculatorHandler calculatorHandler = new CalculatorHandler();
 
             while (!endApp)
             {
@@ -60,7 +62,7 @@ namespace Calculator
                 {
                     try
                     {
-                        result = Calculator.DoOperation(cleanNum1, cleanNum2, op);
+                        result = calculatorHandler.DoOperation(cleanNum1, cleanNum2, op);
                         if (double.IsNaN(result))
                         {
                             Console.WriteLine("This operation will result in a mathematical error.\n");
