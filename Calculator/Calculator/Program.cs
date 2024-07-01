@@ -13,7 +13,6 @@ namespace CalculatorProgram
             Console.WriteLine("------------------------\n");
             int numberOfCalcs = 0;
             List<string> calcsPerformed = new List<string>();
-            char ordinalLetter = '`';
 
             Calculator calculator = new Calculator();
             while (!endApp)
@@ -97,8 +96,7 @@ namespace CalculatorProgram
                                     opSymbol = "Error: Unrecognized input.";
                                     break;
                             }
-                            ordinalLetter++;
-                            calcsPerformed.Add($"{ordinalLetter}) {cleanNum1} {opSymbol} {cleanNum2} = {result}");
+                            calcsPerformed.Add($"{cleanNum1} {opSymbol} {cleanNum2} = {result}");
                             Console.WriteLine($"Calculations Performed ({numberOfCalcs}):");
                             foreach (string calc in calcsPerformed)
                             {
@@ -114,18 +112,33 @@ namespace CalculatorProgram
                 Console.WriteLine("-------------------------\n");
 
                 // Wait for the user to respond before closing.
-                Console.Write("Press 'n' and Enter to close the app, press 'd' and Enter to delete your Calculations Performed history and continue, or press any other key and Enter to Continue: ");
-                string? input = Console.ReadLine();
-                if (input == "n")
+                Console.Write("Options:\n");
+                Console.WriteLine("1) Continue");
+                Console.WriteLine("2) Delete your history of Calculations Performed and continue"); 
+                Console.WriteLine("3) Close the app");
+                string? input;
+                do
                 {
-                    endApp = true;
-                }
-                else if (input == "d")
-                {
-                    calcsPerformed.Clear();
-                    numberOfCalcs = 0;
-                    ordinalLetter = 'a';
-                }
+                    Console.Write("Enter 1, 2, or 3: ");
+                    input = Console.ReadLine();
+                    if (input == "1")
+                    {
+                        continue;
+                    }
+                    else if (input == "2")
+                    {
+                        calcsPerformed.Clear();
+                        numberOfCalcs = 0;
+                    }
+                    else if (input == "3")
+                    {
+                        endApp = true;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Invalid input.");
+                    }
+                } while (input == null || !Regex.IsMatch(input, "[1|2|3|]"));
 
                 Console.WriteLine("\n"); // Friendly linespacing.
             }
