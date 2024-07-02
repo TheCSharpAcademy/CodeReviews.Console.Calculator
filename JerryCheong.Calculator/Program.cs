@@ -18,13 +18,10 @@ namespace CalculatorProgram
             Console.WriteLine("Console Calculator in C#\r");
             Console.WriteLine("------------------------\n");
 
-            // Calculator calculator = new Calculator();
-
             // Declare variables and set to empty.
             // Use Nullable types (with ?) to match type of System.Console.ReadLine
             string? numInput1 = "";
             string? numInput2 = "";
-            double result = 0;
 
             bool endApp = false;
             while (!endApp)

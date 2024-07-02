@@ -2,8 +2,6 @@
 //  Store a list with the latest calculations. And give the users the ability to delete that list.
 //  Allow the users to use the results in the list above to perform new calculations.
 //  Add extra calculations: Square Root, Taking the Power, 10x, Trigonometry functions.
-
-using System.Diagnostics;
 using Newtonsoft.Json;
 
 namespace CalculatorLibrary;
@@ -12,7 +10,7 @@ namespace CalculatorLibrary;
 public class Calculator
 {
     JsonWriter writer;
-    private static int usageCount = 0;
+    private static int usageCount;
     private static List<string> history = new List<string>();
 
     public Calculator()
