@@ -92,22 +92,22 @@ public class Calculator
                 writer.WriteValue("SquareRoot");
                 history.Add($"{history.Count + 1}) √{num1} = {result}");
                 break;
-            case "t":
+            case "p":
                 result = Math.Pow(10, num1);
                 writer.WriteValue("TenPower");
                 history.Add($"{history.Count + 1}) 10^{num1} = {result}");
                 break;
-            case "sine":
+            case "s":
                 result = Math.Sin(num1);
                 writer.WriteValue("Sin");
                 history.Add($"{history.Count + 1}) Sin({num1}) = {result}");
                 break;
-            case "cosine":
+            case "c":
                 result = Math.Cos(num1);
                 writer.WriteValue("Cos");
                 history.Add($"{history.Count + 1}) Cos({num1}) = {result}");
                 break;
-            case "tangent":
+            case "t":
                 result = Math.Tan(num1);
                 writer.WriteValue("Tan");
                 history.Add($"{history.Count + 1}) Tan({num1}) = {result}");

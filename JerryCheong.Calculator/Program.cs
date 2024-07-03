@@ -42,10 +42,10 @@ namespace CalculatorProgram
                 Console.WriteLine("OR");
                 Console.WriteLine("Choose an operator from the following list:");
                 Console.WriteLine("\tr - SquareRoot");
-                Console.WriteLine("\tt - TenPower");
-                Console.WriteLine("\tsine - Sin");
-                Console.WriteLine("\tcosine - Cos");
-                Console.WriteLine("\ttangent - Tan");
+                Console.WriteLine("\tp - TenPower");
+                Console.WriteLine("\ts - Sin");
+                Console.WriteLine("\tc - Cos");
+                Console.WriteLine("\tt - Tan");
 
                 numInput2 = Console.ReadLine();
 
@@ -55,12 +55,12 @@ namespace CalculatorProgram
                     Console.Write("Input cannot be empty. Please enter a numeric value or choose an operator:");
                     numInput2 = Console.ReadLine();
                 }
-                while (!double.TryParse(numInput2, out cleanNum2) && !Regex.IsMatch(numInput2, "[r|t|sine|cosine|tangent]"))
+                while (!double.TryParse(numInput2, out cleanNum2) && !Regex.IsMatch(numInput2, "^(r|p|s|c|t)$"))
                 {
                     Console.Write("This is not valid input. Please enter a numeric value or choose an operator:");
                     numInput2 = Console.ReadLine();
                 }
-                if (Regex.IsMatch(numInput2, "[r|t|sine|cosine|tangent]"))
+                if (Regex.IsMatch(numInput2, "^(r|p|s|c|t)$"))
                 {
                     string op = numInput2;
                     program.SingleNumberCalc(cleanNum1, op);
@@ -80,7 +80,7 @@ namespace CalculatorProgram
                     string? op = Console.ReadLine();
 
                     // Validate input is not null, and matches the pattern
-                    while (op == null || !Regex.IsMatch(op, "[a|s|m|d|p]"))
+                    while (op == null || !Regex.IsMatch(op, "^(a|s|m|d|p)$"))
                     {
                         Console.WriteLine("Error: Unrecognized input. Please enter a valid operator:");
                         op = Console.ReadLine();
@@ -182,10 +182,10 @@ namespace CalculatorProgram
             Console.WriteLine("OR");
             Console.WriteLine("Choose an operator from the following list:");
             Console.WriteLine("\tr - SquareRoot");
-            Console.WriteLine("\tt - TenPower");
-            Console.WriteLine("\tsine - Sin");
-            Console.WriteLine("\tcosine - Cos");
-            Console.WriteLine("\ttangent - Tan");
+            Console.WriteLine("\tp - TenPower");
+            Console.WriteLine("\ts - Sin");
+            Console.WriteLine("\tc - Cos");
+            Console.WriteLine("\tt - Tan");
 
             string? numInput2 = Console.ReadLine();
 
@@ -195,12 +195,12 @@ namespace CalculatorProgram
                 Console.Write("Input cannot be empty. Please enter a numeric value or choose an operator:");
                 numInput2 = Console.ReadLine();
             }
-            while (!double.TryParse(numInput2, out cleanNum2) && !Regex.IsMatch(numInput2, "[r|t|sine|cosine|tangent]"))
+            while (!double.TryParse(numInput2, out cleanNum2) && !Regex.IsMatch(numInput2, "^(r|p|s|c|t)$"))
             {
                 Console.Write("This is not valid input. Please enter a numeric value or choose an operator:");
                 numInput2 = Console.ReadLine();
             }
-            if (Regex.IsMatch(numInput2, "[r|t|sine|cosine|tangent]"))
+            if (Regex.IsMatch(numInput2, "^(r|p|s|c|t)$"))
             {
                 SingleNumberCalc(cleanNum1, numInput2);
             }
@@ -217,7 +217,7 @@ namespace CalculatorProgram
                 string? op = Console.ReadLine();
 
                 // Validate input is not null, and matches the pattern
-                while (op == null || !Regex.IsMatch(op, "[a|s|m|d]"))
+                while (op == null || !Regex.IsMatch(op, "^(a|s|m|d)$"))
                 {
                     Console.WriteLine("Error: Unrecognized input. Please enter a valid operator:");
                     op = Console.ReadLine();
