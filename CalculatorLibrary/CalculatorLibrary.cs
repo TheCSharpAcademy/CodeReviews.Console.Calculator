@@ -1,9 +1,5 @@
-﻿using System.Diagnostics;
-using System.Security.Principal;
-using System.Text;
+﻿using System.Text;
 using Newtonsoft.Json;
-using static System.Net.Mime.MediaTypeNames;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace CalculatorLibrary
 {
