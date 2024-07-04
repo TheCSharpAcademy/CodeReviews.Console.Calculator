@@ -1,4 +1,5 @@
 ﻿using CalculatorLibrary;
+using System;
 using System.Text.RegularExpressions;
 
 namespace Calculator
@@ -15,65 +16,58 @@ namespace Calculator
 
             while (!endApp)
             {
-                // Declare variables and set to empty.
-                // Use Nullable types (with ?) to match type of System.Console.ReadLine
-                string? numInput1 = "";
-                string? numInput2 = "";
-                double result = 0;
-
-                // Ask the user to type the first number.
-                Console.Write("Type a number, and then press Enter: ");
-                numInput1 = Console.ReadLine();
-
-                double cleanNum1 = 0;
-                while (!double.TryParse(numInput1, out cleanNum1))
-                {
-                    Console.Write("This is not valid input. Please enter a numeric value: ");
-                    numInput1 = Console.ReadLine();
-                }
-
-                // Ask the user to type the second number.
-                Console.Write("Type another number, and then press Enter: ");
-                numInput2 = Console.ReadLine();
-
-                double cleanNum2 = 0;
-                while (!double.TryParse(numInput2, out cleanNum2))
-                {
-                    Console.Write("This is not valid input. Please enter a numeric value: ");
-                    numInput2 = Console.ReadLine();
-                }
-
                 // Ask the user to choose an operator.
                 Console.WriteLine("Choose an operator from the following list:");
                 Console.WriteLine("\ta - Add");
                 Console.WriteLine("\ts - Subtract");
                 Console.WriteLine("\tm - Multiply");
                 Console.WriteLine("\td - Divide");
+                Console.WriteLine("\troot - Square root, x^0.5");
+                Console.WriteLine("\tpow - Exponentiation, x^y");
+                Console.WriteLine("\tpow10 - Raise 10 to the power x, 10^x");
+                Console.WriteLine("\tsin - sin(x), x as DEG");
+                Console.WriteLine("\tcos - cos(x), x as DEG");
+                Console.WriteLine("\ttan - tan(x), x as DEG");
+                Console.WriteLine("\tcot - cot(x), x as DEG");
                 Console.Write("Your option? ");
 
-                string? op = Console.ReadLine();
+                string? menuOption = Console.ReadLine();
 
-                // Validate input is not null, and matches the pattern
-                if (op == null || !Regex.IsMatch(op, "[a|s|m|d]"))
+                switch (menuOption)
                 {
-                    Console.WriteLine("Error: Unrecognized input.");
-                }
-                else
-                {
-                    try
-                    {
-                        result = calculatorHandler.DoOperation(cleanNum1, cleanNum2, op);
-                        if (double.IsNaN(result))
+                    case "c":
+                        calculatorHandler.ClearLatestCalculations();
+                        break;
+                    case not null when Regex.IsMatch(menuOption, "^([asmd]|pow)$"): // Validate input is not null, and matches the pattern
+                        try
                         {
-                            Console.WriteLine("This operation will result in a mathematical error.\n");
+                            double operandLeft = calculatorHandler.InputOperandHandler();
+                            double operandRight = calculatorHandler.InputOperandHandler();
+                            double result = calculatorHandler.DoOperation(operandLeft, operandRight, menuOption);
+                            DisplayResult(result);
                         }
-                        else Console.WriteLine("Your result: {0:0.##}\n", result);
-                    }
-                    catch (Exception e)
-                    {
-                        Console.WriteLine("Oh no! An exception occurred trying to do the math.\n - Details: " + e.Message);
-                    }
+                        catch (Exception e)
+                        {
+                            Console.WriteLine("Oh no! An exception occurred trying to do the math.\n - Details: " + e.Message);
+                        }
+                        break;
+                    case not null when Regex.IsMatch(menuOption, "^(root|pow10|sin|cos|tan|cot)$"):
+                        try
+                        {
+                            double operandLeft = calculatorHandler.InputOperandHandler();
+                            double result = calculatorHandler.DoMathFunction(operandLeft, menuOption);
+                            DisplayResult(result);
+                        }
+                        catch (Exception e)
+                        {
+                            Console.WriteLine("Oh no! An exception occurred trying to do the math.\n - Details: " + e.Message);
+                        }
+                        break;
+                    default:
+                        Console.WriteLine("Error: Unrecognized input.");
+                        break;
                 }
+
                 Console.WriteLine("------------------------\n");
 
                 // Wait for the user to respond before closing.
@@ -85,6 +79,18 @@ namespace Calculator
 
             calculatorHandler.Finish();
             return;
+        }
+
+        public static void DisplayResult(double num)
+        {
+            if (double.IsNaN(num))
+            {
+                Console.WriteLine("This operation will result in a mathematical error.\n");
+            }
+            else
+            {
+                Console.WriteLine("Your result: {0:0.##}\n", num);
+            }
         }
     }
 }
