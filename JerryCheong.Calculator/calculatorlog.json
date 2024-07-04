@@ -1,19 +1,16 @@
 {
   "Operations": [
     {
-      "Operand1": 100.0,
-      "Operation": "SquareRoot",
-      "Result": 10.0
-    },
-    {
-      "Operand1": 151.0,
-      "Operand2": 444.0,
+      "Operand1": 150.0,
+      "Operand2": 999.0,
       "Operation": "Add",
-      "Result": 595.0
+      "Result": 1149.0
     },
     {
-      "Operand1": 5.0,
-      "Operand2": 6.666,
-      "Operation": "Multiply",
-      "Result": 33.33
+      "Operand1": 852.0,
+      "Operand2": 9.0,
+      "Operation": "Divide",
+      "Result": 94.66666666666667
     }
+  ]
+}
