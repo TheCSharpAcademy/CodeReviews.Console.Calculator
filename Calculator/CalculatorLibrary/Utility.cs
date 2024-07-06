@@ -53,15 +53,13 @@ public class Utility
                 Console.Write("\b \b");
             }
         }
-        while (key.Key != ConsoleKey.Enter);
+        while (key.Key != ConsoleKey.Enter || string.IsNullOrEmpty(msg));
 
-        if (!string.IsNullOrEmpty(msg))
+        if (decimal.TryParse(msg, out decimal val))
         {
-            if (decimal.TryParse(msg, out decimal val))
-            {
-                list.Add(val);
-            }
+            list.Add(val);
         }
+
         Console.WriteLine();
     }
     internal static bool CalculatorLoop()

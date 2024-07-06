@@ -75,9 +75,10 @@ public class Brain
     }
     internal static string Divide(decimal x, decimal y, out decimal result)
     {
-        result = Math.Round(x / y, 4);
+        result = 0;
         try
         {
+            result = Math.Round(x / y, 4);
             return Menu.DisplayCalculationOutcome(x, y, "/", result);
         }
         catch (DivideByZeroException)
