@@ -1,0 +1,26 @@
+{
+  "Operations": [
+    {
+      "Operand1": 13.0,
+      "Operand2": 2.0,
+      "Operation": "Power",
+      "Result": 169.0
+    },
+    {
+      "Operand1": 22.0,
+      "Operand2": 2.0,
+      "Operation": "Power",
+      "Result": 484.0
+    },
+    {
+      "Operand1": 88.0,
+      "Operand2": 2.0,
+      "Operation": "Add",
+      "Result": 90.0
+    },
+    {
+      "Operand1": 55.0,
+      "Operand2": 2.0,
+      "Operation": "10x",
+      "Result": 570.0
+    }
