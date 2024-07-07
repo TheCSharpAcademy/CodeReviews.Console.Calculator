@@ -31,15 +31,16 @@ class Program
       }
 
 
-      Console.Write("Type a number, and then press enter: ");
-      numInput1 = Console.ReadLine();
-      double cleanNum1 = 0;
+      double cleanNum1;
       if (chosenCalculation != null)
       {
         cleanNum1 = chosenCalculation.Answer;
       }
       else
       {
+        Console.Write("Type a number, and then press enter: ");
+        numInput1 = Console.ReadLine();
+        cleanNum1 = 0;
         while (!double.TryParse(numInput1, out cleanNum1))
         {
           Console.WriteLine("This is not valid input, Please enter a numeric value: ");

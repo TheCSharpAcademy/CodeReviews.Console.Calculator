@@ -1,26 +1,28 @@
 {
   "Operations": [
     {
-      "Operand1": 13.0,
-      "Operand2": 2.0,
+      "Operand1": 12.0,
+      "Operand2": 3.0,
       "Operation": "Power",
-      "Result": 169.0
+      "Result": 1728.0
     },
     {
-      "Operand1": 22.0,
-      "Operand2": 2.0,
-      "Operation": "Power",
-      "Result": 484.0
-    },
-    {
-      "Operand1": 88.0,
-      "Operand2": 2.0,
-      "Operation": "Add",
-      "Result": 90.0
-    },
-    {
-      "Operand1": 55.0,
+      "Operand1": 24.0,
       "Operand2": 2.0,
       "Operation": "10x",
-      "Result": 570.0
+      "Result": 260.0
+    },
+    {
+      "Operand1": 1728.0,
+      "Operand2": 33.0,
+      "Operation": "Subtract",
+      "Result": 1695.0
+    },
+    {
+      "Operand1": 12.0,
+      "Operand2": 12.0,
+      "Operation": "Multiply",
+      "Result": 144.0
     }
+  ]
+}
