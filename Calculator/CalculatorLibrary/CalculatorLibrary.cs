@@ -1,4 +1,3 @@
-﻿using System.Diagnostics;
 using System;
 using System.Diagnostics.Metrics;
 using Newtonsoft.Json;
@@ -9,7 +8,7 @@ namespace CalculatorLibrary
     {
 
         JsonWriter writer;
-        int counter = 0;
+        int counter;
 
         public Calculator()
         {
