@@ -1,0 +1,65 @@
+[
+  {
+    "OperationDate": "2024-07-12T14:28:40.9694519+00:00",
+    "FirstOperand": 360.0,
+    "SecondOperand": 34.0,
+    "Operation": "Subtraction",
+    "Result": 326.0
+  },
+  {
+    "OperationDate": "2024-07-12T14:28:48.7565097+00:00",
+    "FirstOperand": 360.0,
+    "SecondOperand": "NaN",
+    "Operation": "Sine function",
+    "Result": -0.0
+  },
+  {
+    "OperationDate": "2024-07-12T14:28:56.4294724+00:00",
+    "FirstOperand": 0.0,
+    "SecondOperand": 3.0,
+    "Operation": "Subtraction",
+    "Result": -3.0
+  },
+  {
+    "OperationDate": "2024-07-12T14:29:01.6265253+00:00",
+    "FirstOperand": 0.0,
+    "SecondOperand": "NaN",
+    "Operation": "Sine function",
+    "Result": 0.0
+  },
+  {
+    "OperationDate": "2024-07-12T14:29:07.8427015+00:00",
+    "FirstOperand": 180.0,
+    "SecondOperand": "NaN",
+    "Operation": "Sine function",
+    "Result": 0.0
+  },
+  {
+    "OperationDate": "2024-07-12T14:29:28.1697811+00:00",
+    "FirstOperand": 34.0,
+    "SecondOperand": "NaN",
+    "Operation": "Sine function",
+    "Result": 0.5592
+  },
+  {
+    "OperationDate": "2024-07-12T14:30:12.6416266+00:00",
+    "FirstOperand": 34.0,
+    "SecondOperand": "NaN",
+    "Operation": "Tangent function",
+    "Result": 0.6745
+  },
+  {
+    "OperationDate": "2024-07-12T14:34:57.3568484+00:00",
+    "FirstOperand": 34.0,
+    "SecondOperand": "NaN",
+    "Operation": "Square root",
+    "Result": 5.831
+  },
+  {
+    "OperationDate": "2024-07-12T14:35:04.2141511+00:00",
+    "FirstOperand": 0.0,
+    "SecondOperand": "NaN",
+    "Operation": "Square root",
+    "Result": 0.0
+  }
+]

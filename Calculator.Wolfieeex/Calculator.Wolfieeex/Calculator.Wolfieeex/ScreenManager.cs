@@ -96,101 +96,133 @@ public class ScreenEngine
 
     private void CalculateScreen(string calculationType)
     {
-        double firstNumber = 0;
+        double firstNumber = double.NaN;
         double secondNumber = double.NaN;
         string stringTypeInput;
 
-        if (previousScreen == Screens.MainMenu)
+        bool calculatorScreenWhile = true;
+        while (calculatorScreenWhile)
         {
-            string operationsCount = HelperMethods.ReturnOperationsCount().ToString();
-            Console.Write($"You are currently on the {OperationalDetails.menuOptions[calculationType.ToLower()].Name.ToLower()} screen.");
-            Console.WriteLine(("This calculator was used a total of: " + operationsCount + (operationsCount != "1" ? " times" : " time")).PadLeft(60));
-            Console.WriteLine($"{new string('-', Console.BufferWidth)}");
-            Console.WriteLine();
-            int previousY = Console.CursorTop;
-            Console.SetCursorPosition(0, Console.CursorTop + 9);
-            Console.WriteLine($"{new string('-', Console.BufferWidth)}");
-            Console.WriteLine("Optional Input: ");
-            Console.WriteLine("P - Choose a previous calculator result for your current opertaion");
-            Console.WriteLine("E - Return to Main Menu");
-            Console.SetCursorPosition(0, previousY);
+            if (previousScreen == Screens.MainMenu)
+            {
+                string operationsCount = HelperMethods.ReturnOperationsCount().ToString();
 
-            HelperMethods.AskForNumber(OperationalDetails.menuOptions[calculationType.ToLower()].OperandOne);
-            if (calculationType.ToLower() == "sr")
-            {
-                stringTypeInput = HelperMethods.ReadNumericInput(ref firstNumber, OperationalDetails.menuOptions[calculationType.ToLower()].OperandOne, radicant: true, specialInput: true);
-            }
-            else
-            {
-                stringTypeInput = HelperMethods.ReadNumericInput(ref firstNumber, OperationalDetails.menuOptions[calculationType.ToLower()].OperandOne, specialInput: true);
-            }
-            if (SpecialInputHandle(stringTypeInput))
-            {
-                previousScreen = queuedScreen;
-                queuedScreen = Screens.MainMenu;
-                return;
-            }
+                Console.Write($"You are currently on the {OperationalDetails.menuOptions[calculationType.ToLower()].Name.ToLower()} screen.");
+                Console.WriteLine(("This calculator was used a total of: " + operationsCount + (operationsCount != "1" ? " times" : " time")).PadLeft(60));
+                Console.WriteLine($"{new string('-', Console.BufferWidth)}");
+                Console.WriteLine();
 
-            if (!String.IsNullOrEmpty(OperationalDetails.menuOptions[calculationType.ToLower()].OperandTwo))
-            {
-                HelperMethods.AskForNumber(OperationalDetails.menuOptions[calculationType.ToLower()].OperandTwo);
-                if (calculationType.ToLower() == "d")
+                int previousY = Console.CursorTop;
+                Console.SetCursorPosition(0, Console.CursorTop + 9);
+                Console.WriteLine($"{new string('-', Console.BufferWidth)}");
+                Console.WriteLine("Optional Input: ");
+                Console.WriteLine("P - Choose a previous calculator result for your current opertaion");
+                Console.WriteLine("E - Return to Main Menu");
+                Console.SetCursorPosition(0, previousY);
+
+                HelperMethods.AskForNumber(OperationalDetails.menuOptions[calculationType.ToLower()].OperandOne);
+                if (double.IsNaN(firstNumber))
                 {
-                    stringTypeInput = HelperMethods.ReadNumericInput(ref secondNumber, OperationalDetails.menuOptions[calculationType.ToLower()].OperandTwo, divisor: true, specialInput: true);
-                }
-                else if (calculationType.ToLower() == "p10")
-                {
-                    stringTypeInput = HelperMethods.ReadNumericInput(ref secondNumber, OperationalDetails.menuOptions[calculationType.ToLower()].OperandTwo, power10: true, specialInput: true);
+                    if (calculationType.ToLower() == "sr")
+                    {
+                        stringTypeInput = HelperMethods.ReadNumericInput(ref firstNumber, OperationalDetails.menuOptions[calculationType.ToLower()].OperandOne, radicant: true, specialInput: true, specialInputRegex: @"^(e|p)$");
+                    }
+                    else
+                    {
+                        stringTypeInput = HelperMethods.ReadNumericInput(ref firstNumber, OperationalDetails.menuOptions[calculationType.ToLower()].OperandOne, specialInput: true, specialInputRegex: @"^(e|p)$");
+                    }
+                    if (SpecialInputHandle(stringTypeInput))
+                    {
+                        previousScreen = queuedScreen;
+                        queuedScreen = Screens.MainMenu;
+                        return;
+                    }
                 }
                 else
                 {
-                    stringTypeInput = HelperMethods.ReadNumericInput(ref secondNumber, OperationalDetails.menuOptions[calculationType.ToLower()].OperandTwo, specialInput: true);
+                    Console.WriteLine(firstNumber);
                 }
-                if (SpecialInputHandle(stringTypeInput))
-                {
-                    previousScreen = queuedScreen;
-                    queuedScreen = Screens.MainMenu;
-                    return;
-                }
-            }
-        }
-        else
-        {
-            string operationsCount = HelperMethods.ReturnOperationsCount().ToString();
-            Console.Write($"You are currently on the {OperationalDetails.trigonometryOptions[calculationType.ToLower()].Name.ToLower()} screen.");
-            Console.WriteLine(("This calculator was used a total of: " + operationsCount + (operationsCount != "1" ? " times" : " time")).PadLeft(60));
-            Console.WriteLine($"{new string('-', Console.BufferWidth)}");
-            Console.WriteLine();
-            int previousY = Console.CursorTop;
-            Console.SetCursorPosition(0, Console.CursorTop + 9);
-            Console.WriteLine($"{new string('-', Console.BufferWidth)}");
-            Console.WriteLine("Optional Input: ");
-            Console.WriteLine("P - Choose a previous calculator result for your current opertaion");
-            Console.WriteLine("E - Return to Main Menu");
-            Console.SetCursorPosition(0, previousY);
 
-            HelperMethods.AskForNumber(OperationalDetails.trigonometryOptions[calculationType.ToLower()].OperandOne);
-            if (calculationType.ToLower()[0] != 'a' || calculationType.ToLower() == "at")
-            {
-                stringTypeInput = HelperMethods.ReadNumericInput(ref firstNumber, OperationalDetails.trigonometryOptions[calculationType.ToLower()].OperandOne, specialInput: true);
+                if (!String.IsNullOrEmpty(OperationalDetails.menuOptions[calculationType.ToLower()].OperandTwo))
+                {
+                    HelperMethods.AskForNumber(OperationalDetails.menuOptions[calculationType.ToLower()].OperandTwo);
+                    if (double.IsNaN(secondNumber))
+                    {
+                        if (calculationType.ToLower() == "d")
+                        {
+                            stringTypeInput = HelperMethods.ReadNumericInput(ref secondNumber, OperationalDetails.menuOptions[calculationType.ToLower()].OperandTwo, divisor: true, specialInput: true, specialInputRegex: @"^(e|p|d)$");
+                        }
+                        else if (calculationType.ToLower() == "p10")
+                        {
+                            stringTypeInput = HelperMethods.ReadNumericInput(ref secondNumber, OperationalDetails.menuOptions[calculationType.ToLower()].OperandTwo, power10: true, specialInput: true, specialInputRegex: @"^(e|p|d)$");
+                        }
+                        else
+                        {
+                            stringTypeInput = HelperMethods.ReadNumericInput(ref secondNumber, OperationalDetails.menuOptions[calculationType.ToLower()].OperandTwo, specialInput: true, specialInputRegex: @"^(e|p|d)$");
+                        }
+                        if (SpecialInputHandle(stringTypeInput))
+                        {
+                            previousScreen = queuedScreen;
+                            queuedScreen = Screens.MainMenu;
+                            return;
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine(secondNumber);
+                    }
+                }
             }
             else
             {
-                stringTypeInput = HelperMethods.ReadNumericInput(ref firstNumber, OperationalDetails.trigonometryOptions[calculationType.ToLower()].OperandOne, trigonometricValue: true, specialInput: true);
+                string operationsCount = HelperMethods.ReturnOperationsCount().ToString();
+                Console.Write($"You are currently on the {OperationalDetails.trigonometryOptions[calculationType.ToLower()].Name.ToLower()} screen.");
+                Console.WriteLine(("This calculator was used a total of: " + operationsCount + (operationsCount != "1" ? " times" : " time")).PadLeft(60));
+                Console.WriteLine($"{new string('-', Console.BufferWidth)}");
+                Console.WriteLine();
+                int previousY = Console.CursorTop;
+                Console.SetCursorPosition(0, Console.CursorTop + 9);
+                Console.WriteLine($"{new string('-', Console.BufferWidth)}");
+                Console.WriteLine("Optional Input: ");
+                Console.WriteLine("P - Choose a previous calculator result for your current opertaion");
+                Console.WriteLine("E - Return to Main Menu");
+                Console.SetCursorPosition(0, previousY);
+
+                HelperMethods.AskForNumber(OperationalDetails.trigonometryOptions[calculationType.ToLower()].OperandOne);
+                
+                if (double.IsNaN(firstNumber))
+                {
+                    if (calculationType.ToLower()[0] != 'a' || calculationType.ToLower() == "at")
+                    {
+                        stringTypeInput = HelperMethods.ReadNumericInput(ref firstNumber, OperationalDetails.trigonometryOptions[calculationType.ToLower()].OperandOne, specialInput: true, specialInputRegex: @"^(e|p)$");
+                    }
+                    else
+                    {
+                        stringTypeInput = HelperMethods.ReadNumericInput(ref firstNumber, OperationalDetails.trigonometryOptions[calculationType.ToLower()].OperandOne, trigonometricValue: true, specialInput: true, specialInputRegex: @"^(e|p)$");
+                    }
+                    if (SpecialInputHandle(stringTypeInput))
+                    {
+                        previousScreen = queuedScreen;
+                        queuedScreen = Screens.MainMenu;
+                        return;
+                    }
+                }
+                else
+                {
+                    Console.WriteLine(firstNumber);
+                }
             }
-            if (SpecialInputHandle(stringTypeInput))
-            {
-                previousScreen = queuedScreen;
-                queuedScreen = Screens.MainMenu;
-                return;
-            }
+            calculatorScreenWhile = false;
         }
+
         Console.WriteLine($"{new string('-', Console.BufferWidth)}");
 
         CalculatorEngine calculatorEngine = new CalculatorEngine();
         double result = calculatorEngine.CalculateResult(firstNumber, secondNumber, calculationType, Enum.GetName(previousScreen));
 
-        string output = result != double.NaN ? String.Format("{0:0.####}", result) : "Not a valid number";
+        string output = !Double.IsNaN(result) ? String.Format("{0:0.####}", result) : "Not a valid number";
+        if (output == "-0") output = "0";
+
         if (previousScreen == Screens.MainMenu)
             Console.WriteLine($"The {OperationalDetails.menuOptions[calculationType.ToLower()].ResultingOperand.ToLower()}: {output}");
         else
