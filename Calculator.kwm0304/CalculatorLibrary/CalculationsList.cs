@@ -1,4 +1,3 @@
-
 using System.Text.RegularExpressions;
 
 namespace CalculatorLibrary;
@@ -6,12 +5,19 @@ namespace CalculatorLibrary;
 public class CalculationsList
 {
   private static readonly List<Calculation> recentCalculations = [];
+  public static void AddCalculationToList(double numOne, double answer, string operation)
+  {
+    string symbol = GetOperation(operation);
+    Calculation newCalculation = new(numOne, answer, symbol);
+    recentCalculations.Add(newCalculation);
+  }
   public static void AddCalculationToList(double numOne, double numTwo, double answer, string operation)
   {
     string symbol = GetOperation(operation);
     Calculation newCalculation = new(numOne, numTwo, answer, symbol);
     recentCalculations.Add(newCalculation);
   }
+
   public static Calculation? ListMenuOptions()
   {
     DisplayList();
@@ -19,7 +25,7 @@ public class CalculationsList
     Console.WriteLine("[D]elete list");
     Console.WriteLine("[E]xit");
     string? op = Console.ReadLine();
-    
+
     if (op == null || !Regex.IsMatch(op.ToUpper(), "[C|D|E]"))
     {
       Console.WriteLine("Please choose a valid option");
@@ -40,6 +46,7 @@ public class CalculationsList
       return null;
     }
   }
+
   public static bool AnyEntriesInList()
   {
     return recentCalculations.Count != 0;
@@ -86,6 +93,7 @@ public class CalculationsList
       Console.WriteLine($"{i + 1}. {calculation.NumberOne} {calculation.Operator} {calculation.NumberTwo} = {calculation.Answer}");
     }
   }
+
   private static string GetOperation(string op)
   {
     return op switch
@@ -96,6 +104,9 @@ public class CalculationsList
       "d" => "/",
       "e" => "^",
       "t" => "10x",
+      "c" => "cos",
+      "sin" => "sin",
+      "tan" => "tan",
       _ => "Invalid operation",
     };
   }
@@ -108,9 +119,9 @@ public class CalculationsList
     {
       if (AnyEntriesInList())
       {
-      return true;
+        return true;
       }
-      else 
+      else
       {
         Console.WriteLine("No entries to display");
         return false;
@@ -120,7 +131,8 @@ public class CalculationsList
     {
       return false;
     }
-    else{
+    else
+    {
       return ListPrompt();
     }
   }

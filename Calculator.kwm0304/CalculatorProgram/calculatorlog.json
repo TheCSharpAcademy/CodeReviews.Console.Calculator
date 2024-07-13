@@ -1,28 +1,42 @@
 {
   "Operations": [
     {
-      "Operand1": 12.0,
-      "Operand2": 3.0,
-      "Operation": "Power",
-      "Result": 1728.0
-    },
-    {
-      "Operand1": 24.0,
-      "Operand2": 2.0,
+      "Operand1": 44.0,
       "Operation": "10x",
-      "Result": 260.0
+      "Result": 440.0
     },
     {
-      "Operand1": 1728.0,
+      "Operand1": 440.0,
+      "Operation": "Cosine",
+      "Result": 0.9843713352610934
+    },
+    {
+      "Operand1": 0.9843713352610934,
+      "Operation": "Sine",
+      "Result": 0.8329243602404511
+    },
+    {
+      "Operand1": 22.0,
+      "Operation": "Tangent",
+      "Result": 0.00885165604168446
+    },
+    {
+      "Operand1": 100.0,
       "Operand2": 33.0,
-      "Operation": "Subtract",
-      "Result": 1695.0
+      "Operation": "Add",
+      "Result": 133.0
     },
     {
-      "Operand1": 12.0,
-      "Operand2": 12.0,
+      "Operand1": 0.8329243602404511,
+      "Operand2": 54.0,
       "Operation": "Multiply",
-      "Result": 144.0
+      "Result": 44.97791545298436
+    },
+    {
+      "Operand1": 44.97791545298436,
+      "Operand2": 12.0,
+      "Operation": "Power",
+      "Result": 6.854754178723253E+19
     }
   ]
 }
