@@ -53,13 +53,13 @@ namespace CalculatorProgram
                             else
                             {
                                 Console.Clear();
-                                calculator.showCount();
+                                calculator.ShowCount();
                                 Console.WriteLine("\nCalculations:");
-                                calculator.showCalculations();
+                                calculator.ShowCalculations();
                             }
                             break;
                         case '4':
-                            calculator.clearCalculations();
+                            calculator.ClearCalculations();
                             break;
                         case '5':
                             endApp = true;
@@ -197,7 +197,7 @@ namespace CalculatorProgram
         //Prompt the user to select a result to use
         {
             Console.WriteLine("Which Result do you want to use?");
-            calculator.showCalculations();
+            calculator.ShowCalculations();
             Console.WriteLine("");
             Console.Write("Your option? ");
 
@@ -210,7 +210,7 @@ namespace CalculatorProgram
                 selection = Console.ReadKey().KeyChar;
                 try
                 {
-                    num = calculator.calculations[int.Parse(selection.ToString()) - 1].result;
+                    num = calculator.calculations[int.Parse(selection.ToString()) - 1].Result;
                     validSelection = true;
                 }
                 catch
