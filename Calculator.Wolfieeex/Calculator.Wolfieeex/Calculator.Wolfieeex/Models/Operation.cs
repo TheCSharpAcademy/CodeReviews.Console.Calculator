@@ -23,7 +23,7 @@ internal class OperationalDetails
 {
     public static Dictionary<string, Operation> menuOptions = new Dictionary<string, Operation>()
     {
-        { "a", new Operation { Name = "Addition", OperandOne = "Addent", OperandTwo = "Addent", ResultingOperand = "Sum" } },
+        { "a", new Operation { Name = "Addition", OperandOne = "Addent", OperandTwo = "second Addent", ResultingOperand = "Sum" } },
         { "s", new Operation { Name = "Subtraction", OperandOne = "Minuend", OperandTwo = "Subtrahend", ResultingOperand = "Difference" } },
         { "m", new Operation { Name = "Multiplication", OperandOne = "Multiplicand", OperandTwo = "Multiplicator", ResultingOperand = "Product" } },
         { "d", new Operation { Name = "Division", OperandOne = "Divisor", OperandTwo = "Dividient", ResultingOperand = "Quotient" } },
