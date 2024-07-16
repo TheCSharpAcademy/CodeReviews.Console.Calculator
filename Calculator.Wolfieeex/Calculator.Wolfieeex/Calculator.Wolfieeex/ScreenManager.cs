@@ -139,6 +139,12 @@ public class ScreenEngine
                         queuedScreen = Screens.MainMenu;
                         return;
                     }
+                    if (stringTypeInput.ToLower() == "p")
+                    {
+                        firstNumber = HelperMethods.PreviousResultSelectionScreen();
+                        Console.Clear();
+                        continue;
+                    }
                 }
                 else
                 {
@@ -177,6 +183,12 @@ public class ScreenEngine
                         {
                             firstNumber = double.NaN;
                             secondNumber = double.NaN;
+                            Console.Clear();
+                            continue;
+                        }
+                        if (stringTypeInput.ToLower() == "p")
+                        {
+                            secondNumber = HelperMethods.PreviousResultSelectionScreen();
                             Console.Clear();
                             continue;
                         }
@@ -220,6 +232,12 @@ public class ScreenEngine
                         previousScreen = queuedScreen;
                         queuedScreen = Screens.MainMenu;
                         return;
+                    }
+                    if (stringTypeInput.ToLower() == "p")
+                    {
+                        firstNumber = HelperMethods.PreviousResultSelectionScreen();
+                        Console.Clear();
+                        continue;
                     }
                 }
                 else
@@ -335,15 +353,5 @@ public class ScreenEngine
                 queuedScreen = Screens.Calculation;
                 break;
         }
-    }
-
-    private void TemporaryPreviousOperationsScreen()
-    {
-
-    }
-
-    private void DeletePreviousInput()
-    {
-
     }
 }
