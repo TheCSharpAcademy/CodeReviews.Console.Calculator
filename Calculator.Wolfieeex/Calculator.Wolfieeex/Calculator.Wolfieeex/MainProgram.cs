@@ -15,7 +15,6 @@ class MainProgram
             Console.WriteLine("\n\nAn exception occurred trying to run the program.\n - Details: " + ex.Message + ".\nThis application will close now.");
         }
 
-        //calculatorEngine.Deconstructor();
 
         Console.Write("Thank you for using this application! Press any key to exit: ");
         Console.ReadKey();
