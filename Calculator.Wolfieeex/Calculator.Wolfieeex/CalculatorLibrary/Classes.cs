@@ -1,7 +1,6 @@
 ﻿using Newtonsoft.Json;
 using System.Text.RegularExpressions;
 using CalculatorLibrary.Models;
-//using Xamarin.Essentials;
 
 namespace CalculatorLibrary;
 
@@ -48,6 +47,10 @@ public class CalculatorEngine
                         {
                             escapeSequence = "00B" + letter;
                         }
+                        else if (letter == '-')
+                        {
+                            escapeSequence = "207B";
+                        }
                         else if (letter == '1')
                         {
                             escapeSequence = "00B9";
@@ -66,6 +69,14 @@ public class CalculatorEngine
                         if (letter == '2' || letter == '3')
                         {
                             escapeSequence = "00B" + letter;
+                        }
+                        else if (letter == '-')
+                        {
+                            escapeSequence = "207b";
+                        }
+                        else if (letter == '.')
+                        {
+                            escapeSequence = "00B7";
                         }
                         else if (letter == '1')
                         {
@@ -119,7 +130,6 @@ public class CalculatorEngine
                     break;
             }
         }
-        //Clipboard.SetTextAsync(result.ToString());
         LogResults(calculationString, result, operationName);
         UpdateCalculatorOperationsCount();
         return result;
@@ -317,7 +327,7 @@ public class HelperMethods
 
         Console.OutputEncoding = System.Text.Encoding.Unicode;
 
-        Console.WriteLine($"{"Date:".PadRight(16)}{"Time:".PadRight(12)}{"Operation:".PadRight(longestOperationIterationLength + 3)}{"Result:".PadRight(25)}");
+        Console.WriteLine($"{"Date:".PadRight(16)}{"Time:".PadRight(12)}{"Operation:".PadRight(longestOperationIterationLength + 3)}{"Result:".PadRight(50)}");
         Console.WriteLine();
         foreach (OperationalData.DataFormat data in OperationalData.previousOperations)
         {
@@ -326,7 +336,7 @@ public class HelperMethods
                 stringResult = "Undefined";
             if (stringResult == "-0")
                 stringResult = "0";
-            Console.WriteLine($"{data.OperationDate.ToString("dd/MM/yyyy").PadRight(16)}{data.OperationDate.ToString("hh:mm").PadRight(12)}{data.OperationString.PadRight(longestOperationIterationLength + 3)}{stringResult.PadRight(25)}");
+            Console.WriteLine($"{data.OperationDate.ToString("dd/MM/yyyy").PadRight(16)}{data.OperationDate.ToString("hh:mm").PadRight(12)}{data.OperationString.PadRight(longestOperationIterationLength + 3)}{stringResult.PadRight(50)}");
         }
     }
     static public double PreviousResultSelectionScreen(bool divisor = false, bool trigonometricValue = false, bool radicant = false, bool power10 = false)
