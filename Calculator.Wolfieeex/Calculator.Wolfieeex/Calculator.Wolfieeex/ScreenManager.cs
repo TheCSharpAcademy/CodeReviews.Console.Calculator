@@ -128,6 +128,12 @@ public class ScreenEngine
                     if (calculationType.ToLower() == "sr")
                     {
                         stringTypeInput = HelperMethods.ReadNumericInput(ref firstNumber, OperationalDetails.menuOptions[calculationType.ToLower()].OperandOne, radicant: true, specialInput: true, specialInputRegex: @"^(e|p)$");
+                        if (stringTypeInput.ToLower() == "p")
+                        {
+                            firstNumber = HelperMethods.PreviousResultSelectionScreen(radicant: true);
+                            Console.Clear();
+                            continue;
+                        }
                     }
                     else
                     {
@@ -164,10 +170,22 @@ public class ScreenEngine
                         if (calculationType.ToLower() == "d")
                         {
                             stringTypeInput = HelperMethods.ReadNumericInput(ref secondNumber, OperationalDetails.menuOptions[calculationType.ToLower()].OperandTwo, divisor: true, specialInput: true, specialInputRegex: @"^(e|p|d)$");
+                            if (stringTypeInput.ToLower() == "p")
+                            {
+                                secondNumber = HelperMethods.PreviousResultSelectionScreen(divisor: true);
+                                Console.Clear();
+                                continue;
+                            }
                         }
                         else if (calculationType.ToLower() == "p10")
                         {
                             stringTypeInput = HelperMethods.ReadNumericInput(ref secondNumber, OperationalDetails.menuOptions[calculationType.ToLower()].OperandTwo, power10: true, specialInput: true, specialInputRegex: @"^(e|p|d)$");
+                            if (stringTypeInput.ToLower() == "p")
+                            {
+                                secondNumber = HelperMethods.PreviousResultSelectionScreen(power10: true);
+                                Console.Clear();
+                                continue;
+                            }
                         }
                         else
                         {
@@ -216,7 +234,7 @@ public class ScreenEngine
                 Console.SetCursorPosition(0, previousY);
 
                 HelperMethods.AskForNumber(OperationalDetails.trigonometryOptions[calculationType.ToLower()].OperandOne);
-                
+
                 if (double.IsNaN(firstNumber))
                 {
                     if (calculationType.ToLower()[0] != 'a' || calculationType.ToLower() == "at")
@@ -226,6 +244,12 @@ public class ScreenEngine
                     else
                     {
                         stringTypeInput = HelperMethods.ReadNumericInput(ref firstNumber, OperationalDetails.trigonometryOptions[calculationType.ToLower()].OperandOne, trigonometricValue: true, specialInput: true, specialInputRegex: @"^(e|p)$");
+                        if (stringTypeInput.ToLower() == "p")
+                        {
+                            firstNumber = HelperMethods.PreviousResultSelectionScreen(trigonometricValue: true);
+                            Console.Clear();
+                            continue;
+                        }
                     }
                     if (stringTypeInput.ToLower() == "e")
                     {
@@ -262,7 +286,8 @@ public class ScreenEngine
         double result = calculatorEngine.CalculateResult(firstNumber, secondNumber, calculationType, Enum.GetName(previousScreen));
 
         string output = !Double.IsNaN(result) ? String.Format("{0:0.####}", result) : "Not a valid number";
-        if (output == "-0") output = "0";
+        if (output == "-0")
+            output = "0";
 
         if (previousScreen == Screens.MainMenu)
             Console.WriteLine($"The {OperationalDetails.menuOptions[calculationType.ToLower()].ResultingOperand.ToLower()}: {output}");

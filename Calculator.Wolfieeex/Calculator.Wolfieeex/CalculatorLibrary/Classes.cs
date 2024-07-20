@@ -1,7 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System.Text.RegularExpressions;
 using CalculatorLibrary.Models;
-using System.IO;
+//using Xamarin.Essentials;
 
 namespace CalculatorLibrary;
 
@@ -43,7 +43,15 @@ public class CalculatorEngine
                     calculationString = $"{number1} * 10";
                     foreach (char letter in number2.ToString())
                     {
-                        string escapeSequence = "207" + letter; 
+                        string escapeSequence = "207" + letter;
+                        if (letter == '2' || letter == '3')
+                        {
+                            escapeSequence = "00B" + letter;
+                        }
+                        else if (letter == '1')
+                        {
+                            escapeSequence = "00B9";
+                        }
                         int escapeCode = int.Parse(escapeSequence, System.Globalization.NumberStyles.HexNumber);
                         calculationString += char.ConvertFromUtf32(escapeCode);
                     }
@@ -55,6 +63,14 @@ public class CalculatorEngine
                     foreach (char letter in number2.ToString())
                     {
                         string escapeSequence = "207" + letter;
+                        if (letter == '2' || letter == '3')
+                        {
+                            escapeSequence = "00B" + letter;
+                        }
+                        else if (letter == '1')
+                        {
+                            escapeSequence = "00B9";
+                        }
                         int escapeCode = int.Parse(escapeSequence, System.Globalization.NumberStyles.HexNumber);
                         calculationString += char.ConvertFromUtf32(escapeCode);
                     }
@@ -103,6 +119,7 @@ public class CalculatorEngine
                     break;
             }
         }
+        //Clipboard.SetTextAsync(result.ToString());
         LogResults(calculationString, result, operationName);
         UpdateCalculatorOperationsCount();
         return result;
@@ -116,7 +133,7 @@ public class CalculatorEngine
             file.Close();
         }
         string? stringNumber = File.ReadAllText("calculatorOperationsCount.log");
-        if (String.IsNullOrEmpty(stringNumber) == null)
+        if (string.IsNullOrEmpty(stringNumber) == null)
         {
             File.WriteAllText("calculatorOperationsCount.log", "1");
         }
@@ -148,26 +165,26 @@ public class CalculatorEngine
             {
                 JsonTextReader jsonReader = new JsonTextReader(openStream);
                 OperationalData.previousOperations = serializer.Deserialize<List<OperationalData.DataFormat>>(jsonReader);
-            }                          
+            }
         }
 
         using (StreamWriter writeStream = File.CreateText(path))
         {
-            OperationalData.previousOperations.Add(new OperationalData.DataFormat
+            OperationalData.previousOperations.Insert(0, new OperationalData.DataFormat
             {
                 OperationDate = DateTime.Now,
                 OperationString = operationString,
                 Result = Math.Round(result, 4),
                 Operation = operation
             });
-           
+
             serializer.Serialize(writeStream, OperationalData.previousOperations);
-        }     
+        }
     }
 }
 public class HelperMethods
 {
-    static public string ReadNumericInput(ref double number, string ordinalString, bool divisor = false, bool trigonometricValue = false, bool radicant = false, bool power10 = false, bool specialInput = false, string specialInputRegex = "")
+    static public string ReadNumericInput(ref double number, string ordinalString, bool divisor = false, bool trigonometricValue = false, bool radicant = false, bool power10 = false, bool selectionScreenIndex = false, bool specialInput = false, string specialInputRegex = "")
     {
         bool checkNumber = true;
         while (checkNumber)
@@ -221,6 +238,14 @@ public class HelperMethods
                 Console.SetCursorPosition(0, Console.CursorTop - 1);
                 Console.Write($"\r{new string(' ', Console.BufferWidth)}");
                 Console.Write($"\rYour exponent of power of 10 must be a whole number. Please try again- reinsert {ordinalString.ToLower()} and press ENTER: ");
+                continue;
+            }
+            if (selectionScreenIndex && (number < 1 || number > OperationalData.previousOperations.Count || number > 10))
+            {
+                Console.SetCursorPosition(0, Console.CursorTop - 1);
+                Console.Write($"\r{new string(' ', Console.BufferWidth)}");
+                int range = OperationalData.previousOperations.Count > 10 ? 10 : OperationalData.previousOperations.Count;
+                Console.Write($"\rYour index must be in range of 1 and {range}. Please reinsert it and press ENTER: ");
                 continue;
             }
             checkNumber = false;
@@ -290,20 +315,25 @@ public class HelperMethods
             }
         }
 
+        Console.OutputEncoding = System.Text.Encoding.Unicode;
+
         Console.WriteLine($"{"Date:".PadRight(16)}{"Time:".PadRight(12)}{"Operation:".PadRight(longestOperationIterationLength + 3)}{"Result:".PadRight(25)}");
         Console.WriteLine();
         foreach (OperationalData.DataFormat data in OperationalData.previousOperations)
         {
             string stringResult = data.Result.ToString();
-            if (stringResult == "NaN") stringResult = "Undefined";
-            if (stringResult == "-0") stringResult = "0";
+            if (stringResult == "NaN")
+                stringResult = "Undefined";
+            if (stringResult == "-0")
+                stringResult = "0";
             Console.WriteLine($"{data.OperationDate.ToString("dd/MM/yyyy").PadRight(16)}{data.OperationDate.ToString("hh:mm").PadRight(12)}{data.OperationString.PadRight(longestOperationIterationLength + 3)}{stringResult.PadRight(25)}");
         }
     }
-    static public double PreviousResultSelectionScreen()
+    static public double PreviousResultSelectionScreen(bool divisor = false, bool trigonometricValue = false, bool radicant = false, bool power10 = false)
     {
         string path = "operationsLog.json";
 
+        Console.Clear();
         if (File.Exists(path))
         {
             using (JsonTextReader jsonTextReader = new JsonTextReader(File.OpenText(path)))
@@ -312,41 +342,119 @@ public class HelperMethods
                 OperationalData.previousOperations = jsonSerializer.Deserialize<List<OperationalData.DataFormat>>(jsonTextReader);
             }
         }
+        else
+        {
+            Console.Write("There are no previous operations to select from. Press any key to return to calculator menu: ");
+            Console.ReadKey();
+            return double.NaN;
+        }
 
-        Console.Clear();
+        Console.OutputEncoding = System.Text.Encoding.Unicode;
+
         Console.WriteLine("You are on a previous opeations screen.");
-        Console.Write("Choose a result from any previous operation by typing in its index number to use it for your current calculation: ");
+        Console.WriteLine($"{new string('-', Console.BufferWidth)}");
+        Console.Write("\nChoose a result from any previous operation by typing in its index number to use it for your current calculation: ");
 
         int typingY = Console.CursorTop;
         int typingX = Console.CursorLeft;
 
-        Console.WriteLine("\nE - Return to the calculator screen without choosing a value");
+        Console.WriteLine("\n\nE - Optionally, return to the calculator screen without choosing a value");
         Console.WriteLine($"{new string('-', Console.BufferWidth)}");
         Console.WriteLine();
         Console.WriteLine("Last 10 previous operations displaying:\n");
 
         int longestOperationIterationLength = 10;
+        int longestOperationName = 17;
+        int currentOperation = 1;
         foreach (OperationalData.DataFormat data in OperationalData.previousOperations)
         {
             if (data.OperationString.Length > longestOperationIterationLength)
             {
                 longestOperationIterationLength = data.OperationString.Length;
             }
+
+            if (data.Operation.Length > longestOperationName)
+            {
+                longestOperationName = data.Operation.Length;
+            }
+
+            if (currentOperation == 10)
+                break;
+            currentOperation++;
         }
-    
-        Console.WriteLine($"{"Index number".PadRight(20)}{"Operation:".PadRight(longestOperationIterationLength + 3)}{"Result:".PadRight(25)}\n");
+
+        Console.WriteLine($"{"Index number: ".PadRight(20)}{"Operation Name:".PadRight(longestOperationName + 3)}{"Operation:".PadRight(longestOperationIterationLength + 3)}{"Result:".PadRight(25)}\n");
 
         int indexN = 1;
         foreach (OperationalData.DataFormat data in OperationalData.previousOperations)
         {
             string stringResult = data.Result.ToString();
-            if (stringResult == "NaN") stringResult = "Undefined";
-            if (stringResult == "-0") stringResult = "0";
-            Console.WriteLine($"{indexN.ToString().PadRight(20)}{data.OperationString.PadRight(longestOperationIterationLength + 3)}{stringResult.PadRight(25)}");
+            if (stringResult == "NaN")
+                stringResult = "Undefined";
+            if (stringResult == "-0")
+                stringResult = "0";
+            Console.WriteLine($"{(indexN.ToString() + ")").PadRight(20)}{data.Operation.PadRight(longestOperationName + 3)}{data.OperationString.PadRight(longestOperationIterationLength + 3)}{stringResult.PadRight(25)}");
+            if (indexN == 10)
+                break;
             indexN++;
         }
-        Console.ReadKey();
-        return 0;
+
+        Console.SetCursorPosition(typingX, typingY);
+
+        bool numberChecks = true;
+        while (numberChecks)
+        {
+            double userInput = 0;
+            string exitPrompt = HelperMethods.ReadNumericInput(ref userInput, "index", selectionScreenIndex: true, specialInput: true, specialInputRegex: @"^e$");
+            if (exitPrompt.ToLower() == "e")
+            {
+                return double.NaN;
+            }
+            else if (CheckIndexIfItsValidForCalculation(OperationalData.previousOperations[(int)userInput - 1].Result, divisor: divisor, trigonometricValue: trigonometricValue, radicant: radicant, power10: power10))
+            {
+                return OperationalData.previousOperations[(int)userInput - 1].Result;
+            }
+        }
+        return double.NaN;
+    }
+    static public bool CheckIndexIfItsValidForCalculation(double number, bool divisor = false, bool trigonometricValue = false, bool radicant = false, bool power10 = false)
+    {
+        if (divisor && number == 0)
+        {
+            Console.SetCursorPosition(0, Console.CursorTop - 1);
+            Console.Write($"\r{new string(' ', Console.BufferWidth)}");
+            Console.Write($"\rYour divisor must not equal 0. Please try again- reinsert index number and press ENTER: ");
+            return false;
+        }
+        if (trigonometricValue && (number < -1 || number > 1))
+        {
+            Console.SetCursorPosition(0, Console.CursorTop - 1);
+            Console.Write($"\r{new string(' ', Console.BufferWidth)}");
+            Console.Write($"\rTrigonometric value needs to be in range of -1 and 1. Please try again- reinsert index number and press ENTER: ");
+            return false;
+        }
+        if (radicant && number < 0)
+        {
+            Console.SetCursorPosition(0, Console.CursorTop - 1);
+            Console.Write($"\r{new string(' ', Console.BufferWidth)}");
+            Console.Write($"\rYour radicant must not be lower than 0. Please try again- reinsert index number and press ENTER: ");
+            return false;
+        }
+        if (power10 && number != (int)number)
+        {
+            Console.SetCursorPosition(0, Console.CursorTop - 1);
+            Console.Write($"\r{new string(' ', Console.BufferWidth)}");
+            Console.Write($"\rYour exponent of power of 10 must be a whole number. Please try again- reinsert index number and press ENTER: ");
+            return false;
+        }
+        if (Double.IsNaN(number))
+        {
+            Console.SetCursorPosition(0, Console.CursorTop - 1);
+            Console.Write($"\r{new string(' ', Console.BufferWidth)}");
+            Console.Write($"\rYou cannot use tangent's undefined result for your calculation. Please try again- reinsert index number and press ENTER: ");
+            return false;
+        }
+        return true;
     }
     static public int ReturnOperationsCount()
     {
@@ -357,7 +465,7 @@ public class HelperMethods
         }
 
         string? stringNumber = File.ReadAllText("calculatorOperationsCount.log");
-        if (String.IsNullOrEmpty(stringNumber))
+        if (string.IsNullOrEmpty(stringNumber))
         {
             return 0;
         }
