@@ -10,11 +10,7 @@ internal class OperationalData
         {
             get; set;
         }
-        public double FirstOperand
-        {
-            get; set;
-        }
-        public double? SecondOperand
+        public string OperationString
         {
             get; set;
         }

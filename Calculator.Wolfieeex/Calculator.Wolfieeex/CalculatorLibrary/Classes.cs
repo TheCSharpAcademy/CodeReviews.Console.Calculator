@@ -9,8 +9,8 @@ public class CalculatorEngine
 {
     public double CalculateResult(double number1, double number2, string operation, string previousScreen = "MainMenu")
     {
-        string operationString = "";
         string operationName = "";
+        string calculationString = "";
         double result = double.NaN;
 
         if (previousScreen == "MainMenu")
@@ -20,30 +20,49 @@ public class CalculatorEngine
                 case "a":
                     result = number1 + number2;
                     operationName = "Addition";
+                    calculationString = $"{number1} + {number2}";
                     break;
                 case "s":
-                    result = number2 - number1;
+                    result = number1 - number2;
                     operationName = "Subtraction";
+                    calculationString = $"{number1} - {number2}";
                     break;
                 case "m":
                     result = number1 * number2;
                     operationName = "Multiplication";
+                    calculationString = $"{number1} * {number2}";
                     break;
                 case "d":
                     result = number1 / number2;
                     operationName = "Division";
+                    calculationString = $"{number1} / {number2}";
                     break;
                 case "p10":
                     result = number1 * Math.Pow(10, number2);
-                    operationName = "Mulitplicaton of power of 10";
+                    operationName = "10th power multiplicand";
+                    calculationString = $"{number1} * 10";
+                    foreach (char letter in number2.ToString())
+                    {
+                        string escapeSequence = "207" + letter; 
+                        int escapeCode = int.Parse(escapeSequence, System.Globalization.NumberStyles.HexNumber);
+                        calculationString += char.ConvertFromUtf32(escapeCode);
+                    }
                     break;
                 case "p":
                     result = Math.Pow(number1, number2);
                     operationName = "Power";
+                    calculationString = $"{number1}";
+                    foreach (char letter in number2.ToString())
+                    {
+                        string escapeSequence = "207" + letter;
+                        int escapeCode = int.Parse(escapeSequence, System.Globalization.NumberStyles.HexNumber);
+                        calculationString += char.ConvertFromUtf32(escapeCode);
+                    }
                     break;
                 case "sr":
                     result = Math.Pow(number1, 0.5d);
                     operationName = "Square root";
+                    calculationString = $"\u221A{number1}";
                     break;
             }
         }
@@ -54,31 +73,37 @@ public class CalculatorEngine
                 case "s":
                     result = Math.Sin(number1 * Math.PI / 180.0d);
                     operationName = "Sine function";
+                    calculationString = $"Sin({number1}\u00B0)";
                     break;
                 case "c":
                     result = Math.Cos(number1 * Math.PI / 180.0d);
                     operationName = "Cosine function";
+                    calculationString = $"Cos({number1}\u00B0)";
                     break;
                 case "t":
                     if ((number1 + 90) % 180 != 0)
                         result = Math.Tan(number1 * Math.PI / 180.0d);
                     operationName = "Tangent function";
+                    calculationString = $"Tan({number1}\u00B0)";
                     break;
                 case "as":
                     result = Math.Asin(number1) * 180.0d / Math.PI;
                     operationName = "Arcsine function";
+                    calculationString = $"Arcsin({number1})";
                     break;
                 case "ac":
                     result = Math.Acos(number1) * 180.0d / Math.PI;
                     operationName = "Arccosine function";
+                    calculationString = $"Arccos({number1})";
                     break;
                 case "at":
                     result = Math.Atan(number1) * 180.0d / Math.PI;
                     operationName = "Arctangent function";
+                    calculationString = $"Arctan({number1})";
                     break;
             }
         }
-        LogResults(number1, number2, result, operationName);
+        LogResults(calculationString, result, operationName);
         UpdateCalculatorOperationsCount();
         return result;
     }
@@ -110,7 +135,7 @@ public class CalculatorEngine
         }
     }
 
-    private void LogResults(double operandOne, double operandTwo, double result, string operation)
+    private void LogResults(string operationString, double result, string operation)
     {
         string path = "operationsLog.json";
 
@@ -131,9 +156,8 @@ public class CalculatorEngine
             OperationalData.previousOperations.Add(new OperationalData.DataFormat
             {
                 OperationDate = DateTime.Now,
-                FirstOperand = operandOne,
-                SecondOperand = operandTwo,
-                Result = result,
+                OperationString = operationString,
+                Result = Math.Round(result, 4),
                 Operation = operation
             });
            
@@ -143,7 +167,7 @@ public class CalculatorEngine
 }
 public class HelperMethods
 {
-    static public string ReadNumericInput(ref double number, string ordinalString, bool divisor = false, bool trigonometricValue = false, bool radicant = false, bool power10 = false, bool specialInput = false)
+    static public string ReadNumericInput(ref double number, string ordinalString, bool divisor = false, bool trigonometricValue = false, bool radicant = false, bool power10 = false, bool specialInput = false, string specialInputRegex = "")
     {
         bool checkNumber = true;
         while (checkNumber)
@@ -161,7 +185,7 @@ public class HelperMethods
             {
                 if (specialInput)
                 {
-                    if (Regex.IsMatch(userInput.ToLower(), @"^(e|p)$"))
+                    if (Regex.IsMatch(userInput.ToLower(), specialInputRegex))
                     {
                         return userInput;
                     }
@@ -256,12 +280,73 @@ public class HelperMethods
         Console.WriteLine("Previous operations: ");
         Console.WriteLine($"{new string('-', Console.BufferWidth)}");
         Console.WriteLine();
-        Console.WriteLine($"{"Date:".PadRight(16)}{"Time:".PadRight(12)}{"Operation:".PadRight(25)}{"Result:".PadRight(25)}");
+
+        int longestOperationIterationLength = 10;
+        foreach (OperationalData.DataFormat data in OperationalData.previousOperations)
+        {
+            if (data.OperationString.Length > longestOperationIterationLength)
+            {
+                longestOperationIterationLength = data.OperationString.Length;
+            }
+        }
+
+        Console.WriteLine($"{"Date:".PadRight(16)}{"Time:".PadRight(12)}{"Operation:".PadRight(longestOperationIterationLength + 3)}{"Result:".PadRight(25)}");
         Console.WriteLine();
         foreach (OperationalData.DataFormat data in OperationalData.previousOperations)
         {
-            Console.WriteLine($"{data.OperationDate.ToString("dd/MM/yyyy").PadRight(16)}{data.OperationDate.ToString("hh:mm").PadRight(12)}{data.Operation.PadRight(25)}{data.Result.ToString().PadRight(25)}");
+            string stringResult = data.Result.ToString();
+            if (stringResult == "NaN") stringResult = "Undefined";
+            if (stringResult == "-0") stringResult = "0";
+            Console.WriteLine($"{data.OperationDate.ToString("dd/MM/yyyy").PadRight(16)}{data.OperationDate.ToString("hh:mm").PadRight(12)}{data.OperationString.PadRight(longestOperationIterationLength + 3)}{stringResult.PadRight(25)}");
         }
+    }
+    static public double PreviousResultSelectionScreen()
+    {
+        string path = "operationsLog.json";
+
+        if (File.Exists(path))
+        {
+            using (JsonTextReader jsonTextReader = new JsonTextReader(File.OpenText(path)))
+            {
+                JsonSerializer jsonSerializer = new JsonSerializer();
+                OperationalData.previousOperations = jsonSerializer.Deserialize<List<OperationalData.DataFormat>>(jsonTextReader);
+            }
+        }
+
+        Console.Clear();
+        Console.WriteLine("You are on a previous opeations screen.");
+        Console.Write("Choose a result from any previous operation by typing in its index number to use it for your current calculation: ");
+
+        int typingY = Console.CursorTop;
+        int typingX = Console.CursorLeft;
+
+        Console.WriteLine("\nE - Return to the calculator screen without choosing a value");
+        Console.WriteLine($"{new string('-', Console.BufferWidth)}");
+        Console.WriteLine();
+        Console.WriteLine("Last 10 previous operations displaying:\n");
+
+        int longestOperationIterationLength = 10;
+        foreach (OperationalData.DataFormat data in OperationalData.previousOperations)
+        {
+            if (data.OperationString.Length > longestOperationIterationLength)
+            {
+                longestOperationIterationLength = data.OperationString.Length;
+            }
+        }
+    
+        Console.WriteLine($"{"Index number".PadRight(20)}{"Operation:".PadRight(longestOperationIterationLength + 3)}{"Result:".PadRight(25)}\n");
+
+        int indexN = 1;
+        foreach (OperationalData.DataFormat data in OperationalData.previousOperations)
+        {
+            string stringResult = data.Result.ToString();
+            if (stringResult == "NaN") stringResult = "Undefined";
+            if (stringResult == "-0") stringResult = "0";
+            Console.WriteLine($"{indexN.ToString().PadRight(20)}{data.OperationString.PadRight(longestOperationIterationLength + 3)}{stringResult.PadRight(25)}");
+            indexN++;
+        }
+        Console.ReadKey();
+        return 0;
     }
     static public int ReturnOperationsCount()
     {
