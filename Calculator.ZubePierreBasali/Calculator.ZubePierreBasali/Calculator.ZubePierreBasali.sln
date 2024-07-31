@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.10.35027.167
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Calculator.ZubePierreBasali", "Calculator.ZubePierreBasali.csproj", "{EAD12DC8-7F1E-4DBB-AB28-92D6002B1227}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "class library", "..\class library\class library.csproj", "{71F22EBC-0C0E-4AAC-81FB-99BB42D0A0FB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{EAD12DC8-7F1E-4DBB-AB28-92D6002B1227}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EAD12DC8-7F1E-4DBB-AB28-92D6002B1227}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EAD12DC8-7F1E-4DBB-AB28-92D6002B1227}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EAD12DC8-7F1E-4DBB-AB28-92D6002B1227}.Release|Any CPU.Build.0 = Release|Any CPU
+		{71F22EBC-0C0E-4AAC-81FB-99BB42D0A0FB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{71F22EBC-0C0E-4AAC-81FB-99BB42D0A0FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{71F22EBC-0C0E-4AAC-81FB-99BB42D0A0FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{71F22EBC-0C0E-4AAC-81FB-99BB42D0A0FB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {31228778-BB97-4C5E-8D71-27874EC721E2}
+	EndGlobalSection
+EndGlobal
