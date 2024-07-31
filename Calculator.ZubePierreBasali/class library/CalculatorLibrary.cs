@@ -82,7 +82,7 @@ namespace CalculatorLibrary
 
     public class Data
     {
-        static int IdCount = 0;
+        static int IdCount;
         public static List<Data> data = new List<Data>();
 
         public int Id { get; set; }
@@ -231,7 +231,7 @@ namespace CalculatorLibrary
             }
         }
 
-        public static string MainMenu()//bool endApp)
+        public static string MainMenu()
         {
             string? readResult;
             readResult = Console.ReadLine();
@@ -242,6 +242,7 @@ namespace CalculatorLibrary
                     Data.PrintData();
                     break;
                 case "d":
+                    // Delete data function
                     bool validInput = false;
                     int id;
                     while (!validInput)
@@ -263,7 +264,6 @@ namespace CalculatorLibrary
                         if (readResult.ToLower() == "d") validInput = false;
                     }
                     readResult = "d";
-                    // Delete data function
                     break;
                 default:
                     break;

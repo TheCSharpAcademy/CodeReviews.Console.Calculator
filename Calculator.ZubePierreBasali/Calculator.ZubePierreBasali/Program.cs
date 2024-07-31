@@ -32,8 +32,6 @@ namespace CalculatorProgram
                 // Use Nullable types (with ?) to match type of System.Console.ReadLine
                 if (!endApp)
                 {
-                    string? numInput1 = "";
-                    string? numInput2 = "";
                     double result = 0;
 
                     // Ask the user to type the first number.
@@ -70,14 +68,12 @@ namespace CalculatorProgram
                             Console.WriteLine("Oh no! An exception occurred trying to do the math.\n - Details: " + e.Message);
                         }
                     }
+
                     Console.WriteLine("------------------------\n");
 
                     Console.WriteLine($"Calculator was used {calculator.numberOfUse} time(s).\n");
 
                     Console.WriteLine("------------------------\n");
-
-                    Console.WriteLine("------------------------\n");
-
 
                     // Wait for the user to respond before closing.
                     Console.Write("Press 'n' and Enter to close the app, or press any other key and Enter to continue: ");
