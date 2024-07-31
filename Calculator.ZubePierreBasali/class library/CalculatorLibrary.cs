@@ -1,7 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Collections.Immutable;
-using System.Diagnostics;
-using System.Text;
 using Newtonsoft.Json;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
@@ -84,35 +82,35 @@ namespace CalculatorLibrary
 
     public class Data
     {
-        static int idCount = 0;
+        static int IdCount = 0;
         public static List<Data> data = new List<Data>();
 
-        public int id { get; set; }
-        string operation { get; set; }
-        double operand1 { get; set; }
-        double operand2 { get; set; }
-        public double result { get; set; }
+        public int Id { get; set; }
+        string Operation { get; set; }
+        double Operand1 { get; set; }
+        double Operand2 { get; set; }
+        public double Result { get; set; }
 
         public static void AddData(double num1, double num2, double res, string op)
         {
             data.Add(
             new Data
             {
-                id = idCount,
-                operand1 = num1,
-                operand2 = num2,
-                result = res,
-                operation = op
+                Id = IdCount,
+                Operand1 = num1,
+                Operand2 = num2,
+                Result = res,
+                Operation = op
             }
             );
-            idCount++;
+            IdCount++;
         }
 
-        public static double GetInput()
+        public static string GetInput()
         {
             double answer = 0;
             int x = 0;
-            int[] numArr = new int[x + 1];
+            string[] numArr = new string[x + 1];
             bool returnRet = false;
             int currentIndex = data.Count - 1;
             ConsoleKeyInfo keyInfo = new();
@@ -126,31 +124,39 @@ namespace CalculatorLibrary
                         if (currentIndex <= data.Count - 1)
                         {
                             if (currentIndex < 0) currentIndex = 0;
-                            answer = data[currentIndex].result;
+                            answer = data[currentIndex].Result;
                             currentIndex++;
                         }
                         Console.Write($"\r{new System.String(' ', Console.BufferWidth)}");
                         Console.Write($"\r{answer}");
                         Thread.Sleep(20);
                         x = 0;
-                        numArr = new int[x + 1];
+                        numArr = new string[x + 1];
                         break;
                     case ConsoleKey.UpArrow:
                         returnRet = true;
                         if ((currentIndex >= 0))
                         {
                             if (currentIndex > data.Count - 1) currentIndex = data.Count - 1;
-                            answer = data[currentIndex].result;
+                            answer = data[currentIndex].Result;
                             currentIndex--;
                         }
                         Console.Write($"\r{new System.String(' ', Console.BufferWidth)}");
                         Console.Write($"\r{answer}");
                         x = 0;
-                        numArr = new int[x + 1];
+                        numArr = new string[x + 1];
                         Thread.Sleep(20);
                         break;
                     case ConsoleKey.Enter:
+                        Console.WriteLine();
                         break;
+                    case ConsoleKey.Delete:
+                    case ConsoleKey.Backspace:
+                        Console.Write($"\r{new System.String(' ', Console.BufferWidth)}");
+                        Console.SetCursorPosition(0, Console.CursorTop);
+                        numArr = new string[x + 1];
+                        break;
+
                     default:
 
                         if (returnRet == true)
@@ -159,20 +165,17 @@ namespace CalculatorLibrary
                             Console.Write($"\r{keyInfo.KeyChar}");
                             Console.SetCursorPosition(1, Console.CursorTop);
                         }
-                        int num;
+
                         string keyChar = keyInfo.KeyChar.ToString();
-                        bool isInteger = int.TryParse(keyChar, out num);
-                        if (isInteger)
+                        numArr[x] = keyChar;
+                        string[] buffArr = numArr;
+                        x++;
+                        numArr = new string[x + 1];
+                        for (int i = 0; i < buffArr.Length; i++)
                         {
-                            numArr[x] = num;
-                            int[] buffArr = numArr;
-                            x++;
-                            numArr = new int[x + 1];
-                            for (int i = 0; i < buffArr.Length; i++)
-                            {
-                                numArr[i] = buffArr[i];
-                            }
+                            numArr[i] = buffArr[i];
                         }
+
                         currentIndex = data.Count - 1;
                         returnRet = false;
                         Thread.Sleep(20);
@@ -181,45 +184,106 @@ namespace CalculatorLibrary
 
             } while (keyInfo.Key != ConsoleKey.Enter);
 
-            string output = "";
+            return ChooseRightInput(answer, returnRet, numArr);
+        }
+
+        private static string ChooseRightInput(double answer,bool returnRet, string[] numArr)
+        {
             if (returnRet)
             {
-                return answer;
+                return answer.ToString();
             }
             else
             {
+                string output = "";
                 for (int i = 0; i < numArr.Length - 1; i++)
                 {
                     output = $"{output}{numArr[i]}";
                 }
-                double.TryParse(output, out answer);
+                return output;
             }
-
-            return answer;
         }
 
         public static void PrintData()
         {
             for (int i = 0; i < Data.data.Count; i++)
             {
-                Console.WriteLine($"id: {data[i].id}");
-                Console.WriteLine($"operand 1: {data[i].operand1}");
-                Console.WriteLine($"operand 2: {data[i].operand2}");
-                Console.WriteLine($"operation: {data[i].operation}");
-                Console.WriteLine($"reasult: {data[i].result}");
+                Console.WriteLine($"id: {data[i].Id}");
+                Console.WriteLine($"operand 1: {data[i].Operand1}");
+                Console.WriteLine($"operand 2: {data[i].Operand2}");
+                Console.WriteLine($"operation: {data[i].Operation}");
+                Console.WriteLine($"reasult: {data[i].Result}");
                 Console.WriteLine();
             }
         }   
 
         public static void DeleteData(int id)
         {
-            data.Remove(data[id]);
-            // Forward iteration doesn't work
-            for (int i = data.Count -1; i >= id; i--)
+            if (data.Count != 0 && id >= 0 && id < data.Count)
             {
-                data[i].id = i;
+                data.Remove(data[id]);
+                // Forward iteration doesn't work
+                for (int i = data.Count - 1; i >= id; i--)
+                {
+                    data[i].Id = i;
+                }
+                IdCount = data.Count;
             }
-            idCount = data.Count;
+        }
+
+        public static string MainMenu()//bool endApp)
+        {
+            string? readResult;
+            readResult = Console.ReadLine();
+            Console.WriteLine();
+            switch (readResult.ToLower())
+            {
+                case "p":
+                    Data.PrintData();
+                    break;
+                case "d":
+                    bool validInput = false;
+                    int id;
+                    while (!validInput)
+                    {
+                        Console.WriteLine($"Please select an id between 0 and {Data.data.Count - 1} then Enter,or press 'n' then Enter to quit.");
+                        while (!validInput)
+                        {
+                            readResult = Console.ReadLine();
+                            validInput = int.TryParse(readResult, out id);
+                            if (validInput) { Data.DeleteData(id); }
+                            else
+                            {
+                                Console.Write($"\r{new System.String(' ', Console.BufferWidth)}");
+                                Console.SetCursorPosition(0, Console.CursorTop);
+                            }
+                        }
+                        Console.WriteLine("press 'd' then Enter to delete another data");
+                        readResult = Console.ReadLine();
+                        if (readResult.ToLower() == "d") validInput = false;
+                    }
+                    readResult = "d";
+                    // Delete data function
+                    break;
+                default:
+                    break;
+            }
+            return readResult;
+        }
+
+        public static double GetNumber()
+        {
+            string? num;
+            Console.Write("Type a number, and then press Enter: \n");
+            num = GetInput();
+
+            double cleanNum = 0;
+            while (!double.TryParse(num, out cleanNum))
+            {
+                Console.Write("This is not valid input. Please enter an integer value: ");
+                num = GetInput();
+            }
+            return cleanNum;
         }
     }
 }

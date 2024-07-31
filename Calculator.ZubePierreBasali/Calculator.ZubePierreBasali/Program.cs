@@ -9,7 +9,7 @@ namespace CalculatorProgram
         static void Main(string[] args)
         {
             bool endApp = false;
-            string? readResult;
+            string? readResult = "";
             // Display title as the C# console calculator app.
             Console.WriteLine("Console Calculator in C#\r");
             Console.WriteLine("------------------------\n");
@@ -17,50 +17,17 @@ namespace CalculatorProgram
             Calculator calculator = new Calculator();
             while (!endApp)
             {
+                // Display Menu of option for the calculator and process user input
                 do
                 {
                     Console.WriteLine("press 'p' and Enter to print data.");
                     Console.WriteLine("press 'd' and Enter to delete data from the data list");
                     Console.WriteLine("press 'n' and Enter to quit");
                     Console.WriteLine("press Enter to continue to calculation.");
-                    readResult = Console.ReadLine();
-                    Console.WriteLine();
-                    switch (readResult.ToLower())
-                    {
-                        case "p":
-                            Data.PrintData();
-                            break;
-                        case "d":
-                            bool validInput = false;
-                            int id;
-                            while (!validInput)
-                            {                                
-                                Console.WriteLine($"Please select an id between 0 and {Data.data.Count - 1} then Enter,or press 'n' then Enter to quit.");
-                                while (!validInput)
-                                {
-                                    readResult = Console.ReadLine();
-                                    validInput = int.TryParse(readResult, out id);
-                                    if (validInput) { Data.DeleteData(id); }
-                                    else
-                                    {
-                                        Console.Write($"\r{new System.String(' ', Console.BufferWidth)}");
-                                        Console.SetCursorPosition(0, Console.CursorTop);
-                                    }
-                                }
-                                Console.WriteLine("press 'd' then Enter to delete another data");
-                                readResult= Console.ReadLine();
-                                if (readResult.ToLower() == "d") validInput = false;
-                            }
-                            readResult = "d";
-                            // Delete data function
-                            break;
-                        case "n":
-                            endApp = true;
-                            break;
-                        default:
-                            break;
-                    }
+                    readResult = Data.MainMenu();
+                    if (readResult == "n") endApp = true;
                 } while (readResult.ToLower() == "d" || readResult.ToLower() == "p");
+
                 // Declare variables and set to empty.
                 // Use Nullable types (with ?) to match type of System.Console.ReadLine
                 if (!endApp)
@@ -70,28 +37,9 @@ namespace CalculatorProgram
                     double result = 0;
 
                     // Ask the user to type the first number.
-                    Console.Write("Type a number, and then press Enter: ");
-                    numInput1 = Console.ReadLine();
-
-                    double cleanNum1 = 0;
-                    while (!double.TryParse(numInput1, out cleanNum1))
-                    {
-                        Console.Write("This is not valid input. Please enter an integer value: ");
-                        numInput1 = Console.ReadLine();
-                    }
-
+                    double cleanNum1 = Data.GetNumber();
                     // Ask the user to type the second number.
-                    Console.Write("Type another number, and then press Enter: ");
-                    numInput2 = Console.ReadLine();
-
-                    double cleanNum2 = 0;
-                    while (!double.TryParse(numInput2, out cleanNum2))
-                    {
-                        Console.Write("This is not valid input. Please enter an integer value: ");
-                        numInput2 = Console.ReadLine();
-                    }
-
-                    // Ask the user to choose an operator.
+                    double cleanNum2 = Data.GetNumber();
                     Console.WriteLine("Choose an operator from the following list:");
                     Console.WriteLine("\ta - Add");
                     Console.WriteLine("\ts - Subtract");
