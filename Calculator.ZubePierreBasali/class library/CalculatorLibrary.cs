@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Collections.Immutable;
+using System.Linq.Expressions;
+using System.Text.RegularExpressions;
 using Newtonsoft.Json;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
@@ -8,8 +10,8 @@ namespace CalculatorLibrary
     public class Calculator
     {
         public int numberOfUse;
-        JsonWriter writer;
-        string operation;
+        static JsonWriter writer;
+        static string operation;
 
         public Calculator()
         {
@@ -24,50 +26,151 @@ namespace CalculatorLibrary
 
         public double DoOperation(double num1, double num2, string op)
         {
-            double result = double.NaN; // Default value is "not-a-number" if an operation, such as division, could result in an error.
-            writer.WriteStartObject();
-            writer.WritePropertyName("Operand1");
-            writer.WriteValue(num1);
-            writer.WritePropertyName("Operand2");
-            writer.WriteValue(num2);
-            writer.WritePropertyName("Operation");
-            // Use a switch statement to do the math.
-            switch (op)
-            {
-                case "a":
-                    result = num1 + num2;
-                    writer.WriteValue("Add");
-                    operation = "Add";
-                    break;
-                case "s":
-                    result = num1 - num2;
-                    writer.WriteValue("Subtract");
-                    operation = "Subtract";
-                    break;
-                case "m":
-                    result = num1 * num2;
-                    writer.WriteValue("Multiply");
-                    operation = "Multiply";
-                    break;
-                case "d":
-                    // Ask the user to enter a non-zero divisor.
-                    if (num2 != 0)
-                    {
-                        result = num1 / num2;
-                    }
-                    writer.WriteValue("Divide");
-                    operation = "Divide";
-                    break;
-                // Return text for an incorrect option entry.
-                default:
-                    break;
-            }
-            writer.WritePropertyName("Result");
-            writer.WriteValue(result);
-            writer.WriteEndObject();
+                double result = double.NaN; // Default value is "not-a-number" if an operation, such as division, could result in an error.
+            try { 
+                writer.WriteStartObject();
+                writer.WritePropertyName("Operand1");
+                writer.WriteValue(num1);
+                writer.WritePropertyName("Operand2");
+                if (op == "10")
+                {
+                    writer.WriteValue(10);
+                }
+                else if (op == "r" || op == "t")
+                {
+                    writer.WriteValue("no value");
+                }
+                else
+                {
+                    writer.WriteValue(num2);
+                }
+                writer.WritePropertyName("Operation");
+                // Use a switch statement to do the math.
+                switch (op)
+                {
+                    case "a":
+                        result = num1 + num2;
+                        writer.WriteValue("Add");
+                        operation = "Add";
+                        break;
+                    case "s":
+                        result = num1 - num2;
+                        writer.WriteValue("Subtract");
+                        operation = "Subtract";
+                        break;
+                    case "m":
+                        result = num1 * num2;
+                        writer.WriteValue("Multiply");
+                        operation = "Multiply";
+                        break;
+                    case "d":
+                        // Ask the user to enter a non-zero divisor.
+                        if (num2 != 0)
+                        {
+                            result = num1 / num2;
+                        }
+                        writer.WriteValue("Divide");
+                        operation = "Divide";
+                        break;
+                    case "r":
+                        result = Math.Sqrt(num1);
+                        writer.WriteValue("Square root");
+                        operation = "Square root";
+                        break;
+                    case "p":
+                        result = Math.Pow(num1, num2);
+                        writer.WriteValue("Power");
+                        operation = "Power";
+                        break;
+                    case "10":
+                        result = num1 * 10;
+                        writer.WriteValue("10x");
+                        operation = "10x";
+                        break;
+                    case "t":
+                        result = Trigonometry(num1);
+                        break;
+                    default:
+                        break;
+                }
+                writer.WritePropertyName("Result");
+                writer.WriteValue(result);
+                writer.WriteEndObject();
+
             numberOfUse++;
 
-            Data.AddData(num1, num2, result, operation);
+            Data.AddData(num1, num2, result, operation, op);
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            return result;
+        }
+
+        private static double Trigonometry(double num1)
+        {
+            Console.WriteLine("Choose a trigonometrical operation:");
+            Console.WriteLine("\ts - Sinus");
+            Console.WriteLine("\tc - Cosinus");
+            Console.WriteLine("\tt - Tangent");
+            Console.WriteLine("\tas - Arc Sinus");
+            Console.WriteLine("\tac - Arc Cosinus");
+            Console.WriteLine("\tat - Arc Tangent");
+
+            double result = double.NaN;
+
+                string? op;
+
+                do
+                {
+                    op = Console.ReadLine();
+
+                    switch (op)
+                    {
+                        case "s":
+                            result = Math.Sin(num1);
+                            writer.WriteValue("Sinus");
+                            operation = "Sinus";
+                            break;
+                        case "c":
+                            result = Math.Cos(num1);
+                            writer.WriteValue("Cosinus");
+                            operation = "Cosinus";
+                            break;
+                        case "t":
+                            result = Math.Tan(num1);
+                            writer.WriteValue("Tangent");
+                            operation = "Tangent";
+                            break;
+                        case "as":
+                            result = Math.Asin(num1);
+                            writer.WriteValue("Arc Sinus");
+                            operation = "Arc Sinus";
+                            break;
+                        case "ac":
+                            result = Math.Acos(num1);
+                            writer.WriteValue("Arc Cosinus");
+                            operation = "Arc Cosinus";
+                            break;
+                        case "at":
+                            result = Math.Atan(num1);
+                            writer.WriteValue("Arc Tangent");
+                            operation = "Arc Tangent";
+                            break;
+                        default:
+                            Console.WriteLine(new System.String(' ', Console.BufferWidth));
+                            Console.SetCursorPosition(0, Console.CursorTop);
+                            Console.Write("Invalid option, please choose a vlild option.");
+                            Thread.Sleep(1000);
+                            Console.WriteLine(new System.String(' ', Console.BufferWidth));
+                            Console.SetCursorPosition(0, Console.CursorTop);
+                            break;
+
+                    }
+                } while (op == null || !Regex.IsMatch(op, "[s|c|t|as|ac|at]"));
 
             return result;
         }
@@ -91,8 +194,12 @@ namespace CalculatorLibrary
         double Operand2 { get; set; }
         public double Result { get; set; }
 
-        public static void AddData(double num1, double num2, double res, string op)
+        public static void AddData(double num1, double num2, double res, string operation ,string op)
         {
+            if (!Regex.IsMatch(op, "[a|s|m|d|p]")) 
+            {
+                num2 = double.NaN;
+            }
             data.Add(
             new Data
             {
@@ -100,7 +207,7 @@ namespace CalculatorLibrary
                 Operand1 = num1,
                 Operand2 = num2,
                 Result = res,
-                Operation = op
+                Operation = operation
             }
             );
             IdCount++;

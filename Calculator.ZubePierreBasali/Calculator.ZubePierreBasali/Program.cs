@@ -26,6 +26,7 @@ namespace CalculatorProgram
                     Console.WriteLine("press Enter to continue to calculation.");
                     readResult = Data.MainMenu();
                     if (readResult == "n") endApp = true;
+
                 } while (readResult.ToLower() == "d" || readResult.ToLower() == "p");
 
                 // Declare variables and set to empty.
@@ -34,21 +35,28 @@ namespace CalculatorProgram
                 {
                     double result = 0;
 
-                    // Ask the user to type the first number.
-                    double cleanNum1 = Data.GetNumber();
-                    // Ask the user to type the second number.
-                    double cleanNum2 = Data.GetNumber();
                     Console.WriteLine("Choose an operator from the following list:");
                     Console.WriteLine("\ta - Add");
                     Console.WriteLine("\ts - Subtract");
                     Console.WriteLine("\tm - Multiply");
                     Console.WriteLine("\td - Divide");
+                    Console.WriteLine("\tr - Square Root of a number");
+                    Console.WriteLine("\tp - Power (x^y)");
+                    Console.WriteLine("\t10 - power of ten (10^x)");
+                    Console.WriteLine("\tt - Trigonometry (trig(x))");
                     Console.Write("Your option? ");
 
                     string? op = Console.ReadLine();
-
+                    // Ask the user to type the first number.
+                    double cleanNum1 = Data.GetNumber();
+                    // Ask the user to type the second number.
+                    double cleanNum2 = 0;
+                    if (op != "r" && op != "10" && op != "t")
+                    {
+                        cleanNum2 = Data.GetNumber();
+                    }
                     // Validate input is not null, and matches the pattern
-                    if (op == null || !Regex.IsMatch(op, "[a|s|m|d]"))
+                    if (op == null || !Regex.IsMatch(op, "[a|s|m|d|r|p|10|t]"))
                     {
                         Console.WriteLine("Error: Unrecognized input.");
                     }
@@ -60,6 +68,8 @@ namespace CalculatorProgram
                             if (double.IsNaN(result))
                             {
                                 Console.WriteLine("This operation will result in a mathematical error.\n");
+                                Data.DeleteData(Data.data.Count - 1);
+                                calculator.numberOfUse--;
                             }
                             else Console.WriteLine("Your result: {0:0.##}\n", result);
                         }
