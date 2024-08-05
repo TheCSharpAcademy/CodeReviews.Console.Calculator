@@ -30,13 +30,13 @@ public class Menu
         Console.WriteLine("".PadRight(40, '-'));
     }
 
-    public string Prompt(string prompt = "Please enter your selection:")
+    public string Prompt(string promptText = "Please enter your selection:")
     {
         string? input = null;
         
         while (!CheckInput(input ??= "no input"))
         {
-            Console.Write($"{prompt}".ToUpper());
+            Console.Write($"{promptText}".ToUpper());
             input = Console.ReadLine();
         }
         return input.ToLower();

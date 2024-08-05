@@ -9,7 +9,7 @@ public class Calculator
     internal static Menu HistoryMenu { get; set; } = new();
     internal static List<string[]> CalculationHistory { get; set; } = new();
     internal static double[] Operands { get; set; } = [0, 0];
-    internal static double Result { get; set; } = 0;
+    internal static double Result;
     readonly public static string Log = @"logfile.json";
     readonly public static string AppName = @"Calculator Application";
     private static LoggerLibrary Logger = new();
@@ -150,18 +150,20 @@ public class Calculator
                             ClearHistory();
                             break;
                         case "set":
-                        bool keepgoing = false;
-                        int response;
-                        while (!keepgoing){
-                            Console.Write("Please enter the line you would like to set:");
-                            string? r = Console.ReadLine();
-                            if(int.TryParse(r, out response)){
-                                keepgoing = true;
-                                SetFromHistory(response, out Operands[0], out Operands[1], out double num);
-                                Result = num;
+                            bool keepgoing = false;
+                            int response;
+                            while (!keepgoing)
+                            {
+                                Console.Write("Please enter the line you would like to set:");
+                                string? r = Console.ReadLine();
+                                if (int.TryParse(r, out response))
+                                {
+                                    keepgoing = true;
+                                    SetFromHistory(response, out Operands[0], out Operands[1], out double num);
+                                    Result = num;
+                                }
                             }
-                            }
-                        break;
+                            break;
                         case "exit":
                             break;
                     }
@@ -183,7 +185,8 @@ public class Calculator
                     Logger.CloseLog();
                     Environment.Exit(0);
                     break;
-            }}
+            }
+        }
         catch (Exception e)
         {
             Console.WriteLine("Oh no! An exception occurred trying to do the math.\n - Details: " + e.Message);
@@ -211,7 +214,6 @@ public class Calculator
         List<string[]> his = CalculationHistory;
         for (int i = his.Count - 1; i >= 0; i--)
         {
-            string op = his[i][0];
             string n1 = his[i][1];
             string n2 = his[i][2];
             string res = his[i][3];
@@ -229,7 +231,8 @@ public class Calculator
         Console.ReadKey();
     }
 
-    private static void SetFromHistory(int history, out double x, out double y, out double z){
+    private static void SetFromHistory(int history, out double x, out double y, out double z)
+    {
         x = Convert.ToDouble(CalculationHistory[history][1]);
         y = Convert.ToDouble(CalculationHistory[history][2]);
         z = Convert.ToDouble(CalculationHistory[history][3]);
