@@ -1,0 +1,3 @@
+[submodule "contrib/Newtonsoft.Json"]
+	path = contrib/Newtonsoft.Json
+	url = git@github.com:cyanitol/Miscellaneous.Contrib.CSharp.Newtonsoft.JSON.git
