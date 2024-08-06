@@ -1,7 +1,6 @@
-﻿namespace CalculatorLibrary;
+﻿using Newtonsoft.Json;
 
-using System.Diagnostics;
-using Newtonsoft.Json;
+namespace CalculatorLibrary;
 
 public class Calculator
 {
@@ -16,13 +15,6 @@ public class Calculator
         writer.WriteStartObject();
         writer.WritePropertyName("Operations");
         writer.WriteStartArray();
-    }
-    
-    public void Finish()
-    {
-        writer.WriteEndArray();
-        writer.WriteEndObject();
-        writer.Close();
     }
 
     public double DoOperation(double num1, double num2, string op)
@@ -57,17 +49,22 @@ public class Calculator
                 {
                     result = num1 / num2;
                 }
+
                 writer.WriteValue("Divide");
                 break;
         }
+
         writer.WritePropertyName("Result");
         writer.WriteValue(result);
         writer.WriteEndObject();
-        
+
         return result;
     }
-}
-
-public class CalculatorLibrary
-{
+   
+    public void Finish()
+    {
+        writer.WriteEndArray();
+        writer.WriteEndObject();
+        writer.Close();
+    }
 }
