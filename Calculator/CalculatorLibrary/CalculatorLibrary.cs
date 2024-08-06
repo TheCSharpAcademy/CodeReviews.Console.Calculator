@@ -1,12 +1,11 @@
-﻿using System.Diagnostics;
 using Newtonsoft.Json;
-using System.Collections.Generic;
+
 
 namespace CalculatorProgram
 {
     public class Calculator
     {
-        private static int operationCount = 0; // Counter for operations
+        private static int operationCount; // Counter for operations
         private List<string> calculationHistory = new List<string>(); // List to store calculation history
 
         JsonWriter writer;
