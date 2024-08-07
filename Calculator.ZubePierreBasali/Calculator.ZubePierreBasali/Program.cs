@@ -78,7 +78,7 @@ namespace CalculatorProgram
                             Console.WriteLine("Oh no! An exception occurred trying to do the math.\n - Details: " + e.Message);
                         }
                     }
-
+                    
                     Console.WriteLine("------------------------\n");
 
                     Console.WriteLine($"Calculator was used {calculator.numberOfUse} time(s).\n");

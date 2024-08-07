@@ -83,9 +83,9 @@ namespace CalculatorLibrary
                         operation = "Power";
                         break;
                     case "10":
-                        result = num1 * 10;
-                        writer.WriteValue("10x");
-                        operation = "10x";
+                        result = Math.Pow(10,num1);
+                        writer.WriteValue("10^x");
+                        operation = "10^x";
                         break;
                     case "t":
                         result = Trigonometry(num1);
@@ -120,6 +120,12 @@ namespace CalculatorLibrary
             Console.WriteLine("\tac - Arc Cosinus");
             Console.WriteLine("\tat - Arc Tangent");
 
+            // Prevent Math.Tan(90° or 270° and all alikes) to return a result as it is supposed to be out of domain
+            double angle = num1;
+
+            // Convert the angle into radian due to Math function working with radians
+            num1 = Math.PI * num1 / 180.0;
+
             double result = double.NaN;
 
                 string? op;
@@ -127,7 +133,7 @@ namespace CalculatorLibrary
                 do
                 {
                     op = Console.ReadLine();
-
+                    
                     switch (op)
                     {
                         case "s":
@@ -141,7 +147,10 @@ namespace CalculatorLibrary
                             operation = "Cosinus";
                             break;
                         case "t":
-                            result = Math.Tan(num1);
+                            if (angle % 360 != 90 && angle != 270)
+                            {
+                                result = Math.Tan(num1);
+                            }
                             writer.WriteValue("Tangent");
                             operation = "Tangent";
                             break;
@@ -337,7 +346,7 @@ namespace CalculatorLibrary
                 IdCount = data.Count;
             }
         }
-
+        
         public static string MainMenu()
         {
             string? readResult;
