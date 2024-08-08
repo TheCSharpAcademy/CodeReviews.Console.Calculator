@@ -1,6 +1,5 @@
 ﻿using CalculatorLibrary;
 using System.Diagnostics.Metrics;
-using System.Numerics;
 
 namespace CalculatorProgram;
 
@@ -37,7 +36,7 @@ class Program
         return;
     }
 
-    static string ChooseMode(Calculator calculator, ref int numberOfCalculation)
+    static void ChooseMode(Calculator calculator, ref int numberOfCalculation)
     {
         string? mode = Console.ReadLine();
         switch (mode)
@@ -59,7 +58,6 @@ class Program
                 ChooseMode(calculator, ref numberOfCalculation);
                 break;
         }
-        return mode;
     }
     
 }
