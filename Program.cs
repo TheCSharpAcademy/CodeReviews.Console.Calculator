@@ -47,7 +47,10 @@ class Program
                                 "or press any other key and Enter to continue: ");
             string input = Console.ReadLine()!;
             if (input == "n")
+            {
+                calculator.Finish();
                 System.Environment.Exit(0);
+            }
 
         } while (true);
     }
