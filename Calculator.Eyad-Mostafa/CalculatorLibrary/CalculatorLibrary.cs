@@ -1,5 +1,4 @@
 ﻿using Newtonsoft.Json;
-
 namespace CalculatorLibrary;
 
 public class Calculator
@@ -42,7 +41,7 @@ public class Calculator
                 writer.WriteValue("Multiply");
                 break;
             case "p":
-                result = Math.Pow(num1,num2);
+                result = Math.Pow(num1, num2);
                 writer.WriteValue("pow");
                 break;
             case "d":
