@@ -12,7 +12,5 @@ namespace Console_Calculator_App.ConsoleCalculatorApp.Model
         internal float Num1 { get; set; }
         internal float Num2 { get; set; }
         internal string Operation { get; set; } = string.Empty;
-        internal string Input1 { get; set; } = string.Empty;
-        internal string Input2 { get; set; } = string.Empty;
     }
 }

@@ -10,16 +10,14 @@ namespace Console_Calculator_App.ConsoleCalculatorApp.Controller
 
         public static void Run()
         {
-            MathProblem mathProblem = new MathProblem();
             do
             {
+                MathProblem mathProblem = new MathProblem();
                 Menu.FirstNum();
-                mathProblem.Input1= Console.ReadLine()!;
-                mathProblem.Num1 = ParseInput(mathProblem.Input1);
+                mathProblem.Num1 = ParseInput(Console.ReadLine()!);
 
                 Menu.SecondNum();
-                mathProblem.Input2 = Console.ReadLine()!;
-                mathProblem.Num2 = ParseInput(mathProblem.Input2);
+                mathProblem.Num2 = ParseInput(Console.ReadLine()!);
 
                 Menu.Operation();
                 mathProblem.Operation = Console.ReadLine()!.ToLower();
