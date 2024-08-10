@@ -2,21 +2,21 @@
 {
     internal class Menu
     {
-        public static void DisplayFirstNum()
+        public static void FirstNum()
         {
             Console.Clear();
             Console.WriteLine("-----------------------\n");
             Console.Write("Type a number, and then press Enter: ");
         }
 
-        public static void DisplaySecondNum()
+        public static void SecondNum()
         {
             Console.Write("Type another number, and then press Enter: ");
         }
 
-        public static void DisplayOperation()
+        public static void Operation()
         {
-            Console.WriteLine("Choose an operator from the following list:\n");
+            Console.WriteLine("Choose an operator from the following list:");
             Console.WriteLine("       a - Add");
             Console.WriteLine("       s - Subtract");
             Console.WriteLine("       m - Multiply");
@@ -24,24 +24,24 @@
             Console.Write("Your option? ");
         }
 
-        public static void DisplayAnswer(float answer)
+        public static void Answer(float answer)
         {
             Console.WriteLine($"Your result: {answer:F2}");
         }
 
-        public static void DisplayError()
+        public static void Error()
         {
             Console.WriteLine($"This operation will result in a mathematical error.\n");
         }
 
-        public static void DisplayEnd()
+        public static void End()
         {
             Console.WriteLine("-----------------------\n");
             Console.Write("Press 'n' and Enter to close the app, " +
                                 "or press any other key and Enter to continue: ");
         }
 
-        public static void DisplayInvalidInput()
+        public static void InvalidInput()
         {
             Console.Write("This is not a valid input. Please enter a numeric value: ");
         }

@@ -13,15 +13,15 @@ namespace Console_Calculator_App.ConsoleCalculatorApp.Controller
             MathProblem mathProblem = new MathProblem();
             do
             {
-                Menu.DisplayFirstNum();
+                Menu.FirstNum();
                 mathProblem.Input1= Console.ReadLine()!;
                 mathProblem.Num1 = ParseInput(mathProblem.Input1);
 
-                Menu.DisplaySecondNum();
+                Menu.SecondNum();
                 mathProblem.Input2 = Console.ReadLine()!;
                 mathProblem.Num2 = ParseInput(mathProblem.Input2);
 
-                Menu.DisplayOperation();
+                Menu.Operation();
                 mathProblem.Operation = Console.ReadLine()!.ToLower();
                 mathProblem.Answer = _calculator.CalculateAnswer(
                                                         mathProblem.Operation, 
@@ -30,14 +30,14 @@ namespace Console_Calculator_App.ConsoleCalculatorApp.Controller
 
                 if (!float.IsNaN(mathProblem.Answer))
                 {
-                    Menu.DisplayAnswer(mathProblem.Answer);
+                    Menu.Answer(mathProblem.Answer);
                 }
                 else
                 {
-                    Menu.DisplayError();
+                    Menu.Error();
                 }
 
-                Menu.DisplayEnd();
+                Menu.End();
                 string input = Console.ReadLine()!;
                 if (input == "n")
                 {
@@ -60,7 +60,7 @@ namespace Console_Calculator_App.ConsoleCalculatorApp.Controller
                 }
                 catch (Exception)
                 {
-                    Menu.DisplayInvalidInput();
+                    Menu.InvalidInput();
                     input = Console.ReadLine()!;
                 }
             } while (true);
