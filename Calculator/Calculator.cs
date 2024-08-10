@@ -1,4 +1,6 @@
-﻿namespace Calculator;
+﻿using System.Globalization;
+
+namespace Calculator;
 
 using SimpleMenuLibrary;
 using SimpleLoggerLibrary;
@@ -6,14 +8,14 @@ using SimpleLoggerLibrary;
 public class Calculator
 {
     public static Menu MainMenu { get; set; } = new();
-    internal static Menu HistoryMenu { get; set; } = new();
-    internal static List<string[]> CalculationHistory { get; set; } = new();
-    internal static double[] Operands { get; set; } = [0, 0];
-    internal static double Result;
-    readonly public static string Log = @"logfile.json";
-    readonly public static string AppName = @"Calculator Application";
-    private static LoggerLibrary Logger = new();
-    private static string Selection = "";
+    private static Menu HistoryMenu { get; set; } = new();
+    private static List<string[]> CalculationHistory { get; set; } = new();
+    private static double[] Operands { get; set; } = [0, 0];
+    private static double _result;
+    private const string Log = @"logfile.json";
+    private const string AppName = @"Calculator Application";
+    private static readonly LoggerLibrary Logger = new();
+    private static string _selection = "";
 
     public Calculator()
     {
@@ -82,60 +84,79 @@ public class Calculator
     {
         try
         {
-            if (Selection == null)
-                Console.WriteLine("No operation provided.  Try again.");
-
-            switch (Selection)
+            switch (_selection)
             {
                 case "a":
-                    Result = Operands[0] + Operands[1];
-                    AddHistory("a", Operands[0].ToString(), Operands[1].ToString(), Result.ToString());
+                    _result = Operands[0] + Operands[1];
+                    AddHistory("a", Operands[0].ToString(CultureInfo.InvariantCulture), Operands[1].
+                        ToString(CultureInfo.InvariantCulture), _result.ToString(CultureInfo.InvariantCulture));
                     break;
                 case "s":
-                    Result = Operands[0] - Operands[1];
-                    AddHistory("s", Operands[0].ToString(), Operands[1].ToString(), Result.ToString());
+                    _result = Operands[0] - Operands[1];
+                    AddHistory("s", Operands[0].ToString(CultureInfo.InvariantCulture), Operands[1].
+                        ToString(CultureInfo.InvariantCulture), _result.ToString(CultureInfo.InvariantCulture));
                     break;
                 case "x":
-                    Result = Operands[0] * Operands[1];
-                    AddHistory("x", Operands[0].ToString(), Operands[1].ToString(), Result.ToString());
+                    _result = Operands[0] * Operands[1];
+                    AddHistory("x", Operands[0].ToString(CultureInfo.InvariantCulture), Operands[1].
+                        ToString(CultureInfo.InvariantCulture), _result.ToString(CultureInfo.InvariantCulture));
                     break;
                 case "d":
                     if (Operands[1] != 0)
                     {
-                        Result = Operands[0] / Operands[1];
-                        AddHistory("d", Operands[0].ToString(), Operands[1].ToString(), Result.ToString());
+                        _result = Operands[0] / Operands[1];
+                        AddHistory("d", Operands[0].ToString(CultureInfo.InvariantCulture), Operands[1].
+                            ToString(CultureInfo.InvariantCulture), _result.ToString(CultureInfo.InvariantCulture));
                     }
                     else
                     {
-                        Console.WriteLine("Attemped to divide by Zero! Try again.");
+                        Console.WriteLine("Attempted to divide by Zero! Try again.");
                     }
                     break;
                 case "sqrt":
-                    Result = Math.Sqrt(Operands[0]);
-                    AddHistory("sqrt", Operands[0].ToString(), Operands[1].ToString(), Result.ToString());
+                    _result = Math.Sqrt(Operands[0]);
+                    AddHistory("sqrt", Operands[0].
+                        ToString(CultureInfo.InvariantCulture), Operands[1].
+                        ToString(CultureInfo.InvariantCulture), _result.
+                        ToString(CultureInfo.InvariantCulture));
                     break;
                 case "pow":
-                    Result = Math.Pow(Operands[0], Operands[1]);
-                    AddHistory("pow", Operands[0].ToString(), Operands[1].ToString(), Result.ToString());
+                    _result = Math.Pow(Operands[0], Operands[1]);
+                    AddHistory("pow", Operands[0].
+                        ToString(CultureInfo.InvariantCulture), Operands[1].
+                        ToString(CultureInfo.InvariantCulture), _result.
+                        ToString(CultureInfo.InvariantCulture));
                     break;
                 case "10x":
-                    Result = Operands[0] * 10;
-                    AddHistory("10x", Operands[0].ToString(), Operands[1].ToString(), Result.ToString());
+                    _result = Operands[0] * 10;
+                    AddHistory("10x", Operands[0].
+                        ToString(CultureInfo.InvariantCulture), Operands[1].
+                        ToString(CultureInfo.InvariantCulture), _result.
+                        ToString(CultureInfo.InvariantCulture));
                     break;
                 case "sin":
-                    Result = Math.Sin(Operands[0]);
-                    AddHistory("sin", Operands[0].ToString(), Operands[1].ToString(), Result.ToString());
+                    _result = Math.Sin(Operands[0]);
+                    AddHistory("sin", Operands[0].
+                        ToString(CultureInfo.InvariantCulture), Operands[1].
+                        ToString(CultureInfo.InvariantCulture), _result.
+                        ToString(CultureInfo.InvariantCulture));
                     break;
                 case "cos":
-                    Result = Math.Cos(Operands[0]);
-                    AddHistory("cos", Operands[0].ToString(), Operands[1].ToString(), Result.ToString());
+                    _result = Math.Cos(Operands[0]);
+                    AddHistory("cos", Operands[0].
+                        ToString(CultureInfo.InvariantCulture), Operands[1].
+                        ToString(CultureInfo.InvariantCulture), _result.
+                        ToString(CultureInfo.InvariantCulture));
                     break;
                 case "tan":
-                    Result = Math.Tan(Operands[0]);
-                    AddHistory("tan", Operands[0].ToString(), Operands[1].ToString(), Result.ToString());
+                    _result = Math.Tan(Operands[0]);
+                    AddHistory("tan", Operands[0].
+                        ToString(CultureInfo.InvariantCulture), Operands[1].
+                        ToString(CultureInfo.InvariantCulture), _result.
+                        ToString(CultureInfo.InvariantCulture));
                     break;
                 case "swapxz":
-                    (Operands[0], Result) = (Result, Operands[0]);
+                    (Operands[0], _result) = (_result, Operands[0]);
                     break;
                 case "swapxy":
                     (Operands[0], Operands[1]) = (Operands[1], Operands[0]);
@@ -160,7 +181,7 @@ public class Calculator
                                 {
                                     keepgoing = true;
                                     SetFromHistory(response, out Operands[0], out Operands[1], out double num);
-                                    Result = num;
+                                    _result = num;
                                 }
                             }
                             break;
@@ -169,7 +190,7 @@ public class Calculator
                     }
                     break;
                 case "clear":
-                    Result = 0;
+                    _result = 0;
                     Operands[0] = 0;
                     Operands[1] = 0;
                     break;
@@ -197,13 +218,13 @@ public class Calculator
 
     public static void GetSelection()
     {
-        Selection = MainMenu.Prompt($"Enter Operation (1/{CalculationHistory.Count + 1}): ");
+        _selection = MainMenu.Prompt($"Enter Operation (1/{CalculationHistory.Count + 1}): ");
     }
 
     public static void ShowMemory()
     {
 
-        Console.WriteLine($"Memory: x = {Operands[0]}  |  y = {Operands[1]}  |  z = {Result}".ToUpper());
+        Console.WriteLine($"Memory: x = {Operands[0]}  |  y = {Operands[1]}  |  z = {_result}".ToUpper());
         Console.WriteLine("".PadRight(40, '-'));
 
     }
@@ -240,15 +261,12 @@ public class Calculator
 
     private static void AddHistory(params String[] eventData)
     {
-        if (MainMenu.Options != null)
+        foreach (Option option in MainMenu.Options)
         {
-            foreach (Option option in MainMenu.Options)
+            if (option.Symbol == eventData[0])
             {
-                if (option.Symbol == eventData[0])
-                {
-                    Logger.WriteLogEntry(eventData);
-                    CalculationHistory.Add(eventData);
-                }
+                Logger.WriteLogEntry(eventData);
+                CalculationHistory.Add(eventData);
             }
         }
     }
