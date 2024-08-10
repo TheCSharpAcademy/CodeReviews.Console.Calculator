@@ -2,17 +2,16 @@
 
 namespace SimpleMenuLibrary
 {
-    public class Menu(string title = "No Title", 
-        string selectorLabel = "Operator", string descriptionLabel = "Description")
+    public class Menu(string title = "No Title")
     {
         public struct Option(string description, string selector)
         {
             public readonly string Description = description;
             public readonly string Selector = selector;
         }
-        
+
         private readonly List<Option> _options = [];
-        
+
         private static readonly int ConsoleWidth = Console.WindowWidth;
         private readonly int TotalPaddingLength = (ConsoleWidth / 2) + (title.Length / 2);
         private const string MenuBorder = "|";
@@ -26,12 +25,12 @@ namespace SimpleMenuLibrary
             _options.Add(menuOption);
         }
 
-        public void ShowMenu(bool clear = true, string optionDelimiter="", 
-        string? footerContent = null)
+        public void ShowMenu(bool clear = true, string optionDelimiter = "",
+        List<string>? footerContent = null)
         {
             if (clear)
                 Console.Clear();
-            
+
             var menuTitle = new StringBuilder();
             menuTitle.AppendFormat($"{_outsideMargin}");
             menuTitle.AppendFormat($"".PadLeft(TotalPaddingLength - OutsideMarginWidth, '='));
@@ -40,7 +39,7 @@ namespace SimpleMenuLibrary
             menuTitle.AppendFormat($"{title}".PadLeft(ConsoleWidth - menuTitle.Length).ToUpper());
             menuTitle.AppendFormat($"\n");
             menuTitle.AppendFormat($"{_outsideMargin}");
-            menuTitle.AppendFormat($"".PadLeft(TotalPaddingLength-OutsideMarginWidth, '='));
+            menuTitle.AppendFormat($"".PadLeft(TotalPaddingLength - OutsideMarginWidth, '='));
             menuTitle.AppendFormat($"\n");
             Console.Write(menuTitle);
 
@@ -51,7 +50,7 @@ namespace SimpleMenuLibrary
                 menuLine.AppendFormat(MenuBorder);
                 menuLine.AppendFormat($"{_insideMargin}");
                 menuLine.AppendFormat($"{option.Selector}{optionDelimiter}");
-                menuLine.AppendFormat(new string(' ',20 - 
+                menuLine.AppendFormat(new string(' ', 20 -
                     option.Selector.Length - optionDelimiter.Length));
                 menuLine.AppendFormat($"{option.Description}");
                 menuLine.AppendFormat($"".PadLeft(TotalPaddingLength - menuLine.Length - 1));
@@ -59,12 +58,13 @@ namespace SimpleMenuLibrary
                 menuLine.AppendFormat($"{_outsideMargin}");
                 menuLine.AppendFormat("\n");
                 Console.Write(menuLine);
-                
+
             }
-            ShowFooter(footerContent ??= "");
+            ShowFooter(footerContent);
         }
 
-        private void ShowFooter(string content=""){
+        private void ShowFooter(string content = "")
+        {
             var footer = new StringBuilder();
             footer.AppendFormat($"{_outsideMargin}");
             footer.AppendFormat($"".PadLeft(TotalPaddingLength - OutsideMarginWidth, '-'));
@@ -72,10 +72,26 @@ namespace SimpleMenuLibrary
             footer.AppendFormat($"\n");
             footer.AppendFormat($"{_outsideMargin}{_insideMargin}{content}{_outsideMargin}\n");
             footer.AppendFormat($"{_outsideMargin}");
-            footer.AppendFormat("".PadRight(TotalPaddingLength-OutsideMarginWidth, '-'));
-            Console.WriteLine(footer);
-            
+            footer.AppendFormat("".PadRight(TotalPaddingLength - OutsideMarginWidth, '-'));
+            Console.WriteLine(footer.ToString());
         }
+
+        private void ShowFooter(List<string> content)
+        {
+            var footer = new StringBuilder();
+            footer.AppendFormat($"{_outsideMargin}");
+            footer.AppendFormat($"".PadLeft(TotalPaddingLength - OutsideMarginWidth, '-'));
+            footer.AppendFormat($"{_outsideMargin}");
+            footer.AppendFormat($"\n");
+            foreach (string item in content)
+            {
+                footer.AppendFormat($"{_outsideMargin}{_insideMargin}{item}{_outsideMargin}\n");
+            }
+            footer.AppendFormat($"{_outsideMargin}");
+            footer.AppendFormat("".PadRight(TotalPaddingLength - OutsideMarginWidth, '-'));
+            Console.WriteLine(footer.ToString());
+        }
+
         public string? Prompt(string promptText = "Enter Selection:", bool checkEnabled = false)
         {
             string? input = null;
@@ -94,7 +110,7 @@ namespace SimpleMenuLibrary
             else
             {
                 Console.Write($"{prompt}".ToUpper());
-                input = Console.ReadLine();             
+                input = Console.ReadLine();
             }
 
             return input?.ToLower();
