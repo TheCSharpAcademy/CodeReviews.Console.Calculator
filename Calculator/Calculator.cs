@@ -7,42 +7,40 @@ using SimpleLoggerLibrary;
 
 public class Calculator
 {
-    public static Menu MainMenu { get; set; } = new();
-    private static Menu HistoryMenu { get; set; } = new();
-    private static List<string[]> CalculationHistory { get; set; } = new();
-    private static double[] Operands { get; set; } = [0, 0];
+    public static Menu MainMenu = new($"{AppName}");
+    private static Menu HistoryMenu = new($"{AppName} - History");
+    private static List<string[]> CalculationHistory = new();
+    private static double[] Operands = [0, 0];
     private static double _result;
     private const string Log = @"logfile.json";
     private const string AppName = @"Calculator Application";
     private static readonly LoggerLibrary Logger = new();
-    private static string _selection = "";
+    private static string? _selection = "";
 
     public Calculator()
     {
         // Main Calculator Menu
-        MainMenu.Title = $"{AppName}".PadLeft(30);
-        MainMenu.AddOption(["x + y = z", "a"]);
-        MainMenu.AddOption(["x - y = z", "s"]);
-        MainMenu.AddOption(["x * y = z", "x"]);
-        MainMenu.AddOption(["x ÷ y = z", "d"]);
-        MainMenu.AddOption(["sqrt(x) = z", "sqrt"]);
-        MainMenu.AddOption(["x^y = z", "pow"]);
-        MainMenu.AddOption(["10x = z", "10x"]);
-        MainMenu.AddOption(["sin(x) = z", "sin"]);
-        MainMenu.AddOption(["cos(x) = z", "cos"]);
-        MainMenu.AddOption(["tan(x) = z", "tan"]);
-        MainMenu.AddOption(["x = z, z = x", "swapxz"]);
-        MainMenu.AddOption(["x = y, y = x", "swapxy"]);
-        MainMenu.AddOption(["Set x", "set"]);
-        MainMenu.AddOption(["Set x, y", "setxy"]);
-        MainMenu.AddOption(["History Menu", "history"]);
-        MainMenu.AddOption(["Exit Program", "exit"]);
+        MainMenu.AddMenuOption(new Menu.Option(description:"x + y = z",selector:"a"));
+        MainMenu.AddMenuOption(new Menu.Option(description:"x - y = z",selector:"s"));
+        MainMenu.AddMenuOption(new Menu.Option(description:"x * y = z",selector:"x"));
+        MainMenu.AddMenuOption(new Menu.Option(description:"x ÷ y = z",selector:"d"));
+        MainMenu.AddMenuOption(new Menu.Option(description:"sqrt(x) = z",selector:"sqrt"));
+        MainMenu.AddMenuOption(new Menu.Option(description:"x^y = z",selector:"pow"));
+        MainMenu.AddMenuOption(new Menu.Option(description:"10x = z",selector:"10x"));
+        MainMenu.AddMenuOption(new Menu.Option(description:"sin(x) = z",selector:"sin"));
+        MainMenu.AddMenuOption(new Menu.Option(description:"cos(x) = z",selector:"cos"));
+        MainMenu.AddMenuOption(new Menu.Option(description:"tan(x) = z",selector:"tan"));
+        MainMenu.AddMenuOption(new Menu.Option(description:"x = z, z = x",selector:"swapxz"));
+        MainMenu.AddMenuOption(new Menu.Option(description: "x = y, y = x", selector: "swapxy"));
+        MainMenu.AddMenuOption(new Menu.Option(description: "Set x", selector: "set"));
+        MainMenu.AddMenuOption(new Menu.Option(description:"Set x, y",selector:"setxy"));
+        MainMenu.AddMenuOption(new Menu.Option(description:"History Menu",selector:"history"));
+        MainMenu.AddMenuOption(new Menu.Option(description:"Exit Program",selector:"exit"));
 
         // Calculator History Menu
-        HistoryMenu.Title = $" ".PadLeft(35);
-        HistoryMenu.AddOption(["Clear history", "clear"]);
-        HistoryMenu.AddOption(["x, y, z from history", "set"]);
-        HistoryMenu.AddOption(["Main Menu", "exit"]);
+        HistoryMenu.AddMenuOption(new Menu.Option(description:"Clear history",selector:"clear"));
+        HistoryMenu.AddMenuOption(new Menu.Option(description:"x, y, z from history",selector:"set"));
+        HistoryMenu.AddMenuOption(new Menu.Option(description:"Main Menu",selector:"exit"));
 
         // Start Logger
         Logger.ApplicationName = AppName;
@@ -65,18 +63,17 @@ public class Calculator
 
     public void GetOperands()
     {
-        Console.Clear();
-        Calculator.MainMenu.ShowMenu();
-        Calculator.ShowMemory();
-        Console.Write("Enter X, press Enter: ");
-        double numx = GetOperand();
-        Operands[0] = numx;
+        double numx;
+        double numy;
 
         Console.Clear();
-        Calculator.MainMenu.ShowMenu();
-        Calculator.ShowMemory();
-        Console.Write("Enter Y, press Enter: ");
-        double numy = GetOperand();
+        Calculator.MainMenu.ShowMenu(footerContent: Calculator.GetMemory());
+        while (!double.TryParse(MainMenu.Prompt("Enter X, press Enter: "), out numx));
+            Operands[0] = numx;
+
+        Console.Clear();
+        Calculator.MainMenu.ShowMenu(footerContent: Calculator.GetMemory());
+        while (!double.TryParse(MainMenu.Prompt("Enter Y, press Enter: "), out numy));
         Operands[1] = numy;
     }
 
@@ -172,17 +169,14 @@ public class Calculator
                             break;
                         case "set":
                             bool keepgoing = false;
-                            int response;
                             while (!keepgoing)
                             {
                                 Console.Write("Please enter the line you would like to set:");
-                                string? r = Console.ReadLine();
-                                if (int.TryParse(r, out response))
-                                {
-                                    keepgoing = true;
-                                    SetFromHistory(response, out Operands[0], out Operands[1], out double num);
-                                    _result = num;
-                                }
+                                var r = Console.ReadLine();
+                                if (!int.TryParse(r, out var response)) continue;
+                                keepgoing = true;
+                                SetFromHistory(response, out Operands[0], out Operands[1], out double num);
+                                _result = num;
                             }
                             break;
                         case "exit":
@@ -221,11 +215,10 @@ public class Calculator
         _selection = MainMenu.Prompt($"Enter Operation (1/{CalculationHistory.Count + 1}): ");
     }
 
-    public static void ShowMemory()
+    public static string GetMemory()
     {
 
-        Console.WriteLine($"Memory: x = {Operands[0]}  |  y = {Operands[1]}  |  z = {_result}".ToUpper());
-        Console.WriteLine("".PadRight(40, '-'));
+        return $"Memory: x = {Operands[0]}  |  y = {Operands[1]}  |  z = {_result}".ToUpper();
 
     }
 
@@ -259,15 +252,12 @@ public class Calculator
         z = Convert.ToDouble(CalculationHistory[history][3]);
     }
 
-    private static void AddHistory(params String[] eventData)
+    private static void AddHistory(params string[] eventData)
     {
-        foreach (Option option in MainMenu.Options)
+        foreach (var option in MainMenu.GetMenuOptions().Where(option => option.Selector == eventData[0]))
         {
-            if (option.Symbol == eventData[0])
-            {
-                Logger.WriteLogEntry(eventData);
-                CalculationHistory.Add(eventData);
-            }
+            Logger.WriteLogEntry(eventData);
+            CalculationHistory.Add(eventData);
         }
     }
 }

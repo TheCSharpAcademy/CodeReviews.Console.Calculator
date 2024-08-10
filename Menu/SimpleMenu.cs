@@ -1,58 +1,112 @@
-﻿namespace SimpleMenuLibrary;
-public struct Option
+﻿using System.Text;
+
+namespace SimpleMenuLibrary
 {
-    public string Description;
-    public string Symbol;
-}
-
-public class Menu
-{
-    public string? Title;
-    public List<Option> Options = [];
-
-    public void AddOption(string[] option)
+    public class Menu(string title = "No Title", 
+        string selectorLabel = "Operator", string descriptionLabel = "Description")
     {
-        Options?.Add(new Option {Description = option[0],Symbol = option[1]});
-    }
-
-    public void ShowMenu(bool clear = true)
-    {
-        if (clear)
-            Console.Clear();
-        Console.WriteLine($"{Title}".ToUpper());
-        Console.WriteLine("".PadRight(40, '-'));
-        foreach (Option option in Options)
+        public struct Option(string description, string selector)
         {
-            Console.Write($"{option.Symbol}".PadRight(20));
-            Console.Write($"{option.Description}\n");
+            public readonly string Description = description;
+            public readonly string Selector = selector;
         }
-        Console.WriteLine("".PadRight(40, '-'));
-    }
-
-    public string Prompt(string promptText = "Please enter your selection:")
-    {
-        string? input = null;
         
-        while (!CheckInput(input ??= "no input"))
-        {
-            Console.Write($"{promptText}".ToUpper());
-            input = Console.ReadLine();
-        }
-        return input.ToLower();
-    }
+        private readonly List<Option> _options = [];
+        
+        private static readonly int ConsoleWidth = Console.WindowWidth;
+        private readonly int TotalPaddingLength = (ConsoleWidth / 2) + (title.Length / 2);
+        private const string MenuBorder = "|";
+        private const int InsideMarginWidth = 2;
+        private const int OutsideMarginWidth = 6;
+        private readonly string _outsideMargin = new string(' ', OutsideMarginWidth);
+        private readonly string _insideMargin = new string(' ', InsideMarginWidth);
 
-    private bool CheckInput(string input)
-    {
-        if (input == null)
-            return false;
-        if (Options != null)
+        public void AddMenuOption(Option menuOption)
         {
-            foreach (Option option in Options)
-            {
-                if (option.Symbol == input)
-                    return true;
-            }
+            _options.Add(menuOption);
         }
-        return false;
+
+        public void ShowMenu(bool clear = true, string optionDelimiter="", 
+        string? footerContent = null)
+        {
+            if (clear)
+                Console.Clear();
+            
+            var menuTitle = new StringBuilder();
+            menuTitle.AppendFormat($"{_outsideMargin}");
+            menuTitle.AppendFormat($"".PadLeft(TotalPaddingLength - OutsideMarginWidth, '='));
+            menuTitle.AppendFormat($"\n");
+            menuTitle.AppendFormat($"{_outsideMargin}");
+            menuTitle.AppendFormat($"{title}".PadLeft(ConsoleWidth - menuTitle.Length).ToUpper());
+            menuTitle.AppendFormat($"\n");
+            menuTitle.AppendFormat($"{_outsideMargin}");
+            menuTitle.AppendFormat($"".PadLeft(TotalPaddingLength-OutsideMarginWidth, '='));
+            menuTitle.AppendFormat($"\n");
+            Console.Write(menuTitle);
+
+            foreach (var option in _options)
+            {
+                var menuLine = new StringBuilder();
+                menuLine.AppendFormat($"{_outsideMargin}");
+                menuLine.AppendFormat(MenuBorder);
+                menuLine.AppendFormat($"{_insideMargin}");
+                menuLine.AppendFormat($"{option.Selector}{optionDelimiter}");
+                menuLine.AppendFormat(new string(' ',20 - 
+                    option.Selector.Length - optionDelimiter.Length));
+                menuLine.AppendFormat($"{option.Description}");
+                menuLine.AppendFormat($"".PadLeft(TotalPaddingLength - menuLine.Length - 1));
+                menuLine.AppendFormat(MenuBorder);
+                menuLine.AppendFormat($"{_outsideMargin}");
+                menuLine.AppendFormat("\n");
+                Console.Write(menuLine);
+                
+            }
+            ShowFooter(footerContent ??= "");
+        }
+
+        private void ShowFooter(string content=""){
+            var footer = new StringBuilder();
+            footer.AppendFormat($"{_outsideMargin}");
+            footer.AppendFormat($"".PadLeft(TotalPaddingLength - OutsideMarginWidth, '-'));
+            footer.AppendFormat($"{_outsideMargin}");
+            footer.AppendFormat($"\n");
+            footer.AppendFormat($"{_outsideMargin}{_insideMargin}{content}{_outsideMargin}\n");
+            footer.AppendFormat($"{_outsideMargin}");
+            footer.AppendFormat("".PadRight(TotalPaddingLength-OutsideMarginWidth, '-'));
+            Console.WriteLine(footer);
+            
+        }
+        public string? Prompt(string promptText = "Enter Selection:", bool checkEnabled = false)
+        {
+            string? input = null;
+            var prompt = new StringBuilder();
+            prompt.AppendFormat($"{_outsideMargin}{_insideMargin}");
+            prompt.AppendFormat(promptText);
+
+            if (checkEnabled)
+            {
+                while (!CheckInput(input ??= "no input"))
+                {
+                    Console.Write($"{prompt}".ToUpper());
+                    input = Console.ReadLine();
+                }
+            }
+            else
+            {
+                Console.Write($"{prompt}".ToUpper());
+                input = Console.ReadLine();             
+            }
+
+            return input?.ToLower();
+        }
+
+        public List<Option> GetMenuOptions()
+        {
+            return _options;
+        }
+        private bool CheckInput(string? input)
+        {
+            return input != null && _options.Any(option => option.Selector == input);
+        }
     }
 }
