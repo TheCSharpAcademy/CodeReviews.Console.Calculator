@@ -21,10 +21,7 @@ namespace Console_Calculator_App.ConsoleCalculatorApp.Controller
 
                 Menu.Operation();
                 mathProblem.Operation = Console.ReadLine()!.ToLower();
-                mathProblem.Answer = _calculator.CalculateAnswer(
-                                                        mathProblem.Operation, 
-                                                        mathProblem.Num1,
-                                                        mathProblem.Num2);
+                mathProblem.Answer = _calculator.CalculateAnswer(mathProblem.Operation, mathProblem.Num1, mathProblem.Num2);
 
                 if (!float.IsNaN(mathProblem.Answer))
                 {
