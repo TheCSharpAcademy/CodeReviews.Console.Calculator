@@ -1,7 +1,7 @@
-﻿namespace CalculatorLibrary;
+﻿namespace Calculator;
 
-using MenuLibrary;
-using LoggerLibrary;
+using SimpleMenuLibrary;
+using SimpleLoggerLibrary;
 
 public class Calculator
 {
