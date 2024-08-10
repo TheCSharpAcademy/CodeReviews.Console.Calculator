@@ -206,7 +206,7 @@ public class Calculator
                             while (!keepgoing)
                             {
                                 var r = HistoryMenu.Prompt(promptText:"Please enter the line you would like to set:");
-                                if (!int.TryParse(r, out var response)) continue;
+                                if (!int.TryParse(r, out var response) || (response  > CalculationHistory.Count - 1) ) continue;
                                 keepgoing = true;
                                 SetFromHistory(response, out Operands[0],
                                 out Operands[1], out double num);
