@@ -10,8 +10,11 @@ namespace Console_Calculator_App.ConsoleCalculatorApp.Controller
 
         public static void Run()
         {
+            ICollection<MathProblem> mathProblems = new List<MathProblem>();
             do
             {
+                Menu.Title(mathProblems.Count());
+
                 MathProblem mathProblem = new MathProblem();
                 Menu.FirstNum();
                 mathProblem.Num1 = ParseInput(Console.ReadLine()!);
@@ -22,6 +25,8 @@ namespace Console_Calculator_App.ConsoleCalculatorApp.Controller
                 Menu.Operation();
                 mathProblem.Operation = Console.ReadLine()!.ToLower();
                 mathProblem.Answer = _calculator.CalculateAnswer(mathProblem.Operation, mathProblem.Num1, mathProblem.Num2);
+
+                mathProblems.Add(mathProblem);
 
                 if (!float.IsNaN(mathProblem.Answer))
                 {

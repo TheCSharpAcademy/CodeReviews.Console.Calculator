@@ -2,10 +2,15 @@
 {
     internal class Menu
     {
-        public static void FirstNum()
+        public static void Title(int usage)
         {
             Console.Clear();
-            Console.WriteLine("-----------------------\n");
+            Console.WriteLine($"Console Calculator App (Used {usage} {(usage < 2 ? "time" : "times")})");
+            Console.WriteLine("\n-----------------------");
+        }
+
+        public static void FirstNum()
+        {
             Console.Write("Type a number, and then press Enter: ");
         }
 
@@ -16,7 +21,7 @@
 
         public static void Operation()
         {
-            Console.WriteLine("Choose an operator from the following list:");
+            Console.WriteLine("\nChoose an operator from the following list:");
             Console.WriteLine("       a - Add");
             Console.WriteLine("       s - Subtract");
             Console.WriteLine("       m - Multiply");
