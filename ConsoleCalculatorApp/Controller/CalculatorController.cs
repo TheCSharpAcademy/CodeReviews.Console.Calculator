@@ -15,6 +15,22 @@ namespace Console_Calculator_App.ConsoleCalculatorApp.Controller
             {
                 Menu.Title(mathProblems.Count());
 
+                Menu.Options();
+                string input = Console.ReadLine()!;
+                if (input == "n")
+                {
+                    _calculator.Finish();
+                    System.Environment.Exit(0);
+                }
+                else if (input == "d")
+                { 
+                    mathProblems = new List<MathProblem>(); 
+                }
+                else if (input == "u")
+                {
+                    Menu.ViewList(mathProblems);
+                }
+
                 MathProblem mathProblem = new MathProblem();
                 Menu.FirstNum();
                 mathProblem.Num1 = ParseInput(Console.ReadLine()!);
@@ -38,14 +54,7 @@ namespace Console_Calculator_App.ConsoleCalculatorApp.Controller
                 }
 
                 Menu.End();
-                string input = Console.ReadLine()!;
-                if (input == "n")
-                {
-                    _calculator.Finish();
-                    System.Environment.Exit(0);
-                }
-                else if (input == "d")
-                    mathProblems = new List<MathProblem>();
+                Console.ReadLine();
 
             } while (true);
         }

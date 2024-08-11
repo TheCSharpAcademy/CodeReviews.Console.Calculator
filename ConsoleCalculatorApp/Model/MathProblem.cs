@@ -12,5 +12,21 @@ namespace Console_Calculator_App.ConsoleCalculatorApp.Model
         internal float Num1 { get; set; }
         internal float Num2 { get; set; }
         internal string Operation { get; set; } = string.Empty;
+        
+        public override string ToString()
+        {
+            return $"{Num1} {OperationSymbol()} {Num2} = {Answer}";
+        }
+
+        private string OperationSymbol() => Operation switch
+        {
+            "a" => "+",
+            "s" => "-",
+            "m" => "*",
+            "d" => "/",
+            _   => " "
+        };
+
     }
+
 }

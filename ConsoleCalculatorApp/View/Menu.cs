@@ -1,4 +1,7 @@
-﻿namespace Console_Calculator_App.ConsoleCalculatorApp.View
+﻿using Console_Calculator_App.ConsoleCalculatorApp.Model;
+
+namespace Console_Calculator_App.ConsoleCalculatorApp.View
+
 {
     internal class Menu
     {
@@ -11,6 +14,7 @@
 
         public static void FirstNum()
         {
+            Console.WriteLine("\n-----------------------");
             Console.Write("Type a number, and then press Enter: ");
         }
 
@@ -39,20 +43,36 @@
             Console.WriteLine($"This operation will result in a mathematical error.\n");
         }
 
-        public static void End()
+        public static void Options()
         {
-            Console.WriteLine("\n-----------------------");
             Console.WriteLine("Options:");
             Console.WriteLine("     n - Exit");
             Console.WriteLine("     d - Delete List");
-            Console.WriteLine("     v - View List");
-            Console.WriteLine("     Any other or no keys to continue");
-            Console.WriteLine("Please select an option from above and press enter:");
+            Console.WriteLine("     u - Use Results");
+            Console.WriteLine("     Any other or no keys to continue using the calculator");
+            Console.Write("Please select an option from above and press enter: ");
         }
 
         public static void InvalidInput()
         {
             Console.Write("This is not a valid input. Please enter a numeric value: ");
+        }
+
+        public static void End()
+        {
+            Console.Write("Press enter to continue...");
+        }
+
+        public static void ViewList(ICollection<MathProblem> mathProblems)
+        {
+            Console.Clear();
+            Title(mathProblems.Count);
+
+            IList<MathProblem> list = mathProblems.ToList();
+            for(int i = 0; i < mathProblems.Count; i++)
+            {
+                Console.WriteLine($"{i + 1}: {list[i].ToString()}");
+            }
         }
     }
 }
