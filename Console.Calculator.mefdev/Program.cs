@@ -45,13 +45,11 @@ class Application
 
     private static void DisplayUsageTime(Calculator calculator)
     {
-        {
             Console.WriteLine("\n---------Calculator Usage---------");
             string usageTime = "time";
             usageTime += calculator.GetUsageTime() > 1 ? "s" : "";
             Console.WriteLine($"The calculator has been used {calculator.GetUsageTime()} {usageTime}");
             Console.WriteLine("----------------------------------\n");
-        }
     }
     private static void DeleteJsonFile(Calculator calculator)
     {
