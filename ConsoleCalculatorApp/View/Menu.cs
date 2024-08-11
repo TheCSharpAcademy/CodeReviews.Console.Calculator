@@ -49,7 +49,7 @@ namespace Console_Calculator_App.ConsoleCalculatorApp.View
             Console.WriteLine("     n - Exit");
             Console.WriteLine("     d - Delete List");
             Console.WriteLine("     u - Use Results");
-            Console.WriteLine("     Any other or no keys to continue using the calculator");
+            Console.WriteLine("     Any other or no letter to continue using the calculator");
             Console.Write("Please select an option from above and press enter: ");
         }
 
@@ -58,21 +58,31 @@ namespace Console_Calculator_App.ConsoleCalculatorApp.View
             Console.Write("This is not a valid input. Please enter a numeric value: ");
         }
 
+        public static void InvalidIndex(int max)
+        {
+            Console.Write($"The index entered is out of range, please enter a number between 0 and {max}: ");
+        }
+
         public static void End()
         {
             Console.Write("Press enter to continue...");
         }
 
-        public static void ViewList(ICollection<MathProblem> mathProblems)
+        public static void ViewList(IList<MathProblem> mathProblems)
         {
             Console.Clear();
             Title(mathProblems.Count);
-
-            IList<MathProblem> list = mathProblems.ToList();
+            Console.WriteLine("Index: Math Problem & Results");
             for(int i = 0; i < mathProblems.Count; i++)
             {
-                Console.WriteLine($"{i + 1}: {list[i].ToString()}");
+                Console.WriteLine($"{i}: {mathProblems[i].ToString()}");
             }
+            Console.WriteLine("Enter r to return to the menu or any other letter for your own number");
+        }
+
+        public static void PickAResult(int num)
+        {
+            Console.Write($"Enter the index for the result that will be used for operand {num}: ");
         }
     }
 }

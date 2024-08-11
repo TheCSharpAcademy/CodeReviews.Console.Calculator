@@ -9,8 +9,8 @@ namespace Console_Calculator_App.ConsoleCalculatorApp.Model
     internal class MathProblem
     {
         internal float Answer { get; set; } = float.NaN;
-        internal float Num1 { get; set; }
-        internal float Num2 { get; set; }
+        internal float Num1 { get; set; } = float.NaN;
+        internal float Num2 { get; set; } = float.NaN;
         internal string Operation { get; set; } = string.Empty;
         
         public override string ToString()
