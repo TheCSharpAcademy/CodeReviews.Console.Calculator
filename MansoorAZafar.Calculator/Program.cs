@@ -1,6 +1,4 @@
-﻿using System.ComponentModel;
-using System.Runtime.CompilerServices;
-using System.Text.RegularExpressions;
+﻿using System.Text.RegularExpressions;
 using MansoorAZafar.CalculatorLibrary;
 class Program
 {
@@ -9,14 +7,6 @@ class Program
         bool endApp = false;
 
         Calculator calculator = new Calculator();
-
-        /*#region Temporary Filling of History
-        calculator.DoOperation(num1: 43, num2: 2, op: "a");
-        calculator.DoOperation(num1: 65, num2: 54.5, op: "s");
-        calculator.DoOperation(num1: 0.75, num2: 54, op: "d");
-        calculator.DoOperation(num1: 245436, num2: 21, op: "m");
-        calculator.DoOperation(num1: 244.5454, num2: 2.2544, op: "d");
-        #endregion Temporary Filling of History*/
 
         while (!endApp)
         {

@@ -4,7 +4,7 @@ namespace MansoorAZafar.CalculatorLibrary
 {
     public class Calculator
     {
-        private int calculatorUsageCounter = 0;
+        private int calculatorUsageCounter;
         private List<Calculation> history = new List<Calculation>();
         private JsonWriter writer;
 
