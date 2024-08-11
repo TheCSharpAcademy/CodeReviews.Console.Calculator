@@ -41,9 +41,13 @@
 
         public static void End()
         {
-            Console.WriteLine("-----------------------\n");
-            Console.Write("Press 'n' and Enter to close the app, " +
-                                "or press any other key and Enter to continue: ");
+            Console.WriteLine("\n-----------------------");
+            Console.WriteLine("Options:");
+            Console.WriteLine("     n - Exit");
+            Console.WriteLine("     d - Delete List");
+            Console.WriteLine("     v - View List");
+            Console.WriteLine("     Any other or no keys to continue");
+            Console.WriteLine("Please select an option from above and press enter:");
         }
 
         public static void InvalidInput()

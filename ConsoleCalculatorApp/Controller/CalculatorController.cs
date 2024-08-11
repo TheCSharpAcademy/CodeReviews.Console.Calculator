@@ -44,6 +44,8 @@ namespace Console_Calculator_App.ConsoleCalculatorApp.Controller
                     _calculator.Finish();
                     System.Environment.Exit(0);
                 }
+                else if (input == "d")
+                    mathProblems = new List<MathProblem>();
 
             } while (true);
         }
