@@ -1,10 +1,10 @@
 ﻿using CalculatorLibrary;
 class Application
 {
-    private static double num1 = 0;
-    private static double num2 = 0;
+    private static double num1;
+    private static double num2;
    
-    private static void Main(String[] args)
+    private static void Main()
     {
         bool quit = false;
         Calculator calculator = new Calculator();

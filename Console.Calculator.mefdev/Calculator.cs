@@ -5,7 +5,7 @@ namespace CalculatorLibrary
 {
 	public class Calculator: BaseOperations
 	{
-        private int UsageCounter { get; set; } = 0;
+        private int UsageCounter { get; set; }
         private JsonWriter writer;
 
         public Calculator()
