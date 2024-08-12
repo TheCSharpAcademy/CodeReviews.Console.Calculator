@@ -33,9 +33,9 @@ namespace Console_Calculator_App.ConsoleCalculatorApp.View
             Console.Write("Your option? ");
         }
 
-        public static void Answer(float answer)
+        public static void Answer(float result)
         {
-            Console.WriteLine($"Your result: {answer:F2}");
+            Console.WriteLine($"Your result: {result:F2}");
         }
 
         public static void Error()
