@@ -1,24 +1,18 @@
 ﻿using System;
 namespace CalculatorLibrary
 {
-	public class BaseOperations
-	{
-		public BaseOperations()
-		{
+    public class BaseOperations
+    {
+        public BaseOperations()
+        {
 
-		}
-        public double Addition(double num1, double num2)
-        {
-            return num1 + num2;
         }
-        public double Substraction(double num1, double num2)
-        {
-            return num1 - num2;
-        }
-        public double Multiplication(double num1, double num2)
-        {
-            return num1 * num2;
-        }
+        public double Addition(double num1, double num2) => num1 + num2;
+
+        public double Substraction(double num1, double num2) => num1 - num2;
+
+        public double Multiplication(double num1, double num2) => num1 * num2;
+
         public double Division(double num1, double num2)
         {
             try
@@ -34,38 +28,25 @@ namespace CalculatorLibrary
         }
         public virtual string GetOperation(string oper)
         {
-            switch (oper.ToLower())
+            return oper.ToLower() switch
             {
-                case "m":
-                    return "*";
-                case "s":
-                    return "-";
-                case "d":
-                    return "/";
-                case "a":
-                    return "+";
-                default:
-                    throw new InvalidOperationException("\nInvalid operation. Try again, please");
-            }
+                "m" => "*",
+                "s" => "-",
+                "d" => "/",
+                "a" => "+",
+                _ => throw new InvalidOperationException("\nInvalid operation. Try again, please")
+            };
         }
         protected virtual string GetOperationName(string oper)
         {
-            switch (oper)
+            return oper switch
             {
-                case "M":
-                    return "Multiplation";
-                case "S":
-                    return "Substraction";
-                case "D":
-                    return "Division";
-                case "A":
-                    return "Addition";
-                default:
-                    throw new InvalidOperationException("\nInvalid operation");
-            }
+                "M" => "Multiplation",
+                "S" => "Substraction",
+                "D" => "Division",
+                "A" => "Addition",
+                _ => throw new InvalidOperationException("\nInvalid operation"),
+            };
         }
-
-
     }
 }
-
