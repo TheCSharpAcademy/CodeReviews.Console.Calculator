@@ -26,7 +26,7 @@ class Program
             Console.WriteLine("\ts - Subtract");
             Console.WriteLine("\tm - Multiply");
             Console.WriteLine("\td - Divide");
-            Console.WriteLine("\tr - Sqaure Root");
+            Console.WriteLine("\tr - Square Root");
             Console.WriteLine("\tp - Power");
             Console.WriteLine("\tx - 10x");
             Console.WriteLine("\tt - Trigonometry Functions (for both numbers)");
@@ -55,7 +55,8 @@ class Program
             }
 
             // Validate input is not null, and matches the pattern
-            if (op == null || !Regex.IsMatch(op.ToLower(), "[a|s|m|d|r|p|x|t|v]"))
+            op = op?.ToLower()[0].ToString(); // we do this because the program could break if we use the whole string
+            if (op == null || !Regex.IsMatch(op, "[a|s|m|d|r|p|x|t|v]"))
             {
                 Console.WriteLine("Error: Bad Input.");
                 goto EndOfLoop;
@@ -79,7 +80,6 @@ class Program
                         break;
                     //10x
                     case "x":
-                        
                         result = calculator.DoOperation(num1: tenX, num2: cleanNum1, op: op);
                         break;
                     //Trig
@@ -90,6 +90,7 @@ class Program
                     //All other operations
                     default:
                         //We need the 2nd number
+                        if (op == "p") op = "x"; // we want the power operation, but we just arent using 10x
                         GetAndPutValidInput(ref cleanNum2, message: "Enter the value for the second number\n> ");
                         result = calculator.DoOperation(cleanNum1, cleanNum2, op);
                         break;

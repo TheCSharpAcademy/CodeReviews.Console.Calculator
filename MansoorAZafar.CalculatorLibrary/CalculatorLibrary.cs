@@ -33,7 +33,6 @@ namespace MansoorAZafar.CalculatorLibrary
 
         public double DoOperation(double num1, double num2 = 0, string op = "")
         {
-            #region Setup
             ++this.calculatorUsageCounter;
             double result = double.NaN; // Default value is "not-a-number" if an operation, such as division, could result in an error.
             writer.WriteStartObject();
@@ -42,7 +41,6 @@ namespace MansoorAZafar.CalculatorLibrary
             writer.WritePropertyName("Operand2");
             writer.WriteValue(num2);
             writer.WritePropertyName("Operation");
-            #endregion End Setup
 
             // Use a switch statement to do the math.
             switch (op)
