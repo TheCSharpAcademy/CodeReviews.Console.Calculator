@@ -114,7 +114,7 @@ class Application
         {
             DisplayMenu();
             operation = Console.ReadLine()?.ToLower();
-        };
+        }
         calculator.Calculate(s_num1, s_num2, operation);
     }
 }
