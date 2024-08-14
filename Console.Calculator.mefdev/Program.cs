@@ -51,7 +51,7 @@ class Application
         Console.WriteLine("-------------------------------------------------------------------\n");
 
     }
-    private static bool DeleteJsonFile(Calculator calculator)
+    private static void DeleteJsonFile(Calculator calculator)
     {
 
         Console.WriteLine("\n------------------------- Record list ---------------------------");
@@ -59,7 +59,6 @@ class Application
         {
             calculator.DeleteJsonFile();
             calculator.CloseRecord();
-            return true;
         }
         catch
         {

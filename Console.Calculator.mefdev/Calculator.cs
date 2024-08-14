@@ -5,7 +5,7 @@ namespace CalculatorLibrary
     {
         private int _usageCounter;
         private JsonWriter _writer;
-        private bool _isWriterInitialized = false;
+        private bool _isWriterInitialized;
 
         public Calculator() => InitializeWriter();
 
@@ -213,6 +213,7 @@ namespace CalculatorLibrary
 
         private void DisplayResult(double num1, double num2, string oper, double result)
         {
+
             Console.WriteLine($"------------------------ Operation Result ------------------------");
             Console.WriteLine($"Your result: {num1} {oper} {num2} = {result}");
             Console.WriteLine("-------------------------------------------------------------------");
