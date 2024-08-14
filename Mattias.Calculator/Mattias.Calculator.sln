@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.10.35027.167
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mattias.Calculator", "Mattias.Calculator\Mattias.Calculator.csproj", "{192108A9-87A3-423C-8A00-F98956A1BF15}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CalculatorLibrary", "CalculatorLibrary\CalculatorLibrary.csproj", "{395E68BD-CD90-4E8A-8FD8-05C2E26ADB09}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{192108A9-87A3-423C-8A00-F98956A1BF15}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{192108A9-87A3-423C-8A00-F98956A1BF15}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{192108A9-87A3-423C-8A00-F98956A1BF15}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{192108A9-87A3-423C-8A00-F98956A1BF15}.Release|Any CPU.Build.0 = Release|Any CPU
+		{395E68BD-CD90-4E8A-8FD8-05C2E26ADB09}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{395E68BD-CD90-4E8A-8FD8-05C2E26ADB09}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{395E68BD-CD90-4E8A-8FD8-05C2E26ADB09}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{395E68BD-CD90-4E8A-8FD8-05C2E26ADB09}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {1B2ABAFC-FCBA-42CB-A032-D8495AB63FCF}
+	EndGlobalSection
+EndGlobal
