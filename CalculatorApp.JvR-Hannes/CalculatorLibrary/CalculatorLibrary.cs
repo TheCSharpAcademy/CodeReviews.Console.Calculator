@@ -238,14 +238,14 @@ namespace CalculatorLibrary
                 string selectedCalculation = calculationHistory[index - 1];
                 Console.WriteLine($"Reusing: {selectedCalculation}");
 
-                double result = double.Parse(selectedCalculation.Split('=')[1].Trim());
+                //double result = double.Parse(selectedCalculation.Split('=')[1].Trim());
 
                 Console.WriteLine("Enter an operator (+, -, *, /) to apply on the previous result:");
-                string? op = Console.ReadLine();
+                //string? op = Console.ReadLine();
 
                 Console.WriteLine("Enter the number to use in the new calculation:");
-                double num1 = Convert.ToDouble(Console.ReadLine());
-                double num2 = Convert.ToDouble(Console.ReadLine());
+                //double num1 = Convert.ToDouble(Console.ReadLine());
+                //double num2 = Convert.ToDouble(Console.ReadLine());
             }
         }
         static void PerformTrigonometry()
