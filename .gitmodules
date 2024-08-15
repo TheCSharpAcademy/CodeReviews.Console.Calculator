@@ -1,0 +1,3 @@
+[submodule "CalculatorConsoleApp"]
+	path = CalculatorConsoleApp
+	url = https://github.com/Anvinalias/CalculatorConsoleApp.git
