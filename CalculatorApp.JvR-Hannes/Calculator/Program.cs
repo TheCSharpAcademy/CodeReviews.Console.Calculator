@@ -7,10 +7,6 @@ namespace CalculatorProgram
     {
         static void Main(string[] args)
         {
-            
-            string usageFilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "usageCount.txt");
-            //IncrementUsageCount(usageFilePath);
-
             bool endApp = false;
 
             do
