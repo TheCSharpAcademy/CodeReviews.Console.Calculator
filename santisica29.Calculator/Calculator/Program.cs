@@ -1,5 +1,4 @@
-﻿using System.Text.RegularExpressions;
-using CalculatorLibrary;
+﻿using CalculatorLibrary;
 
 namespace CalculatorProgram;
 class Program
@@ -59,7 +58,7 @@ class Program
             // Wait for the user to respond before closing.
             endApp = Helpers.IsCalculationComplete();
 
-            Console.WriteLine("\n"); // Friendly linespacing;
+            Console.WriteLine("\n");
         }
         calc.Finish();
         return;

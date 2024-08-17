@@ -6,7 +6,7 @@ using Newtonsoft.Json;
 namespace CalculatorLibrary;
 public class Calculator
 {
-    int timesCalcWasUsed = 0;
+    int timesCalcWasUsed;
     static List<string> latestCalculations = new();
     static List<double> latestResults = new List<double>();
 
