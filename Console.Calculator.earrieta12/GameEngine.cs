@@ -393,7 +393,7 @@ namespace MyFirstProgram
         {
 
             int maxDifficulty = difficulty[0];
-            int totalOperations = difficulty[1];
+            
             var random = new Random();
             
             int firstNumber;
@@ -443,7 +443,7 @@ namespace MyFirstProgram
         {
 
             int maxDifficulty = difficulty[0];
-            int totalOperations = difficulty[1];
+            
             var random = new Random();
 
             int firstNumber;
@@ -492,7 +492,7 @@ namespace MyFirstProgram
         {
 
             int maxDifficulty = difficulty[0];
-            int totalOperations = difficulty[1];
+            
             var random = new Random();
 
             int firstNumber;
