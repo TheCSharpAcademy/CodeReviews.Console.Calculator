@@ -70,7 +70,7 @@ namespace MyFirstProgram
 
                     case "7":
 
-                        difficulty = Helper.gameDifficulty();
+                        difficulty = Helper.GameDifficulty();
 
                         break;
 

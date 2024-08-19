@@ -19,7 +19,7 @@
             return name;
         }
 
-        internal static List<int> gameDifficulty()
+        internal static List<int> GameDifficulty()
         {
 
             List<int> difficulty = new List<int>();
@@ -66,7 +66,7 @@
                 Score = gameScore,
                 Type = gameType,
                 Name = name,
-                time = time
+                Time = time
             });
 
         }
@@ -83,7 +83,7 @@
 
             public string Name { get; set; }
 
-            public string time { get; set; }
+            public string Time { get; set; }
         }
 
         internal static void PrintGames()
@@ -94,7 +94,7 @@
             Console.WriteLine("---------------------------");
             foreach (var game in games)
             {
-                Console.WriteLine($"{game.Date} - {game.Type}: {game.Score}pts, {game.time} seconds");
+                Console.WriteLine($"{game.Date} - {game.Type}: {game.Score}pts, {game.Time} seconds");
             }
             Console.WriteLine("---------------------------\n");
             Console.WriteLine("Press any key to return to Main Menu");

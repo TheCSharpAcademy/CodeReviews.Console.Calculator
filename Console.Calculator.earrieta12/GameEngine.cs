@@ -275,7 +275,7 @@ namespace MyFirstProgram
             Console.Clear();
             foreach (var game in games)
             {
-                Console.WriteLine($"Name: {game.Name} - Date: {game.Date} - Type: {game.Type} Score: {game.Score} pts, Time: {game.time} seconds");
+                Console.WriteLine($"Name: {game.Name} - Date: {game.Date} - Type: {game.Type} Score: {game.Score} pts, Time: {game.Time} seconds");
             }
 
             Console.WriteLine("Press any key to go back to the main menu.");
@@ -345,7 +345,6 @@ namespace MyFirstProgram
         {
 
             int maxDifficulty = difficulty[0];
-            int totalOperations = difficulty[1];
             var random = new Random();
             
 
@@ -396,8 +395,7 @@ namespace MyFirstProgram
             int maxDifficulty = difficulty[0];
             int totalOperations = difficulty[1];
             var random = new Random();
-            Stopwatch timeMeasure = new Stopwatch();
-
+            
             int firstNumber;
             int secondNumber;
 
