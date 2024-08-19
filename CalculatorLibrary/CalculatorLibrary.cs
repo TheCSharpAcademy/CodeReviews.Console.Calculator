@@ -1,8 +1,6 @@
-﻿
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
-namespace CalculatorLibrary
-{
+namespace CalculatorLibrary;
     public class Option
     {
         static Operation Op = new Operation();
@@ -10,6 +8,7 @@ namespace CalculatorLibrary
 
         JsonWriter writer;
         public Option()
+
         {
             StreamWriter logFile = File.CreateText("calculator.log");
 
@@ -108,6 +107,7 @@ namespace CalculatorLibrary
         }
     }
     internal class Operation
+
     {
         public double Addition(double num1, double num2)
         {
@@ -149,7 +149,4 @@ namespace CalculatorLibrary
                 Console.WriteLine(i);
             }
         }
-
     }
-
-}

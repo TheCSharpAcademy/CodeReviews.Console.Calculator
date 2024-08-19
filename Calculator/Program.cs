@@ -1,7 +1,6 @@
 ﻿using CalculatorLibrary;
 
-namespace CalculatorApp
-{
+namespace CalculatorApp;
     internal class Program
     {
         static void Main(string[] args)
@@ -43,7 +42,5 @@ namespace CalculatorApp
                 continueChoice = Console.ReadLine();
 
             } while (continueChoice != "n" && continueChoice != "N"); 
-
         }
     }
-}
