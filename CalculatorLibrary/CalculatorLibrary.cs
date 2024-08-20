@@ -1,7 +1,4 @@
-﻿using System.Globalization;
-
-namespace CalculatorLibrary;
-using System.Diagnostics;
+﻿namespace CalculatorLibrary;
 using Newtonsoft.Json;
 
 public class Calculator
