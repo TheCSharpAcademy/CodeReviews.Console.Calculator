@@ -8,6 +8,7 @@ public class Calculator
     static List<double> latestResults = new List<double>();
 
     JsonWriter writer;
+
     public Calculator()
     {
         StreamWriter logFile = File.CreateText("calculatorlog.json");
@@ -18,6 +19,7 @@ public class Calculator
         writer.WritePropertyName("Operations");
         writer.WriteStartArray();
     }
+
     public double DoOperation(double num1, double num2, string op)
     {
         double result = double.NaN; // Default value is "not-a-number" if an operation, such as division, could result in an error.
@@ -53,7 +55,7 @@ public class Calculator
                     Console.WriteLine("You can't divide by 0. Pick another number");
                     num2 = int.Parse(Console.ReadLine());
                 }
-                result = num1 / num2;
+                result = Math.Round(num1 / num2, 2);
                 writer.WriteValue("Divide");
                 operand = "/";
                 break;
@@ -104,7 +106,7 @@ public class Calculator
         if (lC == null)
         {
             Console.WriteLine("List is empty\n");
-            Console.WriteLine("'n' to start a new calculation");
+            Console.WriteLine("'s' to start a new calculation");
         }
         else
         {
@@ -115,7 +117,7 @@ public class Calculator
             }
 
             Console.WriteLine("\nPress 'd' to delete the list");
-            Console.WriteLine("'n' to start a new calculation");
+            Console.WriteLine("'s' to start a new calculation");
             Console.WriteLine("'u' to use one of the latest results to make a new operation");
         }
     }

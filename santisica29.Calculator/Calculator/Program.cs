@@ -7,8 +7,9 @@ class Program
     {
         bool endApp = false;
         // Display title as the C# console calculator app.
-        Console.WriteLine("Console Calculator in C#\r");
+        Console.WriteLine("Console Calculator in C#. Press any key to start.\r");
         Console.WriteLine("------------------------\n");
+        Console.ReadKey();
 
         Calculator calc = new Calculator();
         while (!endApp)
@@ -23,6 +24,8 @@ class Program
             string choice = Helpers.GetChoice();
 
             double res = Helpers.StartProgram(choice);
+
+            Console.Clear();
 
             if (res == 0)
             {
@@ -42,11 +45,15 @@ class Program
             try
             {
                 result = calc.DoOperation(cleanNum1, cleanNum2, op);
+
                 if (double.IsNaN(result))
                 {
                     Console.WriteLine("This operation will result in a mathematical error.\n");
                 }
-                else Console.WriteLine("Your result: {0:0.##}\n", result);
+                else
+                {
+                    Console.WriteLine($"Your result: {result:0.##}\n");
+                }
             }
             catch (Exception e)
             {

@@ -7,8 +7,8 @@ internal class Helpers
 {
     internal static string GetChoice()
     {
-        Console.WriteLine("Choose 'n' to make a new calculation or 'v' to view your latest calculations\n");
-        var choice = ValidateInput(Console.ReadLine().ToLower().Trim(), "n", "v");
+        Console.WriteLine("Choose 's' to start the program or 'v' to view your latest calculations\n");
+        var choice = ValidateInput(Console.ReadLine().ToLower().Trim(), "s", "v");
 
         return choice;
     }
@@ -21,7 +21,7 @@ internal class Helpers
         {
             Calculator.ShowLatestCalculations();
 
-            var input = ValidateInput(Console.ReadLine(), "n", "u", "d");
+            var input = ValidateInput(Console.ReadLine(), "s", "u", "d");
 
             if (input == "d")
             {
