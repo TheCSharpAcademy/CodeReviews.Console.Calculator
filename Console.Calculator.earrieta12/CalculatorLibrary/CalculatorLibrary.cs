@@ -6,7 +6,7 @@ namespace CalculatorLibrary
     {
 
         JsonWriter writer;
-        int count = 0;
+        int count;
 
 
         public Calculator()
