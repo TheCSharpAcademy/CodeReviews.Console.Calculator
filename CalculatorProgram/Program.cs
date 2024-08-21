@@ -5,6 +5,8 @@ namespace CalculatorProgram;
 
 class Program
 {
+    private static int usageCount = 0;
+    
     static void Main(string[] args)
     {
         bool endApp = false;
@@ -69,6 +71,7 @@ class Program
                         Console.WriteLine("This operation will result in a mathematical error.\n");
                     }
                     else Console.WriteLine("Your result: {0:0.##}\n", result);
+                    usageCount++;
                 }
                 catch (Exception e)
                 {
@@ -80,8 +83,8 @@ class Program
             // Wait for the user to respond before closing.
             Console.Write("Press 'n' and Enter to close the app, or press any other key and Enter to continue: ");
             if (Console.ReadLine() == "n") endApp = true;
-
-            Console.WriteLine("\n"); // Friendly linespacing.
+            
+            Console.WriteLine($"The calculator has been used {usageCount} {(usageCount > 1 ? "times" : "time")}.\n"); // Friendly linespacing.
         }
         
         calculator.Finish();

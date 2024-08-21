@@ -7,7 +7,7 @@ public class Calculator
     
     public Calculator()
     {
-        StreamWriter logFile = File.CreateText("calculatorlog.json");
+        var logFile = File.CreateText("calculatorlog.json");
         logFile.AutoFlush = true;
         writer = new JsonTextWriter(logFile);
         writer.Formatting = Formatting.Indented;
