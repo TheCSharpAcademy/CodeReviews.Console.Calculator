@@ -1,12 +1,17 @@
-﻿using System.Text.RegularExpressions;
+﻿using System.Diagnostics.CodeAnalysis;
+using System.Globalization;
+using System.Text.RegularExpressions;
 using CalculatorLibrary;
 
 namespace CalculatorProgram;
 
+[SuppressMessage("Performance", "SYSLIB1045:Convert to \'GeneratedRegexAttribute\'.")]
 class Program
 {
-    private static int usageCount = 0;
+    private static int _usageCount;
+    private static List<string[]> _calculationHistory = [];
     
+    [SuppressMessage("Performance", "SYSLIB1045:Convert to \'GeneratedRegexAttribute\'.")]
     static void Main(string[] args)
     {
         bool endApp = false;
@@ -20,31 +25,13 @@ class Program
         {
             // Declare variables and set to empty.
             // Use Nullable types (with ?) to match type of System.Console.ReadLine
-            string? numInput1 = "";
-            string? numInput2 = "";
-            double result = 0;
-
-            // Ask the user to type the first number.
-            Console.Write("Type a number, and then press Enter: ");
-            numInput1 = Console.ReadLine();
-
             double cleanNum1 = 0;
-            while (!double.TryParse(numInput1, out cleanNum1))
-            {
-                Console.Write("This is not valid input. Please enter a numeric value: ");
-                numInput1 = Console.ReadLine();
-            }
-
-            // Ask the user to type the second number.
-            Console.Write("Type another number, and then press Enter: ");
-            numInput2 = Console.ReadLine();
-
             double cleanNum2 = 0;
-            while (!double.TryParse(numInput2, out cleanNum2))
-            {
-                Console.Write("This is not valid input. Please enter a numeric value: ");
-                numInput2 = Console.ReadLine();
-            }
+            
+            DeleteListOfPreviousCalculations();
+
+            cleanNum1 = SubmitInputNumber("first");
+            cleanNum2 = SubmitInputNumber("second");
 
             // Ask the user to choose an operator.
             Console.WriteLine("Choose an operator from the following list:");
@@ -65,13 +52,7 @@ class Program
             { 
                 try
                 {
-                    result = calculator.DoOperation(cleanNum1, cleanNum2, op);
-                    if (double.IsNaN(result))
-                    {
-                        Console.WriteLine("This operation will result in a mathematical error.\n");
-                    }
-                    else Console.WriteLine("Your result: {0:0.##}\n", result);
-                    usageCount++;
+                    CarryOutCalculation(cleanNum1, cleanNum2, op, calculator);
                 }
                 catch (Exception e)
                 {
@@ -84,10 +65,149 @@ class Program
             Console.Write("Press 'n' and Enter to close the app, or press any other key and Enter to continue: ");
             if (Console.ReadLine() == "n") endApp = true;
             
-            Console.WriteLine($"The calculator has been used {usageCount} {(usageCount > 1 ? "times" : "time")}.\n"); // Friendly linespacing.
+            Console.WriteLine($"The calculator has been used {_usageCount} {(_usageCount > 1 ? "times" : "time")}.\n"); // Friendly linespacing.
         }
         
         calculator.Finish();
         return;
+    }
+
+    private static double SubmitInputNumber(string position)
+    {
+        string? numInput;
+        string? decision;
+        double cleanNum = 0.0;
+        
+        Console.WriteLine($"You will now enter the {position} number");
+        if (_calculationHistory.Count > 0)
+        {
+            Console.WriteLine("Do you want to use the result of previous calculations?");
+            Console.Write("Type y for yes or n for no, and then press Enter: ");
+            decision = Console.ReadLine();
+            
+            while (decision == null || !Regex.IsMatch(decision, "[y|n]")) 
+            {
+                Console.WriteLine("Error: Unrecognized input.");
+                Console.Write("Type y for yes or n for no, and then press Enter: ");
+                decision = Console.ReadLine();
+            }
+
+            if (decision.Equals("y"))
+            {
+                Console.WriteLine("\nPrevious Results");
+                Console.WriteLine("------------------------");
+                HashSet<double> valuesSet = [];
+                foreach (string[] calculation in _calculationHistory)
+                {
+                    Console.WriteLine(calculation[3]);
+                    valuesSet.Add(double.Parse(calculation[3]));
+                }
+                Console.Write("\nChoose a value from the ones listed above, and then press Enter: ");
+                numInput = Console.ReadLine();
+                
+                while (!double.TryParse(numInput, out cleanNum) || !valuesSet.Contains(cleanNum))
+                {
+                    Console.WriteLine("This is not a valid input.");
+                    Console.Write("Choose a value from the ones listed above, and then press Enter: ");
+                    numInput = Console.ReadLine();
+                }
+            }
+            else
+            {
+                // Ask the user to type a number.
+                Console.Write("\nType a number, and then press Enter: ");
+                numInput = Console.ReadLine();
+            
+                while (!double.TryParse(numInput, out cleanNum))
+                {
+                    Console.Write("This is not valid input. Please enter a numeric value: ");
+                    numInput = Console.ReadLine();
+                }
+            }
+        }
+        else
+        {
+            // Ask the user to type a number.
+            Console.Write("Type a number, and then press Enter: ");
+            numInput = Console.ReadLine();
+            
+            while (!double.TryParse(numInput, out cleanNum))
+            {
+                Console.Write("This is not valid input. Please enter a numeric value: ");
+                numInput = Console.ReadLine();
+            }
+        }
+
+        return cleanNum;
+    }
+
+    private static void DeleteListOfPreviousCalculations()
+    {
+        if (_calculationHistory.Count <= 0) return;
+        
+        Console.WriteLine("Previous calculations exist, do you want to delete them?");
+        Console.Write("Type y to delete or n to retain, and then press Enter: ");
+        string? decision = Console.ReadLine();
+                
+        while (decision == null || !Regex.IsMatch(decision, "[y|n]")) 
+        {
+            Console.WriteLine("Error: Unrecognized input.");
+            Console.Write("Type y to delete or n to retain, and then press Enter: ");
+            decision = Console.ReadLine();
+        }
+
+        if (decision.Equals("y"))
+            _calculationHistory.Clear();
+        
+        Console.WriteLine();
+    }
+
+    private static void CarryOutCalculation(double cleanNum1, double cleanNum2, string op, Calculator calculator)
+    {
+        string[] calculation = [
+            cleanNum1.ToString(CultureInfo.InvariantCulture), 
+            cleanNum2.ToString(CultureInfo.InvariantCulture), 
+            GetOpSymbol(op),
+            ""
+        ];
+        
+        double result = calculator.DoOperation(cleanNum1, cleanNum2, op);
+        
+        if (double.IsNaN(result))
+        {
+            Console.WriteLine("This operation will result in a mathematical error.\n");
+        }
+        else
+        {
+            Console.WriteLine("Your result: {0:0.##}\n", result);
+            calculation[3] = result.ToString("0.##");
+            _calculationHistory.Add(calculation);
+        }
+        
+        _usageCount++;
+    }
+
+    private static string GetOpSymbol(string op)
+    {
+        string symbol = "";
+        
+        // ReSharper disable once ConvertSwitchStatementToSwitchExpression
+        switch (op)
+        {
+            case "a":
+                symbol = "+";
+                break;
+            case "s":
+                symbol = "-";
+                break;
+            case "m":
+                symbol = "*";
+                break;
+            case "d":
+                symbol = "/";
+                break;
+        }
+
+        return symbol;
     }
 }
