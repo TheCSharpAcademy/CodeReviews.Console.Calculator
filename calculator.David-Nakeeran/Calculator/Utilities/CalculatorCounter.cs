@@ -3,8 +3,7 @@ namespace CalculatorProgram
     class CalculatorCounter
     {
         // Private field to store counter value
-        private int _counter = 0;
-
+        private int _counter;
 
         // Method to increment the counter
         internal void IncrementCounter()
