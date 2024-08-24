@@ -1,10 +1,22 @@
 {
   "Operations": [
     {
-      "Operand1": 398457348957289.0,
-      "Operand2": 893475943275498.0,
-      "Operation": "Taking the Power",
-      "Result": "Infinity"
+      "Operand1": 1.0,
+      "Operand2": 4.0,
+      "Operation": "Sine",
+      "Result": 0.8414709848078965
+    },
+    {
+      "Operand1": 1.0,
+      "Operand2": 4.0,
+      "Operation": "Cosine",
+      "Result": 0.5403023058681398
+    },
+    {
+      "Operand1": 1.0,
+      "Operand2": 3.0,
+      "Operation": "Tangent",
+      "Result": 1.557407724654902
     }
   ]
 }

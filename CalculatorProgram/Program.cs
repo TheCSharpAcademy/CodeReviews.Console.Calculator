@@ -39,12 +39,15 @@ class Program
             Console.WriteLine("\td - Divide");
             Console.WriteLine("\tr - Square Root");
             Console.WriteLine("\tp - Taking the Power");
+            Console.WriteLine("\te - Sine");
+            Console.WriteLine("\tc - Cosine");
+            Console.WriteLine("\tt - Tangent");
             Console.Write("Your option? ");
 
             string? op = Console.ReadLine();
 
             // Validate input is not null, and matches the pattern
-            if (op == null || ! Regex.IsMatch(op, "[a|s|m|d|r|p]"))
+            if (op == null || ! Regex.IsMatch(op, "[a|s|m|d|r|p|e|c|t]"))
             {
                 Console.WriteLine("Error: Unrecognized input.");
             }
@@ -52,9 +55,9 @@ class Program
             { 
                 try
                 {
-                    if (op.Equals("r"))
+                    if (Regex.IsMatch(op, "[r|e|c|t]"))
                     {
-                        Console.WriteLine("Only the first number entered will be used for the square root operation.");
+                        Console.WriteLine("Only the first number entered will be used for the square root or trigonometry operation.");
                     }
                     CarryOutCalculation(cleanNum1, cleanNum2, op, calculator);
                 }

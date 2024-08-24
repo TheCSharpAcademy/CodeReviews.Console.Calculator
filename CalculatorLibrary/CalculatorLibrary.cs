@@ -26,6 +26,7 @@ public class Calculator
         _writer.WriteValue(num2);
         _writer.WritePropertyName("Operation");
         // Use a switch statement to do the math.
+
         switch (op)
         {
             case "a":
@@ -55,8 +56,24 @@ public class Calculator
                 }
                 _writer.WriteValue("Square Root");
                 break;
+            case "p":
+                result = Math.Pow(num1, num2);
+                _writer.WriteValue("Taking the Power");
+                break;
+            case "e":
+                result = Math.Sin(num1);
+                _writer.WriteValue("Sine");
+                break;
+            case "c":
+                result = Math.Cos(num1);
+                _writer.WriteValue("Cosine");
+                break;
+            case "t":
+                result = Math.Tan(num1);
+                _writer.WriteValue("Tangent");
+                break;
         }
-        
+
         _writer.WritePropertyName("Result");
         _writer.WriteValue(result);
         _writer.WriteEndObject();
