@@ -42,7 +42,6 @@ public class Calculator
                 _writer.WriteValue("Multiply");
                 break;
             case "d":
-                // Ask the user to enter a non-zero divisor.
                 if (num2 != 0)
                 {
                     result = num1 / num2;
