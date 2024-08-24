@@ -1,22 +1,10 @@
 {
   "Operations": [
     {
-      "Operand1": 16.0,
-      "Operand2": 4.0,
-      "Operation": "Square Root",
-      "Result": 4.0
-    },
-    {
-      "Operand1": 4.0,
-      "Operand2": 4.0,
-      "Operation": "Multiply",
-      "Result": 16.0
-    },
-    {
-      "Operand1": 45.0,
-      "Operand2": 4.0,
-      "Operation": "Square Root",
-      "Result": 6.708203932499369
+      "Operand1": 398457348957289.0,
+      "Operand2": 893475943275498.0,
+      "Operation": "Taking the Power",
+      "Result": "Infinity"
     }
   ]
 }

@@ -38,12 +38,13 @@ class Program
             Console.WriteLine("\tm - Multiply");
             Console.WriteLine("\td - Divide");
             Console.WriteLine("\tr - Square Root");
+            Console.WriteLine("\tp - Taking the Power");
             Console.Write("Your option? ");
 
             string? op = Console.ReadLine();
 
             // Validate input is not null, and matches the pattern
-            if (op == null || ! Regex.IsMatch(op, "[a|s|m|d|r]"))
+            if (op == null || ! Regex.IsMatch(op, "[a|s|m|d|r|p]"))
             {
                 Console.WriteLine("Error: Unrecognized input.");
             }
