@@ -9,10 +9,10 @@ namespace CalculatorProgram;
 class Program
 {
     private static int _usageCount;
-    private static List<string[]> _calculationHistory = [];
+    private static readonly List<string[]> CalculationHistory = [];
     
     [SuppressMessage("Performance", "SYSLIB1045:Convert to \'GeneratedRegexAttribute\'.")]
-    static void Main(string[] args)
+    private static void Main()
     {
         bool endApp = false;
         // Display title as the C# console calculator app.
@@ -25,13 +25,11 @@ class Program
         {
             // Declare variables and set to empty.
             // Use Nullable types (with ?) to match type of System.Console.ReadLine
-            double cleanNum1 = 0;
-            double cleanNum2 = 0;
-            
+
             DeleteListOfPreviousCalculations();
 
-            cleanNum1 = SubmitInputNumber("first");
-            cleanNum2 = SubmitInputNumber("second");
+            double cleanNum1 = SubmitInputNumber("first");
+            double cleanNum2 = SubmitInputNumber("second");
 
             // Ask the user to choose an operator.
             Console.WriteLine("Choose an operator from the following list:");
@@ -39,12 +37,13 @@ class Program
             Console.WriteLine("\ts - Subtract");
             Console.WriteLine("\tm - Multiply");
             Console.WriteLine("\td - Divide");
+            Console.WriteLine("\tr - Square Root");
             Console.Write("Your option? ");
 
             string? op = Console.ReadLine();
 
             // Validate input is not null, and matches the pattern
-            if (op == null || ! Regex.IsMatch(op, "[a|s|m|d]"))
+            if (op == null || ! Regex.IsMatch(op, "[a|s|m|d|r]"))
             {
                 Console.WriteLine("Error: Unrecognized input.");
             }
@@ -52,6 +51,10 @@ class Program
             { 
                 try
                 {
+                    if (op.Equals("r"))
+                    {
+                        Console.WriteLine("Only the first number entered will be used for the square root operation.");
+                    }
                     CarryOutCalculation(cleanNum1, cleanNum2, op, calculator);
                 }
                 catch (Exception e)
@@ -65,21 +68,20 @@ class Program
             Console.Write("Press 'n' and Enter to close the app, or press any other key and Enter to continue: ");
             if (Console.ReadLine() == "n") endApp = true;
             
-            Console.WriteLine($"The calculator has been used {_usageCount} {(_usageCount > 1 ? "times" : "time")}.\n"); // Friendly linespacing.
+            Console.WriteLine($"The calculator has been used {_usageCount} {(_usageCount > 1 ? "times" : "time")}.\n"); // Friendly line spacing.
         }
         
         calculator.Finish();
-        return;
     }
 
     private static double SubmitInputNumber(string position)
     {
         string? numInput;
         string? decision;
-        double cleanNum = 0.0;
+        double cleanNum;
         
         Console.WriteLine($"You will now enter the {position} number");
-        if (_calculationHistory.Count > 0)
+        if (CalculationHistory.Count > 0)
         {
             Console.WriteLine("Do you want to use the result of previous calculations?");
             Console.Write("Type y for yes or n for no, and then press Enter: ");
@@ -97,7 +99,7 @@ class Program
                 Console.WriteLine("\nPrevious Results");
                 Console.WriteLine("------------------------");
                 HashSet<double> valuesSet = [];
-                foreach (string[] calculation in _calculationHistory)
+                foreach (string[] calculation in CalculationHistory)
                 {
                     Console.WriteLine(calculation[3]);
                     valuesSet.Add(double.Parse(calculation[3]));
@@ -143,7 +145,7 @@ class Program
 
     private static void DeleteListOfPreviousCalculations()
     {
-        if (_calculationHistory.Count <= 0) return;
+        if (CalculationHistory.Count <= 0) return;
         
         Console.WriteLine("Previous calculations exist, do you want to delete them?");
         Console.Write("Type y to delete or n to retain, and then press Enter: ");
@@ -157,7 +159,7 @@ class Program
         }
 
         if (decision.Equals("y"))
-            _calculationHistory.Clear();
+            CalculationHistory.Clear();
         
         Console.WriteLine();
     }
@@ -181,7 +183,7 @@ class Program
         {
             Console.WriteLine("Your result: {0:0.##}\n", result);
             calculation[3] = result.ToString("0.##");
-            _calculationHistory.Add(calculation);
+            CalculationHistory.Add(calculation);
         }
         
         _usageCount++;
