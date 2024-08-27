@@ -1,4 +1,5 @@
-﻿using System.Text.RegularExpressions;
+﻿global using System.Net.Sockets;
+using System.Text.RegularExpressions;
 using CalculatorLibrary;
 using System.Globalization;
 public class CalculatorApp
