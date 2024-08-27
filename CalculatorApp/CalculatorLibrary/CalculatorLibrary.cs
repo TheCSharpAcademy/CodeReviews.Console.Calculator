@@ -20,10 +20,7 @@ namespace CalculatorLibrary
             writer.WriteStartObject();
             writer.WritePropertyName("Operation");
             writer.WriteStartArray();
-            //Trace.Listeners.Add(new TextWriterTraceListener(logFile));
-            //Trace.AutoFlush = true;
-            //Trace.WriteLine("Starting Calculator Log");
-            //Trace.WriteLine(string.Format("Started {0}"), System.DateTime.Now.ToString());
+           
         }
         public double OperationToDo(double firstNumber, double secondNumber, string op)
         {
@@ -48,7 +45,7 @@ namespace CalculatorLibrary
                         Answer = result
                     });
                     writer.WriteValue("Add");
-                    //Trace.WriteLine(string.Format("{0} + {1} = {2}", firstNumber, secondNumber, result));
+                    
                     break;
                 case "-":
                     result = firstNumber - secondNumber;
@@ -60,7 +57,7 @@ namespace CalculatorLibrary
                         Answer = result
                     });
                     writer.WriteValue("Subtract");
-                    //Trace.WriteLine(string.Format("{0} - {1} = {2}", firstNumber, secondNumber, result));
+                    
                     break;
                 case "*":
                     result = firstNumber * secondNumber;
@@ -72,7 +69,7 @@ namespace CalculatorLibrary
                         Answer = result
                     });
                     writer.WriteValue("Multiply");
-                    //Trace.WriteLine(string.Format("{0} * {1} = {2}", firstNumber, secondNumber, result));
+                    
                     break;
                 case "/":
                     if(secondNumber != 0)
@@ -86,7 +83,7 @@ namespace CalculatorLibrary
                             Answer = result
                         });
                         writer.WriteValue("Divide");
-                        //Trace.WriteLine(string.Format("{0} / {1} = {2}", firstNumber, secondNumber, result));
+                        
                     }
                     
                     break;
@@ -100,7 +97,7 @@ namespace CalculatorLibrary
                         Answer = result
                     });
                     writer.WriteValue("Power");
-                    //Trace.WriteLine(string.Format("{0} + {1} = {2}", firstNumber, secondNumber, result));
+                    
                     break;
                 case "r":
                     result = Math.Sqrt(firstNumber);
@@ -112,7 +109,7 @@ namespace CalculatorLibrary
                         Answer = result
                     });
                     writer.WriteValue("Square root");
-                    //Trace.WriteLine(string.Format("{0} = {2}", firstNumber, result));
+                    
                     break;
                 case "c":
                     result = Math.Cos(firstNumber);
@@ -124,7 +121,7 @@ namespace CalculatorLibrary
                         Answer = result
                     });
                     writer.WriteValue("Cosine");
-                    //Trace.WriteLine(string.Format("{0} = {2}", firstNumber, result));
+                    
                     break;
                 case "s":
                     result = Math.Sin(firstNumber);
@@ -136,7 +133,7 @@ namespace CalculatorLibrary
                         Answer = result
                     });
                     writer.WriteValue("Sine");
-                    //Trace.WriteLine(string.Format("{0} = {2}", firstNumber, result));
+                    
                     break;
                 case "t":
                     result = Math.Tan(firstNumber);
@@ -148,7 +145,7 @@ namespace CalculatorLibrary
                         Answer = result
                     });
                     writer.WriteValue("Tangant");
-                    //Trace.WriteLine(string.Format("{0} = {2}", firstNumber, result));
+                    
                     break;
                 default:
                     break;

@@ -104,15 +104,13 @@ public class CalculatorApp
                             {
                                 result = calculator.OperationToDo(cleanNum, cleanNum2, oper);
                                 calCount++;
-
                                 if (double.IsNaN(result))
                                 {
                                     Console.WriteLine("This operation will result a mathematical error.\n");
                                 }
                                 else
                                 {
-                                    Console.WriteLine($"Your result: {result:0.##}\n");
-
+                                    Console.WriteLine("Your result: {0:0.##}\n", result);
                                 }
                             }
                             catch (Exception e)
@@ -121,8 +119,8 @@ public class CalculatorApp
                             }
                         }
 
-                        Console.WriteLine("_______________________________");
-                        Console.WriteLine($"Calculator was used{calCount} times");
+                        Console.WriteLine("_______________________________\n");
+                        Console.WriteLine($"Calculator was used {calCount} times");
                         Console.WriteLine("Press 'x' to discard previous result and start new operation.");
                         Console.WriteLine("Press 'n' and to go back to main menu, or press any other key press Enter to continue");
 
