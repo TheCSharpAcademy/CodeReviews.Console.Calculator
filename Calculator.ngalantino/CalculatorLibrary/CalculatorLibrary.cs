@@ -50,6 +50,10 @@ namespace CalculatorLibrary
                         result = num1 / num2;
                         writer.WriteValue("Divide");
                     }
+                    else
+                    { 
+                        writer.WriteValue("Cannot divide by zero!");
+                    }
                     break;
                 // Return text for an incorrect option entry.
                 default:
