@@ -5,7 +5,7 @@ namespace CalculatorLibrary;
 public class Calculator
 {
     private List<string> allAnswers = new List<string>();
-    private int calculatorUsedCount = 0;
+    int calculatorUsedCount = 0;
     private JsonWriter writer;
 
     public Calculator()
@@ -64,15 +64,9 @@ public class Calculator
         writer.WriteEndObject();
 
         allAnswers.Add(answer);
-        CalculatorUsedCounter();
+        calculatorUsedCount++;
 
         return result;
-    }
-
-    private int CalculatorUsedCounter()
-    {
-        calculatorUsedCount++;
-        return calculatorUsedCount;
     }
 
     public int GetCalculatorUsedCount()
