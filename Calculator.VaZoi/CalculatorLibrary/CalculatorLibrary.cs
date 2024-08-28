@@ -5,7 +5,7 @@ namespace CalculatorLibrary;
 public class Calculator
 {
     private List<string> allAnswers = new List<string>();
-    int calculatorUsedCount = 0;
+    int calculatorUsedCount;
     private JsonWriter writer;
 
     public Calculator()
