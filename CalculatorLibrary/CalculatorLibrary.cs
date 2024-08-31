@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Diagnostics;
 using Newtonsoft.Json;
 
 namespace CalculatorLibrary
@@ -17,6 +18,7 @@ namespace CalculatorLibrary
             writer.WritePropertyName("Operations");
             writer.WriteStartArray();
         }
+
         public double DoOperation(double num1, double num2, string op)
         {
             double result = double.NaN; // Default value is "not-a-number" if an operation, such as division, could result in an error.
@@ -83,9 +85,14 @@ namespace CalculatorLibrary
 
             return result;
         }
-        public void Finish()
+
+        
+
+        public void Finish(int usageCount)
         {
             writer.WriteEndArray();
+            writer.WritePropertyName("Amount of Times Calculator Used (in operations)");
+            writer.WriteValue(usageCount);
             writer.WriteEndObject();
             writer.Close();
         }

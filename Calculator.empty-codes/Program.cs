@@ -8,6 +8,7 @@ namespace CalculatorProgram
         static void Main(string[] args)
         {
             bool endApp = false;
+            int usageCount = 0;
             // Display title as the C# console calculator app.
             Console.WriteLine("Console Calculator in C#\r");
             Console.WriteLine("------------------------\n");
@@ -120,6 +121,7 @@ namespace CalculatorProgram
                     }
                 }
 
+                usageCount++;
                 // Wait for the user to respond before closing.
                 Console.Write("Press 'n' and Enter to close the app, or press any other key and Enter to continue: ");
                 if (Console.ReadLine() == "n") endApp = true;
@@ -127,7 +129,7 @@ namespace CalculatorProgram
                 Console.WriteLine("\n"); // Friendly linespacing.
             }
             // Add call to close the JSON writer before return
-            calculator.Finish();
+            calculator.Finish(usageCount);
             return;
         }
     }
