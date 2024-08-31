@@ -11,9 +11,9 @@ namespace CalculatorProgram
             int usageCount = 0;
             // Display title as the C# console calculator app.
             Console.WriteLine("Console Calculator in C#\r");
-            Console.WriteLine("------------------------\n");
 
             Calculator calculator = new Calculator();
+            var calculations = calculator.GetCalculations();
             while (!endApp)
             {
                 // Declare variables and set to empty.
@@ -24,7 +24,8 @@ namespace CalculatorProgram
                 double cleanNum1 = 0;
                 double cleanNum2 = 0;
 
-                Console.WriteLine("Select operation type using the options below:");
+                Console.WriteLine("------------------------\n");
+                Console.WriteLine("Select operation type using the choice1 below:");
                 Console.WriteLine("\ta - Addition");
                 Console.WriteLine("\ts - Subtraction");
                 Console.WriteLine("\tm - Multiplication");
@@ -73,64 +74,156 @@ namespace CalculatorProgram
                     }
                     if (op == "t")
                     {
-                        Console.WriteLine("10 \r\nx\r\n ");
+                        Console.WriteLine("10^x");
                     }
                     if (op == "sin" || op == "cos" || op == "tan")
                     {
                         Console.WriteLine("sin(x) or cos(x) or tan(x) where x is an angle in degrees.");
                     }
+                    
                     // Ask the user to type the first number.
-                    Console.Write("Type a number x, and then press Enter: ");
+
+                    Console.Write(calculations.Count == 0
+                        ? "Type a number x: "
+                        : "Type a number x or enter letter 'y' to use the result of the last operation: ");
+
                     numInput1 = Console.ReadLine();
 
-                    while (!double.TryParse(numInput1, out cleanNum1))
+                    if (calculations.Count != 0 && numInput1 == "y")
                     {
-                        Console.Write("This is not valid input. Please enter a numeric value: ");
-                        numInput1 = Console.ReadLine();
+                        var lastOperation = calculations[^1];
+                        cleanNum1 = lastOperation.result;
+                    }
+                    else
+                    {
+                        while (!double.TryParse(numInput1, out cleanNum1))
+                        {
+                            Console.Write("This is not valid input. Please enter a numeric value: ");
+                            numInput1 = Console.ReadLine();
+                        }
                     }
                 }
+
+
+                
+                
 
                 void GetTwoOperands()
                 {
                     if (op == "p")
                     {
-                        Console.Write("This number will be the base.");
+                        Console.Write("This number will be the base. ");
                     }
                     // Ask the user to type the first number.
-                    Console.Write("Type a number, and then press Enter: ");
+                    Console.Write(calculations.Count == 0
+                        ? "Type a number: "
+                        : "Type a number or enter letter 'y' to use the result of the last operation: ");
+
                     numInput1 = Console.ReadLine();
 
-                    while (!double.TryParse(numInput1, out cleanNum1))
+                    if (calculations.Count != 0 && numInput1 == "y")
                     {
-                        Console.Write("This is not valid input. Please enter a numeric value: ");
-                        numInput1 = Console.ReadLine();
+                        var lastOperation = calculations[^1];
+                        cleanNum1 = lastOperation.result;
+                    }
+                    else
+                    {
+                        while (!double.TryParse(numInput1, out cleanNum1))
+                        {
+                            Console.Write("This is not valid input. Please enter a numeric value: ");
+                            numInput1 = Console.ReadLine();
+                        }
                     }
 
                     if (op == "p")
                     {
-                        Console.Write("This number will be the exponent.");
+                        Console.Write("This number will be the exponent. ");
                     }
+
                     // Ask the user to type the second number.
-                    Console.Write("Type another number, and then press Enter: ");
+                    Console.Write(calculations.Count == 0
+                        ? "Type another number: "
+                        : "Type another number or enter letter 'y' to use the result of the last operation: ");
+
                     numInput2 = Console.ReadLine();
 
-                    while (!double.TryParse(numInput2, out cleanNum2))
+                    if (calculations.Count != 0 && numInput2 == "y")
                     {
-                        Console.Write("This is not valid input. Please enter a numeric value: ");
-                        numInput2 = Console.ReadLine();
+                        var lastOperation = calculations[^1];
+                        cleanNum2 = lastOperation.result;
+                    }
+                    else
+                    {
+                        while (!double.TryParse(numInput2, out cleanNum2))
+                        {
+                            Console.Write("This is not valid input. Please enter a numeric value: ");
+                            numInput2 = Console.ReadLine();
+                        }
                     }
                 }
 
                 usageCount++;
-                // Wait for the user to respond before closing.
-                Console.Write("Press 'n' and Enter to close the app, or press any other key and Enter to continue: ");
-                if (Console.ReadLine() == "n") endApp = true;
 
+                // Wait for the user to respond before closing.
+                Console.WriteLine("Enter:");
+                Console.WriteLine("\tv - To View Latest Calculations");
+                Console.WriteLine("\tn - To Close the App");
+                Console.WriteLine("\tc - To Continue");
+
+                string? choice1 = Console.ReadLine();
+
+                if (choice1 == null || !Regex.IsMatch(choice1, "[v|n|c]"))
+                {
+                    Console.WriteLine("Error: Unrecognized input.");
+                }
+                else
+                {
+                    if (choice1 == "c") continue;
+                    if (choice1 == "n") endApp = true;
+
+                    
+                    if (choice1 == "v")
+                    {
+                        Console.WriteLine("Latest Calculations");
+                        Console.WriteLine("------------------------");
+                        foreach (var calc in calculations)
+                        {
+                            string output = calc.symbol switch
+                            {
+                                "+" or "-" or "*" or "/" or "^" => $"{calc.num1} {calc.symbol} {calc.num2} = {calc.result}",
+                                "√" or "10^" or "sin" or "cos" or "tan" => $"{calc.symbol}({calc.num1}) = {calc.result}",
+                                _ => "Error!, unknown symbol."
+                            };
+                            Console.WriteLine(output);
+                        }
+
+                        Console.WriteLine("\n------------------------\n");
+                        Console.WriteLine("Enter:");
+                        Console.WriteLine("\td - To Delete this list");
+                        Console.WriteLine("\tc - to continue");
+                        Console.WriteLine("\tn - To close the App");
+
+                        string? choice2 = Console.ReadLine();
+
+                        if (choice2 == null || !Regex.IsMatch(choice2, "[d|new|n|c]"))
+                        {
+                            Console.WriteLine("Error: Unrecognized input.");
+                        }
+                        else
+                        {
+                            if (choice2 == "c") continue;
+                            if (choice2 == "n") endApp = true;
+                            if (choice2 == "d") calculations.Clear();
+                        }
+
+                    }
+                    
+                }
                 Console.WriteLine("\n"); // Friendly linespacing.
             }
             // Add call to close the JSON writer before return
             calculator.Finish(usageCount);
             return;
+            }
         }
     }
-}
