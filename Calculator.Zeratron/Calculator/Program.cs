@@ -36,8 +36,7 @@ namespace CalculatorProgram
  cos - Cosine
  tan - Tangent
  v - View operation history
- c - Clear operation history
-");
+ c - Clear operation history");
                 Console.Write("Your option?: ");
 
                 string? op = Console.ReadLine().ToLower();
