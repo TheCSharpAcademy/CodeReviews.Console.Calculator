@@ -49,6 +49,30 @@ namespace CalculatorLibrary
                     }
                     writer.WriteValue("Divide");
                     break;
+                case "sq":
+                    result = Math.Sqrt(num1);
+                    writer.WriteValue("Square Root");
+                    break;
+                case "p":
+                    result = Math.Pow(num1, num2);
+                    writer.WriteValue("Taking the Power");
+                    break;
+                case "t":
+                    result = Math.Pow(10, num1);
+                    writer.WriteValue("Raising 10 to the Power of x");
+                    break;
+                case "sin":
+                    result = Math.Sin(ToRadian(num1));
+                    writer.WriteValue("Sine");
+                    break;
+                case "cos":
+                    result = Math.Cos(ToRadian(num1));
+                    writer.WriteValue("Cosine");
+                    break;
+                case "tan":
+                    result = Math.Tan(ToRadian(num1));
+                    writer.WriteValue("Tangent");
+                    break;
                 // Return text for an incorrect option entry.
                 default:
                     break;
@@ -64,6 +88,11 @@ namespace CalculatorLibrary
             writer.WriteEndArray();
             writer.WriteEndObject();
             writer.Close();
+        }
+
+        double ToRadian(double value)
+        {
+            return value * (Math.PI / 180.0);
         }
     }
 }
