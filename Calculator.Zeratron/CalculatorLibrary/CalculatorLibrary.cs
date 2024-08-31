@@ -99,9 +99,9 @@ namespace CalculatorLibrary
             writer.WriteEndObject();
 
             if (op == "sr" || op == "p10" || op == "sin" || op == "cos" || op == "tan")
-                log.Add($"{symbol}{num1} = {result}");
+                log.Add($"Operation {operationCounter}: {symbol}{num1} = {result}");
             else
-                log.Add($"{num1} {symbol} {num2} = {result}");
+                log.Add($"Operation {operationCounter}: {num1} {symbol} {num2} = {result}");
 
             return result;
         }
@@ -118,7 +118,6 @@ namespace CalculatorLibrary
         public void ClearLog()
         {
             log.Clear();
-            File.WriteAllText("calculatorlog.json", string.Empty);
         }
 
         public List<string> OperationLog()

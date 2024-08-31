@@ -24,19 +24,20 @@ namespace CalculatorProgram
                 double result = 0;
 
                 Console.Clear();
-                Console.WriteLine("Choose an operator from the following list:");
-                Console.WriteLine("\ta - Add");
-                Console.WriteLine("\ts - Subtract");
-                Console.WriteLine("\tm - Multiply");
-                Console.WriteLine("\td - Divide");
-                Console.WriteLine("\tsr - Square Root");
-                Console.WriteLine("\tp - Power");
-                Console.WriteLine("\tp10 - Power of 10");
-                Console.WriteLine("\tsin - Sine");
-                Console.WriteLine("\tcos - Cosine");
-                Console.WriteLine("\ttan - Tangent");
-                Console.WriteLine("\tv - View operation history");
-                Console.WriteLine("\tc - Clear operation history");
+                Console.WriteLine(@$"Choose an operator from the following list:
+ a - Add
+ s - Subtract
+ m - Multiply
+ d - Divide
+ sr - Square Root
+ p - Power
+ p10 - Power of 10
+ sin - Sine
+ cos - Cosine
+ tan - Tangent
+ v - View operation history
+ c - Clear operation history
+");
                 Console.Write("Your option?: ");
 
                 string? op = Console.ReadLine().ToLower();
