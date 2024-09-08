@@ -1,0 +1,38 @@
+{
+  "Operations": [
+    {
+      "Operand1": 5.0,
+      "Operand2": 5.0,
+      "Operation": "Add",
+      "Result": 10.0
+    },
+    {
+      "Operand1": 564.0,
+      "Operand2": 5.0,
+      "Operation": "Multiply",
+      "Result": 2820.0
+    },
+    {
+      "Operand1": 0.0,
+      "Operand2": 0.0,
+      "Operation": "last calc",
+      "Result": "NaN"
+    },
+    {
+      "Operand1": 0.0,
+      "Operand2": 0.0,
+      "Operation": "last calc",
+      "Result": "NaN"
+    },
+    {
+      "Operand1": 0.0,
+      "Operand2": 0.0,
+      "Operation": "DeletList",
+      "Result": "NaN"
+    },
+    {
+      "Operand1": 0.0,
+      "Operand2": 0.0,
+      "Operation": "last calc",
+      "Result": "NaN"
+    }

@@ -1,0 +1,13 @@
+D:\.net\Console_Calculator\CalculatorLibrary\bin\Debug\net8.0\CalculatorLibrary.deps.json
+D:\.net\Console_Calculator\CalculatorLibrary\bin\Debug\net8.0\CalculatorLibrary.dll
+D:\.net\Console_Calculator\CalculatorLibrary\bin\Debug\net8.0\CalculatorLibrary.pdb
+D:\.net\Console_Calculator\CalculatorLibrary\obj\Debug\net8.0\CalculatorLibrary.GeneratedMSBuildEditorConfig.editorconfig
+D:\.net\Console_Calculator\CalculatorLibrary\obj\Debug\net8.0\CalculatorLibrary.AssemblyInfoInputs.cache
+D:\.net\Console_Calculator\CalculatorLibrary\obj\Debug\net8.0\CalculatorLibrary.AssemblyInfo.cs
+D:\.net\Console_Calculator\CalculatorLibrary\obj\Debug\net8.0\CalculatorLibrary.csproj.CoreCompileInputs.cache
+D:\.net\Console_Calculator\CalculatorLibrary\obj\Debug\net8.0\CalculatorLibrary.sourcelink.json
+D:\.net\Console_Calculator\CalculatorLibrary\obj\Debug\net8.0\CalculatorLibrary.dll
+D:\.net\Console_Calculator\CalculatorLibrary\obj\Debug\net8.0\refint\CalculatorLibrary.dll
+D:\.net\Console_Calculator\CalculatorLibrary\obj\Debug\net8.0\CalculatorLibrary.pdb
+D:\.net\Console_Calculator\CalculatorLibrary\obj\Debug\net8.0\ref\CalculatorLibrary.dll
+D:\.net\Console_Calculator\CalculatorLibrary\obj\Debug\net8.0\CalculatorLibrary.csproj.AssemblyReference.cache

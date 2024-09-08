@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "C4tTb2TLQWs=",
+  "success": true,
+  "projectFilePath": "D:\\.net\\Console_Calculator\\Calculator\\Calculator.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\trust\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512"
+  ],
+  "logs": []
+}
