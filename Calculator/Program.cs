@@ -6,7 +6,6 @@ namespace CalculatorProgram
 {
     class Program
     {
-        public static int usageCount = 0;
         static void Main(string[] args)
         {
             bool endApp = false;
