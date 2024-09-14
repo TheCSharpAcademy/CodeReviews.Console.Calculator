@@ -46,7 +46,10 @@ class Program
                         int index = Int32.Parse(Console.ReadLine());
                         numInput1 = ShortTermMemory.GetResult(index);
                     }
-                    catch { }
+                    catch (Exception ex) 
+                    {
+                        Console.WriteLine("Something went wrong");
+                    }
                 }
             }
             else
@@ -76,7 +79,10 @@ class Program
                         int index = Int32.Parse(Console.ReadLine());
                         numInput2 = ShortTermMemory.GetResult(index);
                     }
-                    catch { }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine("Something went wrong");
+                    }
                 }
             }
             else
