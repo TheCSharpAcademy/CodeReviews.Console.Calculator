@@ -66,7 +66,44 @@ public class Calculator
                 Operations.Add(operation);
                 _writer.WriteValue("Divide");
                 break;
+            case "c":
+                result = Math.Cos(num1);
+                operation.Result = result;
+                Operations.Add(operation);
+                _writer.WriteValue("Cosine");
+                break;
+            case "r":
+                result = Math.Sqrt(num1);
+                operation.Result = result;
+                Operations.Add(operation);
+                _writer.WriteValue("SquareRoot");
+                break;
+            case "t":
+                result = Math.Tan(num1);
+                operation.Result = result;
+                Operations.Add(operation);
+                _writer.WriteValue("Tangent");
+                break;
+            case "si":
+                result = Math.Sin(num1);
+                operation.Result = result;
+                Operations.Add(operation);
+                _writer.WriteValue("Sine");
+                break;
+            case "p":
+                result = Math.Pow(num1, num2);
+                operation.Result = result;
+                Operations.Add(operation);
+                _writer.WriteValue("Power");
+                break;
+            case "x":
+                result = Math.Pow(10, num1);
+                operation.Result = result;
+                Operations.Add(operation);
+                _writer.WriteValue("TenToThePower");
+                break;
             default:
+                _writer.WriteValue("Unknown");
                 break;
         }
         _writer.WritePropertyName("Result");
@@ -98,7 +135,6 @@ public class Calculator
         Operations.Clear();
     }
 
-
     public double UseStoredOperation(int operationIndex, double newOperand)
     {
         if (operationIndex < 0 || operationIndex >= Operations.Count)
@@ -110,16 +146,16 @@ public class Calculator
         double result;
         switch (storedOperation.Operation)
         {
-            case "Add":
+            case "a":
                 result = storedOperation.Result + newOperand;
                 break;
-            case "Subtract":
+            case "s":
                 result = storedOperation.Result - newOperand;
                 break;
-            case "Multiply":
+            case "m":
                 result = storedOperation.Result * newOperand;
                 break;
-            case "Divide":
+            case "d":
                 if (newOperand != 0)
                 {
                     result = storedOperation.Result / newOperand;
@@ -128,6 +164,24 @@ public class Calculator
                 {
                     return double.NaN;
                 }
+                break;
+            case "c":
+                result = Math.Cos(newOperand);
+                break;
+            case "r":
+                result = Math.Sqrt(newOperand);
+                break;
+            case "t":
+                result = Math.Tan(newOperand);
+                break;
+            case "si":
+                result = Math.Sin(newOperand);
+                break;
+            case "p":
+                result = Math.Pow(storedOperation.Result, newOperand);
+                break;
+            case "x":
+                result = Math.Pow(10, newOperand);
                 break;
             default:
                 return double.NaN;
@@ -157,4 +211,34 @@ public class Calculator
         return result;
     }
 
+    public double RepeatLastOperation(double newOperand)
+    {
+        if (Operations.Count == 0)
+        {
+            throw new InvalidOperationException("No previous operations to repeat.");
+        }
+
+        _ = Operations[^1];
+        return UseStoredOperation(Operations.Count - 1, newOperand);
+    }
+
+    public List<double> ApplyOperationToAll(double operand)
+    {
+        List<double> results = [];
+        foreach (var op in Operations)
+        {
+            results.Add(UseStoredOperation(Operations.IndexOf(op), operand));
+        }
+        return results;
+    }
+
+    public double ChainOperations(List<int> operationIndices, double initialValue)
+    {
+        double currentResult = initialValue;
+        foreach (var index in operationIndices)
+        {
+            currentResult = UseStoredOperation(index, currentResult);
+        }
+        return currentResult;
+    }
 }
