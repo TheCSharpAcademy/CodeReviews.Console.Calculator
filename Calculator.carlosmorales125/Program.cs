@@ -82,6 +82,7 @@ namespace CalculatorProgram.carlosmorales125
 
                 Console.WriteLine("\n"); // Friendly linespacing.
             }
+            calculator.Finish();
             return;
         }
     }
