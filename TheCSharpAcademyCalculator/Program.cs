@@ -3,6 +3,7 @@ using static TheCSharpAcademyCalculator.CalculatorLibrary;
 using System.Text.RegularExpressions;
 using TheCSharpAcademyCalculator;
 
+
 namespace CalculatorProgram
 {
 
@@ -17,6 +18,8 @@ namespace CalculatorProgram
             Console.WriteLine("------------------------\n");
 
             CalculatorLibrary calculator = new CalculatorLibrary();
+
+
             while (!endApp)
             {
                 // Declare variables and set to empty.

@@ -25,32 +25,7 @@ namespace TheCSharpAcademyCalculator
             writer.WriteStartArray();
         }
 
-        public List<Operations> GetOperations(List<Operations> ops)
-        {
-
-            using (StreamReader r = new StreamReader("calculatorlog.json"))
-            {
-                string json = r.ReadToEnd();
-                ops = JsonConvert.DeserializeObject<List<Operations>>(json);
-
-            }
-            return ops;
-
-        }
-
-        public int OperationCount()
-        {
-            List<Operations> operations = new List<Operations>();
-            using(StreamReader r = new StreamReader("calculatorlog.json"))
-            {
-                string json = r.ReadToEnd();
-                operations = JsonConvert.DeserializeObject<List<Operations>>(json);
-
-            }
-            
-            
-            return 0;
-        }
+    
         public double DoOperation(double num1, double num2, string op)
         {
             double result = double.NaN; // Default value is "not-a-number" if an operation, such as division, could result in an error.
