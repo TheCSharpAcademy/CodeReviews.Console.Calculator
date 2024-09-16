@@ -1,12 +1,12 @@
-﻿// CalculatorLibrary.cs
-using System.Diagnostics;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
 namespace CalculatorLibrary.carlosmorales125
 {
     public class Calculator
     {
-        JsonTextWriter writer;
+
+        JsonWriter writer;
+
         public Calculator()
         {
             StreamWriter logFile = File.CreateText("calculatorlog.json");
@@ -60,7 +60,7 @@ namespace CalculatorLibrary.carlosmorales125
 
             return result;
         }
-        
+
         public void Finish()
         {
             writer.WriteEndArray();

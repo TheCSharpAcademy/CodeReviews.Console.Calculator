@@ -1,8 +1,9 @@
 ﻿using System.Text.RegularExpressions;
 using CalculatorLibrary.carlosmorales125;
 
-namespace CalculatorProgram.carlosmorales125    
+namespace CalculatorProgram.carlosmorales125
 {
+
     class Program
     {
         static void Main(string[] args)
@@ -11,8 +12,8 @@ namespace CalculatorProgram.carlosmorales125
             // Display title as the C# console calculator app.
             Console.WriteLine("Console Calculator in C#\r");
             Console.WriteLine("------------------------\n");
+
             Calculator calculator = new Calculator();
-            
             while (!endApp)
             {
                 // Declare variables and set to empty.
@@ -28,7 +29,7 @@ namespace CalculatorProgram.carlosmorales125
                 double cleanNum1 = 0;
                 while (!double.TryParse(numInput1, out cleanNum1))
                 {
-                    Console.Write("This is not valid input. Please enter a numeric value: ");
+                    Console.Write("This is not valid input. Please enter an integer value: ");
                     numInput1 = Console.ReadLine();
                 }
 
@@ -39,7 +40,7 @@ namespace CalculatorProgram.carlosmorales125
                 double cleanNum2 = 0;
                 while (!double.TryParse(numInput2, out cleanNum2))
                 {
-                    Console.Write("This is not valid input. Please enter a numeric value: ");
+                    Console.Write("This is not valid input. Please enter an integer value: ");
                     numInput2 = Console.ReadLine();
                 }
 
@@ -62,17 +63,17 @@ namespace CalculatorProgram.carlosmorales125
                 { 
                    try
                    {
-                      result = calculator.DoOperation(cleanNum1, cleanNum2, op);
-                      if (double.IsNaN(result))
-                      {
-                         Console.WriteLine("This operation will result in a mathematical error.\n");
-                      }
-                      else Console.WriteLine("Your result: {0:0.##}\n", result);
-                    }
-                    catch (Exception e)
-                    {
+                       result = calculator.DoOperation(cleanNum1, cleanNum2, op); 
+                       if (double.IsNaN(result))
+                       {
+                           Console.WriteLine("This operation will result in a mathematical error.\n");
+                       }
+                       else Console.WriteLine("Your result: {0:0.##}\n", result);
+                   }
+                   catch (Exception e)
+                   {
                        Console.WriteLine("Oh no! An exception occurred trying to do the math.\n - Details: " + e.Message);
-                    }
+                   }
                 }
                 Console.WriteLine("------------------------\n");
 
