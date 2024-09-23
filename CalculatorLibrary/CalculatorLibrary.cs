@@ -2,10 +2,16 @@
 
 namespace CalculatorLibrary
 {
-
+    public class MathOperation
+    {
+        public string? Operation { get; set; }
+        public double Result { get; set; }
+    }
     public class Calculator
     {
+        List<MathOperation> operations = new List<MathOperation>();
         JsonWriter writer;
+        int calculatorUses = 0;
         public Calculator()
         {
             StreamWriter logFile = File.CreateText("calculatorlog.json");
@@ -27,22 +33,27 @@ namespace CalculatorLibrary
             writer.WriteValue(num2);
             writer.WritePropertyName("Operation");
 
-
             switch (op)
             {
-                case "a":
+                case "+":
                     result = num1 + num2;
                     writer.WriteValue("Add");
                     break;
-                case "s":
+                case "-":
                     result = num1 - num2;
                     writer.WriteValue("Substract");
                     break;
-                case "m":
+                case "*":
                     result = num1 * num2;
                     writer.WriteValue("Multiply");
+                    break;           
+                case "h":
+                    foreach (var item in operations)
+                    {
+                        Console.WriteLine(item.Operation);
+                    }
                     break;
-                case "d":
+                case "/":
                     if (num2 != 0)
                     {
                         result = num1 / num2;
@@ -52,6 +63,8 @@ namespace CalculatorLibrary
                 default:
                     break;
             }
+            operations.Add(new MathOperation {Operation = $"{num1} {op} {num2} = {result}", Result = result });
+            calculatorUses++;
             writer.WritePropertyName("Result");
             writer.WriteValue(result);
             writer.WriteEndObject();
@@ -61,6 +74,10 @@ namespace CalculatorLibrary
 
         public void Finish()
         {
+            writer.WriteStartObject();
+            writer.WritePropertyName("Calculator uses");
+            writer.WriteValue(calculatorUses);
+            writer.WriteEndObject();
             writer.WriteEndArray();
             writer.WriteEndObject();
             writer.Close();

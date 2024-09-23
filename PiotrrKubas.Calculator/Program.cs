@@ -39,15 +39,16 @@ namespace CalculatorProgram
                 }
 
                 Console.WriteLine("Choose an operator from the following list:");
-                Console.WriteLine("\ta - Add");
-                Console.WriteLine("\ts - Subtract");
-                Console.WriteLine("\tm - Multiply");
-                Console.WriteLine("\td - Divide");
+                Console.WriteLine("\t+ - Add");
+                Console.WriteLine("\t- - Subtract");
+                Console.WriteLine("\t* - Multiply");
+                Console.WriteLine("\t/ - Divide");
+                Console.WriteLine("\th - Calculation history");
                 Console.Write("Your option? ");
 
                 string? op = Console.ReadLine();
 
-                if (op == null || !Regex.IsMatch(op, "[a|s|m|d]"))
+                if (op == null || !Regex.IsMatch(op, "[+|-|*|/|h]"))
                 {
                     Console.WriteLine("Error: Unrecognized input.");
                 }
