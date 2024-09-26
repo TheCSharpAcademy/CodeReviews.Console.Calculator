@@ -9,8 +9,9 @@ namespace CalculatorLibrary
     }
     public class Calculator
     {
-        List<MathOperation> operations = new List<MathOperation>();
+        public List<MathOperation> operations = new List<MathOperation>();
         JsonWriter writer;
+        
         int calculatorUses = 0;
         public Calculator()
         {
@@ -21,6 +22,37 @@ namespace CalculatorLibrary
             writer.WriteStartObject();
             writer.WritePropertyName("Operations");
             writer.WriteStartArray();
+        }
+
+        public void AdditionalOptions(string op)
+        {
+            switch (op)
+            {
+                case "h":
+                    int i;
+                    for (i = 0; i < operations.Count; i++)
+                    {
+                        Console.WriteLine(i + 1 + ". " + operations[i].Operation);
+                    }
+
+                    if (operations != null)
+                    {
+                        Console.WriteLine("If you want to use one of the result as your first number, select from above numbers");
+                        Console.WriteLine("If you want to delete your game history, write \"delete\"");
+                        if (int.TryParse(Console.ReadLine(), out i))
+                        {
+                            //DoOperation(operations[i].Result);
+                        }
+                        if (Console.ReadLine() == "delete")
+                        {
+                            operations.Clear();
+                        }
+                    }
+                    break;
+                default:
+                    break;
+            }
+
         }
 
         public double DoOperation(double num1, double num2, string op)
@@ -47,12 +79,6 @@ namespace CalculatorLibrary
                     result = num1 * num2;
                     writer.WriteValue("Multiply");
                     break;           
-                case "h":
-                    foreach (var item in operations)
-                    {
-                        Console.WriteLine(item.Operation);
-                    }
-                    break;
                 case "/":
                     if (num2 != 0)
                     {

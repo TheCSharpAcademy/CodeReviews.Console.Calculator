@@ -1,4 +1,5 @@
 ﻿using CalculatorLibrary;
+using System.Security.Cryptography.X509Certificates;
 using System.Text.RegularExpressions;
 
 namespace CalculatorProgram
@@ -8,37 +9,14 @@ namespace CalculatorProgram
         static void Main(string[] args)
         {
             bool endApp = false;
-            Console.WriteLine("Console Calculator in C#\r");
-            Console.WriteLine("------------------------\n");
 
             Calculator calculator = new Calculator();
             while (!endApp)
             {
-                string? numInput1 = "";
-                string? numInput2 = "";
-                double result = 0;
-
-                Console.Write("Type a number, and then press Enter: ");
-                numInput1 = Console.ReadLine();
-
-                double cleanNum1 = 0;
-                while (!double.TryParse(numInput1, out cleanNum1))
-                {
-                    Console.Write("This is not valid input. Please enter an integer value: ");
-                    numInput1 = Console.ReadLine();
-                }
-
-                Console.Write("Type another number, and then press Enter: ");
-                numInput2 = Console.ReadLine();
-
-                double cleanNum2 = 0;
-                while (!double.TryParse(numInput2, out cleanNum2))
-                {
-                    Console.Write("This is not valid input. Please enter an integer value: ");
-                    numInput2 = Console.ReadLine();
-                }
-
-                Console.WriteLine("Choose an operator from the following list:");
+                Console.Clear();
+                Console.WriteLine("Console Calculator in C#\r");
+                Console.WriteLine("------------------------\n");
+                Console.WriteLine("Choose an option from the following list:");
                 Console.WriteLine("\t+ - Add");
                 Console.WriteLine("\t- - Subtract");
                 Console.WriteLine("\t* - Multiply");
@@ -46,9 +24,19 @@ namespace CalculatorProgram
                 Console.WriteLine("\th - Calculation history");
                 Console.Write("Your option? ");
 
-                string? op = Console.ReadLine();
+                string? option = Console.ReadLine();
+                double result = 0;
 
-                if (op == null || !Regex.IsMatch(op, "[+|-|*|/|h]"))
+                
+                while (option == null)
+                {
+                    Console.WriteLine();
+                }
+                if (Regex.IsMatch(option, "[h]"))
+                {
+                    calculator.AdditionalOptions(option);
+                }
+                else if (!Regex.IsMatch(option, "[+|/|*|-]"))
                 {
                     Console.WriteLine("Error: Unrecognized input.");
                 }
@@ -56,7 +44,8 @@ namespace CalculatorProgram
                 {
                     try
                     {
-                        result = calculator.DoOperation(cleanNum1, cleanNum2, op);
+                        var numbers = Input();
+                        result = calculator.DoOperation(numbers.cleanNum1, numbers.cleanNum2, option);
                         if (double.IsNaN(result))
                         {
                             Console.WriteLine("This operation will result in a mathematical error.\n");
@@ -77,6 +66,35 @@ namespace CalculatorProgram
             }
             calculator.Finish();
             return;
+
+            (double cleanNum1, double cleanNum2) Input()
+            {
+                string? numInput1 = "";
+                string? numInput2 = "";
+
+                Console.Write("Type a number, and then press Enter: ");
+                numInput1 = Console.ReadLine();
+
+                double cleanNum1 = 0;
+                while (!double.TryParse(numInput1, out cleanNum1))
+                {
+                    Console.Write("This is not valid input. Please enter an integer value: ");
+                    numInput1 = Console.ReadLine();
+                }
+
+                Console.Write("Type another number, and then press Enter: ");
+                numInput2 = Console.ReadLine();
+
+                double cleanNum2 = 0;
+                while (!double.TryParse(numInput2, out cleanNum2))
+                {
+                    Console.Write("This is not valid input. Please enter an integer value: ");
+                    numInput2 = Console.ReadLine();
+                }
+                return (cleanNum1, cleanNum2);
+            }
+
+
         }
     }
 }
