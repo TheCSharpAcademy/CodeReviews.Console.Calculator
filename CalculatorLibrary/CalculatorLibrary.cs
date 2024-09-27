@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using System.Text.RegularExpressions;
 
 namespace CalculatorLibrary
 {
@@ -39,11 +40,29 @@ namespace CalculatorLibrary
                     {
                         Console.WriteLine("If you want to use one of the result as your first number, select from above numbers");
                         Console.WriteLine("If you want to delete your game history, write \"delete\"");
-                        if (int.TryParse(Console.ReadLine(), out i))
+                        op = Console.ReadLine();
+                        if (int.TryParse(op, out i))
                         {
-                            //DoOperation(operations[i].Result);
+                            double cleanNum1 = operations[i - 1].Result;
+                            Console.WriteLine("Write the second number");
+                            string? num2 = Console.ReadLine();
+                            double cleanNum2;
+                            while (!double.TryParse(num2, out cleanNum2))
+                            {
+                                Console.Write("This is not valid input. Please enter an integer value: ");
+                                num2 = Console.ReadLine();
+                            }
+                            Console.WriteLine("Choose an operation between - '+', '-', '*' and '/'");
+                            op = Console.ReadLine();
+                            while (!Regex.IsMatch(op, "[+|/|*|-]"))
+                            {
+                                Console.WriteLine("Wron input, you have to chose between - '+', '-', '*' and '/'");
+                                op = Console.ReadLine();
+                            }
+
+                            Console.WriteLine($"{cleanNum1} {op} {cleanNum2} = {DoOperation(cleanNum1, cleanNum2, op)}");
                         }
-                        if (Console.ReadLine() == "delete")
+                        if (op == "delete")
                         {
                             operations.Clear();
                         }
