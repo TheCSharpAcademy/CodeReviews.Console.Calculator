@@ -1,0 +1,14 @@
+/home/hasona23/Desktop/C#/cli/Calculator/Calculator/bin/Debug/net8.0/Calculator
+/home/hasona23/Desktop/C#/cli/Calculator/Calculator/bin/Debug/net8.0/Calculator.deps.json
+/home/hasona23/Desktop/C#/cli/Calculator/Calculator/bin/Debug/net8.0/Calculator.runtimeconfig.json
+/home/hasona23/Desktop/C#/cli/Calculator/Calculator/bin/Debug/net8.0/Calculator.dll
+/home/hasona23/Desktop/C#/cli/Calculator/Calculator/bin/Debug/net8.0/Calculator.pdb
+/home/hasona23/Desktop/C#/cli/Calculator/Calculator/obj/Debug/net8.0/Calculator.GeneratedMSBuildEditorConfig.editorconfig
+/home/hasona23/Desktop/C#/cli/Calculator/Calculator/obj/Debug/net8.0/Calculator.AssemblyInfoInputs.cache
+/home/hasona23/Desktop/C#/cli/Calculator/Calculator/obj/Debug/net8.0/Calculator.AssemblyInfo.cs
+/home/hasona23/Desktop/C#/cli/Calculator/Calculator/obj/Debug/net8.0/Calculator.csproj.CoreCompileInputs.cache
+/home/hasona23/Desktop/C#/cli/Calculator/Calculator/obj/Debug/net8.0/Calculator.dll
+/home/hasona23/Desktop/C#/cli/Calculator/Calculator/obj/Debug/net8.0/refint/Calculator.dll
+/home/hasona23/Desktop/C#/cli/Calculator/Calculator/obj/Debug/net8.0/Calculator.pdb
+/home/hasona23/Desktop/C#/cli/Calculator/Calculator/obj/Debug/net8.0/Calculator.genruntimeconfig.cache
+/home/hasona23/Desktop/C#/cli/Calculator/Calculator/obj/Debug/net8.0/ref/Calculator.dll
