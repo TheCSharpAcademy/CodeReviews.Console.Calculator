@@ -1,6 +1,6 @@
 ﻿// CalculatorLibrary.cs
 namespace CalculatorLibrary;
-using System.Diagnostics;
+
 using Newtonsoft.Json;
 public class Calculator
 {
@@ -8,7 +8,7 @@ public class Calculator
     public Calculator()
     {
         StreamWriter logFile = File.CreateText("Calculator.json");
-        Trace.AutoFlush = true;
+       
         _writer = new JsonTextWriter(logFile);
         _writer.Formatting = Formatting.Indented;
         _writer.WriteStartObject();
