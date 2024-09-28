@@ -1,0 +1,12 @@
+/home/hasona23/Desktop/C#/cli/Calculator/ClassLibrary1/bin/Debug/net8.0/ClassLibrary1.deps.json
+/home/hasona23/Desktop/C#/cli/Calculator/ClassLibrary1/bin/Debug/net8.0/ClassLibrary1.dll
+/home/hasona23/Desktop/C#/cli/Calculator/ClassLibrary1/bin/Debug/net8.0/ClassLibrary1.pdb
+/home/hasona23/Desktop/C#/cli/Calculator/ClassLibrary1/obj/Debug/net8.0/ClassLibrary1.GeneratedMSBuildEditorConfig.editorconfig
+/home/hasona23/Desktop/C#/cli/Calculator/ClassLibrary1/obj/Debug/net8.0/ClassLibrary1.AssemblyInfoInputs.cache
+/home/hasona23/Desktop/C#/cli/Calculator/ClassLibrary1/obj/Debug/net8.0/ClassLibrary1.AssemblyInfo.cs
+/home/hasona23/Desktop/C#/cli/Calculator/ClassLibrary1/obj/Debug/net8.0/ClassLibrary1.csproj.CoreCompileInputs.cache
+/home/hasona23/Desktop/C#/cli/Calculator/ClassLibrary1/obj/Debug/net8.0/ClassLibrary1.sourcelink.json
+/home/hasona23/Desktop/C#/cli/Calculator/ClassLibrary1/obj/Debug/net8.0/ClassLibrary1.dll
+/home/hasona23/Desktop/C#/cli/Calculator/ClassLibrary1/obj/Debug/net8.0/refint/ClassLibrary1.dll
+/home/hasona23/Desktop/C#/cli/Calculator/ClassLibrary1/obj/Debug/net8.0/ClassLibrary1.pdb
+/home/hasona23/Desktop/C#/cli/Calculator/ClassLibrary1/obj/Debug/net8.0/ref/ClassLibrary1.dll

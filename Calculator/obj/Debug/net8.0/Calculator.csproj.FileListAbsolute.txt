@@ -12,3 +12,9 @@
 /home/hasona23/Desktop/C#/cli/Calculator/Calculator/obj/Debug/net8.0/Calculator.pdb
 /home/hasona23/Desktop/C#/cli/Calculator/Calculator/obj/Debug/net8.0/Calculator.genruntimeconfig.cache
 /home/hasona23/Desktop/C#/cli/Calculator/Calculator/obj/Debug/net8.0/ref/Calculator.dll
+/home/hasona23/Desktop/C#/cli/Calculator/Calculator/obj/Debug/net8.0/Calculator.csproj.AssemblyReference.cache
+/home/hasona23/Desktop/C#/cli/Calculator/Calculator/obj/Debug/net8.0/Calculator.sourcelink.json
+/home/hasona23/Desktop/C#/cli/Calculator/Calculator/obj/Debug/net8.0/Calculator.csproj.CopyComplete
+/home/hasona23/Desktop/C#/cli/Calculator/Calculator/bin/Debug/net8.0/CalculatorLibrary.dll
+/home/hasona23/Desktop/C#/cli/Calculator/Calculator/bin/Debug/net8.0/CalculatorLibrary.pdb
+/home/hasona23/Desktop/C#/cli/Calculator/Calculator/bin/Debug/net8.0/Newtonsoft.Json.dll

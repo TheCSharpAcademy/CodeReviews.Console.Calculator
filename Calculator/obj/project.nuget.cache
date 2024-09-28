@@ -1,8 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "sUO37rqvUVg=",
+  "dgSpecHash": "SCwnl37b7tE=",
   "success": true,
   "projectFilePath": "/home/hasona23/Desktop/C#/cli/Calculator/Calculator/Calculator.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "/home/hasona23/.nuget/packages/newtonsoft.json/13.0.3/newtonsoft.json.13.0.3.nupkg.sha512"
+  ],
   "logs": []
 }
