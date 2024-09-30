@@ -9,7 +9,6 @@ class Program
     {
         bool endApp = false;
         int calculatorCount = 0;
-        // Display title as the C# console calculator app.
         Console.WriteLine("Console Calculator in C#\r");
         Console.WriteLine("------------------------\n");
         
@@ -64,8 +63,7 @@ class Program
                     numInput2 = Console.ReadLine();
                 }
             }
-
-            // Ask the user to choose an operator.
+            
             Console.WriteLine("Choose an operator from the following list:");
             Console.WriteLine("\ta - Add");
             Console.WriteLine("\ts - Subtract");
