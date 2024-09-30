@@ -15,8 +15,6 @@ class Program
         
         while (!endApp)
         {
-            // Declare variables and set to empty.
-            // Use Nullable types (with ?) to match type of System.Console.ReadLine
             string? numInput1 = "";
             string? numInput2 = "";
             double result = 0;
@@ -106,8 +104,7 @@ class Program
                }
             }
             Console.WriteLine("------------------------\n");
-
-            // Wait for the user to respond before closing.
+            
             Console.WriteLine("Select an option:");
             Console.WriteLine("Press any key and Enter to continue:");
             Console.WriteLine("\th - View history");
