@@ -17,7 +17,7 @@ namespace CalculatorLibrary
 
     public class CalculatorTracker
     {
-        public int Counter = 0;
+        public int Counter;
     }
 
     public class Calculator
@@ -27,8 +27,8 @@ namespace CalculatorLibrary
         List<CalculationLog> calcLogList = new List<CalculationLog>();
         List<CalculationLog> jsonList = new List<CalculationLog>();
         CalculatorTracker counter = new CalculatorTracker();
-        public int calcCounter = 0;
-        bool loadCounterJsonAlready = false;
+        public int calcCounter;
+        bool loadCounterJsonAlready;
         string? input = "";
         public double DoOperation(double num1, string op, double num2 = double.NaN)
         {
