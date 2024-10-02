@@ -45,8 +45,11 @@ public class Calculator
                 if (num2 != 0)
                 {
                     result = num1 / num2;
-                    _writer.WriteValue("Divide");
+                    
                 }
+                _writer.WriteValue("Divide");
+                
+               
                 break;
             // Return text for an incorrect option entry.
             default:
