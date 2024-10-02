@@ -1,5 +1,4 @@
 ﻿using CalculatorLibrary;
-using System.Security.Cryptography.X509Certificates;
 using System.Text.RegularExpressions;
 
 namespace CalculatorProgram
@@ -21,36 +20,44 @@ namespace CalculatorProgram
                 Console.WriteLine("\t- - Subtract");
                 Console.WriteLine("\t* - Multiply");
                 Console.WriteLine("\t/ - Divide");
+                Console.WriteLine("\ts - Square root");
+                Console.WriteLine("\tp - Power of");
+                Console.WriteLine("\tl - Logarithm");
                 Console.WriteLine("\th - Calculation history");
                 Console.Write("Your option? ");
 
                 string? option = Console.ReadLine();
                 double result = 0;
 
-                
                 while (option == null)
                 {
-                    Console.WriteLine();
+                    Console.WriteLine("Error, try again!");
+                    option = Console.ReadLine();
                 }
                 if (Regex.IsMatch(option, "[h]"))
                 {
-                    calculator.AdditionalOptions(option);
+                    calculator.OperationHistory();
                 }
-                else if (!Regex.IsMatch(option, "[+|/|*|-]"))
+                else if (Regex.IsMatch(option, "[s|p|l]"))
                 {
-                    Console.WriteLine("Error: Unrecognized input.");
+                    var numbers = Input(option);
+                    result = calculator.AdvancedOperations(numbers.cleanNum1, numbers.cleanNum2, option);
+                    Console.WriteLine("Your result: {0:0.##}\n", result);
+                }
+                else if (Regex.IsMatch(option, "[+|/|*|-]"))
+                {
+                    var numbers = Input(option);
+                    result = calculator.BasicOperations(numbers.cleanNum1, numbers.cleanNum2, option);
+                    Console.WriteLine("Your result: {0:0.##}\n", result);
                 }
                 else
                 {
                     try
                     {
-                        var numbers = Input();
-                        result = calculator.DoOperation(numbers.cleanNum1, numbers.cleanNum2, option);
                         if (double.IsNaN(result))
                         {
                             Console.WriteLine("This operation will result in a mathematical error.\n");
                         }
-                        else Console.WriteLine("Your result: {0:0.##}\n", result);
                     }
                     catch (Exception e)
                     {
@@ -67,34 +74,81 @@ namespace CalculatorProgram
             calculator.Finish();
             return;
 
-            (double cleanNum1, double cleanNum2) Input()
+            (double cleanNum1, double cleanNum2) Input(string option)
             {
                 string? numInput1 = "";
                 string? numInput2 = "";
+                double cleanNum1 = double.NaN;
+                double cleanNum2 = double.NaN;
 
-                Console.Write("Type a number, and then press Enter: ");
-                numInput1 = Console.ReadLine();
-
-                double cleanNum1 = 0;
-                while (!double.TryParse(numInput1, out cleanNum1))
+                switch (option)
                 {
-                    Console.Write("This is not valid input. Please enter an integer value: ");
-                    numInput1 = Console.ReadLine();
-                }
+                    case "s":
+                        Console.WriteLine("Enter a number that you want to be square rooted, and press Enter");
+                        numInput1 = Console.ReadLine();
 
-                Console.Write("Type another number, and then press Enter: ");
-                numInput2 = Console.ReadLine();
+                        while (!double.TryParse(numInput1, out cleanNum1))
+                        {
+                            Console.Write("This is not valid input. Please enter a numeric value: ");
+                            numInput1 = Console.ReadLine();
+                        }
+                        break;
+                    case "p":
+                        Console.WriteLine("Enter base number, and press Enter");                        
+                        numInput1 = Console.ReadLine();
+                        while (!double.TryParse(numInput1, out cleanNum1))
+                        {
+                            Console.Write("This is not valid input. Please enter a numeric value: ");
+                            numInput1 = Console.ReadLine();
+                        }
 
-                double cleanNum2 = 0;
-                while (!double.TryParse(numInput2, out cleanNum2))
-                {
-                    Console.Write("This is not valid input. Please enter an integer value: ");
-                    numInput2 = Console.ReadLine();
+                        Console.WriteLine("Enter exponent of power, and press Enter");
+                        numInput2 = Console.ReadLine();
+                        while (!double.TryParse(numInput2, out cleanNum2))
+                        {
+                            Console.Write("This is not valid input. Please enter a numeric value: ");
+                            numInput2 = Console.ReadLine();
+                        }
+                        break;
+                    case "l":
+                        Console.WriteLine("Enter a logarithm argument, and press Enter");
+                        numInput1 = Console.ReadLine();
+                        while (!double.TryParse(numInput1, out cleanNum1))
+                        {
+                            Console.Write("This is not valid input. Please enter a numeric value: ");
+                            numInput1 = Console.ReadLine();
+                        } 
+                       
+                        Console.WriteLine("Enter a logarithm base, and press Enter");
+                        numInput2 = Console.ReadLine();
+                        while (!double.TryParse(numInput2, out cleanNum2))
+                        {
+                            Console.Write("This is not valid input. Please enter a numeric value: ");
+                            numInput2 = Console.ReadLine();
+                        }
+                        break;
+                    default:
+                        Console.Write("Type a number, and then press Enter: ");
+                        numInput1 = Console.ReadLine();
+
+                        while (!double.TryParse(numInput1, out cleanNum1))
+                        {
+                            Console.Write("This is not valid input. Please enter a numeric value: ");
+                            numInput1 = Console.ReadLine();
+                        }
+
+                        Console.Write("Type another number, and then press Enter: ");
+                        numInput2 = Console.ReadLine();
+
+                        while (!double.TryParse(numInput2, out cleanNum2))
+                        {
+                            Console.Write("This is not valid input. Please enter a numeric value: ");
+                            numInput2 = Console.ReadLine();
+                        }
+                        break;
                 }
                 return (cleanNum1, cleanNum2);
             }
-
-
         }
     }
 }
