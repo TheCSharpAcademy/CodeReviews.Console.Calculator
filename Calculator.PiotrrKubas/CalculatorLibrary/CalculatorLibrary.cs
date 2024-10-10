@@ -12,7 +12,7 @@ namespace CalculatorLibrary
     {
         public List<MathOperation> operations = new List<MathOperation>();
         JsonWriter writer;
-        
+
         int calculatorUses = 0;
         public Calculator()
         {
@@ -43,9 +43,9 @@ namespace CalculatorLibrary
                 Console.WriteLine("If you chose 'p', selected result will be your base number");
                 Console.WriteLine("If you chose 'l', selected result will be your logarithm argument");
                 Console.WriteLine("If you want to delete your game history, write \"delete\"");
-                
+
                 op = Console.ReadLine();
-               
+
                 if (int.TryParse(op, out i))
                 {
                     double cleanNum1 = operations[i - 1].Result;
@@ -65,22 +65,19 @@ namespace CalculatorLibrary
                         Console.Write("This is not valid input. Please enter an integer value: ");
                         num2 = Console.ReadLine();
                     }
-                    
+
                     if (Regex.IsMatch(op, "[s|p|l]"))
                     {
                         result = AdvancedOperations(cleanNum1, cleanNum2, op);
                         switch (op)
                         {
                             case "s":
-                                result = Math.Sqrt(cleanNum1);
                                 Console.WriteLine($"{cleanNum1} square rooted = {result}");
                                 break;
                             case "p":
-                                result = Math.Pow(cleanNum1, cleanNum2);
                                 Console.WriteLine($"{cleanNum1} to the power of {cleanNum2} = {result}");
                                 break;
                             case "l":
-                                result = Math.Log(cleanNum1, cleanNum2);
                                 Console.WriteLine($"Logarithm {cleanNum1} with the base of {cleanNum2} = {result}");
                                 break;
                             default:
@@ -124,18 +121,23 @@ namespace CalculatorLibrary
                 case "*":
                     result = num1 * num2;
                     writer.WriteValue("Multiply");
-                    break;           
+                    break;
                 case "/":
-                    if (num2 != 0)
+                    bool isNum2Correct = double.IsInfinity(num1 / num2);
+                    while (isNum2Correct)
                     {
-                        result = num1 / num2;
-                        writer.WriteValue("Divide");
+                        Console.Clear();
+                        Console.WriteLine("You cant divide by '0'");
+                        Console.WriteLine("Enter another divisor:");
+                        isNum2Correct = !double.TryParse(Console.ReadLine(), out num2);
                     }
+                    result = num1 / num2;
+                    writer.WriteValue("Division");
                     break;
                 default:
                     break;
             }
-            operations.Add(new MathOperation {Operation = $"{num1} {op} {num2} = {result}", Result = result });
+            operations.Add(new MathOperation { Operation = $"{num1} {op} {num2} = {result}", Result = result });
             calculatorUses++;
             writer.WritePropertyName("Result");
             writer.WriteValue(result);
@@ -159,12 +161,12 @@ namespace CalculatorLibrary
                 case "s":
                     writer.WriteValue("Square root");
                     result = Math.Sqrt(num1);
-                    operations.Add(new MathOperation { Operation = $"{num1} square rooted = {result}", Result = result});
+                    operations.Add(new MathOperation { Operation = $"{num1} square rooted = {result}", Result = result });
                     break;
                 case "p":
                     writer.WriteValue("Power of");
                     result = Math.Pow(num1, num2);
-                    operations.Add(new MathOperation { Operation = $"{num1} to the power of {num2} = {result}", Result = result});
+                    operations.Add(new MathOperation { Operation = $"{num1} to the power of {num2} = {result}", Result = result });
                     break;
                 case "l":
                     writer.WriteValue("Logarithm");

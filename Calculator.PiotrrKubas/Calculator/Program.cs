@@ -94,7 +94,7 @@ namespace CalculatorProgram
                         }
                         break;
                     case "p":
-                        Console.WriteLine("Enter base number, and press Enter");                        
+                        Console.WriteLine("Enter base number, and press Enter");
                         numInput1 = Console.ReadLine();
                         while (!double.TryParse(numInput1, out cleanNum1))
                         {
@@ -117,8 +117,8 @@ namespace CalculatorProgram
                         {
                             Console.Write("This is not valid input. Please enter a numeric value: ");
                             numInput1 = Console.ReadLine();
-                        } 
-                       
+                        }
+
                         Console.WriteLine("Enter a logarithm base, and press Enter");
                         numInput2 = Console.ReadLine();
                         while (!double.TryParse(numInput2, out cleanNum2))
