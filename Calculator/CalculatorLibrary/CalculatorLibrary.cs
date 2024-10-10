@@ -9,6 +9,9 @@ namespace CalculatorLibrary
         {
             JsonWriter writer;
 
+            public List<(double, double, double, string)> history = new (3);
+            private string oper;
+
             public Calculator()
             {
                 StreamWriter logFile = File.CreateText("calculatorlog.json");
@@ -35,14 +38,17 @@ namespace CalculatorLibrary
                     case "a":
                         result = num1 + num2;
                         writer.WriteValue("Add");
+                        oper = "+";
                         break;
                     case "s":
                         result = num1 - num2;
                         writer.WriteValue("Subtract");
+                        oper = "-";
                         break;
                     case "m":
                         result = num1 * num2;
                         writer.WriteValue("Multiply");
+                        oper = "*";
                         break;
                     case "d":
                         // Ask the user to enter a non-zero divisor.
@@ -51,18 +57,35 @@ namespace CalculatorLibrary
                             result = num1 / num2;
                         }
                         writer.WriteValue("Divide");
+                        oper = "/";
                         break;
                     case "p":
                         result = Math.Pow(num1, num2);
                         writer.WriteValue("Power");
+                        oper = "^";
                         break;
                     case "mod":
                         result = num1 % num2;
                         writer.WriteValue("Modulo");
+                        oper = "%";
                         break;
                     // Return text for an incorrect option entry.
                     default:
                         break;
+                }
+                if(history.Count < 3)
+                    history.Add((num1, num2, result, oper));
+                else
+                {
+                    for (var index = 0; index < history.Count; index++)
+                    {
+                        if (index < 2)
+                        {
+                            var x = history[index];
+                            history[index] = history[index + 1];
+                        }
+                        else history[index] = (num1, num2, result, oper);
+                    }
                 }
                 writer.WritePropertyName("Result");
                 writer.WriteValue(result);
