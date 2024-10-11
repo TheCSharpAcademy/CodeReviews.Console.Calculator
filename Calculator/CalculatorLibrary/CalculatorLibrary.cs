@@ -153,7 +153,6 @@ namespace CalculatorLibrary
                     {
                         if (index < 2)
                         {
-                            var x = history[index];
                             history[index] = history[index + 1];
                         }
                         else history[index] = (num1, null, result, oper);
