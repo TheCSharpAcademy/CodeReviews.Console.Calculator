@@ -9,7 +9,7 @@ namespace CalculatorLibrary
         {
             JsonWriter writer;
 
-            public List<(double, double, double, string)> history = new (3);
+            public List<(double, double?, double, string)> history = new (3);
             private string oper;
 
             public Calculator()
@@ -69,10 +69,32 @@ namespace CalculatorLibrary
                         writer.WriteValue("Modulo");
                         oper = "%";
                         break;
+                    case "root":
+                        if (num2 != 0)
+                            result = Math.Pow(num1, 1/ num2);
+                        writer.WriteValue("Root of Nth");
+                        oper = "**";
+                        break;
+                    case "10x":
+                        result = num1 * 10;
+                        writer.WriteValue("10x");
+                        oper = "* 10";
+                        break;
+                    case "sin":
+                        result = Math.Sin(num1);
+                        writer.WriteValue("sin");
+                        oper = "sin";
+                        break;
+                    case "cos":
+                        result = Math.Cos(num1);
+                        writer.WriteValue("cos");
+                        oper = "cos";
+                        break;
                     // Return text for an incorrect option entry.
                     default:
                         break;
                 }
+
                 if(history.Count < 3)
                     history.Add((num1, num2, result, oper));
                 else
@@ -93,7 +115,57 @@ namespace CalculatorLibrary
 
                 return result;
             }
+            // Redefine method for second menu operations
+            public double DoOperation(double num1, string op)
+            {
+                double result = double.NaN; // Default value is "not-a-number" if an operation, such as division, could result in an error.
+                writer.WriteStartObject();
+                writer.WritePropertyName("Operand1");
+                writer.WriteValue(num1);
+                writer.WritePropertyName("Operation");
+                // Use a switch statement to do the math.
+                switch (op)
+                {
+                    case "10x":
+                        result = num1 * 10;
+                        writer.WriteValue("10x");
+                        oper = "* 10";
+                        break;
+                    case "sin":
+                        result = Math.Sin(num1);
+                        writer.WriteValue("sin");
+                        oper = "sin";
+                        break;
+                    case "cos":
+                        result = Math.Cos(num1);
+                        writer.WriteValue("cos");
+                        oper = "cos";
+                        break;
+                    // Return text for an incorrect option entry.
+                    default:
+                        break;
+                }
 
+                if (history.Count < 3)
+                    history.Add((num1, null, result, oper));
+                else
+                {
+                    for (var index = 0; index < history.Count; index++)
+                    {
+                        if (index < 2)
+                        {
+                            var x = history[index];
+                            history[index] = history[index + 1];
+                        }
+                        else history[index] = (num1, null, result, oper);
+                    }
+                }
+                writer.WritePropertyName("Result");
+                writer.WriteValue(result);
+                writer.WriteEndObject();
+
+                return result;
+            }
             public void Finish()
             {
                 writer.WriteEndArray();

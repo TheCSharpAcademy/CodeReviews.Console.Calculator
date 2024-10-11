@@ -24,6 +24,7 @@ internal class Program
             // Use Nullable types (with ?) to match type of System.Console.ReadLine
             var numInput1 = "";
             var numInput2 = "";
+            var numInput0 = "";
 
             double result;
 
@@ -40,20 +41,36 @@ internal class Program
 
             // Read from user first variable for first menu
             var opFirst = Console.ReadLine();
+            if (opFirst == null || !Regex.IsMatch(opFirst, "^(his|cl|c)$"))
+            {
+                Console.WriteLine("Error: Unrecognized input.");
+                continue;
+            }
 
             switch (opFirst)
             {
                 case "his":
                     Console.WriteLine("Choose calculation from 1 to 3: ");
+
+                    double rChecked = 0;
+
                     // Read from user history calculation choice
-                    var r = Convert.ToInt32(Console.ReadLine());
+                    numInput0 = Console.ReadLine();
+
+                    while (!double.TryParse(numInput0, out rChecked))
+                    {
+                        Console.Write("This is not valid input. Please enter an integer value: ");
+                        numInput0 = Console.ReadLine();
+                    }
+
                     // Check if calculation exists
-                    if (r > calculator.history.Count)
+                    if (rChecked > calculator.history.Count || rChecked <= 0)
                     {
                         Console.WriteLine("History is empty yet or you chose wrong number\n");
                         continue;
                     }
-                    switch (r)
+
+                    switch (rChecked)
                     {
                         case 1:
                             numInput1 = calculator.history[0].Item3.ToString();
@@ -76,7 +93,7 @@ internal class Program
                     break;
             }
 
-            
+
             double cleanNum1 = 0;
 
             // Checking if earlier history calculation was chosen 
@@ -97,6 +114,44 @@ internal class Program
                 double.TryParse(numInput1, out cleanNum1);
             }
 
+            // Read from user second variable for first operations' menu
+            Console.WriteLine("\t10x - 10x");
+            Console.WriteLine("\tsin - Sinus");
+            Console.WriteLine("\tcos - Cosinus");
+            Console.WriteLine("\tc - Continue");
+            Console.Write("Your option? ");
+            var opSecond = Console.ReadLine();
+
+            // Check if continue choice was chosen
+            if (opSecond == "c")
+            {
+            }
+            else
+            {
+                // Validate input is not null, and matches the pattern
+                if (opSecond == null || !Regex.IsMatch(opSecond, "^(10x|sin|cos)$"))
+                {
+                    Console.WriteLine("Error: Unrecognized input.");
+                    continue;
+                }
+
+                try
+                {
+                    result = calculator.DoOperation(cleanNum1, opSecond);
+                    if (double.IsNaN(result))
+                        Console.WriteLine("This operation will result in a mathematical error.\n");
+                    else Console.WriteLine("Your result: {0:0.##}\n", result);
+                    calculatorUse++;
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine("Oh no! An exception occurred trying to do the math.\n - Details: " +
+                                      e.Message);
+                }
+
+                continue;
+            }
+
 
             // Ask the user to type the second number.
             Console.Write("Type another number, and then press Enter: ");
@@ -109,7 +164,7 @@ internal class Program
                 numInput2 = Console.ReadLine();
             }
 
-            // Ask the user to choose an operator.
+            // Ask the user to choose an operator in a second operations' menu
             Console.WriteLine("Choose an operator from the following list:");
             Console.WriteLine("\ta - Add");
             Console.WriteLine("\ts - Subtract");
@@ -117,18 +172,20 @@ internal class Program
             Console.WriteLine("\td - Divide");
             Console.WriteLine("\tp - Power");
             Console.WriteLine("\tmod - Modulo");
+            Console.WriteLine("\troot - Root of Nth\n");
+
 
             Console.Write("Your option? ");
 
-            var opSecond = Console.ReadLine();
+            var opThird = Console.ReadLine();
 
             // Validate input is not null, and matches the pattern
-            if (opSecond == null || !Regex.IsMatch(opSecond, "[a|s|m|d|p|mod]"))
+            if (opThird == null || !Regex.IsMatch(opThird, "^(a|s|m|d|p|mod|root)$"))
                 Console.WriteLine("Error: Unrecognized input.");
             else
                 try
                 {
-                    result = calculator.DoOperation(cleanNum1, cleanNum2, opSecond);
+                    result = calculator.DoOperation(cleanNum1, cleanNum2, opThird);
                     if (double.IsNaN(result))
                         Console.WriteLine("This operation will result in a mathematical error.\n");
                     else Console.WriteLine("Your result: {0:0.##}\n", result);
