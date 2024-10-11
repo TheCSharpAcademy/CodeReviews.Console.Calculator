@@ -123,10 +123,7 @@ internal class Program
             var opSecond = Console.ReadLine();
 
             // Check if continue choice was chosen
-            if (opSecond == "c")
-            {
-            }
-            else
+            if (opSecond != "c")
             {
                 // Validate input is not null, and matches the pattern
                 if (opSecond == null || !Regex.IsMatch(opSecond, "^(10x|sin|cos)$"))
