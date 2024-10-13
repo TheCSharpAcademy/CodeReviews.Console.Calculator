@@ -123,13 +123,12 @@ namespace CalculatorLibrary
                     writer.WriteValue("Multiply");
                     break;
                 case "/":
-                    bool isNum2Correct = double.IsInfinity(num1 / num2);
-                    while (isNum2Correct)
+                    while (num2 == 0)
                     {
                         Console.Clear();
                         Console.WriteLine("You cant divide by '0'");
                         Console.WriteLine("Enter another divisor:");
-                        isNum2Correct = !double.TryParse(Console.ReadLine(), out num2);
+                        double.TryParse(Console.ReadLine(), out num2);
                     }
                     result = num1 / num2;
                     writer.WriteValue("Division");
