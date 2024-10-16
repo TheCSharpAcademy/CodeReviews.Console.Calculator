@@ -1,0 +1,13 @@
+C:\Users\dyako\OneDrive\Skrivebord\GitHub\Calculator\CalculatorLibrary\bin\Debug\net8.0\CalculatorLibrary.deps.json
+C:\Users\dyako\OneDrive\Skrivebord\GitHub\Calculator\CalculatorLibrary\bin\Debug\net8.0\CalculatorLibrary.dll
+C:\Users\dyako\OneDrive\Skrivebord\GitHub\Calculator\CalculatorLibrary\bin\Debug\net8.0\CalculatorLibrary.pdb
+C:\Users\dyako\OneDrive\Skrivebord\GitHub\Calculator\CalculatorLibrary\obj\Debug\net8.0\CalculatorLibrary.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\dyako\OneDrive\Skrivebord\GitHub\Calculator\CalculatorLibrary\obj\Debug\net8.0\CalculatorLibrary.AssemblyInfoInputs.cache
+C:\Users\dyako\OneDrive\Skrivebord\GitHub\Calculator\CalculatorLibrary\obj\Debug\net8.0\CalculatorLibrary.AssemblyInfo.cs
+C:\Users\dyako\OneDrive\Skrivebord\GitHub\Calculator\CalculatorLibrary\obj\Debug\net8.0\CalculatorLibrary.csproj.CoreCompileInputs.cache
+C:\Users\dyako\OneDrive\Skrivebord\GitHub\Calculator\CalculatorLibrary\obj\Debug\net8.0\CalculatorLibrary.sourcelink.json
+C:\Users\dyako\OneDrive\Skrivebord\GitHub\Calculator\CalculatorLibrary\obj\Debug\net8.0\CalculatorLibrary.dll
+C:\Users\dyako\OneDrive\Skrivebord\GitHub\Calculator\CalculatorLibrary\obj\Debug\net8.0\refint\CalculatorLibrary.dll
+C:\Users\dyako\OneDrive\Skrivebord\GitHub\Calculator\CalculatorLibrary\obj\Debug\net8.0\CalculatorLibrary.pdb
+C:\Users\dyako\OneDrive\Skrivebord\GitHub\Calculator\CalculatorLibrary\obj\Debug\net8.0\ref\CalculatorLibrary.dll
+C:\Users\dyako\OneDrive\Skrivebord\GitHub\Calculator\CalculatorLibrary\obj\Debug\net8.0\CalculatorLibrary.csproj.AssemblyReference.cache

@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "gPyzbUj9HQ4=",
+  "success": true,
+  "projectFilePath": "C:\\Users\\dyako\\OneDrive\\Skrivebord\\GitHub\\Calculator\\CalculatorLibrary\\CalculatorLibrary.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\dyako\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512"
+  ],
+  "logs": []
+}

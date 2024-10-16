@@ -1,0 +1,126 @@
+[33mcommit 5e1012e37bf1ac2a2f38246a9a0a0df0f056bc0d[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m)[m
+Author: Albina Diakova <256982@student.usn.no>
+Date:   Thu Oct 3 16:54:07 2024 +0200
+
+    Add CalculatorLibrary folder
+
+ CalculatorLibrary/CalculatorLibrary.cs             |  71 [32m++++++++++++[m
+ CalculatorLibrary/CalculatorLibrary.csproj         |  13 [32m+++[m
+ .../bin/Debug/net8.0/CalculatorLibrary.deps.json   |  41 [32m+++++++[m
+ .../bin/Debug/net8.0/CalculatorLibrary.dll         | Bin [31m0[m -> [32m5120[m bytes
+ .../bin/Debug/net8.0/CalculatorLibrary.pdb         | Bin [31m0[m -> [32m11232[m bytes
+ .../obj/CalculatorLibrary.csproj.nuget.dgspec.json |  75 [32m++++++++++++[m
+ .../obj/CalculatorLibrary.csproj.nuget.g.props     |  15 [32m+++[m
+ .../obj/CalculatorLibrary.csproj.nuget.g.targets   |   2 [32m+[m
+ .../.NETCoreApp,Version=v8.0.AssemblyAttributes.cs |   4 [32m+[m
+ .../Debug/net8.0/CalculatorLibrary.AssemblyInfo.cs |  23 [32m++++[m
+ .../CalculatorLibrary.AssemblyInfoInputs.cache     |   1 [32m+[m
+ ...brary.GeneratedMSBuildEditorConfig.editorconfig |  13 [32m+++[m
+ .../net8.0/CalculatorLibrary.GlobalUsings.g.cs     |   8 [32m++[m
+ .../Debug/net8.0/CalculatorLibrary.assets.cache    | Bin [31m0[m -> [32m881[m bytes
+ ...alculatorLibrary.csproj.AssemblyReference.cache | Bin [31m0[m -> [32m538[m bytes
+ ...CalculatorLibrary.csproj.BuildWithSkipAnalyzers |   0
+ ...alculatorLibrary.csproj.CoreCompileInputs.cache |   1 [32m+[m
+ .../CalculatorLibrary.csproj.FileListAbsolute.txt  |  13 [32m+++[m
+ .../obj/Debug/net8.0/CalculatorLibrary.dll         | Bin [31m0[m -> [32m5120[m bytes
+ .../obj/Debug/net8.0/CalculatorLibrary.pdb         | Bin [31m0[m -> [32m11232[m bytes
+ .../Debug/net8.0/CalculatorLibrary.sourcelink.json |   1 [32m+[m
+ .../obj/Debug/net8.0/ref/CalculatorLibrary.dll     | Bin [31m0[m -> [32m5120[m bytes
+ .../obj/Debug/net8.0/refint/CalculatorLibrary.dll  | Bin [31m0[m -> [32m5120[m bytes
+ CalculatorLibrary/obj/project.assets.json          | 127 [32m+++++++++++++++++++++[m
+ CalculatorLibrary/obj/project.nuget.cache          |  10 [32m++[m
+ 25 files changed, 418 insertions(+)
+
+[33mcommit 8b1c34c339d2065dbd0c28607d4cdf015e05d481[m[33m ([m[1;31morigin/main[m[33m)[m
+Author: Albina Diakova <256982@student.usn.no>
+Date:   Thu Oct 3 16:51:52 2024 +0200
+
+    Added library
+
+ .../.vs/Calculator/DesignTimeBuild/.dtbcache.v2    | Bin [31m83864[m -> [32m85447[m bytes
+ Calculator/.vs/Calculator/v17/.suo                 | Bin [31m25088[m -> [32m34816[m bytes
+ Calculator/.vs/Calculator/v17/DocumentLayout.json  |  28 [32m+++[m[31m-[m
+ Calculator/Calculator.csproj                       |   4 [32m+[m
+ Calculator/Calculator.sln                          |   8 [32m+[m[31m-[m
+ Calculator/Program.cs                              | 161 [32m+++++++++[m[31m------------[m
+ Calculator/bin/Debug/net8.0/Calculator.deps.json   |  31 [32m++++[m
+ Calculator/bin/Debug/net8.0/Calculator.dll         | Bin [31m6656[m -> [32m6656[m bytes
+ Calculator/bin/Debug/net8.0/Calculator.exe         | Bin [31m142848[m -> [32m142848[m bytes
+ Calculator/bin/Debug/net8.0/Calculator.pdb         | Bin [31m11228[m -> [32m11428[m bytes
+ Calculator/bin/Debug/net8.0/CalculatorLibrary.dll  | Bin [31m0[m -> [32m5120[m bytes
+ Calculator/bin/Debug/net8.0/CalculatorLibrary.pdb  | Bin [31m0[m -> [32m11232[m bytes
+ Calculator/bin/Debug/net8.0/Newtonsoft.Json.dll    | Bin [31m0[m -> [32m712464[m bytes
+ Calculator/bin/Debug/net8.0/calculator.log         |   3 [32m+[m
+ Calculator/bin/Debug/net8.0/calculatorlog.json     |   8 [32m+[m
+ Calculator/obj/Calculator.csproj.nuget.dgspec.json |  83 [32m++++++++++[m[31m-[m
+ .../obj/Debug/net8.0/Calculator.AssemblyInfo.cs    |   2 [32m+[m[31m-[m
+ .../net8.0/Calculator.AssemblyInfoInputs.cache     |   2 [32m+[m[31m-[m
+ ...lator.GeneratedMSBuildEditorConfig.editorconfig |   2 [32m+[m[31m-[m
+ .../obj/Debug/net8.0/Calculator.assets.cache       | Bin [31m152[m -> [32m702[m bytes
+ .../Calculator.csproj.AssemblyReference.cache      | Bin [31m0[m -> [32m1140[m bytes
+ .../Calculator.csproj.CoreCompileInputs.cache      |   2 [32m+[m[31m-[m
+ .../net8.0/Calculator.csproj.FileListAbsolute.txt  |  20 [32m+++[m
+ .../obj/Debug/net8.0/Calculator.csproj.Up2Date     |   0
+ Calculator/obj/Debug/net8.0/Calculator.dll         | Bin [31m6656[m -> [32m6656[m bytes
+ .../Debug/net8.0/Calculator.genruntimeconfig.cache |   2 [32m+[m[31m-[m
+ Calculator/obj/Debug/net8.0/Calculator.pdb         | Bin [31m11228[m -> [32m11428[m bytes
+ .../obj/Debug/net8.0/Calculator.sourcelink.json    |   1 [32m+[m
+ Calculator/obj/Debug/net8.0/apphost.exe            | Bin [31m142848[m -> [32m142848[m bytes
+ Calculator/obj/Debug/net8.0/ref/Calculator.dll     | Bin [31m5632[m -> [32m5120[m bytes
+ Calculator/obj/Debug/net8.0/refint/Calculator.dll  | Bin [31m5632[m -> [32m5120[m bytes
+ Calculator/obj/project.assets.json                 |  83 [32m++++++++++[m[31m-[m
+ Calculator/obj/project.nuget.cache                 |   8 [32m+[m[31m-[m
+ 33 files changed, 327 insertions(+), 121 deletions(-)
+
+[33mcommit 452b67a6401894d1a04642fa36895a03310825f4[m
+Author: Albina Diakova <256982@student.usn.no>
+Date:   Thu Oct 3 16:51:00 2024 +0200
+
+    Add .gitignore file
+
+ Calculator/.gitignore | 1 [32m+[m
+ 1 file changed, 1 insertion(+)
+
+[33mcommit 9abdc6ce32c450ff89141474a2f5a5f8758c08aa[m
+Author: Albina Diakova <256982@student.usn.no>
+Date:   Thu Oct 3 15:16:14 2024 +0200
+
+    Added project
+
+ .../.vs/Calculator/DesignTimeBuild/.dtbcache.v2    | Bin [31m0[m -> [32m83864[m bytes
+ .../f5b02cc7-c261-41cd-8a74-f06bf4d89c4e.vsidx     | Bin [31m0[m -> [32m11030[m bytes
+ Calculator/.vs/Calculator/v17/.futdcache.v2        | Bin [31m0[m -> [32m142[m bytes
+ Calculator/.vs/Calculator/v17/.suo                 | Bin [31m0[m -> [32m25088[m bytes
+ Calculator/.vs/Calculator/v17/DocumentLayout.json  |  45 [32m++++++++[m
+ .../ProjectEvaluation/calculator.metadata.v8.bin   | Bin [31m0[m -> [32m997[m bytes
+ .../ProjectEvaluation/calculator.projects.v8.bin   | Bin [31m0[m -> [32m26444[m bytes
+ .../ProjectEvaluation/calculator.strings.v8.bin    | Bin [31m0[m -> [32m117424[m bytes
+ Calculator/Calculator.csproj                       |  10 [32m++[m
+ Calculator/Calculator.sln                          |  25 [32m+++++[m
+ Calculator/Program.cs                              | 116 [32m+++++++++++++++++++++[m
+ Calculator/bin/Debug/net8.0/Calculator.deps.json   |  23 [32m++++[m
+ Calculator/bin/Debug/net8.0/Calculator.dll         | Bin [31m0[m -> [32m6656[m bytes
+ Calculator/bin/Debug/net8.0/Calculator.exe         | Bin [31m0[m -> [32m142848[m bytes
+ Calculator/bin/Debug/net8.0/Calculator.pdb         | Bin [31m0[m -> [32m11228[m bytes
+ .../bin/Debug/net8.0/Calculator.runtimeconfig.json |  12 [32m+++[m
+ Calculator/obj/Calculator.csproj.nuget.dgspec.json |  69 [32m++++++++++++[m
+ Calculator/obj/Calculator.csproj.nuget.g.props     |  15 [32m+++[m
+ Calculator/obj/Calculator.csproj.nuget.g.targets   |   2 [32m+[m
+ .../.NETCoreApp,Version=v8.0.AssemblyAttributes.cs |   4 [32m+[m
+ .../obj/Debug/net8.0/Calculator.AssemblyInfo.cs    |  23 [32m++++[m
+ .../net8.0/Calculator.AssemblyInfoInputs.cache     |   1 [32m+[m
+ ...lator.GeneratedMSBuildEditorConfig.editorconfig |  13 [32m+++[m
+ .../obj/Debug/net8.0/Calculator.GlobalUsings.g.cs  |   8 [32m++[m
+ .../obj/Debug/net8.0/Calculator.assets.cache       | Bin [31m0[m -> [32m152[m bytes
+ .../Calculator.csproj.BuildWithSkipAnalyzers       |   0
+ .../Calculator.csproj.CoreCompileInputs.cache      |   1 [32m+[m
+ .../net8.0/Calculator.csproj.FileListAbsolute.txt  |  14 [32m+++[m
+ Calculator/obj/Debug/net8.0/Calculator.dll         | Bin [31m0[m -> [32m6656[m bytes
+ .../Debug/net8.0/Calculator.genruntimeconfig.cache |   1 [32m+[m
+ Calculator/obj/Debug/net8.0/Calculator.pdb         | Bin [31m0[m -> [32m11228[m bytes
+ Calculator/obj/Debug/net8.0/apphost.exe            | Bin [31m0[m -> [32m142848[m bytes
+ Calculator/obj/Debug/net8.0/ref/Calculator.dll     | Bin [31m0[m -> [32m5632[m bytes
+ Calculator/obj/Debug/net8.0/refint/Calculator.dll  | Bin [31m0[m -> [32m5632[m bytes
+ Calculator/obj/project.assets.json                 |  74 [32m+++++++++++++[m
+ Calculator/obj/project.nuget.cache                 |   8 [32m++[m
+ 36 files changed, 464 insertions(+)
