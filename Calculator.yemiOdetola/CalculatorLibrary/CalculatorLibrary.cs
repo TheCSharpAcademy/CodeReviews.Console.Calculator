@@ -1,13 +1,12 @@
-﻿using System.Diagnostics;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
 namespace CalculatorLibrary;
 public class Calculator
 {
 
   JsonWriter writer;
-  double lastResult = 0;
-  public List<string> calculations { get; set; } = new List<string>();
+  double lastResult = double.NaN;
+  public List<string> Calculations { get; set; } = new List<string>();
   public Calculator()
   {
     StreamWriter logFile = File.CreateText("calculator.log");
@@ -33,30 +32,30 @@ public class Calculator
       case "a":
         result = num1 + num2;
         writer.WriteValue("Add");
-        calculations.Add("Add");
+        Calculations.Add("Add");
         break;
       case "s":
         result = num1 - num2;
         writer.WriteValue("Subtract");
-        calculations.Add("Subtract");
+        Calculations.Add("Subtract");
         break;
       case "m":
         result = num1 * num2;
         writer.WriteValue("Multiply");
-        calculations.Add("Multiply");
+        Calculations.Add("Multiply");
         break;
       case "d":
         if (num2 != 0)
         {
           result = num1 / num2;
           writer.WriteValue("Divide");
-          calculations.Add("Divide");
+          Calculations.Add("Divide");
         }
         break;
       case "p":
         result = Math.Pow(num1, num2);
         writer.WriteValue("Power");
-        calculations.Add("Power");
+        Calculations.Add("Power");
         break;
       default:
         break;
@@ -72,13 +71,13 @@ public class Calculator
   {
     writer.WriteEndArray();
     writer.WritePropertyName("CalculationHistory");
-    writer.WriteValue(String.Join(", ", calculations));
+    writer.WriteValue(String.Join(", ", Calculations));
     writer.WriteEndObject();
     writer.Close();
   }
 
-  public void RemoveSavedHistory()
-  {
+  // public void RemoveSavedHistory()
+  // {
 
-  }
+  // }
 }
