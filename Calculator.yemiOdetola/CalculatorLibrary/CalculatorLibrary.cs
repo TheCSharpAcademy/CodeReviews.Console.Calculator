@@ -76,8 +76,4 @@ public class Calculator
     writer.Close();
   }
 
-  // public void RemoveSavedHistory()
-  // {
-
-  // }
 }
