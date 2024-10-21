@@ -5,7 +5,7 @@ namespace CalculatorLibrary
     public class Calculator
     {
         JsonWriter writer;
-        public int CalculationsCount { get; private set; } = 0;
+        public required int CalculationsCount { get; private set; } = 0;
         public List<double> PreviousCalculations { get; private set; } = new List<double>();
         public Calculator()
         {
