@@ -153,7 +153,7 @@ calculator.Finish();
 
 // FUNCTIONS
 
-string? chooseOperation()
+string? ChooseOperation()
 {
     // Ask the user to choose an operator.
     Console.WriteLine("Choose an operator from the following list:");
@@ -173,7 +173,7 @@ string? chooseOperation()
     return choice;
 }
 
-double parseStringToDouble(string? numInput)
+double ParseStringToDouble(string? numInput)
 {
     double cleanNum = 0;
     while (!double.TryParse(numInput, out cleanNum))
