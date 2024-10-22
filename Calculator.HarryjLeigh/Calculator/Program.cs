@@ -53,8 +53,8 @@ while (!endApp)
     {
         //  Ask for number from previous calculations, parses number and perfoms operation
         numInput1 = calculator.UsePreviousCalculations();
-        cleanNum1 = parseStringToDouble(numInput1);
-        op = chooseOperation();
+        cleanNum1 = ParseStringToDouble(numInput1);
+        op = ChooseOperation();
 
         // Validate input is not null, and matches the pattern
         if (op == null || !Regex.IsMatch(op, "[a|s|m|d|p|sqrt|10x|sin|cos|tan]"))
@@ -75,7 +75,7 @@ while (!endApp)
                     // Runs if input is a two number operation - Asks for number, parses number and performs operation
                     Console.Write("Type another number, and then press Enter: ");
                     numInput2 = Console.ReadLine();
-                    cleanNum2 = parseStringToDouble(numInput2);
+                    cleanNum2 = ParseStringToDouble(numInput2);
                     result = calculator.DoTwoNumberOperation(cleanNum1, cleanNum2, op);
                 }
                 // Error checking
@@ -98,8 +98,8 @@ while (!endApp)
         // Ask the user to type the first number. Parses number and performs operation
         Console.Write("Type a number, and then press Enter: ");
         numInput1 = Console.ReadLine();
-        cleanNum1 = parseStringToDouble(numInput1);
-        op = chooseOperation();
+        cleanNum1 = ParseStringToDouble(numInput1);
+        op = ChooseOperation();
 
         // Validate input is not null, and matches the pattern
         if (op == null || !Regex.IsMatch(op, "[a|s|m|d|p|sqrt|10x|sin|cos|tan]"))
@@ -120,7 +120,7 @@ while (!endApp)
                     // Runs if input is a two number operation - Asks for number, parses number and performs operation
                     Console.Write("Type another number, and then press Enter: ");
                     numInput2 = Console.ReadLine();
-                    cleanNum2 = parseStringToDouble(numInput2);
+                    cleanNum2 = ParseStringToDouble(numInput2);
                     result = calculator.DoTwoNumberOperation(cleanNum1, cleanNum2, op);
                 }
                 // Error checking
