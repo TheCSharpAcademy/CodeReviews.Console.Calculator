@@ -105,9 +105,14 @@ namespace CalculatorLibrary
                     writer.WriteValue("Multiply");
                     IncreaseCalculationsCount();
                     AddToPreviousCalculations(result);
-                    break;
+                    break; 
                 case "d":
                     // Ask the user to enter a non-zero divisor.
+                    while (num2 == 0)
+                    {
+                        Console.WriteLine("Please enter a number a non-zero divisor: ");
+                        num2 = Convert.ToDouble(Console.ReadLine());
+                    }
                     if (num2 != 0)
                     {
                         result = num1 / num2;
