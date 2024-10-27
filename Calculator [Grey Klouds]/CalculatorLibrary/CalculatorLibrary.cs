@@ -54,9 +54,9 @@ namespace CalculatorLibrary
                     if (num2 != 0)
                     {
                         result = num1 / num2;
-                        history.Add(result);
-                        writer.WriteValue("Divide");
                     }
+                    history.Add(result);
+                    writer.WriteValue("Divide");
                     usageCount++;
                     break;
                 // Return text for an incorrect option entry.
