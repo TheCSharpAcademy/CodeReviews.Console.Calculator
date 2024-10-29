@@ -13,7 +13,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\CalculatorLibrary\CalculatorLibrary.csproj" />
-    <ProjectReference Include="..\UserInterface\UserInterface.csproj" />
     <ProjectReference Include="..\UserInterface\UserInterfaceLibrary.csproj" />
   </ItemGroup>
 
