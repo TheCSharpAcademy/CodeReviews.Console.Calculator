@@ -11,17 +11,17 @@ namespace CalculatorLibrary
         
         JsonWriter writer;
         JsonWriter countWriter;
-        protected int _counter { get; set; } = 0;
+        protected int Counter { get; set; }
         protected readonly string _countLogFilePath = "UsageCountLog.json";
         public void ShowUsage()
         {
             
-            Console.WriteLine(string.Format("You've used the calculator {0} {1}",_counter,(_counter > 1 ? "times":"time")));
+            Console.WriteLine(string.Format("You've used the calculator {0} {1}",Counter,(Counter > 1 ? "times":"time")));
         }
 
         public void UsageCounter()
         {
-            _counter++;
+            Counter++;
         }
         public Calculator()
         {
@@ -97,7 +97,7 @@ namespace CalculatorLibrary
             writer.WriteEndObject();
             writer.Close();
 
-            countWriter.WriteValue(_counter);
+            countWriter.WriteValue(Counter);
             countWriter.WriteEndObject();
             countWriter.WriteEndArray();
             countWriter.WriteEndObject();
