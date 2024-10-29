@@ -16,7 +16,12 @@
             Addition ,
             Subtraction ,
             Multiplication ,
-            Division 
+            Division,
+            SquareRoot,
+            TenTimes_10x,
+            Sin,
+            Cos,
+            Tan
         }
 }
 

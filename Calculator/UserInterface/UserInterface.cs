@@ -30,7 +30,7 @@ public class UserInterface
                 case Enums.MenuAction.Calculator:
                     // Ask the user to type the first number.
                     var cleanNum1 = AnsiConsole.Ask<double>("[green]Type a number, and then press Enter: [/]");
-                    var cleanNum2 = AnsiConsole.Ask<double>("[green]Type another number, and then press Enter: [/]");
+                    //var cleanNum2 = AnsiConsole.Ask<double>("[green]Type another number, and then press Enter: [/]");
 
                     // Ask the user to choose an operator.
                     var operationTypeChoice = AnsiConsole.Prompt(
@@ -40,7 +40,7 @@ public class UserInterface
 
                         try
                         {
-                            calculationResult = calculator.DoOperation(cleanNum1, cleanNum2, operationTypeChoice);
+                            calculationResult = calculator.DoOperation(cleanNum1, operationTypeChoice);
                             if (double.IsNaN(calculationResult))
                             {
                                 Console.WriteLine("This operation will result in a mathematical error.\n");
@@ -80,7 +80,7 @@ public class UserInterface
 
                     try
                     {
-                        calculationResult = calculator.DoOperation(pastResult, operand, operationChoice);
+                        calculationResult = calculator.DoOperation(pastResult, operationChoice);
                         if (double.IsNaN(calculationResult))
                         {
                             Console.WriteLine("This operation will result in a mathematical error.\n");

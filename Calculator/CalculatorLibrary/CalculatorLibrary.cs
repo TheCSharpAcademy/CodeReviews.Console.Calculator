@@ -43,45 +43,93 @@ namespace CalculatorLibrary
             writer.WritePropertyName("Operations");
             writer.WriteStartArray();
         }
-        public  double DoOperation(double num1, double num2, Enums.Operation operation)
+        public  double DoOperation(double num1, Enums.Operation operation)
         {
             double result = double.NaN; // Default value is "not-a-number" which we use if an operation, such as division, could result in an error.
+            
             writer.WriteStartObject();
             writer.WritePropertyName("Operand1");
             writer.WriteValue(num1);
-            writer.WritePropertyName("Operand2");
-            writer.WriteValue(num2);
-            writer.WritePropertyName("Operation");
+            
 
             // Use a switch statement to do the math.
             switch (operation)
             {
                 case Enums.Operation.Addition:
+                    var num2 = AnsiConsole.Ask<double>("[green]Type another number, and then press Enter: [/]");
                     result = num1 + num2;
+                    writer.WritePropertyName("Operand2");
+                    writer.WriteValue(num2);
+                    writer.WritePropertyName("Operation");
                     writer.WriteValue("Add");
                     _pastResults += $"{num1} + {num2} = {result},";
                     break;
                 case Enums.Operation.Subtraction:
+                    num2 = AnsiConsole.Ask<double>("[green]Type another number, and then press Enter: [/]");
                     result = num1 - num2;
+                    writer.WritePropertyName("Operand2");
+                    writer.WriteValue(num2);
+                    writer.WritePropertyName("Operation");
                     writer.WriteValue("Subtract");
                     _pastResults += $"{num1} - {num2} = {result},";
                     break;
                 case Enums.Operation.Multiplication:
+                    num2 = AnsiConsole.Ask<double>("[green]Type another number, and then press Enter: [/]");
                     result = num1 * num2;
+                    writer.WritePropertyName("Operand2");
+                    writer.WriteValue(num2);
+                    writer.WritePropertyName("Operation");
                     writer.WriteValue("Multiply");
                     _pastResults += $"{num1} * {num2} = {result},";
                     break;
                 case Enums.Operation.Division:
                     // Ask the user to enter a non-zero divisor.
+                    num2 = AnsiConsole.Ask<double>("[green]Type another number, and then press Enter: [/]");
                     if (num2 != 0)
                     {
                         result = num1 / num2;
+                        _pastResults += $"{num1} / {num2} = {result},";
                     }
+                    writer.WritePropertyName("Operand2");
+                    writer.WriteValue(num2);
+                    writer.WritePropertyName("Operation");
                     writer.WriteValue("Divide");
-                    _pastResults += $"{num1} / {num2} = {result},";
+                    
                     break;
                 // Return text for an incorrect option entry.
-  
+                case Enums.Operation.SquareRoot:
+                    
+                    result = Math.Sqrt(num1);
+                    writer.WritePropertyName("Operation");
+                    writer.WriteValue("Sqrt");
+                    _pastResults += $"Sqrt({num1}) = {result},";
+                    break;
+                case Enums.Operation.TenTimes_10x:
+                    result = num1 * 10;
+                    writer.WritePropertyName("Operation");
+                    writer.WriteValue("TenTimes(10X)");
+                    _pastResults += $"10x{num1} = {result},";
+                    break;
+                case Enums.Operation.Sin:
+                    result = Math.Sin(num1);
+                    writer.WritePropertyName("Operation");
+                    writer.WriteValue("Sin");
+                    _pastResults += $"Sin({num1})= {result},";
+                    break;
+                case Enums.Operation.Cos:
+                    result = Math.Cos(num1);
+                    writer.WritePropertyName("Operation");
+                    writer.WriteValue("Cos");
+                    _pastResults += $"Cos({num1})= {result},";
+                    break;
+                case Enums.Operation.Tan:
+                    result = Math.Tan(num1);
+                    writer.WritePropertyName("Operation");
+                    writer.WriteValue("Tan");
+                    _pastResults += $"Tan({num1})= {result},";
+                    break;
+
+
                 default:
                     break;
             }
