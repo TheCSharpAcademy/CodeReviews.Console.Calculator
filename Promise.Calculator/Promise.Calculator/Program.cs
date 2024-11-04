@@ -33,7 +33,7 @@ namespace CalculatorProgram
                 {
                     Console.WriteLine("Invalid input. Please enter a number from the menu.");
                     continue;
-                };
+                }
                 if (menuChoice == 5)
                     break;
                 if (menuChoice == 4)
