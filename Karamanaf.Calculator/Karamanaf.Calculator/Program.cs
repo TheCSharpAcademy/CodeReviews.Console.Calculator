@@ -12,8 +12,6 @@ class Program
 
         while (!endApp)
         {
-            string? numInput1 = "";
-            string? numInput2 = "";
             double result = 0;
 
             Console.Clear();

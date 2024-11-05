@@ -5,7 +5,7 @@ namespace CalculatorLibrary
     public class Calculator
     {
         private List<PreviousResults> previousCalculations = new List<PreviousResults>();
-        private int usageCount = 0;
+        private int usageCount;
         JsonWriter writer;
 
         public Calculator()
