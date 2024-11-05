@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.11.35327.3
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Karamanaf.Calculator", "Karamanaf.Calculator\Karamanaf.Calculator.csproj", "{672A859E-1DBC-40C5-9C16-19B1006B227F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CalculatorLibrary", "CalculatorLibrary\CalculatorLibrary.csproj", "{77C233A3-BE31-4D7F-B8CD-8AB7F9B62715}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{672A859E-1DBC-40C5-9C16-19B1006B227F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{672A859E-1DBC-40C5-9C16-19B1006B227F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{672A859E-1DBC-40C5-9C16-19B1006B227F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{672A859E-1DBC-40C5-9C16-19B1006B227F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{77C233A3-BE31-4D7F-B8CD-8AB7F9B62715}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{77C233A3-BE31-4D7F-B8CD-8AB7F9B62715}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{77C233A3-BE31-4D7F-B8CD-8AB7F9B62715}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{77C233A3-BE31-4D7F-B8CD-8AB7F9B62715}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {1377F674-1902-4F28-90B6-8127F945A33A}
+	EndGlobalSection
+EndGlobal
