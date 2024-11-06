@@ -96,7 +96,7 @@ class Program
                                 int indexCalc = int.Parse(dex);
                                 string calcToUse = pastCalc[indexCalc];
                                 int indexOfEqual = calcToUse.IndexOf("=");
-                                int lenghtCalc = calcToUse.Length;
+                               
                                 string resultClean = calcToUse.Substring(indexOfEqual+1).Trim();
                                 double resClean = double.Parse(resultClean);
                                 cleanNum1 = resClean;
@@ -178,7 +178,7 @@ class Program
                                 int indexCalc = int.Parse(dex);
                                 string calcToUse = pastCalc[indexCalc];
                                 int indexOfEqual = calcToUse.IndexOf("=");
-                                int lenghtCalc = calcToUse.Length;
+                                
                                 string resultClean = calcToUse.Substring(indexOfEqual+1).Trim();
                                 double resClean = double.Parse(resultClean);
                                 cleanNum1 = resClean;
@@ -261,7 +261,7 @@ class Program
                                 int indexCalc = int.Parse(dex);
                                 string calcToUse = pastCalc[indexCalc];
                                 int indexOfEqual = calcToUse.IndexOf("=");
-                                int lenghtCalc = calcToUse.Length;
+                               
                                 string resultClean = calcToUse.Substring(indexOfEqual+1).Trim();
                                 double resClean = double.Parse(resultClean);
                                 cleanNum1 = resClean;
