@@ -104,14 +104,5 @@ namespace CalculatorLibrary
             writer.WriteEndObject();
             writer.Close();
         }
-        static double GetResultFromHistory(List<string> history, int index)
-        {
-            if (index < 0 || index >= history.Count)
-            {
-                throw new ArgumentOutOfRangeException("Invalid index");
-            }
-
-            return double.Parse(history[index]);
-        }
     }
 }

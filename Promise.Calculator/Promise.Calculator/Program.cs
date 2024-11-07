@@ -28,7 +28,7 @@ namespace CalculatorProgram
                 """);
                 string? menuOption = Console.ReadLine();
                 int menuChoice;
-                
+
                 if (!int.TryParse(menuOption, out menuChoice) || menuChoice < 1 || menuChoice > 5)
                 {
                     Console.WriteLine("Invalid input. Please enter a number from the menu.");
@@ -43,26 +43,52 @@ namespace CalculatorProgram
                         Console.WriteLine("No history to use");
                         continue;
                     }
-                    Console.Write("Enter the index of the result you want to use: ");
-                    string? indexInput = Console.ReadLine();
+                    Console.WriteLine("History:");
+                    Console.WriteLine("----------");
+                    for (int i = 0; i < latestCalculations.Count; i++)
+                    {
+                        Console.WriteLine($"{i}: {latestCalculations[i]}");
+                    }
                     int index;
-                    if (!int.TryParse(indexInput, out index))
+                    double previousResult;
+                    double newResult;
+                    while (true)
                     {
-                        Console.WriteLine("Invalid index");
-                        continue;
-                    }
-                    double previousResult = GetResultFromHistory(latestCalculations, index);
-                    Console.WriteLine($"Using previous result: {previousResult}");
+                        Console.Write("\nEnter the index of the result you want to use: ");
+                        string? indexInput = Console.ReadLine();
 
-                    string? op = GetOperatorFromUser();
-                    if (op == null || !Regex.IsMatch(op, "[a|s|m|d|sq|p|x|sn|cn|tn]"))
-                    {
-                        Console.WriteLine("Error: Unrecognized input.");
+                        if (!int.TryParse(indexInput, out index))
+                        {
+                            Console.WriteLine("Invalid index");
+                            continue;
+                        }
+
+                        if (GetResultFromHistory(latestCalculations, index) == 0)
+                        {
+                            Console.WriteLine("Selected index does not exist.");
+                            continue;
+                        }
+                        previousResult = GetResultFromHistory(latestCalculations, index);
+                        break;
                     }
-                    double result = 0;
+
+                    Console.WriteLine($"Using previous result: {previousResult}");
+                    string? op;
+                    while (true)
+                    {
+                        op = GetOperatorFromUser();
+                        if (op == null || !IsValidOperator(op))
+                        {
+                            Console.WriteLine("Error: Unrecognized input.");
+                            continue;
+                        }
+                        break;
+                    }
                     if (IsSingleOperandOperation(op))
                     {
-                        result = calculator.DoOperation(previousResult, op);
+                        newResult = calculator.DoOperation(previousResult, op);
+                        Console.WriteLine("\nYour result: {0:0.##}\n", newResult);
+                        latestCalculations.Add(newResult.ToString());
                     }
                     else
                     {
@@ -74,15 +100,15 @@ namespace CalculatorProgram
                             Console.Write("This is not valid input. Please enter an integer value: ");
                             numInput = Console.ReadLine();
                         }
-                        result = calculator.DoOperation(previousResult, newNum, op);
-                        if (double.IsNaN(result))
+                        newResult = calculator.DoOperation(previousResult, newNum, op);
+                        if (double.IsNaN(newResult))
                         {
                             Console.WriteLine("This operation will result in a mathematical error.\n");
                         }
                         else
                         {
-                            Console.WriteLine("\nYour result: {0:0.##}\n", result);
-                            latestCalculations.Add(result.ToString());
+                            Console.WriteLine("\nYour result: {0:0.##}\n", newResult);
+                            latestCalculations.Add(newResult.ToString());
                         }
                     }
                 }
@@ -111,23 +137,34 @@ namespace CalculatorProgram
                     continue;
                 }
                 if (menuChoice == 1)
-                {        
+                {
                     while (!endApp)
-                    {   
-                        string? op = GetOperatorFromUser();
-                        
-                         string? numInput1 = "";
-                         string? numInput2 = "";
-                         double result = 0;
-                             
+                    {
+                        string? op;
+                        while (true)
+                        {
+                            op = GetOperatorFromUser();
+                            if (op == null || !IsValidOperator(op))
+                            {
+                                Console.WriteLine("Invalid operator. Kindly a valid option from the list");
+                                continue;
+                            }
+                            break;
+
+                        }
+
+                        string? numInput1 = "";
+                        string? numInput2 = "";
+                        double result;
+
                         // Validate input is not null, and matches the pattern
-                        if (op == null || !Regex.IsMatch(op, "[a|s|m|d|sq|p|x|sn|cn|tn]"))
+                        if (op == null || !IsValidOperator(op))
                         {
                             Console.WriteLine("Error: Unrecognized input.");
                         }
                         else
                         {
-                            if(IsSingleOperandOperation(op))
+                            if (IsSingleOperandOperation(op))
                             {
                                 Console.Write("\nType a number, and then press Enter: ");
                                 numInput1 = Console.ReadLine();
@@ -191,7 +228,7 @@ namespace CalculatorProgram
                                     Console.WriteLine("Oh no! An exception occurred trying to do the math.\n - Details: " + e.Message);
                                 }
                             }
-                            
+
                         }
                         counter++;
                         Console.WriteLine($"\nCalculator use count: {counter}\n");
@@ -208,14 +245,17 @@ namespace CalculatorProgram
         {
             if (index < 0 || index >= history.Count)
             {
-                throw new ArgumentOutOfRangeException("Invalid index");
+                return 0;
             }
-
             return double.Parse(history[index]);
         }
         static bool IsSingleOperandOperation(string op)
         {
             return op == "sq" || op == "x" || op == "sn" || op == "cn" || op == "tn";
+        }
+        static bool IsValidOperator(string op)
+        {
+            return Regex.IsMatch(op, "^(a|s|m|d|sq|p|x|sn|cn|tn)$");
         }
         static string? GetOperatorFromUser()
         {
