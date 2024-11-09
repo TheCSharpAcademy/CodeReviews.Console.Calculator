@@ -1,4 +1,8 @@
 ---
 exclude_paths:
   - "README.md"
+<<<<<<< HEAD
   - "**/README.md"
+=======
+  - "**/README.md"
+>>>>>>> origin/main
