@@ -1,5 +1,4 @@
-﻿using System.Diagnostics;
-using System.Text.RegularExpressions;
+﻿using System.Text.RegularExpressions;
 using Newtonsoft.Json;
 
 namespace CalculatorLibrary
@@ -10,7 +9,6 @@ namespace CalculatorLibrary
         public Calculator()
         {
             StreamWriter logFile = File.CreateText("calculator log");
-            Trace.AutoFlush = true;
             writer = new JsonTextWriter(logFile);
             writer.Formatting = Formatting.Indented;
             writer.WriteStartObject();
