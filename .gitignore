@@ -453,4 +453,8 @@ $RECYCLE.BIN/
 !.vscode/launch.json
 !.vscode/extensions.json
 /Calculator.TomDonegan/TextFile1.txt
+<<<<<<< HEAD
 /Calculator.TomDonegan/Calculator.TomDonegan/Notes.txt
+=======
+/Calculator.TomDonegan/Calculator.TomDonegan/Notes.txt
+>>>>>>> 5a0c618 (init)
