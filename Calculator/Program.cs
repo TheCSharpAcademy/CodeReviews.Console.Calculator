@@ -28,12 +28,12 @@ class Program
         history.Add(new HistoryItem(history.Count+ 1, num1, num2, operation, result));
     }
 
-    private static void showTimesUsed(List <HistoryItem> history)
+    private static void ShowTimesUsed(List <HistoryItem> history)
     {
         Console.WriteLine($"The app was used: {history.Count} times");
     }
 
-    private static void showHistory(List<HistoryItem> history)
+    private static void ShowHistory(List<HistoryItem> history)
     {
         foreach (HistoryItem item in history) {
             string? operation = null;
@@ -249,8 +249,8 @@ class Program
             Console.Write("Press 'n' and Enter to close the app, press 'h' to display the history, press 't' to see how many times the app was used, or press any other key and Enter to continue: ");
             string response = Console.ReadLine();
             if (response == "n") endApp = true;
-            else if (response == "h") Program.showHistory(history);
-            else if (response == "t") Program.showTimesUsed(history);
+            else if (response == "h") Program.ShowHistory(history);
+            else if (response == "t") Program.ShowTimesUsed(history);
             Console.WriteLine("\n"); // Friendly linespacing.
         }
         calculator.Finish();
