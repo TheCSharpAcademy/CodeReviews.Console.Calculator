@@ -1,4 +1,5 @@
-﻿using CalculatorLibrary.ConsoleWrapper;
+﻿using Calculator.Application;
+using CalculatorLibrary.ConsoleWrapper;
 using CalculatorLibrary.UI;
 using CalculatorLibrary.UI.ChoiceReader;
 using CalculatorLibrary.UI.Menu;
@@ -26,8 +27,12 @@ var builder = Host.CreateDefaultBuilder()
         services.AddSingleton<IKeyAwaiter, ConsoleKeyAwaiter>();
         services.AddSingleton<OperationSelection>();
         services.AddOperandSourceReaderFactory();
+        services.AddSingleton<CalculationRunner>();
+        services.AddSingleton<OperationLogWriter>();
+        services.AddSingleton<Calculator.Application.Calculator>();
     });
 var host = builder.Build();
 
-var calculator = ActivatorUtilities.CreateInstance<Calculator.Application.Calculator>(host.Services);
+var calculator = host.Services.GetService<Calculator.Application.Calculator>()!;
 calculator.Run();
+host.Dispose();
