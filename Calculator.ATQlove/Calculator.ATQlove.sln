@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.9.34728.123
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Calculator.ATQlove", "Calculator.ATQlove\Calculator.ATQlove.csproj", "{FE8B6794-9107-45CE-8415-63E928838F6F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CalculatorLibrary.ATQlove", "CalculatorLibrary.ATQlove\CalculatorLibrary.ATQlove.csproj", "{B40EAE2E-FFE0-41DD-8963-60AF98E6B36E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FE8B6794-9107-45CE-8415-63E928838F6F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FE8B6794-9107-45CE-8415-63E928838F6F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FE8B6794-9107-45CE-8415-63E928838F6F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FE8B6794-9107-45CE-8415-63E928838F6F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B40EAE2E-FFE0-41DD-8963-60AF98E6B36E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B40EAE2E-FFE0-41DD-8963-60AF98E6B36E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B40EAE2E-FFE0-41DD-8963-60AF98E6B36E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B40EAE2E-FFE0-41DD-8963-60AF98E6B36E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {432A1D0C-97A4-4D6A-9AB4-06A535DCA16C}
+	EndGlobalSection
+EndGlobal
