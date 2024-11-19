@@ -5,6 +5,8 @@ VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "calculator.johnriverz", "calculator.johnriverz\calculator.johnriverz.csproj", "{7F397EF5-38D3-4D30-BD07-07736698934B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CalculatorLibrary", "CalculatorLibrary\CalculatorLibrary.csproj", "{C5E5B258-6E97-4C49-9B1A-1CD814535659}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +20,9 @@ Global
 		{7F397EF5-38D3-4D30-BD07-07736698934B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7F397EF5-38D3-4D30-BD07-07736698934B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7F397EF5-38D3-4D30-BD07-07736698934B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C5E5B258-6E97-4C49-9B1A-1CD814535659}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C5E5B258-6E97-4C49-9B1A-1CD814535659}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C5E5B258-6E97-4C49-9B1A-1CD814535659}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C5E5B258-6E97-4C49-9B1A-1CD814535659}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
