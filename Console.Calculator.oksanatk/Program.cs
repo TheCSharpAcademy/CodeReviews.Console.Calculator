@@ -165,17 +165,17 @@ string ParseVoiceOperator(string voiceOperator)
     {
         case "addition":
             return "add";
-        case string op when voiceOperator.StartsWith("sub"):
+        case string when voiceOperator.StartsWith("sub"):
             return "sub";
-        case string op when voiceOperator.StartsWith("mult"):
+        case string when voiceOperator.StartsWith("mult"):
             return "mult";
-        case string op when voiceOperator.StartsWith("div"):
+        case string when voiceOperator.StartsWith("div"):
             return "div";
-        case string op when voiceOperator.Contains("square"):
+        case string when voiceOperator.Contains("square"):
             return "sq";
-        case string op when voiceOperator.Contains("pow"):
+        case string when voiceOperator.Contains("pow"):
             return "pow";
-        case string op when ((voiceOperator.Contains("10") || voiceOperator.Contains("ten")) && voiceOperator.Contains("x")):
+        case string when ((voiceOperator.Contains("10") || voiceOperator.Contains("ten")) && voiceOperator.Contains("x")):
             return "10x";
         // "sine" operator commonly heard by speech recognizer as "sign"
         case "sign":

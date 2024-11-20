@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "Console.Calculator.oksanatk": {
+      "commandName": "Project",
+      "commandLineArgs": "--voice-input"
+    }
+  }
+}
