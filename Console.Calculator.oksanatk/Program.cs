@@ -180,11 +180,11 @@ string ParseVoiceOperator(string voiceOperator)
         // "sine" operator commonly heard by speech recognizer as "sign"
         case "sign":
             return "sin";
-        case string op when voiceOperator.StartsWith("si"):
+        case string when voiceOperator.StartsWith("si"):
             return "sin";
         case "cosine":
             return "cos";
-        case string op when voiceOperator.StartsWith("tan"):
+        case string when voiceOperator.StartsWith("tan"):
             return "tan";
 
         default:
