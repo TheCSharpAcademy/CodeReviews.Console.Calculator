@@ -89,4 +89,3 @@ public class Calculation
         return cleanNum;
     }
 }
-

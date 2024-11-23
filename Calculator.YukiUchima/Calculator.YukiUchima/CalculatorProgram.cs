@@ -81,5 +81,4 @@ internal class CalculatorProgram
         calculator.Finish();
         return;
     }
-
 }

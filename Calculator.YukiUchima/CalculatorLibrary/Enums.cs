@@ -1,5 +1,4 @@
-﻿
-namespace CalculatorLibrary;
+﻿namespace CalculatorLibrary;
 
 public class Enums
 {
