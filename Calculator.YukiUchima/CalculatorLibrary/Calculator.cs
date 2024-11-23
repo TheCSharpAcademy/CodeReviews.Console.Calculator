@@ -5,7 +5,7 @@ namespace CalculatorLibrary;
 
 public class Calculator
 {
-    private static int _CalculatorUseCount = 0;
+    private static int _CalculatorUseCount;
     public static List<Calculation> _CalculationsList = new List<Calculation>();
 
     JsonWriter writer;

@@ -10,7 +10,7 @@ public class Calculation
     public char Sign { get; set; }
     public string OpName { get; set; }
 
-    private string opString {  get; set; }
+    private string OpString {  get; set; }
 
     public Calculation(double operand1, OperationType operation, double calculationResult, double? operand2 = null)
     {
@@ -23,42 +23,42 @@ public class Calculation
             case Enums.OperationType.Add:
                 this.Sign = '+';
                 this.OpName = "ADD";
-                this.opString = $"{Operand1} {Sign} {Operand2}";
+                this.OpString = $"{Operand1} {Sign} {Operand2}";
                 break;
             case Enums.OperationType.Subtract:
                 this.Sign = '-';
                 this.OpName = "SUBTRACT";
-                this.opString = $"{Operand1} {Sign} {Operand2}";
+                this.OpString = $"{Operand1} {Sign} {Operand2}";
                 break;
             case Enums.OperationType.Multiply:
                 this.Sign = '*';
                 this.OpName = "MULTIPLY";
-                this.opString = $"{Operand1} {Sign} {Operand2}";
+                this.OpString = $"{Operand1} {Sign} {Operand2}";
                 break;
             case Enums.OperationType.Divide:
                 this.Sign = '/';
                 this.OpName = "DIVIDE";
-                this.opString = $"{Operand1} {Sign} {Operand2}";
+                this.OpString = $"{Operand1} {Sign} {Operand2}";
                 break;
             case Enums.OperationType.Power:
                 this.OpName = "POWER";
-                this.opString = $"{Operand1}^{Operand2}";
+                this.OpString = $"{Operand1}^{Operand2}";
                 break;
             case Enums.OperationType.SquareRoot:
                 this.OpName = "ROOT";
-                this.opString = $"{Operand1}^(1/2)";
+                this.OpString = $"{Operand1}^(1/2)";
                 break;
             case Enums.OperationType.TenX:
                 this.OpName = "MULTIPLER(10X)";
-                this.opString = $"{Operand1} x 10";
+                this.OpString = $"{Operand1} x 10";
                 break;
             case Enums.OperationType.Cosine:
                 this.OpName = "COS()";
-                this.opString = $"cos({Operand1})";
+                this.OpString = $"cos({Operand1})";
                 break;
             case Enums.OperationType.Sine:
                 this.OpName = "SIN()";
-                this.opString = $"sin({Operand1})";
+                this.OpString = $"sin({Operand1})";
                 break;
         }
         GetDetails();
@@ -66,7 +66,7 @@ public class Calculation
     
     public void GetDetails()
     {
-        Console.WriteLine($"Operation {OpName}\t:\t{opString}\t= {CalculationResult}");
+        Console.WriteLine($"Operation {OpName}\t:\t{OpString}\t= {CalculationResult}");
     }
 
     public static double GetCalculateNumber(int currentInputNumber)
