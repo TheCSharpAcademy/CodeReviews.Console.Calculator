@@ -1,5 +1,5 @@
 ﻿using System.Text.RegularExpressions;
-using Calculator;
+using CalculatorLibrary;
 
 var endApp = false;
 
@@ -44,7 +44,7 @@ while (!endApp)
     {
         try
         {
-            var result = CalculatorClass.DoOperation(cleanNum1, cleanNum2, op);
+            var result = CalculatorLib.DoOperation(cleanNum1, cleanNum2, op);
             if (double.IsNaN(result))
                 Console.WriteLine("This operation will result in a math error.\n");
             else
