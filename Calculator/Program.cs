@@ -61,3 +61,5 @@ while (!endApp)
 
     Console.WriteLine("\n");
 }
+
+calculator.Finish();
