@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Calculator", "Calculator\Calculator.csproj", "{88138E47-53DC-421E-A4BD-B9FDA2F0C8BD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Calculator.Natephor", "Calculator.Natephor\Calculator.Natephor.csproj", "{88138E47-53DC-421E-A4BD-B9FDA2F0C8BD}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CalculatorLib", "CalculatorLib\CalculatorLib.csproj", "{04FDE483-BEE0-46B2-B66C-A738CC3D1661}"
 EndProject
