@@ -11,7 +11,7 @@ class Program
         Console.WriteLine("------------------------\n");
 
         Calculator calculator = new Calculator();
-        
+
         while (!endApp)
         {
             // Declare variables and set to empty.
@@ -82,6 +82,8 @@ class Program
 
             Console.WriteLine("\n"); // Friendly linespacing.
         }
+
+        calculator.Finish();
 
         return;
     }
