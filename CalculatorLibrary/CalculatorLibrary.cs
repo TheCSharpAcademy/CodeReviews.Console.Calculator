@@ -51,15 +51,15 @@ public class Calculator
                 if (num2 != 0)
                 {
                     result = num1 / num2;
-                    writer.WriteValue("Divide");
                 }
 
+                writer.WriteValue("Divide");
                 break;
             // Return text for an incorrect option entry.
             default:
                 break;
         }
-        
+
         writer.WritePropertyName("Result");
         writer.WriteValue(result);
         writer.WriteEndObject();
