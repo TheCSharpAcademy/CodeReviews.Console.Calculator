@@ -5,6 +5,8 @@ VisualStudioVersion = 17.12.35521.163 d17.12
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Calculator.CabyDJ", "Calculator.CabyDJ\Calculator.CabyDJ.csproj", "{2C594646-59B5-4F96-9E1D-0A207FC5441F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CalculatorLibrary", "CalculatorLibrary\CalculatorLibrary.csproj", "{DE63B985-0D54-41CE-A26B-470584A522DE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{2C594646-59B5-4F96-9E1D-0A207FC5441F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2C594646-59B5-4F96-9E1D-0A207FC5441F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2C594646-59B5-4F96-9E1D-0A207FC5441F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DE63B985-0D54-41CE-A26B-470584A522DE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DE63B985-0D54-41CE-A26B-470584A522DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DE63B985-0D54-41CE-A26B-470584A522DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DE63B985-0D54-41CE-A26B-470584A522DE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
