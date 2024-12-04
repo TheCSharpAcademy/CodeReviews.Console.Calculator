@@ -4,8 +4,8 @@ namespace CalculatorLibrary;
 
 public class Calculator
 {
-    private readonly List<CalculatorHistory> history;
     private readonly JsonWriter writer;
+    private List<CalculatorHistory> history;
 
     public Calculator()
     {
@@ -23,8 +23,14 @@ public class Calculator
     {
         Console.WriteLine($"You have entered {history.Count} valid operation(s).");
 
-        for (var i = 0; i < history.Count; i++)
-            history[i].DisplayResult(i);
+        if (history.Count > 0)
+        {
+            for (var i = 0; i < history.Count; i++)
+                history[i].DisplayResult(i);
+
+            Console.Write("Would you like to delete this list? (y/N) ");
+            if (Console.ReadLine().ToLower() == "y") history = new List<CalculatorHistory>();
+        }
 
         Console.WriteLine();
     }
