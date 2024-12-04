@@ -1,34 +1,7 @@
-﻿using System.Text.RegularExpressions;
+﻿using CalculatorLibrary;
+using System.Text.RegularExpressions;
 
-class Calculator
-{
-    public static double DoOperation(double num1, double num2, string op)
-    {
-        double result = double.NaN;
-        switch (op)
-        {
-            case "a":
-                result = num1 + num2;
-                break;
-            case "s":
-                result = num1 - num2;
-                break;
-            case "m":
-                result = num1 * num2;
-                break;
-            case "d":
-                if (num2 != 0)
-                {
-                    result = num1 / num2;
-                }
-                break;
-            default:
-                break;
-        }
-        return result;
-    }
-}
-
+namespace CalculatorProgram;
 class Program
 {
     static void Main(string[] args)
@@ -37,6 +10,7 @@ class Program
         Console.WriteLine("Console Calculator in C#\r");
         Console.WriteLine("------------------------\n");
 
+        Calculator calculator = new Calculator();
         while (!endApp)
         {
             string? numInput1 = "";
