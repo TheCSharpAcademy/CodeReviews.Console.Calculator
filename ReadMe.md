@@ -12,6 +12,4 @@ that you're comfortable applying text-based instructions when developing softwar
 
 **This project has only one requirement:**
 
-**This project has only one requirement:**
-
 Complete the following tutorial (parts 1 and 2): Create a Calculator App (Microsoft Docs). You can find the link [**here**](https://docs.microsoft.com/en-us/visualstudio/get-started/csharp/tutorial-console?view=vs-2022)
