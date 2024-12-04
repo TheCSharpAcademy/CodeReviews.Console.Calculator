@@ -1,8 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "a6bEhGlbrsr3xQSZ8/mH++JXPMkBA6H4hz08I5BBvgOD6ZYIg/dbaQ0927lFLnPBoDSdZZTHnSpoxzQ8+FbPqQ==",
+  "dgSpecHash": "FOK10/rVjRPNoeoOSJaY1UjZoCg/rGK2y/yza0w4C7uacQ6fQt2AldF+SnnNk4DSTOlH6VfqTKBsKG5abdm4vQ==",
   "success": true,
   "projectFilePath": "C:\\repos\\CSharpAcademy-Console.Calculator\\Calculator\\Calculator\\Calculator.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\connor.campbell\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512"
+  ],
   "logs": []
 }

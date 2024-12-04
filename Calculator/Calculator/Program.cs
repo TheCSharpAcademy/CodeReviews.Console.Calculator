@@ -2,8 +2,9 @@
 using CalculatorLibrary;
 using System.Text.RegularExpressions;
 
-namespace Calculator
+namespace CalculatorProgram
 {
+
     class Program
     {
         static void Main(string[] args)
@@ -13,7 +14,7 @@ namespace Calculator
             Console.WriteLine("Console Calculator in C#\r");
             Console.WriteLine("------------------------\n");
 
-            CalculatorLibrary.Calculator calculator = new CalculatorLibrary.Calculator();
+            Calculator calculator = new Calculator();
             while (!endApp)
             {
                 // Declare variables and set to empty.
@@ -83,6 +84,7 @@ namespace Calculator
 
                 Console.WriteLine("\n"); // Friendly linespacing.
             }
+            calculator.Finish();
             return;
         }
     }

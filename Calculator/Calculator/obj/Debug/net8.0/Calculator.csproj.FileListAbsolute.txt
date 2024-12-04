@@ -27,3 +27,8 @@ C:\repos\CSharpAcademy-Console.Calculator\Calculator\Calculator\obj\Debug\net8.0
 C:\repos\CSharpAcademy-Console.Calculator\Calculator\Calculator\obj\Debug\net8.0\Calculator.pdb
 C:\repos\CSharpAcademy-Console.Calculator\Calculator\Calculator\obj\Debug\net8.0\Calculator.genruntimeconfig.cache
 C:\repos\CSharpAcademy-Console.Calculator\Calculator\Calculator\obj\Debug\net8.0\ref\Calculator.dll
+C:\repos\CSharpAcademy-Console.Calculator\Calculator\Calculator\bin\Debug\net8.0\Newtonsoft.Json.dll
+C:\repos\CSharpAcademy-Console.Calculator\Calculator\Calculator\bin\Debug\net8.0\CalculatorLibrary.dll
+C:\repos\CSharpAcademy-Console.Calculator\Calculator\Calculator\bin\Debug\net8.0\CalculatorLibrary.pdb
+C:\repos\CSharpAcademy-Console.Calculator\Calculator\Calculator\obj\Debug\net8.0\Calculator.csproj.AssemblyReference.cache
+C:\repos\CSharpAcademy-Console.Calculator\Calculator\Calculator\obj\Debug\net8.0\Calculator.csproj.CopyComplete

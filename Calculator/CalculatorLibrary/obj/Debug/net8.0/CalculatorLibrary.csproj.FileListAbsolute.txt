@@ -1,0 +1,13 @@
+C:\repos\CSharpAcademy-Console.Calculator\Calculator\CalculatorLibrary\bin\Debug\net8.0\CalculatorLibrary.deps.json
+C:\repos\CSharpAcademy-Console.Calculator\Calculator\CalculatorLibrary\bin\Debug\net8.0\CalculatorLibrary.dll
+C:\repos\CSharpAcademy-Console.Calculator\Calculator\CalculatorLibrary\bin\Debug\net8.0\CalculatorLibrary.pdb
+C:\repos\CSharpAcademy-Console.Calculator\Calculator\CalculatorLibrary\obj\Debug\net8.0\CalculatorLibrary.csproj.AssemblyReference.cache
+C:\repos\CSharpAcademy-Console.Calculator\Calculator\CalculatorLibrary\obj\Debug\net8.0\CalculatorLibrary.GeneratedMSBuildEditorConfig.editorconfig
+C:\repos\CSharpAcademy-Console.Calculator\Calculator\CalculatorLibrary\obj\Debug\net8.0\CalculatorLibrary.AssemblyInfoInputs.cache
+C:\repos\CSharpAcademy-Console.Calculator\Calculator\CalculatorLibrary\obj\Debug\net8.0\CalculatorLibrary.AssemblyInfo.cs
+C:\repos\CSharpAcademy-Console.Calculator\Calculator\CalculatorLibrary\obj\Debug\net8.0\CalculatorLibrary.csproj.CoreCompileInputs.cache
+C:\repos\CSharpAcademy-Console.Calculator\Calculator\CalculatorLibrary\obj\Debug\net8.0\CalculatorLibrary.sourcelink.json
+C:\repos\CSharpAcademy-Console.Calculator\Calculator\CalculatorLibrary\obj\Debug\net8.0\CalculatorLibrary.dll
+C:\repos\CSharpAcademy-Console.Calculator\Calculator\CalculatorLibrary\obj\Debug\net8.0\refint\CalculatorLibrary.dll
+C:\repos\CSharpAcademy-Console.Calculator\Calculator\CalculatorLibrary\obj\Debug\net8.0\CalculatorLibrary.pdb
+C:\repos\CSharpAcademy-Console.Calculator\Calculator\CalculatorLibrary\obj\Debug\net8.0\ref\CalculatorLibrary.dll
