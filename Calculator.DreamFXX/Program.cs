@@ -1,5 +1,5 @@
-﻿using CalculatorLibrary;
-using System.Text.RegularExpressions;
+﻿using System.Text.RegularExpressions;
+using CalculatorLibrary;
 
 namespace CalculatorProgram
 {
@@ -8,6 +8,7 @@ namespace CalculatorProgram
         static void Main(string[] args)
         {
             bool endApp = false;
+
             Console.WriteLine("Console Calculator in C#\r");
             Console.WriteLine("------------------------\n");
 
@@ -55,7 +56,8 @@ namespace CalculatorProgram
                 {
                     try
                     {
-                        result = Calculator.DoOperation(cleanNum1, cleanNum2, op);
+                        result = calculator.DoOperation(cleanNum1, cleanNum2, op);
+
                         if (double.IsNaN(result))
                         {
                             Console.WriteLine("This operation will result in a mathematical error.\n");
@@ -66,18 +68,15 @@ namespace CalculatorProgram
                     {
                         Console.WriteLine("Error - Something went wrong.\n - Details: " + e.Message);
                     }
-                }
+                } 
                 Console.WriteLine("------------------------\n");
+                Console.Write("Type n and press enter if you want to Close the app. Press any key to continue: ");
+                if (Console.ReadLine() == "n") endApp = true;
 
-            Console.Write("Enter the n symbol to Close the app. Press any key to continue: ");
-            if (Console.ReadLine() == "n") endApp = true;
-
-            Console.WriteLine("\n");
+                Console.WriteLine("\n");
             }
-
             calculator.Finish();
-        return;
+            return;
         }
     }
-
 }
