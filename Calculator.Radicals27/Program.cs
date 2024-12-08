@@ -20,7 +20,6 @@ namespace CalculatorProgram
 				ShowMainMenu();
 			}
 
-			//calculator.Finish();
 			return;
 		}
 
@@ -111,7 +110,7 @@ namespace CalculatorProgram
 			{
 				int userInput = int.Parse(calculationSelection);
 
-				if(calculationHistory[userInput].num2.HasValue)
+				if (calculationHistory[userInput].num2.HasValue)
 				{
 					DoCalculationForTwoNumbers(calculationHistory[userInput].num1.ToString(), calculationHistory[userInput].num2.ToString());
 				}
@@ -188,7 +187,7 @@ namespace CalculatorProgram
 			Console.Clear();
 		}
 
-		static void DoCalculationForTwoNumbers(string numInput1 =  "", string numInput2 = "")
+		static void DoCalculationForTwoNumbers(string numInput1 = "", string numInput2 = "")
 		{
 			double result = 0;
 
