@@ -5,7 +5,7 @@ namespace CalculatorLibrary
     public class Calculator
     {
         private const string FilePath = "calculatorlog.json";
-        private static int _usageCount = 0;
+        private static int _usageCount;
         private CalculationsList _calculationsList = new CalculationsList();
         private Calculation _currentCalculation = new Calculation();
 
@@ -137,7 +137,8 @@ namespace CalculatorLibrary
             }
             else
             {
-                Console.WriteLine("No file found.");
+                SaveCalculations();
+                Console.WriteLine("No file found... Creating empty file.");
                 Console.ReadKey();
             }
         }

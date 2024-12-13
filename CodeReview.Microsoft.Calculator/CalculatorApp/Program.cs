@@ -1,6 +1,5 @@
 ﻿using System.Text.RegularExpressions;
 using CalculatorLibrary;
-using System.Diagnostics;
 
 namespace CalculatorApp
 {
