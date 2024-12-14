@@ -5,9 +5,9 @@ namespace CalculatorLibrary
     public class Calculator
     {
         private const string FilePath = "calculatorlog.json";
-        private static int _usageCount;
         private CalculationsList _calculationsList = new CalculationsList();
         private Calculation _currentCalculation = new Calculation();
+        private static int _usageCount;
 
         public double DoOperation(double num1, double num2, string op)
         {
@@ -101,7 +101,6 @@ namespace CalculatorLibrary
                 Console.Clear();
                 foreach (var operation in _calculationsList.Operations)
                 {
-                    //Console.WriteLine($"Operand1: {operation.Operand1}, Operand2: {operation.Operand2}, Operation: {operation.Operation}, Result: {operation.Result}, Counter: {operation.Counter}");
                     Console.WriteLine(
                         $"Counter: {operation.Counter,5}\t" +
                         $"Operand1: {operation.Operand1,-10}\t" +
