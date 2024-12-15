@@ -5,12 +5,12 @@ namespace CalculatorLibrary;
 
 public class Calculator
 {
-    public double SelectedResult { get; set; } = 0;
+    public double SelectedResult;
 
     public string? Calculate(string expression)
     {
         Expression exp = new Expression(expression);
-        JSONHelpers jSONHelpers = new JSONHelpers();
+        JsonHelpers jSONHelpers = new JsonHelpers();
 
         try
         {
@@ -21,7 +21,7 @@ public class Calculator
             {
                 double doublelValue = Convert.ToDouble(result);
                 roundedValue = RoundTheResult(doublelValue);
-                jSONHelpers.WriteToJSONFile(expression, roundedValue);
+                jSONHelpers.WriteToJsonFile(expression, roundedValue);
             }
             return roundedValue;
         }
@@ -41,22 +41,22 @@ public class Calculator
 
     public double GetResult(double num1, double num2, string operation)
     {
-        JSONHelpers jSONHelpers = new JSONHelpers();
+        JsonHelpers jSONHelpers = new JsonHelpers();
         double result = double.NaN;
 
         switch (operation)
         {
             case "Add":
                 result = num1 + num2;
-                jSONHelpers.WriteToJSONFile($"{num1}+{num2}", RoundTheResult(result));
+                jSONHelpers.WriteToJsonFile($"{num1}+{num2}", RoundTheResult(result));
                 break;
             case "Subtract":
                 result = num1 - num2;
-                jSONHelpers.WriteToJSONFile($"{num1}-{num2}", RoundTheResult(result));
+                jSONHelpers.WriteToJsonFile($"{num1}-{num2}", RoundTheResult(result));
                 break;
             case "Multiply":
                 result = num1 * num2;
-                jSONHelpers.WriteToJSONFile($"{num1}*{num2}", RoundTheResult(result));
+                jSONHelpers.WriteToJsonFile($"{num1}*{num2}", RoundTheResult(result));
                 break;
             case "Divide":
                 while (true)
@@ -69,31 +69,31 @@ public class Calculator
                     else break;
                 }
                 result = num1 / num2;
-                jSONHelpers.WriteToJSONFile($"{num1}/{num2}", RoundTheResult(result));
+                jSONHelpers.WriteToJsonFile($"{num1}/{num2}", RoundTheResult(result));
                 break;
             case "Square Root":
                 result = Math.Sqrt(num1);
-                jSONHelpers.WriteToJSONFile($"Square root of {num1}", RoundTheResult(result));
+                jSONHelpers.WriteToJsonFile($"Square root of {num1}", RoundTheResult(result));
                 break;
             case "Taking the Power":
                 result = Math.Pow(num1, num2);
-                jSONHelpers.WriteToJSONFile($"{num1} to the power of {num2}", RoundTheResult(result));
+                jSONHelpers.WriteToJsonFile($"{num1} to the power of {num2}", RoundTheResult(result));
                 break;
             case "10x":
                 result = num1 * 10;
-                jSONHelpers.WriteToJSONFile($"{num1} times 10", RoundTheResult(result));
+                jSONHelpers.WriteToJsonFile($"{num1} times 10", RoundTheResult(result));
                 break;
             case "Sine":
                 result = Math.Sin(num1 * Math.PI / 180);
-                jSONHelpers.WriteToJSONFile($"The sine of {num1} degrees", RoundTheResult(result));
+                jSONHelpers.WriteToJsonFile($"The sine of {num1} degrees", RoundTheResult(result));
                 break;
             case "Cosine":
                 result = Math.Cos(num1 * Math.PI / 180);
-                jSONHelpers.WriteToJSONFile($"The cosine of {num1} degrees", RoundTheResult(result));
+                jSONHelpers.WriteToJsonFile($"The cosine of {num1} degrees", RoundTheResult(result));
                 break;
             case "Tangent":
                 result = Math.Tan(num1 * Math.PI / 180);
-                jSONHelpers.WriteToJSONFile($"The tangent of {num1} degrees", RoundTheResult(result));
+                jSONHelpers.WriteToJsonFile($"The tangent of {num1} degrees", RoundTheResult(result));
                 break;
             default:
                 break;

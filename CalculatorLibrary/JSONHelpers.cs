@@ -3,20 +3,20 @@ using Spectre.Console;
 
 namespace CalculatorLibrary;
 
-public class JSONHelpers
+public class JsonHelpers
 {
     public const string LogFilePath = "calculatorlog.json";
 
     public List<Operation> Operations;
     public int TimesUsed;
 
-    public JSONHelpers()
+    public JsonHelpers()
     {
         Operations = LoadOperationsFromJsonFile();
         TimesUsed = Operations.Count;
     }
 
-    public void WriteToJSONFile(string expression, string result)
+    public void WriteToJsonFile(string expression, string result)
     {
         Operation operation = new() { TimesUsed = ++TimesUsed, Expression = expression, Result = result };
         Operations.Add(operation);
@@ -92,7 +92,7 @@ public class JSONHelpers
     private static void CreateNewFile()
     {
         AnsiConsole.MarkupLine($"[yellow]Creating new file...[/]");
-        using (StreamWriter logFile = File.CreateText(LogFilePath)) { }
+        File.WriteAllText(LogFilePath, string.Empty);
 
         AnsiConsole.Status()
             .Start("[yellow]Press any key to continue.[/]", ctx =>

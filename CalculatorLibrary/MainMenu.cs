@@ -1,4 +1,5 @@
 ﻿using CalculatorLibrary;
+using Newtonsoft.Json;
 using Spectre.Console;
 using System.Globalization;
 
@@ -100,7 +101,7 @@ public class MainMenu
         }
         else if (choice == "Show List of operations")
         {
-            JSONHelpers jSONHelpers = new JSONHelpers();
+            JsonHelpers jSONHelpers = new JsonHelpers();
             List<string> listOfOperations = jSONHelpers.GetListOfOperations();
 
             if (listOfOperations.Count > 0)
@@ -119,12 +120,12 @@ public class MainMenu
         }
         else if (choice == "Use previous result")
         {
-            JSONHelpers jSONHelpers = new JSONHelpers();
+            JsonHelpers jSONHelpers = new JsonHelpers();
             List<string> listOfOperations = jSONHelpers.GetListOfOperations();
 
             if (listOfOperations.Count > 0)
             {
-                List<string> listOfPreviousResults = JSONHelpers.RetrieveResults();
+                List<string> listOfPreviousResults = JsonHelpers.RetrieveResults();
                 
                 string result = AnsiConsole.Prompt(
                     new SelectionPrompt<string>()
@@ -172,7 +173,7 @@ public class MainMenu
 
         else if (choice == "Clear List of operations")
         {
-            JSONHelpers jSONHelpers = new JSONHelpers();
+            JsonHelpers jSONHelpers = new JsonHelpers();
             List<string> listOfOperations = jSONHelpers.GetListOfOperations();
 
             if (listOfOperations.Count > 0)
@@ -190,8 +191,8 @@ public class MainMenu
 
                 if (answer == "Yes")
                 {
-                    File.Delete(JSONHelpers.LogFilePath);
-                    using (StreamWriter logFile = File.CreateText(JSONHelpers.LogFilePath)) { }
+                    File.Delete(JsonHelpers.LogFilePath);
+                    File.WriteAllText(JsonHelpers.LogFilePath, string.Empty);
                     jSONHelpers.Operations = new List<Operation>();
 
                     Console.Clear();

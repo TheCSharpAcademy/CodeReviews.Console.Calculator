@@ -2,7 +2,7 @@
 
 public class Operation
 {
-    public int TimesUsed { get; set; } = 0;
+    public int TimesUsed;
     public string Expression { get; set; } = "";
     public object Result { get; set; } = "";
 }

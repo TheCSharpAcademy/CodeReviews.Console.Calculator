@@ -3,7 +3,7 @@ using Spectre.Console;
 
 class Program
 {
-    static async Task Main(string[] args)
+    static async Task Main()
     {
         Calculator calculator = new Calculator();
 
