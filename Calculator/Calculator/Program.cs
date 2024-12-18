@@ -4,34 +4,104 @@ using CalculatorLibrary;
 class Program
 
 {
-    private static double[] getGeneralArguments()
+    private static double[] getGeneralArguments(CalculationHistory history)
     {
+
+        string? argChoice = null;
         string? numInput1 = "";
         string? numInput2 = "";
-
-        // Ask the user to type the first number.
-        Console.Write("Type a number, and " +
-            "then press Enter: ");
-        numInput1 = Console.ReadLine();
-
         double cleanNum1 = 0;
-        while (!double.TryParse(numInput1, out cleanNum1))
-        {
-            Console.Write("This is not valid input. Please enter a numeric value: ");
-            numInput1 = Console.ReadLine();
-        }
-
-        // Ask the user to type the second number.
-        Console.Write("Type another number, and then press Enter: ");
-        numInput2 = Console.ReadLine();
-
         double cleanNum2 = 0;
-        while (!double.TryParse(numInput2, out cleanNum2))
+
+        do
         {
-            Console.Write("This is not valid input. Please enter a numeric value: ");
+            Console.Write("Enter 'Y' to enter your own data and 'N' to use data from computation history ");
+            argChoice = Console.ReadLine();
+            if (argChoice == "Y" || argChoice == "N")
+            {
+                break;
+            } else
+            {
+                continue;
+            }
+        } while (argChoice == null || argChoice == "" || argChoice != "Y" || argChoice != "N");
+
+        if (argChoice == "Y")
+        {
+
+            // Ask the user to type the first number.
+            Console.Write("Type a number, and " +
+                "then press Enter: ");
+            numInput1 = Console.ReadLine();
+
+            while (!double.TryParse(numInput1, out cleanNum1))
+            {
+                Console.Write("This is not valid input. Please enter a numeric value: ");
+                numInput1 = Console.ReadLine();
+            }
+
+            // Ask the user to type the second number.
+            Console.Write("Type another number, and then press Enter: ");
             numInput2 = Console.ReadLine();
+
+
+            while (!double.TryParse(numInput2, out cleanNum2))
+            {
+                Console.Write("This is not valid input. Please enter a numeric value: ");
+                numInput2 = Console.ReadLine();
+            }
+
         }
+        else if (argChoice == "N")
+        {
+            DisplayHistory(history);
+            // Ask the user to type choice of index number.
+            Console.Write("Enter the index of the first result to use: ");
+            int index = 0;
+            while (!int.TryParse(Console.ReadLine(), out index))
+            {
+                Console.Write("Enter the index of the first result to use: ");
+            }
+
+            try
+            {
+                double result = history.ReuseResult(index - 1);
+                Console.WriteLine($"Using result: {result}");
+                cleanNum1 = result;
+
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error: {ex.Message}");
+            }
+
+            // Ask the user to type choice of index number.
+            Console.Write("Enter the index of the 2nd result to use: ");
+            int index2 = 0;
+            while (!int.TryParse(Console.ReadLine(), out index2))
+            {
+                Console.Write("Enter the index of the 2nd result to use: ");
+            }
+
+            try
+            {
+                double result2 = history.ReuseResult(index2 - 1);
+                Console.WriteLine($"Using result: {result2}");
+                cleanNum2 = result2;
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error: {ex.Message}");
+            }
+
+        }
+
+
+
         return [cleanNum1, cleanNum2];
+
     }
 
     private static string[] getTrigFunctionArguments()
@@ -46,12 +116,12 @@ class Program
         //double cleanNum1 = 0;
         while (numInput1 == "" || numInput1 == null)
         {
-            Console.Write("This is not valid input. Please enter a numeric value: ");
+            Console.Write("This is not valid input. Please enter sin, cos or tan: ");
             numInput1 = Console.ReadLine();
         }
 
         // Ask the user to type the second number.
-        Console.Write("Type another number, and then press Enter: ");
+        Console.Write("Type the angle value, and then press Enter: ");
         numInput2 = Console.ReadLine();
 
         //double cleanNum2 = 0;
@@ -63,39 +133,123 @@ class Program
         return [numInput1, numInput2];
     }
 
-    private static double getSquareRootArgument()
+    private static double getSquareRootArgument(CalculationHistory history)
     {
         string? numInput1 = "";
-
-        // Ask the user to type the first number.
-        Console.Write("Type a number, and then press Enter: ");
-        numInput1 = Console.ReadLine();
-
+        string? argChoice = null;
         double cleanNum1 = 0;
-        while (!double.TryParse(numInput1, out cleanNum1))
+        do
         {
-            Console.Write("This is not valid input. Please enter a numeric value: ");
-            numInput1 = Console.ReadLine();
-        }
+            Console.Write("Enter 'Y' to enter your own data and 'N' to use data from computation history ");
+            argChoice = Console.ReadLine();
+            if (argChoice == "Y" || argChoice == "N")
+            {
+                break;
+            }
+            else
+            {
+                continue;
+            }
+        } while (argChoice == null || argChoice == ""  || argChoice != "Y" || argChoice != "N");
 
+        if (argChoice == "Y")
+        {
+
+            // Ask the user to type the first number.
+            Console.Write("Type a number, and then press Enter: ");
+            numInput1 = Console.ReadLine();
+
+            //double cleanNum1 = 0;
+            while (!double.TryParse(numInput1, out cleanNum1))
+            {
+                Console.Write("This is not valid input. Please enter a numeric value: ");
+                numInput1 = Console.ReadLine();
+            }
+        } 
+        else if (argChoice == "N")
+        {
+            DisplayHistory(history);
+            // Ask the user to type choice of index number.
+            Console.Write("Enter the index of the result to use: ");
+            int index = 0;
+            while (!int.TryParse(Console.ReadLine(), out index))
+            {
+                Console.Write("Enter the index of the result to use: ");
+            }
+
+            try
+            {
+                double result = history.ReuseResult(index - 1);
+                Console.WriteLine($"Using result: {result}");
+                cleanNum1 = result;
+
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error: {ex.Message}");
+            }
+        }
         return cleanNum1;
     }
 
-    private static double getTenToPowerArgument()
+    private static double getTenToPowerArgument(CalculationHistory history)
     {
         string? numInput1 = "";
-
-        // Ask the user to type the first number.
-        Console.Write("Type a number, and then press Enter: ");
-        numInput1 = Console.ReadLine();
-
+        string? argChoice = null;
         double cleanNum1 = 0;
-        while (!double.TryParse(numInput1, out cleanNum1))
+        do
         {
-            Console.Write("This is not valid input. Please enter a numeric value: ");
-            numInput1 = Console.ReadLine();
-        }
+            Console.Write("Enter 'Y' to enter your own data and 'N' to use data from computation history ");
+            argChoice = Console.ReadLine();
+            if (argChoice == "Y" || argChoice == "N")
+            {
+                break;
+            }
+            else
+            {
+                continue;
+            }
+        } while (argChoice == null || argChoice == "" || argChoice != "Y" || argChoice != "N");
 
+        if (argChoice == "Y")
+        {
+
+            // Ask the user to type the first number.
+            Console.Write("Type a number, and then press Enter: ");
+            numInput1 = Console.ReadLine();
+
+            //double cleanNum1 = 0;
+            while (!double.TryParse(numInput1, out cleanNum1))
+            {
+                Console.Write("This is not valid input. Please enter a numeric value: ");
+                numInput1 = Console.ReadLine();
+            }
+        }
+        else if (argChoice == "N")
+        {
+            DisplayHistory(history);
+            // Ask the user to type choice of index number.
+            Console.Write("Enter the index of the result to use: ");
+            int index = 0;
+            while (!int.TryParse(Console.ReadLine(), out index))
+            {
+                Console.Write("Enter the index of the result to use: ");
+            }
+
+            try
+            {
+                double result = history.ReuseResult(index - 1);
+                Console.WriteLine($"Using result: {result}");
+                cleanNum1 = result;
+
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error: {ex.Message}");
+            }
+        }
         return cleanNum1;
     }
 
@@ -175,9 +329,9 @@ class Program
                         case "s":
                         case "m":
                         case "d":
-                        case "p":
+                        case "p": 
                             calculator.setNumberOfTimes();
-                            double[] entriesArray = getGeneralArguments();
+                            double[] entriesArray = getGeneralArguments(history);
                             result = calculator.DoOperation(op, entriesArray[0], entriesArray[1]);
                             if(op == "a")
                             {
@@ -203,13 +357,13 @@ class Program
                                 break;
                         case "r":
                             calculator.setNumberOfTimes();
-                            double argVal = getSquareRootArgument();
+                            double argVal = getSquareRootArgument(history);
                             result = calculator.DoOperation(op, argVal);
                             history.AddToHistory($"Sqrt Of {argVal}={result}");
                             break;
                         case "x":
                             calculator.setNumberOfTimes();
-                            double argTenToPowerVal = getSquareRootArgument();
+                            double argTenToPowerVal = getTenToPowerArgument(history);
                             result = calculator.DoOperation(op, argTenToPowerVal);
                             history.AddToHistory($" 10^{argTenToPowerVal}={result}");
                             break;
