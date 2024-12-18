@@ -141,4 +141,29 @@ namespace CalculatorLibrary
             return result;
         }
     }
+
+    public class CalculationHistory
+    {
+        private List<string> history = new List<string>();
+
+        public void AddToHistory(string calculation) => history.Add(calculation);
+
+        public List<string> GetHistory() => new List<string>(history);
+
+        public void ClearHistory() => history.Clear();
+
+        public double ReuseResult(int index)
+        {
+            if (index < 0 || index >= history.Count)
+                throw new IndexOutOfRangeException("Invalid history index.");
+
+            // Extract the result from the string, assuming the format is "operation = result"
+            string[] parts = history[index].Split('=');
+            if (parts.Length < 2)
+                throw new FormatException("Invalid calculation format in history.");
+
+            // Parse and return the result
+            return double.Parse(parts[1].Trim());
+        }
+    }
 }

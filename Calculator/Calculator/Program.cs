@@ -98,6 +98,36 @@ class Program
 
         return cleanNum1;
     }
+
+    static void DisplayHistory(CalculationHistory history)
+    {
+        var calculations = history.GetHistory();
+        if (calculations.Count == 0)
+        {
+            Console.WriteLine("No calculations in history.");
+        }
+        else
+        {
+            Console.WriteLine("--- Calculation History ---");
+            for (int i = 0; i < calculations.Count; i++)
+            {
+                Console.WriteLine($"{i + 1}. {calculations[i]}");
+            }
+        }
+    }
+
+    static void UseHistoryResult(Calculator calculator, CalculationHistory history)
+    {
+        DisplayHistory(history);
+        Console.Write("Enter the index of the result to use: ");
+        
+        int.TryParse(Console.ReadLine(),out int index);
+        double result = history.ReuseResult(index - 1);
+
+        Console.WriteLine($"Using result: {result}");
+        //PerformCalculation(calculator, history, usageCounter);
+    }
+
     static void Main(string[] args)
     {
         bool endApp = false;
@@ -106,6 +136,7 @@ class Program
         Console.WriteLine("------------------------\n");
 
         Calculator calculator = new Calculator();
+        CalculationHistory history = new CalculationHistory();
 
         while (!endApp)
         {
@@ -122,12 +153,14 @@ class Program
             Console.WriteLine("\tx - 10th Power");
             Console.WriteLine("\tt - Trigonometric Function");
             Console.WriteLine("\tc - To see the number of times the Calculator has been used");
+            Console.WriteLine("\tv - To view Calculation History");
+            Console.WriteLine("\tw - To Clear History");
             Console.Write("Your option? ");
 
             string? op = Console.ReadLine();
 
             // Validate input is not null, and matches the pattern
-            if (op == null || !Regex.IsMatch(op, "[a|s|m|d|r|p|x|t|c]"))
+            if (op == null || !Regex.IsMatch(op, "[a|s|m|d|r|p|x|t|c|v|w]"))
             {
                 Console.WriteLine("Error: Unrecognized input.");
             }
@@ -146,14 +179,39 @@ class Program
                             calculator.setNumberOfTimes();
                             double[] entriesArray = getGeneralArguments();
                             result = calculator.DoOperation(op, entriesArray[0], entriesArray[1]);
-                            break;
+                            if(op == "a")
+                            {
+                                history.AddToHistory($"{entriesArray[0]} + {entriesArray[1]}={result}");
+                            }
+                            else if(op == "s")
+                            {
+                                history.AddToHistory($"{entriesArray[0]} - {entriesArray[1]}={result}");
+                            }
+                            else if (op == "m")
+                            {
+                                history.AddToHistory($"{entriesArray[0]} * {entriesArray[1]}={result}");
+                            }
+                            else if (op == "d")
+                            {
+                                history.AddToHistory($"{entriesArray[0]} / {entriesArray[1]}={result}");
+                            }
+                            else if (op == "p")
+                            {
+                                history.AddToHistory($"{entriesArray[0]} ^ {entriesArray[1]}={result}");
+                            }
+
+                                break;
                         case "r":
                             calculator.setNumberOfTimes();
-                            result = calculator.DoOperation(op, getSquareRootArgument());
+                            double argVal = getSquareRootArgument();
+                            result = calculator.DoOperation(op, argVal);
+                            history.AddToHistory($"Sqrt Of {argVal}={result}");
                             break;
                         case "x":
                             calculator.setNumberOfTimes();
-                            result = calculator.DoOperation(op, getTenToPowerArgument());
+                            double argTenToPowerVal = getSquareRootArgument();
+                            result = calculator.DoOperation(op, argTenToPowerVal);
+                            history.AddToHistory($" 10^{argTenToPowerVal}={result}");
                             break;
                         case "t":
                             calculator.setNumberOfTimes();
@@ -161,9 +219,16 @@ class Program
                             double v = Convert.ToDouble(entriesArray2[1]);
                             string w = entriesArray2[0];
                             result = calculator.DoOperation(op, functionName: w, angle: v);
+                            history.AddToHistory($" {w} {v} degrees ={result}");
                             break;
                          case "c":
                             result = calculator.getNumberOfTimes();
+                            break;
+                         case "v":
+                            DisplayHistory(history);
+                            break;
+                        case "w":
+                            history.ClearHistory();
                             break;
                         // Return text for an incorrect option entry.
                         default:
