@@ -1,5 +1,4 @@
 ﻿// CalculatorLibrary.cs
-using System.Diagnostics;
 using Newtonsoft.Json;
 using System.Runtime.InteropServices;
 
@@ -44,14 +43,14 @@ namespace CalculatorLibrary
                 }
             }
         }
-        public static int NumberOfTimes { get; set; } = 0;
+        public static int NumberOfTimes { get; set; }
 
-        public int getNumberOfTimes()
+        public int GetNumberOfTimes()
         {
             return NumberOfTimes;
         }
 
-        public void setNumberOfTimes()
+        public void SetNumberOfTimes()
         {
             NumberOfTimes++;
         }
