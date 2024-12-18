@@ -113,7 +113,7 @@ class Program
         Console.Write("Type either sin, cos or tan, and then press Enter: ");
         numInput1 = Console.ReadLine();
 
-        //double cleanNum1 = 0;
+        
         while (numInput1 == "" || numInput1 == null)
         {
             Console.Write("This is not valid input. Please enter sin, cos or tan: ");
@@ -124,7 +124,7 @@ class Program
         Console.Write("Type the angle value, and then press Enter: ");
         numInput2 = Console.ReadLine();
 
-        //double cleanNum2 = 0;
+       
         while (numInput2 == "" || numInput2 == null)
         {
             Console.Write("This is not valid input. Please enter a numeric value: ");
@@ -156,10 +156,10 @@ class Program
         {
 
             // Ask the user to type the first number.
-            Console.Write("Type a number, and then press Enter: ");
+            Console.Write("Type a number whose Square root you wish to compute, and then press Enter: ");
             numInput1 = Console.ReadLine();
 
-            //double cleanNum1 = 0;
+
             while (!double.TryParse(numInput1, out cleanNum1))
             {
                 Console.Write("This is not valid input. Please enter a numeric value: ");
@@ -215,11 +215,11 @@ class Program
         if (argChoice == "Y")
         {
 
-            // Ask the user to type the first number.
-            Console.Write("Type a number, and then press Enter: ");
+            // Ask the user to type the exponent to use.
+            Console.Write("Type an exponent, and then press Enter: ");
             numInput1 = Console.ReadLine();
 
-            //double cleanNum1 = 0;
+            
             while (!double.TryParse(numInput1, out cleanNum1))
             {
                 Console.Write("This is not valid input. Please enter a numeric value: ");
@@ -279,7 +279,7 @@ class Program
         double result = history.ReuseResult(index - 1);
 
         Console.WriteLine($"Using result: {result}");
-        //PerformCalculation(calculator, history, usageCounter);
+       
     }
 
     static void Main(string[] args)
@@ -384,12 +384,12 @@ class Program
                         case "w":
                             history.ClearHistory();
                             break;
-                        // Return text for an incorrect option entry.
+                        
                         default:
                             break;
                     }
 
-                    //result = calculator.DoOperation(op);
+                    
                     Console.WriteLine("Your result: {0:0.##}\n", result);
                 }
                 catch (Exception e)
