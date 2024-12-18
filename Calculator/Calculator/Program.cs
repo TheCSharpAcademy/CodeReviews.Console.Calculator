@@ -121,12 +121,13 @@ class Program
             Console.WriteLine("\tp - Power");
             Console.WriteLine("\tx - 10th Power");
             Console.WriteLine("\tt - Trigonometric Function");
+            Console.WriteLine("\tc - To see the number of times the Calculator has been used");
             Console.Write("Your option? ");
 
             string? op = Console.ReadLine();
 
             // Validate input is not null, and matches the pattern
-            if (op == null || !Regex.IsMatch(op, "[a|s|m|d|r|p|x|t]"))
+            if (op == null || !Regex.IsMatch(op, "[a|s|m|d|r|p|x|t|c]"))
             {
                 Console.WriteLine("Error: Unrecognized input.");
             }
@@ -134,7 +135,7 @@ class Program
             {
                 try
                 {
-                    calculator.setNumberOfTimes();
+                    
                     switch (op)
                     {
                         case "a":
@@ -142,21 +143,27 @@ class Program
                         case "m":
                         case "d":
                         case "p":
+                            calculator.setNumberOfTimes();
                             double[] entriesArray = getGeneralArguments();
                             result = calculator.DoOperation(op, entriesArray[0], entriesArray[1]);
                             break;
                         case "r":
+                            calculator.setNumberOfTimes();
                             result = calculator.DoOperation(op, getSquareRootArgument());
                             break;
                         case "x":
+                            calculator.setNumberOfTimes();
                             result = calculator.DoOperation(op, getTenToPowerArgument());
                             break;
                         case "t":
+                            calculator.setNumberOfTimes();
                             string[] entriesArray2 = getTrigFunctionArguments();
                             double v = Convert.ToDouble(entriesArray2[1]);
                             string w = entriesArray2[0];
                             result = calculator.DoOperation(op, functionName: w, angle: v);
-
+                            break;
+                         case "c":
+                            result = calculator.getNumberOfTimes();
                             break;
                         // Return text for an incorrect option entry.
                         default:
