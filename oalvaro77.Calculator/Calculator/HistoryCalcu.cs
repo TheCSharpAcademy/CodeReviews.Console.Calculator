@@ -6,8 +6,8 @@ namespace Calculator
     internal class HistoryCalcu
     {
         public List<StorageCal> history = new List<StorageCal>();
-        
-           
+
+
         public void AddCals(string op, double result)
         {
             history.Add(new StorageCal { Date = DateTime.Now, NameOp = op, Result = result });
@@ -24,15 +24,15 @@ namespace Calculator
 
         public double GetPResult()
         {
-           if (history.Count == 0)
+            if (history.Count == 0)
             {
                 Console.WriteLine("No previus results. Returning defoult value");
                 return 0;
             }
-            
+
             return history[^1].Result;
 
         }
 
-     }
+    }
 }

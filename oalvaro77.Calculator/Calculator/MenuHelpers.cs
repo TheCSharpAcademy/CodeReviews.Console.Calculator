@@ -1,17 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Calculator
+﻿namespace Calculator
 {
-    
+
     internal class MenuHelpers
     {
         Input input = new Input();
         Calculator calculator = new Calculator();
-        internal double ExecuteCalculation(double num1, double num2, string op) {
+        internal double ExecuteCalculation(double num1, double num2, string op)
+        {
             try
             {
                 double result = Calculator.DoOperation(num1, num2, op);
@@ -19,7 +14,7 @@ namespace Calculator
                 {
                     Console.WriteLine("This operation will result in a mathematical error");
                 }
-               return result; 
+                return result;
             }
 
             catch (Exception ex)
@@ -27,7 +22,7 @@ namespace Calculator
                 Console.WriteLine("Oh no! An exception ocurred to do math.\n -Details:" + ex.Message);
                 return double.NaN;
             }
-            
+
         }
 
         internal double PerfomOp(string op)

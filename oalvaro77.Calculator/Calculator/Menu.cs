@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
+﻿using System.Text.RegularExpressions;
 
 namespace Calculator
 {
@@ -13,7 +8,7 @@ namespace Calculator
         public static MenuHelpers menuHelpers = new MenuHelpers();
         public void MainMenu()
         {
-            
+
             Calculator.SetHistoryCalcu(historyCalcu);
             Input.SetHistoryInput(historyCalcu);
             bool endApp = false;
@@ -65,16 +60,17 @@ namespace Calculator
 
                 Console.WriteLine("---------------\n");
                 Console.WriteLine("Press n and Enter to close the app or any other key to continue ");
-                if (Console.ReadLine()?.ToLower() == "n"){
+                if (Console.ReadLine()?.ToLower() == "n")
+                {
                     endApp = true;
 
                 }
                 count++;
-                
+
 
             }
             return;
-            
+
         }
     }
 }
