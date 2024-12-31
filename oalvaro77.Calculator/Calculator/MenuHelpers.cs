@@ -32,15 +32,15 @@
             //For sqrt, only one input is need
             if (op == "5")
             {
-                num1 = input.input1();
+                num1 = input.Input1();
                 double result = ExecuteCalculation(num1, 0, op);
                 return result;
             }
 
             // for other operation
 
-            num1 = input.input1();
-            num2 = input.input2();
+            num1 = input.Input1();
+            num2 = input.Input2();
 
             return ExecuteCalculation(num1, num2, op);
         }

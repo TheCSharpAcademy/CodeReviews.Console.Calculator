@@ -15,15 +15,12 @@ namespace Calculator
             Console.WriteLine("Console calculator en c#\r");
             Console.WriteLine("------------------------\n");
             int count = 0;
-            double previusResult = 0;
+            
             while (!endApp)
             {
                 Console.WriteLine($"Have you used {count} times the calculator");
-                string? numInput1 = "";
-                string? numInput2 = "";
+
                 double result = 0;
-
-
 
                 Console.WriteLine("Choose an operation from the follow list:");
                 Console.WriteLine("\t1 - add");

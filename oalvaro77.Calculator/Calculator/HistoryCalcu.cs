@@ -26,7 +26,7 @@ namespace Calculator
         {
             if (history.Count == 0)
             {
-                Console.WriteLine("No previus results. Returning defoult value");
+               
                 return 0;
             }
 
