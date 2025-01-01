@@ -32,15 +32,15 @@
             //For sqrt, only one input is need
             if (op == "5")
             {
-                num1 = input.Input1();
+                num1 = input.Tinput1();
                 double result = ExecuteCalculation(num1, 0, op);
                 return result;
             }
 
             // for other operation
 
-            num1 = input.Input1();
-            num2 = input.Input2();
+            num1 = input.Tinput1();
+            num2 = input.Tinput2();
 
             return ExecuteCalculation(num1, num2, op);
         }
