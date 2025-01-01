@@ -8,7 +8,7 @@
         {
             historyCalcu = _historyCalcu;
         }
-        public double Input1()
+        public static double Input1()
         {
             double previusResult = historyCalcu.GetPResult();
             //Ask the user to type the first type
@@ -31,7 +31,7 @@
 
         }
 
-        public double Input2()
+        public static double Input2()
         {
             Console.WriteLine("Enter the second value, and thne press enter");
             string numInput2 = Console.ReadLine();
