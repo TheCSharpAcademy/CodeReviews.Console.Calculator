@@ -39,6 +39,23 @@
                     result = Math.Sqrt(num1);
                     historyCalcu.AddCals("Sqrt", result);
                     break;
+                case "6":
+                    result = Math.Pow(num1, num2);
+                    historyCalcu.AddCals("Take pow", result);
+                    break;
+                case "7":
+                    result = Math.Sin(num1);
+                    historyCalcu.AddCals("Sin", result);
+                    break;
+                case "8":
+                    result = Math.Cos(num1);
+                    historyCalcu.AddCals("Sin", result);
+                    break;
+                case "9":
+                    result = Math.Tan(num1);
+                    historyCalcu.AddCals("Sin", result);
+                    break;
+
 
                 default:
                     break;

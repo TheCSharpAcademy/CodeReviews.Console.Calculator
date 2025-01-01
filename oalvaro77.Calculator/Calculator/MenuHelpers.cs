@@ -1,4 +1,6 @@
-﻿namespace Calculator
+﻿using System.Text.RegularExpressions;
+
+namespace Calculator
 {
 
     internal class MenuHelpers
@@ -30,7 +32,7 @@
             double num1 = 0, num2 = 0;
 
             //For sqrt, only one input is need
-            if (op == "5")
+            if (Regex.IsMatch(op, "^[5|7|8|9]$"))
             {
                 num1 = input.Tinput1();
                 double result = ExecuteCalculation(num1, 0, op);

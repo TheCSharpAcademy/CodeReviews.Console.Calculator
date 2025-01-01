@@ -28,7 +28,11 @@ namespace Calculator
                 Console.WriteLine("\t3 - Multiply");
                 Console.WriteLine("\t4 - Divide");
                 Console.WriteLine("\t5 - Sqrt");
-                Console.WriteLine("\t6 - Historial calculation");
+                Console.WriteLine("\t6 - Take Power");
+                Console.WriteLine("\t7 - Sen");
+                Console.WriteLine("\t8 - Cos");
+                Console.WriteLine("\t9 - Tan");
+                Console.WriteLine("\t10 - History Operations");
                 Console.Write("Your option? ");
 
 
@@ -36,12 +40,12 @@ namespace Calculator
                 string? op = Console.ReadLine();
 
                 //Validate the input is not null and matches the pattern
-                if (op == null || !Regex.IsMatch(op, "^[1-6]$"))
+                if (op == null || !Regex.IsMatch(op, "^[1-9]$|^10$"))
                 {
                     Console.WriteLine("Error: Unrecognized input");
                     continue;
                 }
-                if (op == "6")
+                if (op == "10")
                 {
                     historyCalcu.PrintHistory();
 
