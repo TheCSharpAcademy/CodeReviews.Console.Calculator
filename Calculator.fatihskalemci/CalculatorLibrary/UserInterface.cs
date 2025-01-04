@@ -1,21 +1,24 @@
 ﻿using Spectre.Console;
 using static CalculatorLibrary.Enums;
+
 namespace CalculatorLibrary;
 
 public class UserInterface
 {
     private CalculatorEngine calculator = new CalculatorEngine();
+
     public void MainMenu()
     {
-        double result = 0;
         bool endApp = false;
 
         Console.WriteLine("Console Calculator in C#\r");
         Console.WriteLine("------------------------\n");
+
         while (!endApp)
         {
             Console.Clear();
 
+            double result;
             var menuSelection = AnsiConsole.Prompt(
                 new SelectionPrompt<MenuOptions>()
                 .Title("[green]Choose an operation from the following list:[/]")
@@ -37,6 +40,7 @@ public class UserInterface
                     try
                     {
                         result = calculator.DoMathOperation(firstNumber, secondNumber, menuSelection);
+
                         if (double.IsNaN(result))
                         {
                             Console.WriteLine("This operation will result in a mathematical error.\n");
@@ -109,23 +113,28 @@ public class UserInterface
             Console.Write("Press 'n' and Enter to close the app, or press any other key and Enter to continue: ");
             if (Console.ReadLine() == "n") endApp = true;
         }
+
         calculator.Finish();
     }
 
     public double GetNumberFromUser()
     {
         Console.WriteLine("Enter a number OR type \"h\" to select from history");
+
         string? userInput1 = Console.ReadLine();
-        double cleanNum1 = 0;
+        double cleanNum1;
+
         if (userInput1.ToLower() == "h")
         {
             return calculator.SelectFromHistory();
         }
+        
         while (!double.TryParse(userInput1, out cleanNum1))
         {
             Console.Write("This is not valid input. Please enter an integer value: ");
             userInput1 = Console.ReadLine();
         }
+
         return cleanNum1;
     }
 }

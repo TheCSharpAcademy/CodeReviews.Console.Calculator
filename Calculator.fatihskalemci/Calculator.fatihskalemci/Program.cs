@@ -1,4 +1,4 @@
 ﻿using CalculatorLibrary;
 
-UserInterface userInterface = new UserInterface();
+UserInterface userInterface = new();
 userInterface.MainMenu();
