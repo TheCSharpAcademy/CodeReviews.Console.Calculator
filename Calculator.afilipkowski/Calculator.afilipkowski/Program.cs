@@ -60,6 +60,7 @@ class Program
                     else
                     {
                         Console.WriteLine("Your result: {0:0.##}\n", result);
+                        Console.WriteLine($"The calculator was used {calculator.GetCount()} time(s).");
                     }
                 }
                 catch (Exception e)
@@ -68,10 +69,17 @@ class Program
                 }
             }
             Console.WriteLine("------------------------\n");
-            Console.Write("Press 'n' and Enter to close the app, or press any other key and Enter to continue: ");
+            Console.WriteLine("Do you want to see the history of calculations? (y/n)");
+            var history = Console.ReadLine();
+            if (history.ToLower() == "y")
+            {
+                calculator.DisplayHistory();
+                Console.WriteLine("Do you want to clear the history? (y/n)");
+                if (Console.ReadLine() == "y") calculator.ClearHistory();
+            }
+            Console.Write("Press 'n' and Enter to close the app or press any other key and Enter to continue: ");
             if (Console.ReadLine() == "n") endApp = true;
-
-            Console.WriteLine("\n"); // Friendly linespacing.
+            Console.Clear();
         }
         calculator.Finish();
         return;

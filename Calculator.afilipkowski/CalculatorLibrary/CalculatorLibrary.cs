@@ -6,6 +6,8 @@ namespace CalculatorLibrary
     public class Calculator
     {
         JsonWriter writer;
+        private int calcCount = 0;
+        private List<string> calculations = new List<string>();
         public Calculator()
         {
             StreamWriter logFile = File.CreateText("calculatorlog.json");
@@ -31,14 +33,20 @@ namespace CalculatorLibrary
                 case "a":
                     result = num1 + num2;
                     writer.WriteValue("Add");
+                    calcCount++;
+                    calculations.Add($"{num1}+{num2}={result}");
                     break;
                 case "s":
                     result = num1 - num2;
                     writer.WriteValue("Subtract");
+                    calcCount++;
+                    calculations.Add($"{num1}-{num2}={result}");
                     break;
                 case "m":
                     result = num1 * num2;
                     writer.WriteValue("Multiply");
+                    calculations.Add($"{num1}*{num2}={result}");
+                    calcCount++;
                     break;
                 case "d":
                     if (num2 != 0)
@@ -46,6 +54,8 @@ namespace CalculatorLibrary
                         result = num1 / num2;
                     }
                     writer.WriteValue("Divide");
+                    calculations.Add($"{num1}/{num2}={result}");
+                    calcCount++;
                     break;
                 default:
                     break;
@@ -62,6 +72,19 @@ namespace CalculatorLibrary
             writer.WriteEndArray();
             writer.WriteEndObject();
             writer.Close();
+        }
+        public int GetCount() { return calcCount; }
+
+        public void DisplayHistory()
+        {
+            for (int i = 0; i < calculations.Count; i++)
+            {
+                Console.WriteLine($"{i + 1}. {calculations[i]}");
+            }
+        }
+        public void ClearHistory()
+        {
+            calculations.Clear();
         }
     }
 
