@@ -1,12 +1,11 @@
-﻿using System.Diagnostics;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
 namespace CalculatorLibrary
 {
     public class Calculator
     {
         JsonWriter writer;
-        private int calcCount = 0;
+        private int calcCount;
         private List<string> calculations = new List<string>();
         public Calculator()
         {
