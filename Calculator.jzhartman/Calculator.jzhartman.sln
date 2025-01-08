@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.12.35527.113 d17.12
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CalculatorConsoleUI", "Calculator.jzhartman\CalculatorConsoleUI.csproj", "{9C2D565C-19E0-47EC-AFD2-A763DCCF2261}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CalculatorApp", "Calculator.jzhartman\CalculatorApp.csproj", "{9C2D565C-19E0-47EC-AFD2-A763DCCF2261}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CalculatorLibrary", "CalculatorLibrary\CalculatorLibrary.csproj", "{A4A4D427-82DE-4B55-B4C8-8C412F5EE5E0}"
 EndProject

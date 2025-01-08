@@ -6,8 +6,14 @@ namespace CalculatorLibrary
     public class Calculator
     {
         JsonWriter writer;
+        public List<Calculation> History { get; set; }
+        public int TimesUsed { get; set; }
+
         public Calculator()
         {
+            this.History = new List<Calculation>();
+            this.TimesUsed = 0;
+
             StreamWriter logFile = File.CreateText("calculator.log");
             logFile.AutoFlush = true;
             writer = new JsonTextWriter(logFile);
@@ -63,6 +69,31 @@ namespace CalculatorLibrary
             writer.WriteEndArray();
             writer.WriteEndObject();
             writer.Close();
+        }
+
+        public static string GetOperationSymbol(string operation)
+        {
+            string operationSymbol = string.Empty;
+
+            switch (operation)
+            {
+                case "a":
+                    operationSymbol = "+";
+                    break;
+                case "s":
+                    operationSymbol = "-";
+                    break;
+                case "m":
+                    operationSymbol = "*";
+                    break;
+                case "d":
+                    operationSymbol = "/";
+                    break;
+                default:
+                    break;
+            }
+
+            return operationSymbol;
         }
     }
 }
