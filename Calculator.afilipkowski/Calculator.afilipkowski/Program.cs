@@ -5,35 +5,21 @@ class Program
     static void Main(string[] args)
     {
         bool endApp = false;
+        bool firstInput = true; //control for using previous result as an input
         Console.WriteLine("Console Calculator in C#\r");
         Console.WriteLine("------------------------\n");
 
         Calculator calculator = new Calculator();
         while (!endApp)
         {
-            string? numInput1 = "";
-            string? numInput2 = "";
-            double result = 0;
-
-            Console.Write("Type a number, and then press Enter: ");
-            numInput1 = Console.ReadLine();
-
             double cleanNum1 = 0;
-            while (!double.TryParse(numInput1, out cleanNum1))
-            {
-                Console.Write("This is not valid input. Please enter a numeric value: ");
-                numInput1 = Console.ReadLine();
-            }
-
-            Console.Write("Type another number, and then press Enter: ");
-            numInput2 = Console.ReadLine();
-
             double cleanNum2 = 0;
-            while (!double.TryParse(numInput2, out cleanNum2))
-            {
-                Console.Write("This is not valid input. Please enter a numeric value: ");
-                numInput2 = Console.ReadLine();
-            }
+            double result = 0;
+            bool historyCleared = false; //so as it doesn't ask if you want to use previous result as an input after clearing history
+                                         //it needs to be reset after each iteration, otherwise it would be always true after clearing history once
+
+            cleanNum1 = calculator.GetInput(firstInput); //turned getting input into a method in order to prevent repetition
+            cleanNum2 = calculator.GetInput(firstInput);
 
             Console.WriteLine("Choose an operator from the following list:");
             Console.WriteLine("\ta - Add");
@@ -75,8 +61,14 @@ class Program
             {
                 calculator.DisplayHistory();
                 Console.WriteLine("Do you want to clear the history? (y/n)");
-                if (Console.ReadLine() == "y") calculator.ClearHistory();
+                if (Console.ReadLine() == "y")
+                {
+                    calculator.ClearHistory();
+                    historyCleared = true;
+                }
             }
+            if (historyCleared) firstInput = true;
+            else firstInput = false;
             Console.Write("Press 'n' and Enter to close the app or press any other key and Enter to continue: ");
             if (Console.ReadLine() == "n") endApp = true;
             Console.Clear();
