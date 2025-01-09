@@ -6,7 +6,6 @@ using static System.Runtime.InteropServices.JavaScript.JSType;
 namespace CalculatorProgram
 {
     /*
-     *  ToDo: Ability to recall any previous calculations from history list
      *  ToDo: Remove New Calculation option and have menu built into main operation
      *  ToDo: Add other math operations sqrt, taking the power, 10x, and Trig
      * 
@@ -181,7 +180,14 @@ namespace CalculatorProgram
                             PerformCalculations(calculator, true, calculator.History.Last().Result);
                             break;
                         case "h":
-                            PrintHistory(calculator);
+                            (bool recallResult, double resultToRecall) = ManageHistory(calculator);
+
+                            if (recallResult)
+                            {
+                                PrintTitleBar(1, 1);
+                                PrintBriefHistoryBar(calculator);
+                                PerformCalculations(calculator, true, resultToRecall);
+                            }
                             break;
                         case "d":
                             Console.WriteLine("Deleting calculator history...");
@@ -208,6 +214,8 @@ namespace CalculatorProgram
             Console.Clear();
             Console.WriteLine("Printing calculator history");
             Console.WriteLine();
+            Console.WriteLine("ID\tCalculation");
+            PrintDividerLine(2, 1);
 
             int rowID = 1;
             foreach (Calculation calculation in calculator.History)
@@ -219,7 +227,55 @@ namespace CalculatorProgram
             }
 
             Console.WriteLine();
-            PressAnyKeyToContinue();
+        }
+
+
+        private static (bool recallResult, double result) ManageHistory(Calculator calculator)
+        {
+            bool recallResult = false;
+            double result = double.NaN;
+
+            PrintHistory(calculator);
+
+            string response = GetUserInput("Recall previous result as first number? (y/n): ");
+
+            while (response.ToLower() != "y" && response.ToLower() != "n")
+            {
+                Console.Write("ERROR: Please enter \"y\" for yes or \"n\" for no: ");
+                response = Console.ReadLine();
+            }
+
+            if (response.ToLower() == "n")
+            {
+                recallResult = false;
+                PressAnyKeyToContinue();
+            }
+            else
+            {
+                string idSelection = string.Empty;
+                int cleanID = 0;
+                bool idIsValid = false;
+
+                while (!idIsValid)
+                {
+                    idSelection = GetUserInput("Enter the ID number of the result to recall: ");
+                    idIsValid = int.TryParse(idSelection, out cleanID);
+
+                    if (cleanID < 1 || cleanID > calculator.History.Count || calculator.History[cleanID-1].HasError)
+                    {
+                        idIsValid = false;
+                        Console.WriteLine("ERROR: Invalid entry!");
+                    }
+                }
+
+                recallResult = true;
+                result = calculator.History[cleanID - 1].Result;
+
+                Console.WriteLine($"Recalling {result} from history entry {cleanID}!");
+                PressAnyKeyToContinue();
+            }
+
+            return (recallResult, result);
         }
     }
 }
