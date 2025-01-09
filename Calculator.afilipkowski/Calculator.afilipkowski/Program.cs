@@ -5,7 +5,7 @@ class Program
     static void Main(string[] args)
     {
         bool endApp = false;
-        bool firstInput = true; //control for using previous result as an input
+        bool firstInput = true; 
         Console.WriteLine("Console Calculator in C#\r");
         Console.WriteLine("------------------------\n");
 
@@ -15,10 +15,8 @@ class Program
             double cleanNum1 = 0;
             double cleanNum2 = 0;
             double result = 0;
-            bool historyCleared = false; //so as it doesn't ask if you want to use previous result as an input after clearing history
-                                         //it needs to be reset after each iteration, otherwise it would be always true after clearing history once
-
-            cleanNum1 = calculator.GetInput(firstInput); //turned getting input into a method in order to prevent repetition
+            bool historyCleared = false; 
+            cleanNum1 = calculator.GetInput(firstInput); 
             cleanNum2 = calculator.GetInput(firstInput);
 
             Console.WriteLine("Choose an operator from the following list:");

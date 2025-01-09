@@ -87,7 +87,7 @@ namespace CalculatorLibrary
             calculations.Clear();
         }
 
-        public double GetResult(int index) //takes the result from the history and returns it as a double
+        public double GetResult(int index) 
         {
             double result = 0;
             string equation = calculations[index - 1];
@@ -97,7 +97,7 @@ namespace CalculatorLibrary
 
         }
 
-        public double GetInput(bool firstInput) //it takes firstInput as an argument to determine if it should display the message about using previous result
+        public double GetInput(bool firstInput) 
         {
             string? numInput = "";
             double cleanNum = 0;
@@ -108,7 +108,7 @@ namespace CalculatorLibrary
             }
             numInput = Console.ReadLine();
 
-            if (numInput == "p" && !firstInput) //second condition just to make sure it can't be used with empty history
+            if (numInput == "p" && !firstInput)
             {
                 int index = 0;
                 string? indexInput = "";
