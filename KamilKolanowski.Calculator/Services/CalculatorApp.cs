@@ -4,6 +4,8 @@ public class CalculatorApp
 {
     public void Calc()
     {
+        int timesCalculatorUsed = 0;
+        
         Console.WriteLine("Welcome to the calculator!");
         
         while (true)
@@ -27,7 +29,9 @@ public class CalculatorApp
 
             var res = new GetResult();
             res.GetResultFromOperation(operation);
-            
+
+            timesCalculatorUsed += 1;
+            Console.WriteLine($"You used calculator {timesCalculatorUsed} time(s)!");
         }
     }
 }
