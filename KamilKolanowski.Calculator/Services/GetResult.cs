@@ -5,58 +5,80 @@ public class GetResult
     public decimal GetResultFromOperation(string operation)
             {
                 ICalculator calculator = null;
+                char choice;
     
                 switch (operation.ToLower())
                 {
                     case "a":
                         calculator = new Add();
+                        choice = '+';
                         break;
                     case "s":
                         calculator = new Sub();
+                        choice = '-';
                         break;
                     case "m":
                         calculator = new Mul();
+                        choice = '*';
                         break;
                     case "d":
                         calculator = new Div();
+                        choice = '/';
+                        break;
+                    case "q":
+                        choice = 'q';
                         break;
                     default:
                         Console.WriteLine("Invalid operation.");
                         return 0;
                 }
-    
+
                 try
                 {
                     decimal[] nums = GetNumbers();
-    
-                    checked
-                    {
-                        Console.WriteLine($"Your result is: {calculator.Operation(nums[0], nums[1])}");
-                    }
+                    
+                    Console.WriteLine(
+                        $"Your result is: {calculator.Operation(nums[0], nums[1])}");
+                    Console.WriteLine("____________________________________________");
                 }
-                catch (System.OverflowException ex)
+                catch (OverflowException ex)
                 {
                     Console.WriteLine($"You can't add such numbers because: {ex.Message}");
                 }
-                catch (System.FormatException)
+                catch (NullReferenceException ex)
                 {
-                    Console.WriteLine("Invalid input. Please enter a valid number.");
+                    Console.WriteLine($"Enter valid numbers!");
                 }
     
                 return 0;
             }
 
 
-    public decimal[] GetNumbers()
+    public static decimal[]? GetNumbers()
     {
         Console.Write("Enter the first number: ");
-        decimal firstNumber = decimal.Parse(Console.ReadLine());
-    
-        Console.Write("Enter the second number: ");
-        decimal secondNumber = decimal.Parse(Console.ReadLine());
-        
-        decimal[] numbers = { firstNumber, secondNumber };
+        string? input1 = Console.ReadLine();
 
-        return numbers;
+        Console.Write("Enter the second number: ");
+        string? input2 = Console.ReadLine();
+        
+        try
+        {
+            decimal firstNumber = decimal.Parse(input1);
+            decimal secondNumber = decimal.Parse(input2);
+
+            decimal[] numbers = { firstNumber, secondNumber };
+            return numbers;
+        }
+        catch (FormatException)
+        {
+            Console.WriteLine("Invalid input!");
+            return null;
+        }
+        catch (OverflowException)
+        {
+            Console.WriteLine("Number is too large or too small.");
+            return null;
+        }
     }
 }
