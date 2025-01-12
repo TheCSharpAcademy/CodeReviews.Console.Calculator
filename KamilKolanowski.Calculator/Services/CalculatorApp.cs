@@ -22,7 +22,7 @@ public class CalculatorApp
             if (operation.ToLower() == "q")
             {
                 Console.WriteLine("Thank you for using the calculator. Goodbye!");
-                break; // Exit the loop
+                break;
             }
 
             var res = new GetResult();
