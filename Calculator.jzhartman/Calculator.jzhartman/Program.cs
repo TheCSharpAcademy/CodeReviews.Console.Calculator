@@ -2,14 +2,13 @@
 using System.Text.RegularExpressions;
 using System.Diagnostics;
 using static System.Runtime.InteropServices.JavaScript.JSType;
+using CalculatorLibrary.Models;
 
 namespace CalculatorProgram
 {
     /*
      *  ToDo: Remove New Calculation option and have menu built into main operation
      *  ToDo: Add other math operations sqrt, taking the power, 10x, and Trig
-     * 
-     * 
      */
 
     internal class Program
@@ -66,11 +65,14 @@ namespace CalculatorProgram
         }
         private static void PrintOperationsMenu()
         {
-            Console.WriteLine("Choose an operator from the following list:"
-                                +"\n\tA: Add"
-                                +"\n\tS: Subtract"
-                                +"\n\tM: Multiple"
-                                +"\n\tD: Divide");
+            Console.WriteLine("Choose an operation from the following list:"
+                                + "\n\tA: Add"
+                                + "\n\tS: Subtract"
+                                + "\n\tM: Multiply"
+                                + "\n\tD: Divide"
+                                + "\n\tQ: Sqare Root"
+                                + "\n\tR: y Root(x)"
+                                + "\n\tP: Power (y^x)");
             Console.WriteLine();
         }
 
@@ -108,23 +110,29 @@ namespace CalculatorProgram
                 cleanNum1 = CleanNumber(numInput1);
             }
 
-            string numInput2 = GetUserInput("Enter second number:\t");
-            double cleanNum2 = CleanNumber(numInput2);
-
             Console.WriteLine();
             PrintOperationsMenu();
             string operation = GetUserInput("Select your operation: ");
             Console.WriteLine();
 
+
             //Validate operation
-            if (operation == null || !Regex.IsMatch(operation.ToLower(), "[a|s|m|d]"))
+            if (operation == null || !Regex.IsMatch(operation.ToLower(), "[a|s|m|d|q|r|p]"))
             {
                 Console.WriteLine("ERROR: Invalid input.");
             }
             else
             {
-                //Evaluate calculation
+                double cleanNum2 = double.NaN;
                 string operationSymbol = Calculator.GetOperationSymbol(operation);
+                if (operation.ToLower() != "q")
+                {
+                    Console.WriteLine($"{cleanNum1} {operationSymbol} ?");
+                    string numInput2 = GetUserInput("Enter second number:\t");
+                    cleanNum2 = CleanNumber(numInput2);
+                }
+
+                //Evaluate calculation
                 bool calculationHasError = false;
                 try
                 {
@@ -136,7 +144,20 @@ namespace CalculatorProgram
                     }
                     else
                     {
-                        Console.WriteLine("Your result: {1} {2} {3} = {0:0.##}\n", result, cleanNum1, operationSymbol, cleanNum2);
+                        if (Regex.IsMatch(operation.ToLower(), "[a|s|m|d|p]"))
+                        {
+
+                            Console.WriteLine("Your result: {1} {2} {3} = {0:0.##}\n", result, cleanNum1, operationSymbol, cleanNum2);
+                        }
+                        else if (Regex.IsMatch(operation.ToLower(), "[q]"))
+                        {
+                            Console.WriteLine("Your result: {2}({1}) = {0:0.##}\n", result, cleanNum1, operationSymbol);
+                        }
+                        else if (Regex.IsMatch(operation.ToLower(), "[r]"))
+                        {
+                            Console.WriteLine("Your result: {3} {2}({1}) = {0:0.##}\n", result, cleanNum1, operationSymbol, cleanNum2);
+
+                        }
                     }
                 }
                 catch (Exception e)
@@ -146,7 +167,7 @@ namespace CalculatorProgram
 
                 }
 
-                calculator.History.Add(new Calculation(cleanNum1, cleanNum2, operationSymbol, result, calculationHasError));
+                calculator.History.Add(new CalculationModel(cleanNum1, cleanNum2, operationSymbol, result, calculationHasError));
                 calculator.TimesUsed++;
             }
 
@@ -218,7 +239,7 @@ namespace CalculatorProgram
             PrintDividerLine(2, 1);
 
             int rowID = 1;
-            foreach (Calculation calculation in calculator.History)
+            foreach (CalculationModel calculation in calculator.History)
             {
                 string result = (calculation.HasError) ? "ERROR" : calculation.Result.ToString();
 

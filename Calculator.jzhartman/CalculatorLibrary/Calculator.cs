@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics;
+using CalculatorLibrary.Models;
 using Newtonsoft.Json;
 
 namespace CalculatorLibrary
@@ -6,12 +7,12 @@ namespace CalculatorLibrary
     public class Calculator
     {
         JsonWriter writer;
-        public List<Calculation> History { get; set; }
+        public List<CalculationModel> History { get; set; }
         public int TimesUsed { get; set; }
 
         public Calculator()
         {
-            this.History = new List<Calculation>();
+            this.History = new List<CalculationModel>();
             this.TimesUsed = 0;
 
             StreamWriter logFile = File.CreateText("calculator.log");
@@ -54,6 +55,21 @@ namespace CalculatorLibrary
                     }
                     writer.WriteValue("Divide");
                     break;
+                case "q":
+                    if (num1 > 0)
+                    {
+                        result = Math.Sqrt(num1);
+                    }
+                    writer.WriteValue("Square Root");
+                    break;
+                case "r":
+                    result = Math.Pow(num1, 1.0 / num2);
+                    writer.WriteValue("y Root");
+                    break;
+                case "p":
+                    result = Math.Pow(num1, num2);
+                    writer.WriteValue("Power");
+                    break;
                 default:
                     break;
             }
@@ -88,6 +104,15 @@ namespace CalculatorLibrary
                     break;
                 case "d":
                     operationSymbol = "/";
+                    break;
+                case "q":
+                    operationSymbol = "sqrt";
+                    break;
+                case "r":
+                    operationSymbol = "root";
+                    break;
+                case "e":
+                    operationSymbol = "^";
                     break;
                 default:
                     break;
