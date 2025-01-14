@@ -1,6 +1,7 @@
 ﻿using System.Diagnostics;
 using CalculatorLibrary.Models;
 using Newtonsoft.Json;
+using CalculatorLibrary.Enums;
 
 namespace CalculatorLibrary
 {
@@ -24,51 +25,46 @@ namespace CalculatorLibrary
             writer.WriteStartArray();
         }
 
-        public double DoOperation(double num1, double num2, string operation)
+        public double DoOperation(CalculationModel calculation)
         {
             double result = double.NaN;
             writer.WriteStartObject();
             writer.WritePropertyName("Operand1");
-            writer.WriteValue(num1);
+            writer.WriteValue(calculation.Operand1);
             writer.WritePropertyName("Operand2");
-            writer.WriteValue(num2);
+            writer.WriteValue(calculation.Operand2);
             writer.WritePropertyName("Operation");
+            writer.WriteValue(Enum.GetName(calculation.Operation));
 
-            switch (operation.ToLower())
+            switch (calculation.Operation)
             {
-                case "a":
-                    result = num1 + num2;
-                    writer.WriteValue("Add");
+                case Operation.Add:
+                    result = calculation.Operand1 + calculation.Operand2;
+                    
                     break;
-                case "s":
-                    result = num1 - num2;
-                    writer.WriteValue("Subtract");
+                case Operation.Subtract:
+                    result = calculation.Operand1 - calculation.Operand2;
                     break;
-                case "m":
-                    result = num1 * num2;
-                    writer.WriteValue("Multiply");
+                case Operation.Multiply:
+                    result = calculation.Operand1 * calculation.Operand2;
                     break;
-                case "d":
-                    if (num2 != 0)
+                case Operation.Divide:
+                    if (calculation.Operand2 != 0)
                     {
-                        result = num1 / num2;
+                        result = calculation.Operand1 / calculation.Operand2;
                     }
-                    writer.WriteValue("Divide");
                     break;
-                case "q":
-                    if (num1 > 0)
+                case Operation.SquareRoot:
+                    if (calculation.Operand1 > 0)
                     {
-                        result = Math.Sqrt(num1);
+                        result = Math.Sqrt(calculation.Operand1);
                     }
-                    writer.WriteValue("Square Root");
                     break;
-                case "r":
-                    result = Math.Pow(num1, 1.0 / num2);
-                    writer.WriteValue("y Root");
+                case Operation.Root:
+                    result = Math.Pow(calculation.Operand1, 1.0 / calculation.Operand2);
                     break;
-                case "p":
-                    result = Math.Pow(num1, num2);
-                    writer.WriteValue("Power");
+                case Operation.Power:
+                    result = Math.Pow(calculation.Operand1, calculation.Operand2);
                     break;
                 default:
                     break;
@@ -85,40 +81,6 @@ namespace CalculatorLibrary
             writer.WriteEndArray();
             writer.WriteEndObject();
             writer.Close();
-        }
-
-        public static string GetOperationSymbol(string operation)
-        {
-            string operationSymbol = string.Empty;
-
-            switch (operation)
-            {
-                case "a":
-                    operationSymbol = "+";
-                    break;
-                case "s":
-                    operationSymbol = "-";
-                    break;
-                case "m":
-                    operationSymbol = "*";
-                    break;
-                case "d":
-                    operationSymbol = "/";
-                    break;
-                case "q":
-                    operationSymbol = "sqrt";
-                    break;
-                case "r":
-                    operationSymbol = "root";
-                    break;
-                case "e":
-                    operationSymbol = "^";
-                    break;
-                default:
-                    break;
-            }
-
-            return operationSymbol;
         }
     }
 }
