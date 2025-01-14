@@ -56,13 +56,31 @@ namespace CalculatorProgram
         }
         internal static void PrintOperationsMenu()
         {
-            Console.WriteLine("Choose an operation from the following list:"
+            Console.WriteLine("Operation selection menu:"
                                 + "\n\tA: Add" +    "\t\tQ: Sqare Root"
                                 + "\n\tS: Subtract" + "\tR: y Root(x)"
                                 + "\n\tM: Multiply" + "\tP: Power (y^x)"
                                 + "\n\tD: Divide");
             Console.WriteLine();
         }
+        internal static void PrintHistory(Calculator calculator)
+        {
+            Console.Clear();
+            Console.WriteLine("Printing calculator history");
+            Console.WriteLine();
+            Console.WriteLine("ID\tCalculation");
+            PrintDividerLine(2, 1);
+
+            int rowID = 1;
+            foreach (CalculationModel calculation in calculator.History)
+            {
+                Console.WriteLine($"{rowID}:\t{GenerateCalculationDisplayText(calculation)}");
+                rowID++;
+            }
+
+            Console.WriteLine();
+        }
+
 
 
         internal static string GetUserInput(string message)
@@ -76,16 +94,16 @@ namespace CalculatorProgram
 
             while (!double.TryParse(number, out cleanNumber))
             {
-                number = GetUserInput("ERROR: Invalid input. Please enter a numeric value: ");
+                number = GetUserInput("ERROR: Invalid input.\nEnter a numeric value:\t");
             }
 
             return cleanNumber;
         }
-
         internal static void PerformCalculations(Calculator calculator, bool recallAnswer = false, double previousAnswer = double.NaN)
         {
             CalculationModel calculation = new CalculationModel();
             RefreshScreen(calculator);
+            PrintOperationsMenu();
 
             if (recallAnswer)
             {
@@ -99,18 +117,19 @@ namespace CalculatorProgram
             }
 
             Console.WriteLine();
-            PrintOperationsMenu();
+            //PrintOperationsMenu();
 
             bool firstAttempt = true;
             while (calculation.Operation == Operation.Error)
             {
-                string message = (firstAttempt) ? "Select your operation: " : "ERROR: Please select a valid operation: ";
+                if (!firstAttempt) Console.WriteLine("ERROR: Enter a valid operation from the list above!");
 
-                string operation = GetUserInput(message);
+                string operation = GetUserInput("Select operation:\t");
                 SetCalculationOperation(calculation, operation);
 
                 firstAttempt = false;
             }
+            //Console.Write($"Selected operation: {calculation.OperationSymbol}");
             Console.WriteLine();
 
 
@@ -133,8 +152,8 @@ namespace CalculatorProgram
                         partialCalculationText = $"? {calculation.OperationSymbol}({calculation.Operand1})";
                     }
 
-                    RefreshScreen(calculator);
-                    Console.WriteLine($"Current Calculation: {partialCalculationText}");
+                    //RefreshScreen(calculator);
+                    Console.WriteLine($"Current Calculation:\t{partialCalculationText}");
                     Console.WriteLine();
                     string numInput2 = GetUserInput("Enter second number:\t");
                     calculation.Operand2 = CleanNumber(numInput2);
@@ -152,7 +171,7 @@ namespace CalculatorProgram
                     }
                     else
                     {
-                        Console.WriteLine(GenerateCalculationDisplayText(calculation));
+                        Console.WriteLine("Completed Calculation:\t" + GenerateCalculationDisplayText(calculation));
                     }
                 }
                 catch (Exception e)
@@ -169,24 +188,6 @@ namespace CalculatorProgram
             Console.WriteLine();
             PressAnyKeyToContinue();
 
-        }
-
-        internal static void PrintHistory(Calculator calculator)
-        {
-            Console.Clear();
-            Console.WriteLine("Printing calculator history");
-            Console.WriteLine();
-            Console.WriteLine("ID\tCalculation");
-            PrintDividerLine(2, 1);
-
-            int rowID = 1;
-            foreach (CalculationModel calculation in calculator.History)
-            {
-                Console.WriteLine($"{rowID}:\t{GenerateCalculationDisplayText(calculation)}");
-                rowID++;
-            }
-
-            Console.WriteLine();
         }
         internal static (bool recallResult, double result) ManageHistory(Calculator calculator)
         {
@@ -278,11 +279,11 @@ namespace CalculatorProgram
                     break;
             }
         }
-
         internal static string GenerateCalculationDisplayText(CalculationModel c)
         {
             string output = string.Empty;
-            string result = (c.HasError) ? "ERROR" : c.Result.ToString();
+            string formattedResult = $"{c.Result:0.###}";
+            string result = (c.HasError) ? "ERROR" : formattedResult;
 
             switch (c.Operation)
             {

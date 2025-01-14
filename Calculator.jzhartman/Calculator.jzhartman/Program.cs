@@ -7,19 +7,6 @@ using CalculatorLibrary.Enums;
 
 namespace CalculatorProgram
 {
-    /*
-     *  Seems to work....
-     *  
-     *  Need to recheck some things....
-     *  
-     *  Make it a bit prettier and less busy....
-     *  
-     *  Fix output decimal places
-     *  
-     *  ToDo: Remove New Calculation option and have menu built into main operation
-     *  ToDo: Add other math operations 10x, and Trig
-     */
-
     internal class Program
     {
         static void Main(string[] args)
