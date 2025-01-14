@@ -1,6 +1,5 @@
 ﻿using CalculatorLibrary;
 using System.Text.RegularExpressions;
-using System.Diagnostics;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 using CalculatorLibrary.Models;
 using CalculatorLibrary.Enums;

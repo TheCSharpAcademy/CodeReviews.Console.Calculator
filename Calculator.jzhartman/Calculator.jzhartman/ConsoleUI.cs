@@ -2,10 +2,7 @@
 using CalculatorLibrary.Models;
 using CalculatorLibrary;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CalculatorProgram
 {
@@ -117,7 +114,6 @@ namespace CalculatorProgram
             }
 
             Console.WriteLine();
-            //PrintOperationsMenu();
 
             bool firstAttempt = true;
             while (calculation.Operation == Operation.Error)
@@ -129,7 +125,6 @@ namespace CalculatorProgram
 
                 firstAttempt = false;
             }
-            //Console.Write($"Selected operation: {calculation.OperationSymbol}");
             Console.WriteLine();
 
 
@@ -152,7 +147,6 @@ namespace CalculatorProgram
                         partialCalculationText = $"? {calculation.OperationSymbol}({calculation.Operand1})";
                     }
 
-                    //RefreshScreen(calculator);
                     Console.WriteLine($"Current Calculation:\t{partialCalculationText}");
                     Console.WriteLine();
                     string numInput2 = GetUserInput("Enter second number:\t");
