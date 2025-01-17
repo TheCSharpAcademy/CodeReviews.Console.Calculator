@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "za8d6DsWFmg=",
+  "success": true,
+  "projectFilePath": "C:\\Users\\rodri\\source\\repos\\CSharpAcademy\\White Belt\\calculator\\Calculator3\\CalculatorLibrary\\CalculatorLibrary.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\rodri\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512"
+  ],
+  "logs": []
+}
