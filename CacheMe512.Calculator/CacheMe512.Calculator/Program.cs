@@ -1,5 +1,4 @@
-﻿using Spectre.Console;
-using CalculatorLibrary;
+﻿using CalculatorLibrary;
 
 namespace CalculatorProgram
 {
@@ -17,35 +16,42 @@ namespace CalculatorProgram
             while (!endApp)
             {
                 Console.Clear();
-
-                var choice = AnsiConsole.Prompt(
-                    new SelectionPrompt<string>()
-                        .Title("What would you like to do?")
-                        .AddChoices("Perform a new calculation", "Use previous result as operand", "View previous calculations", "Clear memory", "Exit"));
+                Console.WriteLine("What would you like to do?");
+                Console.WriteLine("1. Perform a new calculation");
+                Console.WriteLine("2. Use previous result as operand");
+                Console.WriteLine("3. View previous calculations");
+                Console.WriteLine("4. Clear memory");
+                Console.WriteLine("5. Exit");
+                Console.Write("\nEnter your choice (1-5): ");
+                string choice = Console.ReadLine();
 
                 switch (choice)
                 {
-                    case "Perform a new calculation":
+                    case "1":
                         PerformCalculation(calculator, ref usageCount);
                         break;
 
-                    case "Use previous result as operand":
+                    case "2":
                         UsePreviousResult(calculator, ref usageCount);
                         break;
 
-                    case "View previous calculations":
+                    case "3":
                         calculator.ViewCalculations();
                         break;
 
-                    case "Clear memory":
+                    case "4":
                         calculator.ClearCalculatorMemory();
-                        AnsiConsole.MarkupLine("[green]Memory cleared![/]");
+                        Console.WriteLine("\nMemory cleared!");
                         Console.WriteLine("\nPress Any Key to Continue.");
                         Console.ReadKey();
                         break;
 
-                    case "Exit":
+                    case "5":
                         endApp = true;
+                        break;
+
+                    default:
+                        Console.WriteLine("\nInvalid choice. Please select a valid option.");
                         break;
                 }
             }
@@ -62,11 +68,11 @@ namespace CalculatorProgram
             double result = calculator.DoOperation(num1, num2, operation);
             if (double.IsNaN(result))
             {
-                AnsiConsole.MarkupLine("[red]This operation resulted in a mathematical error.[/]");
+                Console.WriteLine("[Error] This operation resulted in a mathematical error.");
             }
             else
             {
-                AnsiConsole.MarkupLine($"[yellow]Result: {result:0.##}[/]\nTotal results calculated: {++usageCount}");
+                Console.WriteLine($"Result: {result:0.##}\nTotal results calculated: {++usageCount}");
             }
 
             Console.WriteLine("\nPress Any Key to Continue.");
@@ -77,30 +83,38 @@ namespace CalculatorProgram
         {
             if (Memory.calculations.Count == 0)
             {
-                AnsiConsole.MarkupLine("[red]No previous calculations available.[/]");
+                Console.WriteLine("[Error] No previous calculations available.");
                 Console.ReadKey();
                 return;
             }
 
-            var selectedCalculation = AnsiConsole.Prompt(
-                new SelectionPrompt<string>()
-                    .Title("Select a previous result to use as an operand:")
-                    .PageSize(10)
-                    .AddChoices(Memory.calculations));
-
-            double selectedResult = ExtractResultFromCalculation(selectedCalculation);
-
-            double num2 = GetValidNumber("Type the second number: ");
-            string operation = GetOperation();
-
-            double result = calculator.DoOperation(selectedResult, num2, operation);
-            if (double.IsNaN(result))
+            Console.WriteLine("Select a previous result to use as an operand:");
+            for (int i = 0; i < Memory.calculations.Count; i++)
             {
-                AnsiConsole.MarkupLine("[red]This operation resulted in a mathematical error.[/]");
+                Console.WriteLine($"{i + 1}. {Memory.calculations[i]}");
+            }
+
+            Console.Write("\nEnter the number corresponding to the result: ");
+            if (int.TryParse(Console.ReadLine(), out int selectedIndex) && selectedIndex >= 1 && selectedIndex <= Memory.calculations.Count)
+            {
+                double selectedResult = ExtractResultFromCalculation(Memory.calculations[selectedIndex - 1]);
+
+                double num2 = GetValidNumber("Type the second number: ");
+                string operation = GetOperation();
+
+                double result = calculator.DoOperation(selectedResult, num2, operation);
+                if (double.IsNaN(result))
+                {
+                    Console.WriteLine("[Error] This operation resulted in a mathematical error.");
+                }
+                else
+                {
+                    Console.WriteLine($"Result: {result:0.##}\nTotal results calculated: {++usageCount}");
+                }
             }
             else
             {
-                AnsiConsole.MarkupLine($"[yellow]Result: {result:0.##}[/]\nTotal results calculated: {++usageCount}");
+                Console.WriteLine("[Error] Invalid selection.");
             }
 
             Console.WriteLine("\nPress Any Key to Continue.");
@@ -109,19 +123,32 @@ namespace CalculatorProgram
 
         private static string GetOperation()
         {
-            return AnsiConsole.Prompt(
-                new SelectionPrompt<string>()
-                    .Title("Choose an operator:")
-                    .AddChoices("a - Add", "s - Subtract", "m - Multiply", "d - Divide"))
-                .Substring(0, 1);
+            Console.WriteLine("Choose an operator:");
+            Console.WriteLine("a - Add");
+            Console.WriteLine("s - Subtract");
+            Console.WriteLine("m - Multiply");
+            Console.WriteLine("d - Divide");
+            Console.Write("\nEnter your choice (a, s, m, d): ");
+            string op = Console.ReadLine();
+            return op.Substring(0, 1);
         }
 
         private static double GetValidNumber(string prompt)
         {
-            return AnsiConsole.Prompt(
-                new TextPrompt<double>(prompt)
-                    .PromptStyle("green")
-                    .Validate(value => value >= double.MinValue && value <= double.MaxValue ? ValidationResult.Success() : ValidationResult.Error("[red]Invalid number![/]")));
+            double result;
+            while (true)
+            {
+                Console.Write(prompt);
+                string input = Console.ReadLine();
+                if (double.TryParse(input, out result))
+                {
+                    return result;
+                }
+                else
+                {
+                    Console.WriteLine("[Error] Invalid number! Please enter a valid number.");
+                }
+            }
         }
 
         private static double ExtractResultFromCalculation(string calculation)
