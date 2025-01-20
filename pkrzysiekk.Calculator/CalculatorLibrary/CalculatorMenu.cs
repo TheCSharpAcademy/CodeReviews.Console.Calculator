@@ -1,18 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 
 namespace CalculatorLibrary
 {
     public class CalculatorMenu
     {
-        bool endApp = false;
+        bool endApp;
         double cleanNum1 = 0;
         double cleanNum2 = 0;
-        public void showMenu()
+        public void ShowMenu()
         {
             // Display title as the C# console calculator app.
             Console.WriteLine("Console Calculator in C#\r");

@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
 
 namespace CalculatorLibrary
 {
     public class CalculatorHistory
     {
        private List<double> operationsHistory=new();
-        private int placeToInsert = 0;
+        private int placeToInsert;
 
         public void LogResult(double result)
         {

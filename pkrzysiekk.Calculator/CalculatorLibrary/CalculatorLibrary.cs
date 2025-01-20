@@ -1,13 +1,11 @@
-﻿using System.Diagnostics;
-using System.Numerics;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
 namespace CalculatorLibrary
 {
   
       public class Calculator
         {
-        int timesUsed { get; set; }
+        int TimesUsed { get; set; }
         JsonWriter writer;
        public CalculatorHistory history=new();
        public CalculatorMenu menu=new();
@@ -70,7 +68,7 @@ namespace CalculatorLibrary
             writer.WritePropertyName("Result");
             writer.WriteValue(result);
             writer.WriteEndObject();
-            timesUsed++;
+            TimesUsed++;
             return result;
         }
         public void Finish()
