@@ -5,8 +5,6 @@ VisualStudioVersion = 17.12.35527.113
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "pkrzysiekk.Calculator", "pkrzysiekk.Calculator.csproj", "{1C8F95E0-C89D-404B-8F61-620F381ACD16}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CalculatorLibrary", "..\CalculatorLibrary\CalculatorLibrary.csproj", "{C0FA399E-A9EF-4484-9CD4-0C04A472856A}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -17,10 +15,6 @@ Global
 		{1C8F95E0-C89D-404B-8F61-620F381ACD16}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1C8F95E0-C89D-404B-8F61-620F381ACD16}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1C8F95E0-C89D-404B-8F61-620F381ACD16}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C0FA399E-A9EF-4484-9CD4-0C04A472856A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C0FA399E-A9EF-4484-9CD4-0C04A472856A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C0FA399E-A9EF-4484-9CD4-0C04A472856A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C0FA399E-A9EF-4484-9CD4-0C04A472856A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
