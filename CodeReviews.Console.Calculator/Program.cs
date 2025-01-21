@@ -1,7 +1,5 @@
 ﻿using CodeReviews.Console.Calculator.Library;
 
-bool endApp = false;
-
 //
 // Display title as the C# console calculator app.
 //
@@ -11,6 +9,8 @@ Console.WriteLine("  Console Calculator in C#\r");
 Console.WriteLine("------------------------------------------------\n");
 
 var calculator = new Calculator();
+
+bool endApp = false;
 
 while (!endApp)
 {
@@ -44,10 +44,12 @@ while (!endApp)
 
     // Ask the user to choose an operator.
     Console.WriteLine("Choose an operator from the following list:");
+
     Console.WriteLine("\t(a) - Add");
     Console.WriteLine("\t(s) - Subtract");
     Console.WriteLine("\t(m) - Multiply");
     Console.WriteLine("\t(d) - Divide");
+    
     Console.Write("Your option? ");
 
     string? op = Console.ReadLine();
