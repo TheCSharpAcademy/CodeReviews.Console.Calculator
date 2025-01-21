@@ -1,4 +1,4 @@
-﻿using CodeReviews.Console.Calculator;
+﻿using CodeReviews.Console.Calculator.Library;
 
 bool endApp = false;
 
@@ -9,6 +9,8 @@ bool endApp = false;
 Console.WriteLine("------------------------------------------------");
 Console.WriteLine("  Console Calculator in C#\r");
 Console.WriteLine("------------------------------------------------\n");
+
+var calculator = new Calculator();
 
 while (!endApp)
 {
@@ -59,7 +61,7 @@ while (!endApp)
     { 
         try
         {
-            result = Calculator.DoOperation(cleanNum1, cleanNum2, op.ToLower());
+            result = calculator.DoOperation(cleanNum1, cleanNum2, op.ToLower());
 
             if (double.IsNaN(result))
             {
@@ -86,4 +88,5 @@ while (!endApp)
     Console.WriteLine("\n"); // Friendly linespacing.
 }
 
+calculator.Finish(); // close the log file
 return;
