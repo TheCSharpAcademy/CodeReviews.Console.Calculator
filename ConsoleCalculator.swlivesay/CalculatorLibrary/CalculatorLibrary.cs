@@ -1,5 +1,4 @@
-﻿using System.Diagnostics;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
 namespace CalculatorLibrary
 {
@@ -52,7 +51,6 @@ namespace CalculatorLibrary
                     writer.WriteValue("Divide");
                     break;
                 case "r":
-                    //result = Math.Sqrt(num1);
                     result = Math.Pow(num1, (1 / num2));
                     writer.WriteValue("Square Root");
                     break;
