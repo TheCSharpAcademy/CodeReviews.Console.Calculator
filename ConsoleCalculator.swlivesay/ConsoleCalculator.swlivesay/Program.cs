@@ -48,7 +48,7 @@ class Program
             Console.WriteLine("\ts - Subtract");
             Console.WriteLine("\tm - Multiply");
             Console.WriteLine("\td - Divide");
-            Console.WriteLine("\tr - Square Root");
+            Console.WriteLine("\tr - Nth Root");
             Console.WriteLine("\tp - Power");
             Console.Write("Your option? ");
 
@@ -77,7 +77,7 @@ class Program
                         else 
                             Console.WriteLine("Your result: {0:E}\n", result);
                     }
-                    else Console.WriteLine("Your result: {0:0.##}\n", result);
+                    else Console.WriteLine("Your result: {0:0.######}\n", result);
                 }
                 catch (Exception e)
                 {
