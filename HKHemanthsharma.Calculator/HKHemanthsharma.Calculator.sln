@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.33424.131
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HKHemanthsharma.Calculator", "HKHemanthsharma.Calculator\HKHemanthsharma.Calculator.csproj", "{52D1AA8A-82CA-4949-8511-D4D7052237D1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CalculatorLibrary", "CalculatorLibrary\CalculatorLibrary.csproj", "{09384FA5-5063-439C-9BFE-284DF4816691}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{52D1AA8A-82CA-4949-8511-D4D7052237D1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{52D1AA8A-82CA-4949-8511-D4D7052237D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{52D1AA8A-82CA-4949-8511-D4D7052237D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{52D1AA8A-82CA-4949-8511-D4D7052237D1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{09384FA5-5063-439C-9BFE-284DF4816691}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{09384FA5-5063-439C-9BFE-284DF4816691}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{09384FA5-5063-439C-9BFE-284DF4816691}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{09384FA5-5063-439C-9BFE-284DF4816691}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {410F8B30-B071-4E1E-94BA-A17082C2FEC8}
+	EndGlobalSection
+EndGlobal
