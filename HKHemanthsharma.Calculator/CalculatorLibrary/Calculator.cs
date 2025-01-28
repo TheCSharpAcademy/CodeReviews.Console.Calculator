@@ -6,18 +6,14 @@ namespace CalculatorLibrary
 {
     public class Calculator
     {
-        public static int usedCount = 0;
+        public static int usedCount;
         JsonWriter writer;
 
         public Calculator()
         {
 
             StreamWriter logFile = File.CreateText("calculatorlog.json");
-            /*Trace.Listeners.Add(new TextWriterTraceListener(logFile));
-            Trace.AutoFlush = true;
-            Trace.WriteLine("Starting Calculator Log");
-            Trace.WriteLine(String.Format("Started {0}", System.DateTime.Now.ToString()));
-            */
+          
             logFile.AutoFlush = true;
             writer = new JsonTextWriter(logFile);
             writer.Formatting = Newtonsoft.Json.Formatting.Indented;
