@@ -5,6 +5,8 @@ VisualStudioVersion = 17.12.35514.174 d17.12
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Calculator.BrozDa", "Calculator.BrozDa\Calculator.BrozDa.csproj", "{34B57F03-4610-43D7-A9DD-0682F80DA16A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CalculatorLibrary", "CalculatorLibrary\CalculatorLibrary.csproj", "{4F79303A-EC04-4FAC-8C70-D02216E8BB68}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{34B57F03-4610-43D7-A9DD-0682F80DA16A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{34B57F03-4610-43D7-A9DD-0682F80DA16A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{34B57F03-4610-43D7-A9DD-0682F80DA16A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4F79303A-EC04-4FAC-8C70-D02216E8BB68}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4F79303A-EC04-4FAC-8C70-D02216E8BB68}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4F79303A-EC04-4FAC-8C70-D02216E8BB68}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4F79303A-EC04-4FAC-8C70-D02216E8BB68}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
