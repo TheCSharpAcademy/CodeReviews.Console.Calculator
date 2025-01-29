@@ -4,16 +4,25 @@ namespace CalculatorProgram
 {
     internal class Program
     {
+
+        /*
+        1. ✓ Create a functionality that will count the amount of times the calculator was used.
+        2. Store a list with the latest calculations. And give the users the ability to delete that list.
+        3. Allow the users to use the results in the list above to perform new calculations.
+        4. Add extra calculations: Square Root, Taking the Power, 10x, Trigonometry functions.
+        */
         static void Main(string[] args)
         {
             Calculator calculator = new Calculator();
             bool endApp = false;
             // Display title as the C# console calculator app.
-            Console.WriteLine("Console Calculator in C#\r");
-            Console.WriteLine("------------------------\n");
+            
 
             while (!endApp)
             {
+                Console.Clear();
+                Console.SetCursorPosition(0, 0);
+                calculator.PrintTitle();
                 // Declare variables and set to empty.
                 // Use Nullable types (with ?) to match type of System.Console.ReadLine
                 string? numInput1 = "";
