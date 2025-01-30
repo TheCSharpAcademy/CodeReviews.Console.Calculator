@@ -23,6 +23,8 @@ namespace CalculatorProgram
                 Console.Clear();
                 Console.SetCursorPosition(0, 0);
                 calculator.PrintTitle();
+                calculator.PrintHistory();
+                Console.WriteLine("------------------------");
                 // Declare variables and set to empty.
                 // Use Nullable types (with ?) to match type of System.Console.ReadLine
                 string? numInput1 = "";
@@ -83,15 +85,19 @@ namespace CalculatorProgram
                         Console.WriteLine("Oh no! An exception occurred trying to do the math.\n - Details: " + e.Message);
                     }
                 }
-                Console.WriteLine("------------------------\n");
-
+                
                 // Wait for the user to respond before closing.
-                Console.Write("Press 'n' and Enter to close the app, or press any other key and Enter to continue: ");
-                if (Console.ReadLine() == "n") endApp = true;
+                Console.Write("Press [n] and [Enter] to close the app, press [o] and [Enter] to show options or press any other key and [Enter] to continue: ");
+                string input = Console.ReadLine();
+                if (input == "n") endApp = true;
+                else if (input == "o")
+                {
+                    calculator.PrintOptionsMenu();
+                    calculator.ProcessOptionMenu();
+                }
 
                 Console.WriteLine("\n"); // Friendly linespacing.
             }
-            return;
             calculator.Finish();
             return;
         }

@@ -6,6 +6,8 @@ namespace CalculatorLibrary
     {
         private int _numberOfUses;
         private JsonWriter _writer;
+        private List<string> _calculationHistory;
+        private string _currentCalculation;
         public Calculator()
         {
             StreamWriter logFile = File.CreateText("calculatorlog.json");
@@ -14,6 +16,8 @@ namespace CalculatorLibrary
             _writer.Formatting = Formatting.Indented;
             InitializeJSONLog();
             _numberOfUses = GetNumberOfUses();
+            _calculationHistory = new List<string>();
+
         }
         private int GetNumberOfUses()
         {
@@ -61,14 +65,17 @@ namespace CalculatorLibrary
                 case "a":
                     result = num1 + num2;
                     _writer.WriteValue("Add");
+                    _calculationHistory.Add($"{num1} + {num2} = {result}");
                     break;
                 case "s":
                     result = num1 - num2;
                     _writer.WriteValue("Subtract");
+                    _calculationHistory.Add($"{num1} - {num2} = {result}");
                     break;
                 case "m":
                     result = num1 * num2;
                     _writer.WriteValue("Multiply");
+                    _calculationHistory.Add($"{num1} * {num2} = {result}");
                     break;
                 case "d":
                     // Ask the user to enter a non-zero divisor.
@@ -76,6 +83,7 @@ namespace CalculatorLibrary
                     {
                         result = num1 / num2;
                     }
+                    _calculationHistory.Add($"{num1} / {num2} = {result}");
                     _writer.WriteValue("Divide");
                     break;
                 // Return text for an incorrect option entry.
@@ -86,11 +94,28 @@ namespace CalculatorLibrary
             _numberOfUses++;
             return result;
         }
+        public void PrintHistory()
+        {
+            Console.WriteLine("Calculation history:");
+            if (_calculationHistory == null || _calculationHistory.Count == 0)
+            {
+                Console.WriteLine("No records in history");
+            }
+            else
+            {
+                foreach (string calculation in _calculationHistory)
+                {
+                    Console.WriteLine(calculation);
+                }
+            }
+            Console.WriteLine();
+        }
         public void Finish()
         {
             _writer.WriteEndArray();
             _writer.WriteEndObject();
             _writer.Close();
+            WriteNumberOfUses(_numberOfUses);
         }
         public void PrintTitle()
         {
@@ -98,5 +123,54 @@ namespace CalculatorLibrary
             Console.WriteLine($"Calculator was used to solve {_numberOfUses} problems so far");
             Console.WriteLine("------------------------\n");
         }
+        public void PrintOptionsMenu()
+        {
+            Console.Clear();
+            Console.SetCursorPosition(0, 0);
+            PrintTitle();
+            Console.WriteLine("Press coresponding number and [Enter] for selection: ");
+            Console.WriteLine("1. Show History");
+            Console.WriteLine("2. Delete History");
+            Console.WriteLine("3. Return to calculations");
+            Console.WriteLine("------------------------");
+        }
+        public void ProcessOptionMenu()
+        {
+            
+            int numericSelection;
+            bool returnToMenu = false;
+            //null check
+            while (returnToMenu == false) {
+                Console.Write("Please enter your choice: ");
+                string? selection = Console.ReadLine();
+                while (int.TryParse(selection, out numericSelection) == false || (numericSelection < 1 || numericSelection > 3))
+                {
+                    Console.Write("Please enter valid choice: ");
+                    selection = Console.ReadLine();
+                }
+                switch (numericSelection)
+                {
+                    case 1:
+                        PrintHistory();
+                        Console.WriteLine("Press any key to continue");
+                        Console.ReadKey();
+                        PrintOptionsMenu();
+                        break;
+                    case 2:
+                        _calculationHistory.Clear();
+                        Console.WriteLine("Press any key to continue");
+                        Console.ReadKey();
+                        PrintOptionsMenu();
+                        break;
+                    case 3:
+                        returnToMenu = true;
+                        break;
+
+                }
+                
+            }
+            
+        }
+
     }
 }
