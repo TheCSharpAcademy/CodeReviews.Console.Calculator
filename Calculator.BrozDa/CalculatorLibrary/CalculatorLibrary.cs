@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics;
+using System.Dynamic;
 using Newtonsoft.Json;
 namespace CalculatorLibrary
 {
@@ -123,7 +124,12 @@ namespace CalculatorLibrary
             Console.WriteLine($"Calculator was used to solve {_numberOfUses} problems so far");
             Console.WriteLine("------------------------\n");
         }
-        public void PrintOptionsMenu()
+        public void OptionsMenu()
+        {
+            PrintOptionsMenu();
+            ProcessOptionMenu();
+        }
+        private void PrintOptionsMenu()
         {
             Console.Clear();
             Console.SetCursorPosition(0, 0);
@@ -134,21 +140,33 @@ namespace CalculatorLibrary
             Console.WriteLine("3. Return to calculations");
             Console.WriteLine("------------------------");
         }
-        public void ProcessOptionMenu()
+        private int GetAndValidateMenuInput()
         {
-            
+            string? selection;
             int numericSelection;
-            bool returnToMenu = false;
-            //null check
-            while (returnToMenu == false) {
-                Console.Write("Please enter your choice: ");
-                string? selection = Console.ReadLine();
-                while (int.TryParse(selection, out numericSelection) == false || (numericSelection < 1 || numericSelection > 3))
-                {
-                    Console.Write("Please enter valid choice: ");
-                    selection = Console.ReadLine();
-                }
-                switch (numericSelection)
+            Console.Write("Please enter your choice: ");
+            selection = Console.ReadLine();
+
+            while (int.TryParse(selection, out numericSelection) == false || (numericSelection < 1 || numericSelection > 3))
+            {
+                Console.Write("Please enter valid choice: ");
+                selection = Console.ReadLine();
+            }
+
+
+            return numericSelection;
+
+        }
+
+        private void ProcessOptionMenu()
+        {
+            bool wantToStayInMenu = true;
+            
+            while (wantToStayInMenu) 
+            {
+                int selection = GetAndValidateMenuInput();
+
+                switch (selection)
                 {
                     case 1:
                         PrintHistory();
@@ -163,7 +181,7 @@ namespace CalculatorLibrary
                         PrintOptionsMenu();
                         break;
                     case 3:
-                        returnToMenu = true;
+                        wantToStayInMenu = false;
                         break;
 
                 }
