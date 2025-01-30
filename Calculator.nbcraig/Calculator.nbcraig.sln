@@ -5,6 +5,8 @@ VisualStudioVersion = 17.12.35521.163 d17.12
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Calculator.nbcraig", "Calculator.nbcraig.csproj", "{B44F4871-8381-4E75-9EBA-836253F4B850}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CalculatorLibrary", "..\CalculatorLibrary\CalculatorLibrary.csproj", "{69AFF130-6FE9-4CDA-B42E-B0181448720E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{B44F4871-8381-4E75-9EBA-836253F4B850}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B44F4871-8381-4E75-9EBA-836253F4B850}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B44F4871-8381-4E75-9EBA-836253F4B850}.Release|Any CPU.Build.0 = Release|Any CPU
+		{69AFF130-6FE9-4CDA-B42E-B0181448720E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{69AFF130-6FE9-4CDA-B42E-B0181448720E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{69AFF130-6FE9-4CDA-B42E-B0181448720E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{69AFF130-6FE9-4CDA-B42E-B0181448720E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
