@@ -1,6 +1,4 @@
-﻿using System.Diagnostics;
-using System.Dynamic;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 namespace CalculatorLibrary
 {
     public class Calculator
@@ -23,6 +21,7 @@ namespace CalculatorLibrary
             GettingResultFromHistory = false;
 
         }
+        
         private int GetNumberOfUses()
         {
             StreamReader readNumberOfUses = new StreamReader("NumberOfUses.txt");
@@ -52,18 +51,123 @@ namespace CalculatorLibrary
             _writer.WriteValue(num2);
             _writer.WritePropertyName("Operation");
         }
+        private void AddOperandsToJSON(double num1)
+        {
+            _writer.WriteStartObject();
+            _writer.WritePropertyName("Operand1");
+            _writer.WriteValue(num1);
+            _writer.WritePropertyName("Operation");
+        }
         private void AddResultToJSON(double result)
         {
             _writer.WritePropertyName("Result");
             _writer.WriteValue(result);
             _writer.WriteEndObject();
         }
+        public double Calculate(string operation) {
+            double result = double.NaN;
+            double num1;
+            double num2;
 
-        public double DoOperation(double num1, double num2, string op)
+            switch (operation) {
+                case "a": // addition
+                case "s": // substraction
+                case "m": // multiplication
+                case "d": //division
+                    num1 = GetNumber(1);
+                    num2 = GetNumber(2);
+                    result = BasicOperation(num1, num2, operation);
+                    break;
+                case "p": // power
+                    num1 = GetNumber(1);
+                    num2 = GetNumber(2);
+                    result = Power(num1, num2);
+                    break;
+                case "sr": // square root
+                    num1 = GetNumber(1);
+                    result = SquareRoot(num1);
+                    break;
+                case "10x":
+                    num1 = GetNumber(1);
+                    result = TenTimes(num1);
+                    break;
+                case "sin":
+                case "cos":
+                case "tg":
+                    num1 = GetNumber(1);
+                    result = Trigonometry(num1, operation);
+                    break;
+            }
+            return result;
+        }
+        public double TenTimes(double number)
+        {
+            double result = double.NaN;
+            result = 10 * number;
+            AddOperandsToJSON(number);
+            _writer.WriteValue("10x");
+            _calculationHistory.Add($"10 x {number} = {result}");
+            _calculationHistoryResults.Add(result);
+            AddResultToJSON(result);
+            _numberOfUses++;
+            return result;
+        }
+        public double Power(double number, double power)
+        {
+            double result = double.NaN;
+            result = Math.Pow(number, power);
+            AddOperandsToJSON(number, power);
+            _writer.WriteValue("Power");
+            _calculationHistory.Add($"{number} ^ {power} = {result}");
+            _calculationHistoryResults.Add(result);
+            AddResultToJSON(result);
+            _numberOfUses++;
+
+            return result;
+        }
+        public double SquareRoot(double number)
+        {
+            double result = double.NaN;
+            result = Math.Sqrt(number);
+            AddOperandsToJSON(number);
+            _writer.WriteValue("Square Root");
+            _calculationHistory.Add($"√{number} = ±{result}");
+            _calculationHistoryResults.Add(result);
+            AddResultToJSON(result);
+            _numberOfUses++;
+            return result;
+        }
+        public double Trigonometry(double number, string function)
+        {
+            double result = double.NaN;
+            AddOperandsToJSON(number);
+            switch (function) 
+            {
+                case "sin":
+                    result = Math.Sin(number);
+                    _writer.WriteValue("Sinus");
+                    _calculationHistory.Add($"Sin({number}) = {result}");
+                    break;
+                case "cos":
+                    result = Math.Cos(number);
+                    _writer.WriteValue("Cosinus");
+                    _calculationHistory.Add($"Cos({number}) = {result}"); 
+                    break;
+                case "tg":
+                    result = Math.Tan(number);
+                    _writer.WriteValue("Tangent");
+                    _calculationHistory.Add($"Tan({number}) = {result}"); 
+                    break;
+            }
+            _calculationHistoryResults.Add(result);
+            AddResultToJSON(result);
+            _numberOfUses++;
+            return result;
+        }
+        public double BasicOperation(double num1, double num2, string op)
         {
             double result = double.NaN; // Default value is "not-a-number" if an operation, such as division, could result in an error.
             AddOperandsToJSON(num1, num2);
-            // Use a switch statement to do the math.
             switch (op)
             {
                 case "a":
@@ -99,23 +203,7 @@ namespace CalculatorLibrary
             _numberOfUses++;
             return result;
         }
-        public void PrintHistory()
-        {
-            Console.WriteLine("Calculation history:");
-            if (_calculationHistory == null || _calculationHistory.Count == 0)
-            {
-                Console.WriteLine("No records in history");
-            }
-            else
-            {
-                for(int i = 0; i < _calculationHistory.Count; i++)
-                {
-                    Console.WriteLine($"{i + 1}: {_calculationHistory[i]}");
-                }
-                
-            }
-            Console.WriteLine();
-        }
+        
         public void Finish()
         {
             _writer.WriteEndArray();
@@ -123,28 +211,13 @@ namespace CalculatorLibrary
             _writer.Close();
             WriteNumberOfUses(_numberOfUses);
         }
-        public void PrintTitle()
-        {
-            Console.WriteLine("Welsome to Console Calculator in C#\r");
-            Console.WriteLine($"Calculator was used to solve {_numberOfUses} problems so far");
-            Console.WriteLine("------------------------\n");
-        }
+        
         public void OptionsMenu()
         {
             PrintOptionsMenu();
             ProcessOptionMenu();
         }
-        private void PrintOptionsMenu()
-        {
-            Console.Clear();
-            Console.SetCursorPosition(0, 0);
-            PrintTitle();
-            Console.WriteLine("Press coresponding number and [Enter] for selection: ");
-            Console.WriteLine("1. Show History");
-            Console.WriteLine("2. Delete History");
-            Console.WriteLine("3. Return to calculations");
-            Console.WriteLine("------------------------");
-        }
+        
         private int GetAndValidateMenuInput()
         {
             string? selection;
@@ -197,6 +270,18 @@ namespace CalculatorLibrary
         }
         public double GetNumber(int position)
         {
+            if (GettingResultFromHistory)
+            {
+                return GetNumberFromResult();
+            }
+            else
+            {
+                return GetNewNumber(position);
+            }
+        }
+        private double GetNewNumber(int position)
+        {
+            
             string? numInput;
             double cleanNum = 0;
 
@@ -222,7 +307,7 @@ namespace CalculatorLibrary
 
             return cleanNum;
         }
-        public double GetNumberFromResult()
+        private double GetNumberFromResult()
         {
             string? numInput;
             int index;
@@ -236,9 +321,58 @@ namespace CalculatorLibrary
             }
             Console.WriteLine("First Number for calculation: " + _calculationHistoryResults[index - 1]);
 
-
+            GettingResultFromHistory = false;
             return _calculationHistoryResults[index-1];
         }
+        public void PrintInputMenu()
+        {
+            Console.WriteLine("Choose an operation from the following list:");
+            Console.WriteLine("\ta - Add");
+            Console.WriteLine("\ts - Subtract");
+            Console.WriteLine("\tm - Multiply");
+            Console.WriteLine("\td - Divide");
+            Console.WriteLine("\tp - Power");
+            Console.WriteLine("\tsr - Square Root");
+            Console.WriteLine("\t10x - Multiply by 10");
+            Console.WriteLine("\tsin - Sinus");
+            Console.WriteLine("\tcos - Cosinus");
+            Console.WriteLine("\ttg - tangent ");
+            Console.Write("Your input:");
+        }
+        public void PrintHistory()
+        {
+            Console.WriteLine("Calculation history:");
+            if (_calculationHistory == null || _calculationHistory.Count == 0)
+            {
+                Console.WriteLine("No records in history");
+            }
+            else
+            {
+                for (int i = 0; i < _calculationHistory.Count; i++)
+                {
+                    Console.WriteLine($"{i + 1}: {_calculationHistory[i]}");
+                }
 
+            }
+            Console.WriteLine("------------------------");
+            Console.WriteLine();
+        }
+        public void PrintTitle()
+        {
+            Console.WriteLine("Welsome to Console Calculator in C#\r");
+            Console.WriteLine($"Calculator was used to solve {_numberOfUses} problems so far");
+            Console.WriteLine("------------------------\n");
+        }
+        private void PrintOptionsMenu()
+        {
+            Console.Clear();
+            Console.SetCursorPosition(0, 0);
+            PrintTitle();
+            Console.WriteLine("Press coresponding number and [Enter] for selection: ");
+            Console.WriteLine("1. Show History");
+            Console.WriteLine("2. Delete History");
+            Console.WriteLine("3. Return to calculations");
+            Console.WriteLine("------------------------");
+        }
     }
 }
