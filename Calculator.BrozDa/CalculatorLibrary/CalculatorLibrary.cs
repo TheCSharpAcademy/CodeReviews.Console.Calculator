@@ -8,7 +8,8 @@ namespace CalculatorLibrary
         private int _numberOfUses;
         private JsonWriter _writer;
         private List<string> _calculationHistory;
-        private string _currentCalculation;
+        private List<double> _calculationHistoryResults;
+        public bool GettingResultFromHistory { get; set; }
         public Calculator()
         {
             StreamWriter logFile = File.CreateText("calculatorlog.json");
@@ -18,6 +19,8 @@ namespace CalculatorLibrary
             InitializeJSONLog();
             _numberOfUses = GetNumberOfUses();
             _calculationHistory = new List<string>();
+            _calculationHistoryResults = new List<double>();
+            GettingResultFromHistory = false;
 
         }
         private int GetNumberOfUses()
@@ -91,6 +94,7 @@ namespace CalculatorLibrary
                 default:
                     break;
             }
+            _calculationHistoryResults.Add(result); 
             AddResultToJSON(result);
             _numberOfUses++;
             return result;
@@ -104,10 +108,11 @@ namespace CalculatorLibrary
             }
             else
             {
-                foreach (string calculation in _calculationHistory)
+                for(int i = 0; i < _calculationHistory.Count; i++)
                 {
-                    Console.WriteLine(calculation);
+                    Console.WriteLine($"{i + 1}: {_calculationHistory[i]}");
                 }
+                
             }
             Console.WriteLine();
         }
@@ -176,6 +181,7 @@ namespace CalculatorLibrary
                         break;
                     case 2:
                         _calculationHistory.Clear();
+                        _calculationHistoryResults.Clear();
                         Console.WriteLine("Press any key to continue");
                         Console.ReadKey();
                         PrintOptionsMenu();
@@ -188,6 +194,50 @@ namespace CalculatorLibrary
                 
             }
             
+        }
+        public double GetNumber(int position)
+        {
+            string? numInput;
+            double cleanNum = 0;
+
+            if (position == 1)
+            {
+                Console.Write("Enter fisrt number folowed by an [Enter] key: ");
+            }
+            else if (position == 2)
+            {
+                Console.Write("Enter second number folowed by an [Enter] key: ");
+            }
+            else
+            {
+                throw new ArgumentOutOfRangeException("Invalid number position passed to GetNumber()");
+            }
+
+            numInput = Console.ReadLine();
+            while (!double.TryParse(numInput, out cleanNum))
+            {
+                Console.Write("This is not valid input. Please enter a numeric value: ");
+                numInput = Console.ReadLine();
+            }
+
+            return cleanNum;
+        }
+        public double GetNumberFromResult()
+        {
+            string? numInput;
+            int index;
+
+            Console.Write("Enter index number of result you'd like to use: ");
+            numInput = Console.ReadLine();
+            while (!int.TryParse(numInput, out index) || index-1 < 0 || index-1 > _calculationHistoryResults.Count)
+            {
+                Console.Write("This is not valid input. Please enter a valid numeric value: ");
+                numInput = Console.ReadLine();
+            }
+            Console.WriteLine("First Number for calculation: " + _calculationHistoryResults[index - 1]);
+
+
+            return _calculationHistoryResults[index-1];
         }
 
     }
