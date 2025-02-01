@@ -21,15 +21,9 @@ namespace CalculatorProgram
             {
                 double result = 0;
                 string? operation;
+                string? inputPostCalculation;
 
-                Console.Clear();
-                Console.SetCursorPosition(0, 0);
-                calculator.PrintTitle();
-                calculator.PrintHistory();
-                
-
-                // Ask the user to choose an operator.
-                calculator.PrintInputMenu();
+                calculator.Start();
                 operation = Console.ReadLine();
 
                 if (operation == null || !Regex.IsMatch(operation, "^(a|s|m|d|p|sr|10x|sin|cos|tg)$"))
@@ -38,6 +32,7 @@ namespace CalculatorProgram
                     Console.ReadKey();
                     continue;
                 }
+
                 try
                 {
                     result = calculator.Calculate(operation);
@@ -58,9 +53,9 @@ namespace CalculatorProgram
                 Console.WriteLine("Or press [r] and [Enter] to use historical result as first operand");
                 Console.WriteLine("Or press [e] and [Enter] to close the app");
 
-                string? input = Console.ReadLine();
+                inputPostCalculation = Console.ReadLine();
 
-                switch (input)
+                switch (inputPostCalculation)
                 {
                     case "e": 
                         endApp = true;
@@ -72,18 +67,6 @@ namespace CalculatorProgram
                         calculator.GettingResultFromHistory = true; 
                         break;
                 }
-                /*if (input == "e")
-                {
-                    endApp = true;
-                }
-                else if (input == "o")
-                {
-                    
-                }
-                else if (input == "r")
-                {
-                    
-                }*/
 
                 Console.WriteLine("\n"); // Friendly linespacing.
             }
