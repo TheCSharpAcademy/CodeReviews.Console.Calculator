@@ -1,6 +1,4 @@
-﻿using System.Runtime.CompilerServices;
-
-namespace CalculatorHistory
+﻿namespace CalculatorHistory
 {
     public static class History
     {

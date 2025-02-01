@@ -1,5 +1,4 @@
-﻿//using System.Diagnostics;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
 namespace CalculatorLibrary
 {
@@ -37,10 +36,6 @@ namespace CalculatorLibrary
 
             StreamWriter logFile = File.CreateText("calculator.log");
 
-            //Trace.Listeners.Add(new TextWriterTraceListener(logFile));
-            //Trace.AutoFlush = true;
-            //Trace.WriteLine("Starting Calculator Log");
-            //Trace.WriteLine(String.Format("Started {0}", System.DateTime.Now.ToString()));
 
             logFile.AutoFlush = true;
             writer = new JsonTextWriter(logFile);
@@ -69,21 +64,18 @@ namespace CalculatorLibrary
 
         private double Add(double number1, double number2)
         {
-            //Trace.WriteLine(String.Format("{0} + {1} = {2}", number1, number2, number1 + number2));
             double result = number1 + number2;
             SavePropertiesToJson("Add", result, number1, number2);
             return result;
         }
         private double Subtract(double number1, double number2)
         {
-            //Trace.WriteLine(String.Format("{0} - {1} = {2}", number1, number2, number1 - number2));
             double result = number1 - number2;
             SavePropertiesToJson("Subtract", result, number1, number2);
             return result;
         }
         private double Multiply(double number1, double number2)
         {
-            //Trace.WriteLine(String.Format("{0} * {1} = {2}", number1, number2, number1 * number2));
             double result = number1 * number2;
             SavePropertiesToJson("Multiply", result, number1, number2);
             return result;
@@ -95,7 +87,6 @@ namespace CalculatorLibrary
                 Console.WriteLine("You're performing an invalid division. Something divided by 0 is always 0. Select another number:");
                 number2 = Convert.ToDouble(Console.ReadLine());
             }
-            //Trace.WriteLine(String.Format("{0} + {1} = {2}", number1, number2, number1 / number2));
             double result = number1 / number2;
             SavePropertiesToJson("divide", result, number1, number2);
             return result;
@@ -103,7 +94,6 @@ namespace CalculatorLibrary
 
         private double Power(double number1, double number2)
         {
-            //Trace.WriteLine(String.Format("{0} * {1} = {2}", number1, number2, number1 * number2));
             double result = Math.Pow(number1, number2);
             SavePropertiesToJson("Power", result, number1, number2);
             return result;
@@ -116,7 +106,7 @@ namespace CalculatorLibrary
             return result;
         }
 
-        private double x10Power(double number1, double number2)
+        private double X10Power(double number1, double number2)
         {
             double result = number1 * Math.Pow(10, number2);
             SavePropertiesToJson("x10Power", result, number1, number2);
