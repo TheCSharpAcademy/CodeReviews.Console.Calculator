@@ -149,11 +149,11 @@
         /// Performs power operation
         /// </summary>
         /// <param name="number"><see cref="double"/> Number to be raised to power</param>
-        /// <param name="power"><see cref="double"/> Number specifiyng the power</param>
-        /// <returns><see cref="double"/> Number raised to power</returns>
-        public double Power(double number, double power)
+        /// <param name="exponent"><see cref="double"/> Number specifiyng the exponent</param>
+        /// <returns><see cref="double"/> Number raised to power of exponent </returns>
+        public double Power(double number, double exponent)
         {
-            return Math.Pow(number, power); 
+            return Math.Pow(number, exponent); 
         }
         /// <summary>
         /// Perform Square root operation
