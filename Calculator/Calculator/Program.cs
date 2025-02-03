@@ -27,15 +27,30 @@ namespace CalculatorProgram
                 string? numInput2 = "";
                 double result = 0;
 
-                if (previousResult != 0)
+                if (latestCalculationsList.Count != 0)
                 {
-                    numInput1 = previousResult.ToString();
+                    // Ask the user if they want to reuse a result
+                    Console.Write("Type a number, and then press Enter, OR to use a previous result type h: then the line number you wish to use ");
                 }
                 else
                 {
                     // Ask the user to type the first number.
                     Console.Write("Type a number, and then press Enter: ");
-                    numInput1 = Console.ReadLine();
+                }
+                numInput1 = Console.ReadLine();
+                if (numInput1.Length>2 &&  numInput1.Substring(0, 2) == "h:")
+                {
+                    // do history lookup
+                    string indexStr = numInput1.Substring(2);
+                    if (int.TryParse(indexStr, out int index))
+                    {
+                        numInput1 = latestCalculationsList[index-1].calculationResult.ToString();
+                        Console.WriteLine($"The first number is {numInput1}");
+                    }
+                    else
+                    {
+                        Console.WriteLine("History index does not exist");
+                    }
                 }
 
                 double cleanNum1 = 0;
@@ -96,28 +111,22 @@ namespace CalculatorProgram
                 Console.WriteLine($"Times Calculator used: {timesCalculatorUsed}");
                 Console.WriteLine("Previous Calculations:");
                 Console.WriteLine("------------------------");
+                int countHistory = 0;
                 foreach (var calculation in latestCalculationsList)
                 {
-                    Console.WriteLine($"{calculation.calculationString} = {calculation.calculationResult}");
+                    countHistory ++;
+                    Console.WriteLine($"{countHistory}. {calculation.calculationString} = {calculation.calculationResult}");
                 }
                 Console.WriteLine("------------------------\n");
-                Console.WriteLine("\n"); // Friendly linespacing.
-                Console.Write($"Would you like to perform a calculation with {result}? Press Y for yes: ");
-
-                if (Console.ReadLine() == "y" || Console.ReadLine() == "Y")
-                {
-                    previousResult = result;
-                    continue;
-                }
-                previousResult = 0;
+                Console.WriteLine("\n"); // Friendly linespacing.;
                 Console.Write("Press 'c' and Enter to clear the list, or press any other key and Enter to continue: ");
 
                 if (Console.ReadLine() == "c")
                 {
                     latestCalculationsList.Clear();
                 }
-                // Wait for the user to respond before closing.
-                Console.Write("Press 'n' and Enter to close the app, or press any other key and Enter to continue: ");
+                //Wait for the user to respond before closing.
+               Console.Write("Press 'n' and Enter to close the app, or press any other key and Enter to continue: ");
                 
                 if (Console.ReadLine() == "n") endApp = true;
 
