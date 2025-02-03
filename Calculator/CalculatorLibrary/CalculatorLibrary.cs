@@ -19,9 +19,10 @@ namespace CalculatorLibrary
             writer.WriteStartArray();
         }
 
-        public double DoOperation(double num1, double num2, string op)
+        public double DoOperation(double num1, double num2, string op, out string operand)
         {
             double result = double.NaN; // Default value is "not-a-number" if an operation, such as division, could result in an error.
+            operand = "";
             writer.WriteStartObject();
             writer.WritePropertyName("Operand1");
             writer.WriteValue(num1);
@@ -33,14 +34,17 @@ namespace CalculatorLibrary
             {
                 case "a":
                     result = num1 + num2;
+                    operand = "+";
                     writer.WriteValue("Add");
                     break;
                 case "s":
                     result = num1 - num2;
+                    operand = "-";
                     writer.WriteValue("Subtract");
                     break;
                 case "m":
                     result = num1 * num2;
+                    operand = "*";
                     writer.WriteValue("Multiply");
                     break;
                 case "d":
@@ -48,11 +52,13 @@ namespace CalculatorLibrary
                     if (num2 != 0)
                     {
                         result = num1 / num2;
+                        operand = "/";
                     }
                     writer.WriteValue("Divide");
                     break;
                 // Return text for an incorrect option entry.
                 default:
+                    operand = "?";
                     break;
             }
             writer.WritePropertyName("Result");
@@ -69,4 +75,16 @@ namespace CalculatorLibrary
             writer.Close();
         }
     }
-}
+    public class LatestCalculation
+    {
+        public string calculationString { get; set; }
+        public double calculationResult { get; set; }
+
+        public LatestCalculation(string s, double d)
+        {
+            calculationString = s;
+            calculationResult = d;
+        }
+
+    }
+ }

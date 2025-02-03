@@ -10,6 +10,10 @@ namespace CalculatorProgram
         static void Main(string[] args)
         {
             bool endApp = false;
+            int timesCalculatorUsed = 0;
+            List<LatestCalculation> latestCalculationsList = new();
+            double previousResult = 0;
+
             // Display title as the C# console calculator app.
             Console.WriteLine("Console Calculator in C#\r");
             Console.WriteLine("------------------------\n");
@@ -23,9 +27,16 @@ namespace CalculatorProgram
                 string? numInput2 = "";
                 double result = 0;
 
-                // Ask the user to type the first number.
-                Console.Write("Type a number, and then press Enter: ");
-                numInput1 = Console.ReadLine();
+                if (previousResult != 0)
+                {
+                    numInput1 = previousResult.ToString();
+                }
+                else
+                {
+                    // Ask the user to type the first number.
+                    Console.Write("Type a number, and then press Enter: ");
+                    numInput1 = Console.ReadLine();
+                }
 
                 double cleanNum1 = 0;
                 while (!double.TryParse(numInput1, out cleanNum1))
@@ -64,22 +75,50 @@ namespace CalculatorProgram
                 {
                     try
                     {
-                        result = calculator.DoOperation(cleanNum1, cleanNum2, op);
+                        result = calculator.DoOperation(cleanNum1, cleanNum2, op, out string operand);
                         if (double.IsNaN(result))
                         {
                             Console.WriteLine("This operation will result in a mathematical error.\n");
                         }
-                        else Console.WriteLine("Your result: {0:0.##}\n", result);
+                        else
+                        {
+                            Console.WriteLine("Your result: {0:0.##}\n", result);
+                            LatestCalculation latestCalculation = new LatestCalculation( $"{cleanNum1} {operand} {cleanNum2}", result);
+                            latestCalculationsList.Add(latestCalculation);
+                        }
                     }
                     catch (Exception e)
                     {
                         Console.WriteLine("Oh no! An exception occurred trying to do the math.\n - Details: " + e.Message);
                     }
                 }
+                timesCalculatorUsed++;
+                Console.WriteLine($"Times Calculator used: {timesCalculatorUsed}");
+                Console.WriteLine("Previous Calculations:");
+                Console.WriteLine("------------------------");
+                foreach (var calculation in latestCalculationsList)
+                {
+                    Console.WriteLine($"{calculation.calculationString} = {calculation.calculationResult}");
+                }
                 Console.WriteLine("------------------------\n");
+                Console.WriteLine("\n"); // Friendly linespacing.
+                Console.Write($"Would you like to perform a calculation with {result}? Press Y for yes: ");
 
+                if (Console.ReadLine() == "y" || Console.ReadLine() == "Y")
+                {
+                    previousResult = result;
+                    continue;
+                }
+                previousResult = 0;
+                Console.Write("Press 'c' and Enter to clear the list, or press any other key and Enter to continue: ");
+
+                if (Console.ReadLine() == "c")
+                {
+                    latestCalculationsList.Clear();
+                }
                 // Wait for the user to respond before closing.
                 Console.Write("Press 'n' and Enter to close the app, or press any other key and Enter to continue: ");
+                
                 if (Console.ReadLine() == "n") endApp = true;
 
                 Console.WriteLine("\n"); // Friendly linespacing.
