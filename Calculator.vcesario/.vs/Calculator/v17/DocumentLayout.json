@@ -1,0 +1,69 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\victo\\OneDrive\\Documentos\\.NET Projects\\CodeReviews.Console.Calculator\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{6F786C0E-A442-45BB-A306-3824D690878C}|..\\CalculatorLibrary\\CalculatorLibrary.csproj|c:\\users\\victo\\onedrive\\documentos\\.net projects\\calculatorlibrary\\calculatorlibrary.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6F21BD26-1685-4450-900B-E5D7E14A9947}|Calculator.csproj|c:\\users\\victo\\onedrive\\documentos\\.net projects\\codereviews.console.calculator\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6F21BD26-1685-4450-900B-E5D7E14A9947}|Calculator.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 4,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:131:0:{13b12e3e-c1b4-4539-9371-4fe9a0d523fc}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:129:0:{13b12e3e-c1b4-4539-9371-4fe9a0d523fc}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:130:0:{13b12e3e-c1b4-4539-9371-4fe9a0d523fc}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{13b12e3e-c1b4-4539-9371-4fe9a0d523fc}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "CalculatorLibrary.cs",
+              "DocumentMoniker": "C:\\Users\\victo\\OneDrive\\Documentos\\.NET Projects\\CalculatorLibrary\\CalculatorLibrary.cs",
+              "RelativeDocumentMoniker": "..\\CalculatorLibrary\\CalculatorLibrary.cs",
+              "ToolTip": "C:\\Users\\victo\\OneDrive\\Documentos\\.NET Projects\\CalculatorLibrary\\CalculatorLibrary.cs",
+              "RelativeToolTip": "..\\CalculatorLibrary\\CalculatorLibrary.cs",
+              "ViewState": "AQIAAAgAAAAAAAAAAAAYwDkAAAAaAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-30T22:16:27.997Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\victo\\OneDrive\\Documentos\\.NET Projects\\CodeReviews.Console.Calculator\\Program.cs",
+              "RelativeDocumentMoniker": "Program.cs",
+              "ToolTip": "C:\\Users\\victo\\OneDrive\\Documentos\\.NET Projects\\CodeReviews.Console.Calculator\\Program.cs",
+              "RelativeToolTip": "Program.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAE0AAAAdAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-30T21:58:39.739Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
