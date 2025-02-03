@@ -7,8 +7,8 @@ namespace CalculatorLibrary
     public class CalculatorMenu
     {
         bool endApp;
-        double cleanNum1;
-        double cleanNum2;
+        double cleanNum1 = 0;
+        double cleanNum2 = 0;
         public void ShowMenu()
         {
             // Display title as the C# console calculator app.
