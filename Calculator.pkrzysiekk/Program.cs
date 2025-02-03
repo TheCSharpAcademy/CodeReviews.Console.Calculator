@@ -1,5 +1,4 @@
-﻿using System.Text.RegularExpressions;
-using CalculatorLibrary;
+﻿using CalculatorLibrary;
 namespace pkrzysiekk.CalculatorLibrary
 {
     class Program
@@ -7,7 +6,7 @@ namespace pkrzysiekk.CalculatorLibrary
         static void Main(string[] args)
         {
            Calculator calculator = new Calculator();
-           calculator.menu.showMenu();
+           calculator.menu.ShowMenu();
         }
 
     }

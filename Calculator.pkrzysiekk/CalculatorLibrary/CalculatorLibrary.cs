@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿
+using Newtonsoft.Json;
 
 namespace CalculatorLibrary
 {
@@ -6,7 +7,7 @@ namespace CalculatorLibrary
       public class Calculator
         {
         int TimesUsed { get; set; }
-        JsonWriter writer;
+        readonly JsonWriter writer;
        public CalculatorHistory history=new();
        public CalculatorMenu menu=new();
         public Calculator()
@@ -75,7 +76,7 @@ namespace CalculatorLibrary
         {
             writer.WriteEndArray();
             writer.WritePropertyName("Times used");
-            writer.WriteValue(timesUsed);
+            writer.WriteValue(TimesUsed);
             writer.WriteEndObject();
             
             writer.Close();

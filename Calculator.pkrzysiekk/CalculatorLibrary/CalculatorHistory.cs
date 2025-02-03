@@ -1,5 +1,7 @@
 ﻿
 
+
+
 namespace CalculatorLibrary
 {
     public class CalculatorHistory
