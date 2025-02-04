@@ -1,0 +1,15 @@
+C:\Users\katie\OneDrive\Desktop\Learning\CalculatorApp\CalculatorApp\bin\Debug\net9.0\CalculatorApp.exe
+C:\Users\katie\OneDrive\Desktop\Learning\CalculatorApp\CalculatorApp\bin\Debug\net9.0\CalculatorApp.deps.json
+C:\Users\katie\OneDrive\Desktop\Learning\CalculatorApp\CalculatorApp\bin\Debug\net9.0\CalculatorApp.runtimeconfig.json
+C:\Users\katie\OneDrive\Desktop\Learning\CalculatorApp\CalculatorApp\bin\Debug\net9.0\CalculatorApp.dll
+C:\Users\katie\OneDrive\Desktop\Learning\CalculatorApp\CalculatorApp\bin\Debug\net9.0\CalculatorApp.pdb
+C:\Users\katie\OneDrive\Desktop\Learning\CalculatorApp\CalculatorApp\obj\Debug\net9.0\CalculatorApp.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\katie\OneDrive\Desktop\Learning\CalculatorApp\CalculatorApp\obj\Debug\net9.0\CalculatorApp.AssemblyInfoInputs.cache
+C:\Users\katie\OneDrive\Desktop\Learning\CalculatorApp\CalculatorApp\obj\Debug\net9.0\CalculatorApp.AssemblyInfo.cs
+C:\Users\katie\OneDrive\Desktop\Learning\CalculatorApp\CalculatorApp\obj\Debug\net9.0\CalculatorApp.csproj.CoreCompileInputs.cache
+C:\Users\katie\OneDrive\Desktop\Learning\CalculatorApp\CalculatorApp\obj\Debug\net9.0\CalculatorApp.sourcelink.json
+C:\Users\katie\OneDrive\Desktop\Learning\CalculatorApp\CalculatorApp\obj\Debug\net9.0\CalculatorApp.dll
+C:\Users\katie\OneDrive\Desktop\Learning\CalculatorApp\CalculatorApp\obj\Debug\net9.0\refint\CalculatorApp.dll
+C:\Users\katie\OneDrive\Desktop\Learning\CalculatorApp\CalculatorApp\obj\Debug\net9.0\CalculatorApp.pdb
+C:\Users\katie\OneDrive\Desktop\Learning\CalculatorApp\CalculatorApp\obj\Debug\net9.0\CalculatorApp.genruntimeconfig.cache
+C:\Users\katie\OneDrive\Desktop\Learning\CalculatorApp\CalculatorApp\obj\Debug\net9.0\ref\CalculatorApp.dll
