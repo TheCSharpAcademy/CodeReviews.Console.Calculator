@@ -1,6 +1,7 @@
 ﻿// Program.cs
 using CalculatorLibrary;
 using System.Text.RegularExpressions;
+using System.Text;
 
 namespace CalculatorProgram
 {
@@ -9,10 +10,11 @@ namespace CalculatorProgram
     {
         static void Main(string[] args)
         {
+            Console.OutputEncoding = Encoding.UTF8;
             bool endApp = false;
             int timesCalculatorUsed = 0;
+
             List<LatestCalculation> latestCalculationsList = new();
-            double previousResult = 0;
 
             // Display title as the C# console calculator app.
             Console.WriteLine("Console Calculator in C#\r");
@@ -38,13 +40,13 @@ namespace CalculatorProgram
                     Console.Write("Type a number, and then press Enter: ");
                 }
                 numInput1 = Console.ReadLine();
-                if (numInput1.Length>2 &&  numInput1.Substring(0, 2) == "h:")
+                if (numInput1.Length > 2 && numInput1.Substring(0, 2) == "h:")
                 {
                     // do history lookup
                     string indexStr = numInput1.Substring(2);
                     if (int.TryParse(indexStr, out int index))
                     {
-                        numInput1 = latestCalculationsList[index-1].calculationResult.ToString();
+                        numInput1 = latestCalculationsList[index-1].CalculationResult.ToString();
                         Console.WriteLine($"The first number is {numInput1}");
                     }
                     else
@@ -56,19 +58,8 @@ namespace CalculatorProgram
                 double cleanNum1 = 0;
                 while (!double.TryParse(numInput1, out cleanNum1))
                 {
-                    Console.Write("This is not valid input. Please enter an integer value: ");
+                    Console.Write("This is not valid input. Please enter a numeric value: ");
                     numInput1 = Console.ReadLine();
-                }
-
-                // Ask the user to type the second number.
-                Console.Write("Type another number, and then press Enter: ");
-                numInput2 = Console.ReadLine();
-
-                double cleanNum2 = 0;
-                while (!double.TryParse(numInput2, out cleanNum2))
-                {
-                    Console.Write("This is not valid input. Please enter an integer value: ");
-                    numInput2 = Console.ReadLine();
                 }
 
                 // Ask the user to choose an operator.
@@ -77,17 +68,35 @@ namespace CalculatorProgram
                 Console.WriteLine("\ts - Subtract");
                 Console.WriteLine("\tm - Multiply");
                 Console.WriteLine("\td - Divide");
+                Console.WriteLine("\tq - Square Root");
+                Console.WriteLine("\tp - Power (x^y)");
+                Console.WriteLine("\tx - Times by 10");
+                Console.WriteLine("\tt - Trigonometry functions");   //todo
                 Console.Write("Your option? ");
 
                 string? op = Console.ReadLine();
 
+
+
+
                 // Validate input is not null, and matches the pattern
-                if (op == null || !Regex.IsMatch(op, "[a|s|m|d]"))
+                if (op == null || !Regex.IsMatch(op, "[a|s|m|d|q|p|x|t]"))
                 {
                     Console.WriteLine("Error: Unrecognized input.");
                 }
-                else
+                else if (Regex.IsMatch(op, "[a|s|m|d|p]"))
                 {
+
+                    // Ask the user to type the second number.
+                    Console.Write("Type another number, and then press Enter: ");
+                    numInput2 = Console.ReadLine();
+
+                    double cleanNum2 = 0;
+                    while (!double.TryParse(numInput2, out cleanNum2))
+                    {
+                        Console.Write("This is not valid input. Please enter a numeric value: ");
+                        numInput2 = Console.ReadLine();
+                    }
                     try
                     {
                         result = calculator.DoOperation(cleanNum1, cleanNum2, op, out string operand);
@@ -100,6 +109,7 @@ namespace CalculatorProgram
                             Console.WriteLine("Your result: {0:0.##}\n", result);
                             LatestCalculation latestCalculation = new LatestCalculation( $"{cleanNum1} {operand} {cleanNum2}", result);
                             latestCalculationsList.Add(latestCalculation);
+                            timesCalculatorUsed++;
                         }
                     }
                     catch (Exception e)
@@ -107,7 +117,57 @@ namespace CalculatorProgram
                         Console.WriteLine("Oh no! An exception occurred trying to do the math.\n - Details: " + e.Message);
                     }
                 }
-                timesCalculatorUsed++;
+                else if (Regex.IsMatch(op, "[t]"))
+                {
+                    string trigop = Calculator.ChooseTrigonometryOperation();
+                    if (trigop == null || !Regex.IsMatch(trigop, "[c|s|t]"))
+                    {
+                        Console.WriteLine("Error: Unrecognized input.");
+                        
+                    }
+                    try
+                    {
+                        result = calculator.DoTrigonometryOperation(cleanNum1,  trigop, out string operand);
+                        if (double.IsNaN(result))
+                        {
+                            Console.WriteLine("This operation will result in a mathematical error.\n");
+                        }
+                        else
+                        {
+                            Console.WriteLine("Your result: {0:0.##}\n", result);
+                            LatestCalculation latestCalculation = new LatestCalculation($"{operand} {cleanNum1}", result);
+                            latestCalculationsList.Add(latestCalculation);
+                            timesCalculatorUsed++;
+                        }
+                    }
+                    catch (Exception e)
+                    {
+                        Console.WriteLine("Oh no! An exception occurred trying to do the math.\n - Details: " + e.Message);
+                    }
+                }
+                else
+                {
+                    try
+                    {
+                        result = calculator.DoOperationSingleNum(cleanNum1, op, out string operand);
+                        if (double.IsNaN(result))
+                        {
+                            Console.WriteLine("This operation will result in a mathematical error.\n");
+                        }
+                        else
+                        {
+                            Console.WriteLine("Your result: {0:0.##}\n", result);
+                            LatestCalculation latestCalculation = new LatestCalculation($"{operand} {numInput1} ", result);
+                            latestCalculationsList.Add(latestCalculation);
+                            timesCalculatorUsed++;
+                        }
+                    }
+                    catch (Exception e)
+                    {
+                        Console.WriteLine("Oh no! An exception occurred trying to do the math.\n - Details: " + e.Message);
+                    }
+                }
+
                 Console.WriteLine($"Times Calculator used: {timesCalculatorUsed}");
                 Console.WriteLine("Previous Calculations:");
                 Console.WriteLine("------------------------");
@@ -115,10 +175,10 @@ namespace CalculatorProgram
                 foreach (var calculation in latestCalculationsList)
                 {
                     countHistory ++;
-                    Console.WriteLine($"{countHistory}. {calculation.calculationString} = {calculation.calculationResult}");
+                    Console.WriteLine($"{countHistory}. {calculation.CalculationString} = {calculation.CalculationResult}");
                 }
                 Console.WriteLine("------------------------\n");
-                Console.WriteLine("\n"); // Friendly linespacing.;
+
                 Console.Write("Press 'c' and Enter to clear the list, or press any other key and Enter to continue: ");
 
                 if (Console.ReadLine() == "c")
