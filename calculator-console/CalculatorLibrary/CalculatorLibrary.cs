@@ -181,7 +181,7 @@ namespace CalculatorLibrary
 
                         5 => this.SquareRoot(operands[0]),
 
-                        6 => this.x10Power(operands[0], operands[1]),
+                        6 => this.X10Power(operands[0], operands[1]),
 
 
                         _ => throw new Exception("Operation yet to be added"),
