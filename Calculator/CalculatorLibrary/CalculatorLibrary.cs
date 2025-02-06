@@ -1,6 +1,4 @@
-﻿// CalculatorLibrary.cs
-using System.Diagnostics;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
 namespace CalculatorLibrary
 {
@@ -24,8 +22,8 @@ namespace CalculatorLibrary
             writer = new JsonTextWriter(logFile);
             writer.Formatting = Formatting.Indented;
             writer.WriteStartObject();
-            //writer.WritePropertyName("Date and time");
-            //writer.WriteValue(System.DateTime.Now);
+            writer.WritePropertyName("Date and time");
+            writer.WriteValue(System.DateTime.Now);
             writer.WritePropertyName("Operations");
             writer.WriteStartArray();
         }
@@ -38,15 +36,16 @@ namespace CalculatorLibrary
             {
                 _JsonPath = filePathJson;
             }
-            //(int, double, double, string, double) CalculatorReader()
-            //{
-            //    StreamReader logFIle = File.OpenRead(filePathJson);
-            //    writer = new JsonTextWriter(logFile);
-            //    writer.Formatting = Formatting.Indented;
-            //    writer.WriteStartObject();
-            //    writer.WritePropertyName("Operations");
-            //    writer.WriteStartArray();
-            // }
+
+            (int, double, double, string, double) CalculatorReader()
+            {
+                StreamReader logFIle = File.OpenRead(filePathJson);
+                writer = new JsonTextWriter(logFile);
+                writer.Formatting = Formatting.Indented;
+                writer.WriteStartObject();
+                writer.WritePropertyName("Operations");
+                writer.WriteStartArray();
+            }
         }
 
         public double DoOperation(double num1, double num2, string op)
