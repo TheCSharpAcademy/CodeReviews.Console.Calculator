@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using System.Diagnostics;
+using Newtonsoft.Json;
 
 namespace CalculatorLibrary
 {
@@ -24,7 +25,6 @@ namespace CalculatorLibrary
             writer.WritePropertyName("Operand2");
             writer.WriteValue(num2);
             writer.WritePropertyName("Operation");
-            // Use a switch statement to do the math.
             switch (op)
             {
                 case "a":
@@ -40,18 +40,19 @@ namespace CalculatorLibrary
                     writer.WriteValue("Multiply");
                     break;
                 case "d":
-                    // Ask the user to enter a non-zero divisor.
                     if (num2 != 0)
                     {
                         result = num1 / num2;
-                       
                     }
                     writer.WriteValue("Divide");
                     break;
-                // Return text for an incorrect option entry.
                 default:
                     break;
             }
+            writer.WritePropertyName("Result");
+            writer.WriteValue(result);
+            writer.WriteEndObject();
+
             return result;
         }
 
