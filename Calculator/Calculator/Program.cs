@@ -21,7 +21,7 @@ class Program
             // Declare variables and set to empty.
             string numInput1 = "";
             string numInput2 = "";
-            double result = 0;
+            double result;
 
             // Ask the user to type the first number.
             Console.WriteLine(
