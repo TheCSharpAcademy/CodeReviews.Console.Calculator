@@ -7,7 +7,7 @@ namespace CalculatorLibrary
         public List<double> Results = new List<double>();
 
         public int Counter;
-        JsonWriter writer;
+        JsonWriter writer; 
 
         public Calculator()
         {
