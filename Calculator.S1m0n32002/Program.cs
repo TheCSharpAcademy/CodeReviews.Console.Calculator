@@ -1,60 +1,70 @@
-﻿// Declare variables and then initialize to zero.
-double num1 = 0; double num2 = 0;
+﻿using System.Text.RegularExpressions;
 
-// Display title as the C# console calculator app.
-Console.WriteLine("Console Calculator in C#\r");
-Console.WriteLine("------------------------\n");
-
-// Ask the user to type the first number.
-Console.WriteLine("Type a number, and then press Enter");
 while (true)
 {
-    var input = Console.ReadLine();
-    if (double.TryParse(input, out num1))
-        break;
-    Console.WriteLine($"\"{input}\" is not a valid number, insert a number and then press Enter");
-}
+    // Declare variables and then initialize to zero.
+    double num1 = 0; double num2 = 0;
 
-// Ask the user to type the second number.
-Console.WriteLine("Type another number, and then press Enter");
-while (true)
-{
-    var input = Console.ReadLine();
-    if (double.TryParse(input, out num2))
-        break;
-    Console.WriteLine($"\"{input}\" is not a valid number, insert a number and then press Enter");
-}
+    // Display title as the C# console calculator app.
+    Console.Clear();
+    Console.WriteLine("Console Calculator in C#\r");
+    Console.WriteLine("------------------------\n");
 
-// Ask the user to choose an option.
-Console.WriteLine("Choose an option from the following list:");
-Console.WriteLine("\ta - Add");
-Console.WriteLine("\ts - Subtract");
-Console.WriteLine("\tm - Multiply");
-Console.WriteLine("\td - Divide");
-Console.Write("Your option? ");
+    // Ask the user to type the first number.
+    Console.WriteLine("Type a number, and then press Enter");
+    while (true)
+    {
+        var input = Console.ReadLine();
+        if (double.TryParse(input, out num1))
+            break;
+        Console.WriteLine($"\"{input}\" is not a valid number, insert a number and then press Enter");
+    }
 
-// Use a switch statement to do the math.
-switch (Console.ReadLine())
-{
-    case "a":
-        Console.WriteLine($"Your result: {num1} + {num2} = " + (num1 + num2));
-        break;
-    case "s":
-        Console.WriteLine($"Your result: {num1} - {num2} = " + (num1 - num2));
-        break;
-    case "m":
-        Console.WriteLine($"Your result: {num1} * {num2} = " + (num1 * num2));
-        break;
-    case "d":
-        // Ask the user to enter a non-zero divisor until they do so.
-        while (num2 == 0)
+    // Ask the user to type the second number.
+    Console.WriteLine("Type another number, and then press Enter");
+    while (true)
+    {
+        var input = Console.ReadLine();
+        if (double.TryParse(input, out num2))
+            break;
+        Console.WriteLine($"\"{input}\" is not a valid number, insert a number and then press Enter");
+    }
+
+    // Ask the user to choose an option.
+    Console.WriteLine("Choose an option from the following list:");
+    Console.WriteLine("\ta - Add");
+    Console.WriteLine("\ts - Subtract");
+    Console.WriteLine("\tm - Multiply");
+    Console.WriteLine("\td - Divide");
+    Console.Write("Your option? ");
+
+    var op = Console.ReadLine();
+
+    // Validate input is not null, and matches the pattern
+    if (op == null || !Regex.IsMatch(op, "[a|s|m|d]"))
+    {
+        Console.WriteLine("Error: Unrecognized input.");
+    }
+    else
+    {
+        try
         {
-            Console.WriteLine("Enter a non-zero divisor: ");
-            num2 = Convert.ToDouble(Console.ReadLine());
+            var result = Calculator.DoOperation(num1, num2, op);
+            if (double.IsNaN(result))
+            {
+                Console.WriteLine("This operation will result in a mathematical error.\n");
+            }
+            else Console.WriteLine("Your result: {0:0.##}\n", result);
         }
-        Console.WriteLine($"Your result: {num1} / {num2} = " + (num1 / num2));
+        catch (Exception e)
+        {
+            Console.WriteLine("Oh no! An exception occurred trying to do the math.\n - Details: " + e.Message);
+        }
+    }
+    Console.WriteLine("------------------------\n");
+
+    // Wait for the user to respond before closing.
+    Console.Write("Press \"n\" key to close the Calculator console app or any other key to continue...");
+    if (Console.ReadKey(true).Key == ConsoleKey.N)
         break;
 }
-// Wait for the user to respond before closing.
-Console.Write("Press any key to close the Calculator console app...");
-Console.ReadKey();
