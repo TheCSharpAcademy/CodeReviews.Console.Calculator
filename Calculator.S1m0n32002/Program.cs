@@ -1,5 +1,7 @@
 ﻿using System.Text.RegularExpressions;
 
+CalculatorLibrary.Calculator calculator = new ();
+
 while (true)
 {
     // Declare variables and then initialize to zero.
@@ -49,7 +51,8 @@ while (true)
     {
         try
         {
-            var result = Calculator.DoOperation(num1, num2, op);
+            var result = calculator.DoOperation(num1, num2, op);
+
             if (double.IsNaN(result))
             {
                 Console.WriteLine("This operation will result in a mathematical error.\n");
