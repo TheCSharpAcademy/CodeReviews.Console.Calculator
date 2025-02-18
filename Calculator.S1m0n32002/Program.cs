@@ -69,5 +69,8 @@ while (true)
     // Wait for the user to respond before closing.
     Console.Write("Press \"n\" key to close the Calculator console app or any other key to continue...");
     if (Console.ReadKey(true).Key == ConsoleKey.N)
+    {
+        calculator.Finish();
         break;
+    }
 }
