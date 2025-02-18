@@ -40,16 +40,25 @@ while (true)
     Console.WriteLine("\td - Divide");
     Console.Write("Your option? ");
 
-    var op = Console.ReadLine();
+    string? op = null;
 
-    // Validate input is not null, and matches the pattern
-    if (op == null || !Regex.IsMatch(op, "[a|s|m|d]"))
+    while (true)
     {
-        Console.WriteLine("Error: Unrecognized input.");
+        op = Console.ReadLine();
+        
+        // Validate input is not null, and matches the pattern     
+        if (op != null && Regex.IsMatch(op, "[a|s|m|d]"))
+            break;
+        Console.WriteLine($"\"{op}\" is not a valid operation!");
+        Console.WriteLine("Choose an option from the following list:");
+        Console.WriteLine("\ta - Add");
+        Console.WriteLine("\ts - Subtract");
+        Console.WriteLine("\tm - Multiply");
+        Console.WriteLine("\td - Divide");
+        Console.Write("Your option? ");
     }
-    else
-    {
-        try
+
+     try
         {
             var result = calculator.DoOperation(num1, num2, op);
 
@@ -63,7 +72,6 @@ while (true)
         {
             Console.WriteLine("Oh no! An exception occurred trying to do the math.\n - Details: " + e.Message);
         }
-    }
     Console.WriteLine("------------------------\n");
 
     // Wait for the user to respond before closing.
