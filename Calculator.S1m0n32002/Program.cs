@@ -1,6 +1,6 @@
 ﻿using System.Text.RegularExpressions;
 
-CalculatorLibrary.Calculator calculator = new ();
+CalculatorLibrary.Calculator calculator = new();
 
 while (true)
 {
@@ -32,46 +32,35 @@ while (true)
         Console.WriteLine($"\"{input}\" is not a valid number, insert a number and then press Enter");
     }
 
-    // Ask the user to choose an option.
-    Console.WriteLine("Choose an option from the following list:");
-    Console.WriteLine("\ta - Add");
-    Console.WriteLine("\ts - Subtract");
-    Console.WriteLine("\tm - Multiply");
-    Console.WriteLine("\td - Divide");
-    Console.Write("Your option? ");
+    PromptOperationChoice();
 
-    string? op = null;
+    string? op;
 
     while (true)
     {
         op = Console.ReadLine();
-        
+
         // Validate input is not null, and matches the pattern     
         if (op != null && Regex.IsMatch(op, "[a|s|m|d]"))
             break;
         Console.WriteLine($"\"{op}\" is not a valid operation!");
-        Console.WriteLine("Choose an option from the following list:");
-        Console.WriteLine("\ta - Add");
-        Console.WriteLine("\ts - Subtract");
-        Console.WriteLine("\tm - Multiply");
-        Console.WriteLine("\td - Divide");
-        Console.Write("Your option? ");
+        PromptOperationChoice();
     }
 
-     try
-        {
-            var result = calculator.DoOperation(num1, num2, op);
+    try
+    {
+        var result = calculator.DoOperation(num1, num2, op);
 
-            if (double.IsNaN(result))
-            {
-                Console.WriteLine("This operation will result in a mathematical error.\n");
-            }
-            else Console.WriteLine("Your result: {0:0.##}\n", result);
-        }
-        catch (Exception e)
+        if (double.IsNaN(result))
         {
-            Console.WriteLine("Oh no! An exception occurred trying to do the math.\n - Details: " + e.Message);
+            Console.WriteLine("This operation will result in a mathematical error.\n");
         }
+        else Console.WriteLine("Your result: {0:0.##}\n", result);
+    }
+    catch (Exception e)
+    {
+        Console.WriteLine("Oh no! An exception occurred trying to do the math.\n - Details: " + e.Message);
+    }
     Console.WriteLine("------------------------\n");
 
     // Wait for the user to respond before closing.
@@ -80,5 +69,16 @@ while (true)
     {
         calculator.Finish();
         break;
+    }
+
+    void PromptOperationChoice()
+    {
+        // Ask the user to choose an option.
+        Console.WriteLine("Choose an option from the following list:");
+        Console.WriteLine("\ta - Add");
+        Console.WriteLine("\ts - Subtract");
+        Console.WriteLine("\tm - Multiply");
+        Console.WriteLine("\td - Divide");
+        Console.Write("Your option? ");
     }
 }
