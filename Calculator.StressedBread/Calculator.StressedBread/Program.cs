@@ -1,13 +1,16 @@
 ﻿using System.Text.RegularExpressions;
-using Calculator.StressedBread;
+using CalculatorLibrary;
 
+int calculatorUsed = 0;
 bool endApp = false;
-
-Console.WriteLine("Console Calculator\r");
-Console.WriteLine("------------------\n");
+CalculatorBrain calculatorBrain = new();
 
 while (!endApp)
 {
+    Console.Clear();
+    Console.WriteLine($"Console Calculator. You have used the calculator {calculatorUsed} times.\r");
+    Console.WriteLine("------------------\n");
+
     string? numInput1 = "";
     string? numInput2 = "";
     double result = 0;
@@ -41,7 +44,7 @@ Your option?");
 
     string? op = Console.ReadLine();
 
-    if (op == null || ! Regex.IsMatch(op, "[asmd]"))
+    if (op == null || !Regex.IsMatch(op, "[asmd]"))
     {
         Console.WriteLine("Error: Unrecognized input.");
     }
@@ -49,13 +52,14 @@ Your option?");
     {
         try
         {
-            result = CalculatorBrain.DoOperation(cleanNum1, cleanNum2, op);
+            result = calculatorBrain.DoOperation(cleanNum1, cleanNum2, op);
             if (double.IsNaN(result))
             {
                 Console.WriteLine("This operation will result in a mathematical error.\n");
             }
             else
             {
+                calculatorUsed++;
                 Console.WriteLine("Your result: {0:0.####}\n", result);
             }
         }
@@ -71,4 +75,5 @@ Your option?");
 
     Console.WriteLine("\n");
 }
+calculatorBrain.Finish(calculatorUsed);
 return;
