@@ -8,8 +8,8 @@ namespace CalculatorLibrary
         JsonWriter jsonWriter; 
         List<Data> history = new();
 
-        bool isFromHistory = false;
-        double fromHistory = 0;
+        bool isFromHistory;
+        double fromHistory;
 
         // Create and configure a new log file for storing operations in JSON format
         public CalculatorBrain()
