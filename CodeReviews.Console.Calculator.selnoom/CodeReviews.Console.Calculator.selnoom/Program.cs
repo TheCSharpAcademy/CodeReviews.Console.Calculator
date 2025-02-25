@@ -11,7 +11,6 @@ class Program
         Console.WriteLine("------------------------\n");
 
         Calculator calculator = new Calculator();
-        List<Calculation> calculations = new List<Calculation>();
 
         Calculation? chosenCalc = null;
 

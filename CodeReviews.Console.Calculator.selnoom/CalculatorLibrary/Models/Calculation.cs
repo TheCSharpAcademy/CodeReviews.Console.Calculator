@@ -2,7 +2,7 @@
 
 public class Calculation
 {
-    private static int _nextId = 0;
+    private static int _nextId;
     public int Id { get; }
     public string Operation { get; set; }
     public string Num1 { get; set; }

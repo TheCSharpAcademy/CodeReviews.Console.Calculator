@@ -1,5 +1,4 @@
-﻿using System.Diagnostics;
-using CalculatorLibrary.Models;
+﻿using CalculatorLibrary.Models;
 using Newtonsoft.Json;
 
 namespace CalculatorLibrary
