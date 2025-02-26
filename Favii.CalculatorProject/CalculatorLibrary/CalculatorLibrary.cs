@@ -1,15 +1,13 @@
-﻿using System.Diagnostics;
-using System.Text.RegularExpressions;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
 namespace CalculatorLibrary
 {
     public class Calculator
     {
-        public int counter = 0;
+        public int counter;
         JsonWriter writer;
         List<Calculation> calculationsHistory;
-        public Calculator ()
+        public Calculator()
         {
             StreamWriter logFile = File.CreateText("calculatorlog.json");
             logFile.AutoFlush = true;
@@ -95,7 +93,7 @@ namespace CalculatorLibrary
             calculationsHistory.Add(calc);
         }
 
-       public void ShowCalculationsHistory()
+        public void ShowCalculationsHistory()
         {
             if (calculationsHistory.Count() == 0)
             {
@@ -108,7 +106,7 @@ namespace CalculatorLibrary
                     calculation.DisplayCalculation();
                 }
                 Console.WriteLine();
-                Console.ReadLine();       
+                Console.ReadLine();
             }
         }
 
