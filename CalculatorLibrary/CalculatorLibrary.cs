@@ -18,12 +18,6 @@ namespace CalculatorLibrary
             writer.WriteStartObject();
             writer.WritePropertyName("Operations");
             writer.WriteStartArray();
-
-            // // using .NET trace class
-            // Trace.Listeners.Add(new TextWriterTraceListener(logFile));
-            // Trace.AutoFlush = true;
-            // Trace.WriteLine("Starting Calculator Log");
-            // Trace.WriteLine(String.Format("Started {0}", System.DateTime.Now.ToString()));
         }
 
         public double DoOperation(double num1, double num2, string op)
@@ -44,17 +38,14 @@ namespace CalculatorLibrary
                 case "a":
                     result = num1 + num2;
                     writer.WriteValue("Add");
-                    // Trace.WriteLine(String.Format("{0} + {1} = {2}", num1, num2, result));
                     break;
                 case "s":
                     result = num1 - num2;
                     writer.WriteValue("Subtract");
-                    // Trace.WriteLine(String.Format("{0} - {1} = {2}", num1, num2, result));
                     break;
                 case "m":
                     result = num1 * num2;
                     writer.WriteValue("Multiply");
-                    // Trace.WriteLine(String.Format("{0} * {1} = {2}", num1, num2, result));
                     break;
                 case "d":
                     // Ask the user to enter a non-zero divisor.
@@ -63,7 +54,6 @@ namespace CalculatorLibrary
                         result = num1 / num2;
                     }
                     writer.WriteValue("Divide");                    
-                    // Trace.WriteLine(String.Format("{0} / {1} = {2}", num1, num2, result));
                     break;
                 // Return text for an incorrect option entry.
                 default:
