@@ -9,4 +9,9 @@
     <GenerateTargetFrameworkAttribute>false</GenerateTargetFrameworkAttribute>  
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="CalculatorCore\CalculatorCore.csproj" />
+    <ProjectReference Include="CalculatorPrompts\CalculatorPrompts.csproj" />
+  </ItemGroup>
+
 </Project>
