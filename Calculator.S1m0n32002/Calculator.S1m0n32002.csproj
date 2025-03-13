@@ -8,7 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\CalculatorLibrary\CalculatorLibrary.csproj" />
+    <PackageReference Include="Spectre.Console" Version="0.49.1" />
   </ItemGroup>
 
 </Project>
