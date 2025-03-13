@@ -1,0 +1,16 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "consoleCalculator.Samuel-D1906", "consoleCalculator.Samuel-D1906\consoleCalculator.Samuel-D1906.csproj", "{EEEC09B2-6AE7-4864-95A3-4382BF46C507}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{EEEC09B2-6AE7-4864-95A3-4382BF46C507}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EEEC09B2-6AE7-4864-95A3-4382BF46C507}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EEEC09B2-6AE7-4864-95A3-4382BF46C507}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EEEC09B2-6AE7-4864-95A3-4382BF46C507}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
