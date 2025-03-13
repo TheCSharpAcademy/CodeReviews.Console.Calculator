@@ -7,7 +7,7 @@ public class CalculatorEngine
 
     JsonWriter writer;
     public double PrevResult { get; private set; }
-    public bool CanReuseResult { get; private set; } = false;
+    public bool CanReuseResult { get; private set; }
 
     public CalculatorEngine()
     {
