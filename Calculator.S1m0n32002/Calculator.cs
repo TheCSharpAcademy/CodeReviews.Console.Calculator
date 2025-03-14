@@ -1,5 +1,4 @@
 ﻿using Spectre.Console;
-using System.Runtime.InteropServices;
 using static Calculator.S1m0n32002.CalculatorController;
 
 namespace Calculator.S1m0n32002
@@ -16,7 +15,7 @@ namespace Calculator.S1m0n32002
             No,
         }
 
-        public readonly static Dictionary<string, MenuOptions> strMenuOptions = new()
+        public static readonly Dictionary<string, MenuOptions> strMenuOptions = new()
         {
             {"[bold green]Start[/]" ,MenuOptions.Start },
             {"History"              ,MenuOptions.History },

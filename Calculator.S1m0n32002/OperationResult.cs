@@ -6,7 +6,7 @@ namespace Calculator.S1m0n32002
     {
         public double Value { get; set; }
         public double[] Numbers { get; set; } = [];
-        public CalculatorController.Operations Operation { get; set; } 
+        public CalculatorController.Operations Operation { get; set; }
 
         public override string ToString()
         {

@@ -18,7 +18,7 @@
             Exp,
         }
 
-        public readonly static Dictionary<string, Operations> strOperations = new()
+        public static readonly Dictionary<string, Operations> strOperations = new()
         {
             { "Sum"                 ,Operations.Sum},
             { "Subtract"            ,Operations.Subtract},
