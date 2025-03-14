@@ -1,4 +1,5 @@
 ﻿using Spectre.Console;
+using System.Runtime.InteropServices;
 using static Calculator.S1m0n32002.CalculatorController;
 
 namespace Calculator.S1m0n32002
@@ -25,15 +26,18 @@ namespace Calculator.S1m0n32002
             {"No"                   ,MenuOptions.No },
         };
 
-        public static void CalculatorStart()
+        /// <summary>
+        /// Starts the calculator
+        /// </summary>
+        public static void StartCalculator()
         {
             while (true)
             {
                 WriteTitle();
 
                 var prompt = new SelectionPrompt<string>()
-                    .AddChoices([.. 
-                            strMenuOptions.Keys.Where(x => strMenuOptions[x] != MenuOptions.Yes ||
+                    .AddChoices([..
+                            strMenuOptions.Keys.Where(x => strMenuOptions[x] != MenuOptions.Yes &&
                                                                     strMenuOptions[x] != MenuOptions.No)
                         ]);
 
@@ -47,10 +51,9 @@ namespace Calculator.S1m0n32002
                             DoCalc();
                             break;
                         case MenuOptions.History:
-                            //ShowHistory;
-                            break;
-                        case MenuOptions.UsageCounter:
-                            //ShowUsageCounter();
+                            var result = ShowHistory();
+                            if (result != null)
+                                DoCalc(result);
                             break;
                         case MenuOptions.Exit:
                             var anser = AnsiConsole.Prompt(new SelectionPrompt<string>()
@@ -58,7 +61,7 @@ namespace Calculator.S1m0n32002
                                 Title = "Are you sure you want to exit?"
                             }.AddChoices([.. strMenuOptions.Keys.Where(x => strMenuOptions[x] == MenuOptions.Yes ||
                                                                                   strMenuOptions[x] == MenuOptions.No)]));
-                            
+
                             if (strMenuOptions.TryGetValue(anser, out var exitOption))
                             {
                                 if (exitOption == MenuOptions.Yes)
@@ -83,6 +86,84 @@ namespace Calculator.S1m0n32002
             AnsiConsole.WriteLine();
         }
 
+        enum HistoryOperations
+        {
+            Exit,
+            ClearHistory,
+        }
+
+        /// <summary>
+        /// Shows the history of operations
+        /// </summary>
+        static OperationResult? ShowHistory()
+        {
+            while (true)
+            {
+                Dictionary<string, OperationResult> strResultLog = [];
+                var rList = ResultLog.Reverse<OperationResult>();
+
+                int c = 0;
+                foreach (var result in rList)
+                {
+                    strResultLog.Add($"{++c}. {result}", result);
+                }
+
+                Dictionary<string, HistoryOperations> strHistoryOperations = new()
+                {
+                    { "[yellow]Exit[/]"         ,HistoryOperations.Exit },
+                    { "[red]Clear History[/]"   ,HistoryOperations.ClearHistory },
+                };
+
+                var answer = AnsiConsole.Prompt(new SelectionPrompt<string>()
+                {
+                    Title = "History",
+                }
+                .AddChoices(strResultLog.Keys)
+                .AddChoiceGroup("Menu", strHistoryOperations.Keys));
+
+                if (strResultLog.TryGetValue(answer, out var operationResult))
+                {
+                    return operationResult;
+                }
+
+                if (strHistoryOperations.TryGetValue(answer, out var HO))
+                {
+                    switch (HO)
+                    {
+                        case HistoryOperations.Exit:
+                            return null;
+                        case HistoryOperations.ClearHistory:
+                            ClearHistory();
+                            break;
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// Shows the history of operations
+        /// </summary>
+        static void ClearHistory()
+        {
+            Dictionary<string, bool> strYesNo = new()
+            {
+                { "No", false },
+                { "Yes", true },
+            };
+
+            var answer = AnsiConsole.Prompt(new SelectionPrompt<string>()
+            {
+                Title = "History"
+            }.AddChoices(strYesNo.Keys)
+            );
+
+            if (strYesNo.TryGetValue(answer, out var clearHistory))
+            {
+                if (clearHistory)
+                    ResultLog.Clear();
+            }
+        }
+
         /// <summary>
         /// Prompt the user to choose an operation
         /// </summary>
@@ -103,7 +184,10 @@ namespace Calculator.S1m0n32002
                 return null;
         }
 
-        static void DoCalc()
+        /// <summary>
+        /// Perform the operation
+        /// </summary>
+        static void DoCalc(OperationResult? existingResult = null)
         {
             WriteTitle();
 
@@ -113,17 +197,17 @@ namespace Calculator.S1m0n32002
 
             Operations operation = (Operations)answer;
 
-            var numbers = CompileOperation(operation);
+            var numbers = PrepareOperation(operation, existingResult);
 
             try
             {
-                var result = DoOperation(operation, [.. numbers]);
+                var result = DoOperation(operation, numbers.Item1, numbers.Item2);
 
-                if (double.IsNaN(result))
+                if (result == null)
                 {
                     Console.WriteLine("This operation will result in a mathematical error.\n");
                 }
-                else Console.WriteLine("Your result: {0:0.00}\n", result);
+                else Console.WriteLine(result);
             }
             catch (Exception e)
             {
@@ -135,17 +219,27 @@ namespace Calculator.S1m0n32002
             Console.ReadLine();
         }
 
-        static IEnumerable<double> CompileOperation(Operations operation)
+        /// <summary>
+        /// Prepares the data needed for the operation
+        /// </summary>
+        /// <param name="operation"> Requested operation </param>
+        /// <param name="existingResult"> Existing result to use </param>
+        /// <returns> List with the numbers to use during the calculation </returns>
+        private static (double, double) PrepareOperation(Operations operation, OperationResult? existingResult = null)
         {
-            List<double> numbers = [];
+            double num1 = 0;
+            double num2 = 0;
 
-            numbers.Add(AnsiConsole.Prompt(new TextPrompt<double>("Enter one number number:")));
+            if (existingResult != null)
+                num1 = existingResult.Value;
+            else
+                num1 = AnsiConsole.Prompt(new TextPrompt<double>("Enter one number:"));
 
             /// Prompt the user for the second number if needed
             switch (operation)
             {
                 case Operations.Divide:
-                    numbers.Add(AnsiConsole.Prompt(new TextPrompt<double>("Enter the second number")
+                    num2 = AnsiConsole.Prompt(new TextPrompt<double>("Enter the second number:")
                     {
                         Validator = (input) =>
                         {
@@ -153,21 +247,26 @@ namespace Calculator.S1m0n32002
                                 return ValidationResult.Error("Cannot divide by zero");
                             return ValidationResult.Success();
                         }
-                    }));
+                    });
                     break;
 
                 case Operations.Sum:
                 case Operations.Subtract:
                 case Operations.Multiply:
                 case Operations.Power:
-                    numbers.Add(AnsiConsole.Prompt(new TextPrompt<double>("Enter the second number")));
+                    num2 = AnsiConsole.Prompt(new TextPrompt<double>("Enter the second number:"));
+                    break;
+
+                case Operations.TenPower:
+                    num2 = num1;
+                    num1 = 10;
                     break;
 
                 default:
                     break;
             }
 
-            return numbers;
+            return (num1, num2);
         }
     }
 }

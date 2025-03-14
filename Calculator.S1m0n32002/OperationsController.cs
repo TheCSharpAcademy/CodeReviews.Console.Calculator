@@ -1,6 +1,6 @@
 ﻿namespace Calculator.S1m0n32002
 {
-    public static class CalculatorController
+    internal static class CalculatorController
     {
         public enum Operations
         {
@@ -34,64 +34,73 @@
             { "Exponential"         ,Operations.Exp},
         };
 
-        public static double DoOperation(Operations operation, params double[] numbers)
+        public static List<OperationResult> ResultLog { get; } = [];
+
+        public static OperationResult? DoOperation(Operations operation, params double[] numbers)
         {
-            double result = double.NaN; // Default value is "not-a-number" if an operation, such as division, could result in an error.
+            double value = double.NaN; // Default value is "not-a-number" if an operation, such as division, could value in an error.
 
             switch (operation)
             {
                 case Operations.Sum:
-                    result = numbers[0] + numbers[1];
+                    value = numbers[0] + numbers[1];
                     break;
 
                 case Operations.Subtract:
-                    result = numbers[0] - numbers[1];
+                    value = numbers[0] - numbers[1];
                     break;
 
                 case Operations.Multiply:
-                    result = numbers[0] * numbers[1];
+                    value = numbers[0] * numbers[1];
                     break;
 
                 case Operations.Divide:
                     // Should already be not zero but just in case
                     if (numbers[1] != 0)
                     {
-                        result = numbers[0] / numbers[1];
+                        value = numbers[0] / numbers[1];
                     }
+                    else
+                        return null;
                     break;
 
                 case Operations.SquareRoot:
-                    result = Math.Sqrt(numbers[0]);
-                    break;
-
-                case Operations.Power:
-                    result = Math.Pow(numbers[0], numbers[1]);
+                    value = Math.Sqrt(numbers[0]);
                     break;
 
                 case Operations.TenPower:
-                    result = Math.Pow(10, numbers[0]);
+                case Operations.Power:
+                    value = Math.Pow(numbers[0], numbers[1]);
                     break;
-
                 case Operations.Sin:
-                    result = Math.Sin(numbers[0]);
+                    value = Math.Sin(numbers[0]);
                     break;
 
                 case Operations.Cos:
-                    result = Math.Cos(numbers[0]);
+                    value = Math.Cos(numbers[0]);
                     break;
 
                 case Operations.Tan:
-                    result = Math.Tan(numbers[0]);
+                    value = Math.Tan(numbers[0]);
                     break;
 
                 case Operations.Log:
-                    result = Math.Log(numbers[0]);
+                    value = Math.Log(numbers[0]);
                     break;
 
                 case Operations.Exp:
-                    result = Math.Exp(numbers[0]);
+                    value = Math.Exp(numbers[0]);
                     break;
             }
+
+            var result = new OperationResult()
+            {
+                Value = value,
+                Numbers = numbers,
+                Operation = operation,
+            };
+
+            ResultLog.Add(result);
 
             return result;
         }

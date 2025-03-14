@@ -1,1 +1,1 @@
-﻿Calculator.S1m0n32002.Calculator.CalculatorStart();
+﻿Calculator.S1m0n32002.Calculator.StartCalculator();
