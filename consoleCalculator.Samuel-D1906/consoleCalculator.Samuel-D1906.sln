@@ -1,6 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.13.35828.75 d17.13
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "consoleCalculator.Samuel-D1906", "consoleCalculator.Samuel-D1906\consoleCalculator.Samuel-D1906.csproj", "{EEEC09B2-6AE7-4864-95A3-4382BF46C507}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CalculatorLibrary", "CalculatorLibrary\CalculatorLibrary.csproj", "{722C1B14-2629-452F-908F-ADAE0EDA28E1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -12,5 +17,15 @@ Global
 		{EEEC09B2-6AE7-4864-95A3-4382BF46C507}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EEEC09B2-6AE7-4864-95A3-4382BF46C507}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EEEC09B2-6AE7-4864-95A3-4382BF46C507}.Release|Any CPU.Build.0 = Release|Any CPU
+		{722C1B14-2629-452F-908F-ADAE0EDA28E1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{722C1B14-2629-452F-908F-ADAE0EDA28E1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{722C1B14-2629-452F-908F-ADAE0EDA28E1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{722C1B14-2629-452F-908F-ADAE0EDA28E1}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {24971111-762F-421A-9D7C-E9B053DD5626}
 	EndGlobalSection
 EndGlobal
