@@ -19,9 +19,23 @@ class Calculator
         writer.WritePropertyName("Operations");
         writer.WriteStartArray();
     }
+
+    public void ShowMenu()
+    {
+        Console.WriteLine("Console Calculator in C#\r");
+        Console.WriteLine("------------------------\n");
+        Console.WriteLine("Which options do you want to make?\n");
+        Console.WriteLine("\td - Do Operation");
+        Console.WriteLine("\ts - Show List");
+        Console.WriteLine("\tl - Delete List");
+        Console.Write("Your option? ");
+
+        string? option = Console.ReadLine();
+
+    }
     // CalculatorLibrary.cs
     // CalculatorLibrary.cs
-    public double DoOperation(double num1, double num2, string op)
+    public double DoOperation(double num1, double num2, string op, List<double> calculations)
     {
         double result = double.NaN; // Default value is "not-a-number" if an operation, such as division, could result in an error.
         writer.WriteStartObject();
@@ -29,7 +43,7 @@ class Calculator
         writer.WriteValue(num1);
         writer.WritePropertyName("Operand2");
         writer.WriteValue(num2);
-        writer.WritePropertyName("Operation");
+        writer.WritePropertyName("Options");
         // Use a switch statement to do the math.
         switch (op)
         {
@@ -51,7 +65,12 @@ class Calculator
                 {
                     result = num1 / num2;
                 }
-                writer.WriteValue("Divide");
+
+                break;
+            case "l":
+                // Ask the user to enter a non-zero divisor.
+                DeleteList(calculations);
+                writer.WriteValue("Delete List of Calculations");
                 break;
             // Return text for an incorrect option entry.
             default:
@@ -68,6 +87,17 @@ class Calculator
     {
         count = count + 1;
         return count;
+    }
+
+    public List<double> SaveInList (List<double> calculations ,double result)
+    {
+        calculations.Add(result);
+        return calculations;
+    }
+
+    public void DeleteList(List<double> List)
+    {
+        List.Clear();
     }
 
     // CalculatorLibrary.cs

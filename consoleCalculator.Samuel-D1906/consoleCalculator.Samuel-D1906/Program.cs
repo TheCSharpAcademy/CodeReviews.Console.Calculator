@@ -7,15 +7,19 @@ class Program
     {
         bool endApp = false;
         int count = 0;
+        List<double> calculations = [];
+        int savedItems = 0;
         // Display title as the C# console calculator app.
-        Console.WriteLine("Console Calculator in C#\r");
-        Console.WriteLine("------------------------\n");
+        
         // Program.cs
         Calculator calculator = new Calculator();
         while (!endApp)
         {
             // Declare variables and set to empty.
             // Use Nullable types (with ?) to match type of System.Console.ReadLine
+            Console.Write("Calculations: "); 
+            calculations.ForEach(item => Console.Write(item + ","));
+            Console.WriteLine("\n");
             string? numInput1 = "";
             string? numInput2 = "";
             double result = 0;
@@ -65,7 +69,7 @@ class Program
                 {
                     // Program.cs
                     // Program.cs
-                    result = calculator.DoOperation(cleanNum1, cleanNum2, op);
+                    result = calculator.DoOperation(cleanNum1, cleanNum2, op, calculations);
                     if (double.IsNaN(result))
                     {
                         Console.WriteLine("This operation will result in a mathematical error.\n");
@@ -78,9 +82,24 @@ class Program
                 }
 
                 count = calculator.CountOperations(count);
+                calculations = calculator.SaveInList(calculations,result);
             }
+            Console.WriteLine("Calculation saved in List!");
+            savedItems = savedItems + 1;
+            Console.WriteLine(calculations);
             Console.WriteLine("Calculator used: " +  count);
             Console.WriteLine("------------------------\n");
+            Console.WriteLine("Do you want to Delete the List?");
+            Console.WriteLine("\ty - Yes");
+            Console.WriteLine("\tn - No");
+            Console.WriteLine("\tYour Option?");
+            string? delete = Console.ReadLine();
+            if (delete != "n")
+            {
+                calculator.DeleteList(calculations);
+                Console.WriteLine("List successfully deleted!");
+                //Console.WriteLine(calculations[savedItems - 1]);
+            }
 
             // Wait for the user to respond before closing.
             Console.Write("Press 'n' and Enter to close the app, or press any other key and Enter to continue: ");
