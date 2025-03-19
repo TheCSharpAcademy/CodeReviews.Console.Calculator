@@ -6,6 +6,7 @@ class Program
     static void Main(string[] args)
     {
         bool endApp = false;
+        int count = 0;
         // Display title as the C# console calculator app.
         Console.WriteLine("Console Calculator in C#\r");
         Console.WriteLine("------------------------\n");
@@ -18,8 +19,10 @@ class Program
             string? numInput1 = "";
             string? numInput2 = "";
             double result = 0;
+            
 
             // Ask the user to type the first number.
+            Console.WriteLine("Calculator used: " +  count);
             Console.Write("Type a number, and then press Enter: ");
             numInput1 = Console.ReadLine();
 
@@ -73,12 +76,20 @@ class Program
                 {
                     Console.WriteLine("Oh no! An exception occurred trying to do the math.\n - Details: " + e.Message);
                 }
+
+                count = calculator.CountOperations(count);
             }
+            Console.WriteLine("Calculator used: " +  count);
             Console.WriteLine("------------------------\n");
 
             // Wait for the user to respond before closing.
             Console.Write("Press 'n' and Enter to close the app, or press any other key and Enter to continue: ");
-            if (Console.ReadLine() == "n") endApp = true;
+            if (Console.ReadLine() == "n")
+            {
+                endApp = true;
+                count = 0;
+                Console.WriteLine("\n Calculator count reseted!");
+            }
 
             Console.WriteLine("\n"); // Friendly linespacing.
         }

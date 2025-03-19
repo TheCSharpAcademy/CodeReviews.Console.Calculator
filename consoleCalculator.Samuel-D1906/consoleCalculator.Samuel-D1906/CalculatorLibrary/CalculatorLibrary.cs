@@ -64,6 +64,12 @@ class Calculator
         return result;
     }
 
+    public int CountOperations(int count)
+    {
+        count = count + 1;
+        return count;
+    }
+
     // CalculatorLibrary.cs
     public void Finish()
     {
