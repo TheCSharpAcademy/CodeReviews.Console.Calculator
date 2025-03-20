@@ -88,8 +88,14 @@ namespace CalculatorLibrary
             writer.WriteEndObject();
             writer.WritePropertyName("TotalOperations");
             writer.WriteValue(Counter);
+
             writer.WritePropertyName("LatestCalculation");
-            writer.WriteValue(CalculationList);
+            writer.WriteStartArray();
+            foreach (var calculation in CalculationList)
+            {
+                writer.WriteValue(calculation);
+            }
+            writer.WriteEndArray();
             writer.Close();
         }
 
