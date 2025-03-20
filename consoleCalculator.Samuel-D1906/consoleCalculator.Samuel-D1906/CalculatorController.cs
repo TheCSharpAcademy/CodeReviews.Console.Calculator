@@ -1,5 +1,7 @@
-﻿using System.Text.RegularExpressions;
+﻿using System.Globalization;
+using System.Text.RegularExpressions;
 using consoleCalculator.Samuel_D1906.CalculatorLibrary;
+using Spectre.Console;
 
 namespace consoleCalculator.Samuel_D1906;
 
@@ -22,8 +24,19 @@ public class CalculatorController
              string? numInput2 = ""; 
              double result = 0;
              Console.WriteLine("Calculator used: " +  _count);
-             Console.Write("Type a number, and then press Enter: ");
-             numInput1 = Console.ReadLine();
+             Console.Write("Do you want to use Results from the List? as Number 1 (y/n):");
+             if (Console.ReadLine() == "y")
+             {
+                 var userOption = AnsiConsole.Prompt(new SelectionPrompt<double>()
+                     .Title("Which number do you want to use?\r").AddChoices(_calculations));
+                 numInput1 = userOption.ToString(CultureInfo.CurrentCulture);
+                
+             }
+             else
+             {
+                 Console.Write("Type a number, and then press Enter: ");
+                 numInput1 = Console.ReadLine();
+             }
 
              double cleanNum1 = 0;
              while (!double.TryParse(numInput1, out cleanNum1))
@@ -32,8 +45,19 @@ public class CalculatorController
                  numInput1 = Console.ReadLine();
              }
         
-             Console.Write("Type another number, and then press Enter: ");
-             numInput2 = Console.ReadLine();
+             Console.Write("Do you want to use Results from the List? as Number 2 (y/n):");
+             if (Console.ReadLine() == "y")
+             {
+                 var userOption = AnsiConsole.Prompt(new SelectionPrompt<double>()
+                     .Title("Which number do you want to use?\r").AddChoices(_calculations));
+                 numInput2 = userOption.ToString(CultureInfo.InvariantCulture);
+             }
+             else
+             {
+                 Console.Write("Type a number, and then press Enter: ");
+                 numInput2 = Console.ReadLine();
+             }
+
 
              double cleanNum2 = 0;
              while (!double.TryParse(numInput2, out cleanNum2))
