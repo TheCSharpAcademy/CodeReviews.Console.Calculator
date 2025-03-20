@@ -47,6 +47,11 @@ public class CalculatorController
              Console.WriteLine("\ts - Subtract");
              Console.WriteLine("\tm - Multiply");
              Console.WriteLine("\td - Divide");
+             Console.WriteLine("\tsq - Square Root");
+             Console.WriteLine("\tp - 10x Power");
+             Console.WriteLine("\tsin - Trigonometry functions Sin");
+             Console.WriteLine("\tcos - Trigonometry functions Cos");
+             Console.WriteLine("\ttan - Trigonometry functions tan");
              Console.Write("Your option? ");
 
              string? op = Console.ReadLine();

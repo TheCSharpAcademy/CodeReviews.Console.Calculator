@@ -51,6 +51,22 @@ class Calculator
                     result = num1 / num2;
                 }
                 break;
+            case "sq" :
+                result = Math.Sqrt(num1);
+                _writer.WriteValue("Square Root");
+                break;
+            case "p" :
+                result = Math.Pow(num1, 10);
+                break;
+            case "sin" :
+                result = Math.Sin(num1);
+                break;
+            case "cos" :
+                result = Math.Cos(num1);
+                break;
+            case "tan" :
+                result = Math.Tan(num1);
+                break;
             default:
                 break;
         }
