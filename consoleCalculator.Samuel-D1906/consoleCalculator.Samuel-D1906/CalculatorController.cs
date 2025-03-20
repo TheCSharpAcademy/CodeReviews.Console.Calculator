@@ -56,7 +56,7 @@ public class CalculatorController
 
              string? op = Console.ReadLine();
         
-             if (op == null || ! Regex.IsMatch(op, "[a|s|m|d]"))
+             if (op == null || ! Regex.IsMatch(op, "[a|s|m|d|sq|p|sin|cos|tan]"))
              {
                  Console.WriteLine("Error: Unrecognized input.");
              }
