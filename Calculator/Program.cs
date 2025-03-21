@@ -7,11 +7,10 @@ Calculator calculator = new Calculator();
 Console.WriteLine("Console Calculator in C#\r");
 Console.WriteLine("------------------------\n");
 
-int countOfTimesUsed = 0;
+
 
 while (!endApp)
-{
-    countOfTimesUsed++;
+{ 
     // Declare variables and set to empty.
     // Use Nullable types (with ?) to match type of System.Console.ReadLine
     string? numInput1 = "";

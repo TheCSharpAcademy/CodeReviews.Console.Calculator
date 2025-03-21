@@ -1,11 +1,10 @@
-﻿using System.Diagnostics;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 namespace CalculatorLibrary
 {
     public class Calculator
     {
         JsonWriter writer;
-        public static int countOfTimesUsed = 0;
+        public static int countOfTimesUsed;
         public Calculator()
         {
             StreamWriter logfile = File.CreateText("calculatorlog.json");
