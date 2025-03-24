@@ -1,7 +1,6 @@
-﻿using System.Globalization;
+﻿
 using System.Text.RegularExpressions;
 using consoleCalculator.Samuel_D1906.CalculatorLibrary;
-using Spectre.Console;
 
 namespace consoleCalculator.Samuel_D1906;
 
