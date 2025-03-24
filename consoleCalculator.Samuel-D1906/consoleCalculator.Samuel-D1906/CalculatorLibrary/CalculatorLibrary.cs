@@ -49,6 +49,7 @@ class Calculator
                 if (num2 != 0)
                 {
                     result = num1 / num2;
+                    _writer.WriteValue("Divide");
                 }
                 break;
             case "sq" :
@@ -57,15 +58,19 @@ class Calculator
                 break;
             case "p" :
                 result = Math.Pow(num1, 10);
+                _writer.WriteValue("Power to 10");
                 break;
             case "sin" :
                 result = Math.Sin(num1);
+                _writer.WriteValue("Trigonometry functions Sin");
                 break;
             case "cos" :
                 result = Math.Cos(num1);
+                _writer.WriteValue("Trigonometry functions Cos");
                 break;
             case "tan" :
                 result = Math.Tan(num1);
+                _writer.WriteValue("Trigonometry functions tan");
                 break;
             default:
                 break;
