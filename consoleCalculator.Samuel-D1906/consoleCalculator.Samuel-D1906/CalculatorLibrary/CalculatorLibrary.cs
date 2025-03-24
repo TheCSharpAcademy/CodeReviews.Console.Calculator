@@ -1,5 +1,9 @@
-﻿using Newtonsoft.Json;
+﻿using System.Globalization;
+using Newtonsoft.Json;
+using Spectre.Console;
+
 // CalculatorLibrary.cs
+
 
 namespace consoleCalculator.Samuel_D1906.CalculatorLibrary;
 
@@ -115,5 +119,30 @@ class Calculator
         _writer.WriteEndArray();
         _writer.WriteEndObject();
         _writer.Close();
+    }
+
+    public static string UseNumberFromList(string? number, List<double> calculations)
+    {
+        Console.Write("Do you want to use Results from the List? as Number  (y/n):");
+            
+        if (Console.ReadLine() == "y")
+        {
+            if (calculations.Count == 0)
+            {
+                Console.WriteLine("List is empty! Please add a number to the list first.");
+            }
+            else
+            {
+                var userOption = AnsiConsole.Prompt(new SelectionPrompt<double>()
+                    .Title("Which number do you want to use?\r").AddChoices(calculations));
+                number = userOption.ToString(CultureInfo.CurrentCulture);
+            }
+        }
+        else
+        {
+            Console.Write("Type a number, and then press Enter: ");
+            number = Console.ReadLine();
+        }
+        return number;
     }
 }
