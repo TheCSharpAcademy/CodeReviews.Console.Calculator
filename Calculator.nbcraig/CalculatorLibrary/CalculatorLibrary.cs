@@ -1,8 +1,20 @@
-﻿namespace CalculatorLibrary
+﻿using System.Diagnostics;
+
+namespace CalculatorLibrary
 {
     public class Calculator
     {
-        public static double HandleOperations(double num1, double num2, string op)
+        // 
+        public Calculator()
+        {
+            StreamWriter logFile = File.CreateText("calculator.log");
+            Trace.Listeners.Add(new TextWriterTraceListener(logFile));
+            Trace.AutoFlush = true;
+            Trace.WriteLine("Strating Calculator Log");
+            Trace.WriteLine($"Started on {System.DateTime.Now.ToString()}");
+        }
+
+        public double HandleOperations(double num1, double num2, string op)
         {
             double result = 0;
 
@@ -10,12 +22,15 @@
             {
                 case "a":
                     result = num1 + num2;
+                    Trace.WriteLine($"{num1} + {num2} = {result}");
                     break;
                 case "s":
                     result = num1 - num2;
+                    Trace.WriteLine($"{num1} - {num2} = {result}");
                     break;
                 case "m":
                     result = num1 * num2;
+                    Trace.WriteLine($"{num1} * {num2} = {result}");
                     break;
                 case "d":
                     // Prompt the user to enter a non zero divisor until they do so
@@ -35,6 +50,7 @@
                     }
 
                     result = num1 / num2;
+                    Trace.WriteLine($"{num1} / {num2} = {result}");
                     break;
             }
 

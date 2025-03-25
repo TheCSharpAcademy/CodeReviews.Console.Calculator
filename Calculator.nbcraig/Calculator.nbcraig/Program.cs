@@ -7,6 +7,11 @@ internal class Program
         Console.WriteLine("--- WELCOME TO C# CALCULATOR ---");
         Console.WriteLine("--------------------------------");
 
+        // New instance/session of Calculator [See CalculatorLibrary]
+        // Initialisation here because there can bw only one instance 
+        // of the Trace class through the whole app lifecycle.
+        Calculator calculator = new Calculator();
+
         bool calculatorOff = false;
 
         while (!calculatorOff)
@@ -36,6 +41,8 @@ internal class Program
                 num2Input = Console.ReadLine();
             }
 
+
+
             // Prompt the user to choose a operator
             Console.WriteLine("Choose an operator from the list!");
             Console.WriteLine("\ta - Addition");
@@ -46,25 +53,27 @@ internal class Program
 
             string? op = Console.ReadLine().ToLower();
 
-            // Verify enterd operator and perform operation
+            // Verify entered operator and perform operation. Basci block for readability
+
+            string[] allOperators = { "a", "s", "m", "d" };
+
+            while (!allOperators.Contains(op))
             {
-                string[] allOperators = { "a", "s", "m", "d" };
+                Console.Clear();
+                Console.WriteLine("Please enter a suitable operator!");
+                Console.WriteLine("Your Operator: ");
 
-                while (!allOperators.Contains(op))
-                {
-                    Console.Clear();
-                    Console.WriteLine("Please enter a suitable operator!");
-                    Console.WriteLine("Your Operator: ");
-
-                    op = Console.ReadLine().ToLower();
-                }
-
-                double operationResult = Calculator.HandleOperations(num1, num2, op);
+                op = Console.ReadLine().ToLower();
             }
+
+            double operationResult = calculator.HandleOperations(num1, num2, op);
+
+
 
             // Show well formatted results
             Console.Clear();
             Console.WriteLine($"RESULT: {num1} + {num2} = {operationResult}");
+
 
             // Wait for the user to respond before closing.
             Console.Write("Press 'n' and Enter to close the app, or press any other key and Enter to continue: ");
