@@ -1,16 +1,32 @@
-﻿Console.WriteLine("--- WELCOME TO C# CALCULATOR ---");
+﻿using Calculator.nbcraig;
+
+Console.WriteLine("--- WELCOME TO C# CALCULATOR ---");
 Console.WriteLine("--------------------------------");
 
-// Initialize the two operands
-double num1 = 0; double num2 = 0;
+// Initialize variables to store user input
+string? num1Input = "";
+string? num2Input = "";
 
 // Prompt the user to enter the first number
 Console.WriteLine("Enter the first number!");
-num1 = Convert.ToDouble(Console.ReadLine());
+num1Input = Console.ReadLine();
+// Use TryParse to handle format exceptions 
+double num1 = 0;
+while (!double.TryParse(num1Input, out num1))
+{
+    Console.WriteLine("Enter the first number in the correct format!");
+    num1Input = Console.ReadLine();
+}
 
-// Prompt the user to enter the second number
+// Repeat process for the second number
 Console.WriteLine("Enter the second number!");
-num2 = Convert.ToDouble(Console.ReadLine());
+num2Input = Console.ReadLine();
+double num2 = 0;
+while (!double.TryParse(num2Input, out num2))
+{
+    Console.WriteLine("Enter the second number in the correct format!");
+    num2Input = Console.ReadLine();
+}
 
 // Prompt the user to choose a operator
 Console.WriteLine("Choose an operator from the list!");
@@ -20,39 +36,24 @@ Console.WriteLine("\tm - Multiplication");
 Console.WriteLine("\td - Division");
 Console.WriteLine("Your Operator: ");
 
-// Perform operations according to the user's choice
+string? op = Console.ReadLine().ToLower();
 
-string? operand = Console.ReadLine();
+// Verify enterd operator and perform operation
+string[] allOperators = { "a", "s", "m", "d" };
 
-switch (operand.ToLower())
+while (!allOperators.Contains(op))
 {
-    case "a":
-        Console.Clear();
-        Console.WriteLine($"Result: {num1} + {num2} = {num1 + num2}");
-        break;
-    case "s":
-        Console.Clear();
-        Console.WriteLine($"Result: {num1} - {num2} = {num1 - num2}");
-        break;
-    case "m":
-        Console.Clear();
-        Console.WriteLine($"Result: {num1} * {num2} = {num1 * num2}");
-        break;
-    case "d":
-        // Prompt the user to enter a non zero divisor until they do so
-        while (num2.Equals(0))
-        {
-            Console.WriteLine("Cannot divide by Zero(0) !");
-            Console.WriteLine("HINT: Enter a non-zero divisor!");
+    Console.Clear();
+    Console.WriteLine("Please enter a suitable operator!");
+    Console.WriteLine("Your Operator: ");
 
-            num2 = Convert.ToDouble(Console.ReadLine());
-        }
-        Console.Clear();
-        Console.WriteLine($"Result: {num1} / {num2} = {num1 / num2}");
-        break;
-    default:
-        Console.WriteLine("Please select a suitable operator!");
-        break;
+    op = Console.ReadLine().ToLower();
 }
+
+double operationResult = Engine.HandleOperations(num1, num2, op);
+
+// Show well formatted results
+Console.Clear();
+Console.WriteLine($"RESULT: {num1} + {num2} = {operationResult}");
 
 Console.ReadKey();
