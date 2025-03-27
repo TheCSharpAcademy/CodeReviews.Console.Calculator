@@ -7,9 +7,9 @@ internal class Program
         Console.WriteLine("--- WELCOME TO C# CALCULATOR ---");
         Console.WriteLine("--------------------------------");
 
-        // New instance/session of Calculator [See CalculatorLibrary]
-        // Initialisation here because there can bw only one instance 
-        // of the Trace class through the whole app lifecycle.
+        // New instance/session of Calculator [See CalculatorLibrary].
+        // Initialisation is done here because there can only be one
+        // instance of the Trace class through the whole app lifecycle.
         Calculator calculator = new Calculator();
 
         bool calculatorOff = false;
@@ -72,13 +72,17 @@ internal class Program
 
             // Show well formatted results
             Console.Clear();
-            Console.WriteLine($"RESULT: {num1} + {num2} = {operationResult}");
+            Console.WriteLine($"RESULT: {operationResult}");
 
 
             // Wait for the user to respond before closing.
             Console.Write("Press 'n' and Enter to close the app, or press any other key and Enter to continue: ");
             if (Console.ReadLine() == "n") calculatorOff = true;
         }
+
+        // Call the Finish method to close the JSON writer before 
+        // end of app 'session'
+        calculator.Finish();
 
         // End loop and exit app if calcultorOff is to be set to true
         return;
