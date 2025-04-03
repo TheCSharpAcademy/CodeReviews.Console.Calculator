@@ -5,7 +5,7 @@ namespace CalculatorProgram;
 
 class Program
 {
-    static void Main(String[] args)
+    static void Main()
     {
         bool endApp = false;
         // Display Title as the C# console calculator app.
