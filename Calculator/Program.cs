@@ -18,11 +18,11 @@ class Program
             switch (userOption)
             {
                 case "cl":
-                    calculator.clearHistory();
+                    calculator.ClearHistory();
                     System.Console.WriteLine("History cleared.");
                     break;
                 default:
-                    userCalculation(calculator);
+                    UserCalculation(calculator);
                     break;
             }
 
@@ -42,7 +42,7 @@ class Program
         return;
     }
 
-    static void userCalculation(Calculator calculator)
+    static void UserCalculation(Calculator calculator)
     {
         // Declare variables and set to empty.
         double result = 0;
@@ -71,13 +71,13 @@ class Program
         else
         {
             // Ask the user to type the first number.
-            double cleanNum1 = retrieveNumberFromUserInput(calculator, true);
+            double cleanNum1 = RetrieveNumberFromUserInput(calculator, true);
 
             double cleanNum2 = 0;
             if (Regex.IsMatch(op, "[a|s|m|d|p]"))
             {
                 // Ask the user to type the second number.
-                cleanNum2 = retrieveNumberFromUserInput(calculator, false);
+                cleanNum2 = RetrieveNumberFromUserInput(calculator, false);
             }
 
             try
@@ -103,9 +103,9 @@ class Program
     * Returns true if the function is able to retrieve a value from the history,
     * otherwise it returns false (e.g. when the history is empty)
     */
-    private static bool selectResultFromHistory(Calculator calculator, out double previousResult)
+    private static bool SelectResultFromHistory(Calculator calculator, out double previousResult)
     {
-        List<double> resultHistory = calculator.getResultHistory();
+        List<double> resultHistory = calculator.GetResultHistory();
 
 
         if (resultHistory.Count == 0)
@@ -135,7 +135,7 @@ class Program
         return true;
     }
 
-    private static double retrieveNumberFromUserInput(Calculator calculator, bool isFirstInput)
+    private static double RetrieveNumberFromUserInput(Calculator calculator, bool isFirstInput)
     {
         // Use Nullable types (with ?) to match type of System.Console.ReadLine
         string? numInput = "";
@@ -147,7 +147,7 @@ class Program
         bool retrievedFromHistory = false;
         if (numInput == "h")
         {
-            retrievedFromHistory = selectResultFromHistory(calculator, out cleanNum);
+            retrievedFromHistory = SelectResultFromHistory(calculator, out cleanNum);
         }
 
         while (!retrievedFromHistory && !double.TryParse(numInput, out cleanNum))

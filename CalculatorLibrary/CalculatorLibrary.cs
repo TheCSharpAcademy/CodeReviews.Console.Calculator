@@ -148,12 +148,12 @@ public class Calculator
         writer.Close();
     }
 
-    public void clearHistory()
+    public void ClearHistory()
     {
         resultsHistory = new List<double>();
     }
 
-    public List<double> getResultHistory()
+    public List<double> GetResultHistory()
     {
         return resultsHistory;
     }
