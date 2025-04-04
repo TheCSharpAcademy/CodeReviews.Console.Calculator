@@ -7,11 +7,6 @@ namespace CalculatorLibrary
         private static List<(double num1, double num2, string op, double result)> CalculationHistory = new();
         public Calculator()
         {
-            StreamWriter logFile = File.CreateText("Calculator.log");
-            //Trace.Listeners.Add(new TextWriterTraceListener(logFile));
-            //Trace.AutoFlush = true;
-            //Trace.WriteLine("Starting Calculator log");
-            //Trace.WriteLine(String.Format("Started {0}", DateTime.Now.ToString()));
         }
         public double DoOperation(double num1, double num2, string op)
         {
@@ -22,15 +17,12 @@ namespace CalculatorLibrary
             {
                 case "a":
                     result = num1 + num2;
-                    //Trace.WriteLine(String.Format("{0} + {1} = {2}", num1, num2, result));
                     break;
                 case "s":
                     result = num1 - num2;
-                    //Trace.WriteLine(String.Format("{0} - {1} = {2}", num1, num2, result));
                     break;
                 case "m":
                     result = num1 * num2;
-                    //Trace.WriteLine(String.Format("{0} * {1} = {2}", num1, num2, result));
                     break;
                 case "d":
                     // Ask the user to enter a non-zero divisor.
@@ -40,7 +32,6 @@ namespace CalculatorLibrary
                     }
 
                     result = num1 / num2;
-                    //Trace.WriteLine(String.Format("{0} / {1} = {2}", num1, num2, result));
                     break;
                 case "r":
                     if (num1 < 0)
@@ -49,31 +40,25 @@ namespace CalculatorLibrary
                     }
                     num2 = double.NaN;
                     result = Math.Sqrt(num1);
-                    //Trace.WriteLine(String.Format("SQRT{0} = {1}", num1, result));
                     break;
                 case "p":
                     result = Math.Pow(num1, num2);
-                    //Trace.WriteLine(String.Format("{0} Raised to the power of {1} = {2}", num1, num2, result));
                     break;
                 case "t":
                     num2 = double.NaN;
                     result = num1 * 10;
-                    //Trace.WriteLine(String.Format("{0} x10 = {1}", num1, result));
                     break;
                 case "sin":
                     num2 = double.NaN;
                     result = Math.Sin(num1);
-                    //Trace.WriteLine(String.Format("{0} Sin = {1}", num1, result));
                     break;
                 case "cos":
                     num2 = double.NaN;
                     result = Math.Cos(num1);
-                    //Trace.WriteLine(String.Format("{0} Cos = {1}", num1, result));
                     break;
                 case "tan":
                     num2 = double.NaN;
                     result = Math.Tan(num1);
-                    //Trace.WriteLine(String.Format("{0} Tan = {1}", num1, result));
                     break;
                 // Return text for an incorrect option entry.
                 default:
@@ -84,7 +69,6 @@ namespace CalculatorLibrary
             {
                 CalculationHistory.Add((num1, num2, op, result));
             }
-            //Trace.Write($"Calc used no. {++CalculatorUsedCount}");
             CalculatorUsedCount++;
             return result;
         }
