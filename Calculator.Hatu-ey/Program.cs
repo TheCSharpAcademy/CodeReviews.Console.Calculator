@@ -73,7 +73,7 @@ double HandleUserInput()
 
     if (calculator.HasHistory())
     {
-        Console.WriteLine("Would you like to use Previous Answer? Enter H  or press any other key and Enter to continue: ");
+        Console.Write("Would you like to use Previous Answer? Enter H or press any other key and Enter to continue: ");
         if (Console.ReadLine()?.ToLower().Trim() == "h")
         {
             calculator.DisplayHistory();
