@@ -1,9 +1,7 @@
 ﻿using Newtonsoft.Json;
-using Formatting = System.Xml.Formatting;
 
 namespace CalculatorLibrary;
 // CalculatorLibrary.cs
-using System.Diagnostics;
 public class Calculator
 {
     // CalculatorLibrary.cs
