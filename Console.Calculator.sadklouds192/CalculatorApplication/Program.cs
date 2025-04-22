@@ -1,11 +1,12 @@
 ﻿using System.Text.RegularExpressions;
-using CalculatorApplication;
+using CalculatorLibrary;
 
 class Program
 {
     static void Main(string[] args)
     {
         bool endApp = false;
+        var calculator = new Calculator();
         // Display title as the C# console calculator app.
         Console.WriteLine("Console CalculatorApplication in C#\r");
         Console.WriteLine("------------------------\n");
@@ -40,7 +41,7 @@ class Program
                 numInput2 = Console.ReadLine();
             }
 
-            string calculations = Calculator.ShowCalculations();
+            string calculations = calculator.ShowCalculations();
             // Ask the user to choose an operator.
             Console.WriteLine("Choose an operator from the following list:");
             Console.WriteLine($"Number of operations: {Calculator.NumberOfCalculations}");
@@ -67,7 +68,7 @@ class Program
             { 
                try
                {
-                  result = Calculator.DoOperation(cleanNum1, cleanNum2, op);
+                  result = calculator.DoOperation(cleanNum1, cleanNum2, op);
                   if (double.IsNaN(result))
                   {
                      Console.WriteLine("This operation will result in a mathematical error.\n");
@@ -90,12 +91,13 @@ class Program
                     endApp = true;
                     break;
                 case "c":
-                    Calculator.ClearCalculations();
+                    calculator.ClearCalculations();
                     break;
             }
 
             Console.WriteLine("\n"); // Friendly linespacing.
         }
+        calculator.Finish();
         return;
     }
 }
