@@ -50,12 +50,16 @@ class Program
             Console.WriteLine("\ts - Subtract");
             Console.WriteLine("\tm - Multiply");
             Console.WriteLine("\td - Divide");
+            Console.WriteLine("\tq - Square Root");
+            Console.WriteLine("\tp - Power");
+            Console.WriteLine("\tt - Power 10");
+            
             Console.Write("Your option? ");
 
             string? op = Console.ReadLine();
 
             // Validate input is not null, and matches the pattern
-            if (op == null || ! Regex.IsMatch(op, "[a|s|m|d]"))
+            if (op == null || ! Regex.IsMatch(op, "[a|s|m|d|q|p|t]"))
             {
                Console.WriteLine("Error: Unrecognized input.");
             }

@@ -35,6 +35,21 @@ public static class Calculator
                     NumberOfCalculations++;
                 }
                 break;
+            case "q":
+                result = Math.Sqrt(num1);
+                Calculations.Add(result);
+                NumberOfCalculations++;
+                break;
+            case "p":
+                result = Math.Pow(num1, num2);
+                Calculations.Add(result);
+                NumberOfCalculations++;
+                break;
+            case "t":
+                result = Math.Pow(10,num1);
+                Calculations.Add(result);
+                NumberOfCalculations++;
+                break;
             // Return text for an incorrect option entry.
             default:
                 break;
