@@ -5,7 +5,7 @@ namespace CalculatorLibrary
     public class Calculator
     {
         public List<double> Results;
-        public int Counter = 0;
+        public int Counter;
 
         public Calculator()
         {
