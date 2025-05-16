@@ -2,11 +2,11 @@ namespace Calculator_kilozdazolik
 {
     public class Calculator
     {
-        private int _calculatorUsed {get;set;}
+        private int _calculatorUsed;
         public int CalculatorUsed => _calculatorUsed;
         private void IncrementUsage() => _calculatorUsed++;
         
-        private static readonly CalculatorEngine _engine = new CalculatorEngine();
+        private static readonly CalculatorEngine Engine = new CalculatorEngine();
         private readonly Helpers _helper = new();
 
         public static double DoOperation(double num1, double num2, string op)
@@ -16,31 +16,31 @@ namespace Calculator_kilozdazolik
             switch (op)
             {
                 case "a":
-                    result = _engine.AddOperand(num1, num2);
+                    result = Engine.AddOperand(num1, num2);
                     break;
                 case "s":
-                    result = _engine.SubtractOperand(num1, num2);
+                    result = Engine.SubtractOperand(num1, num2);
                     break;
                 case "m":
-                    result = _engine.MultiplyOperand(num1, num2);
+                    result = Engine.MultiplyOperand(num1, num2);
                     break;
                 case "d":
-                    result = _engine.DivideOperand(num1, num2);
+                    result = Engine.DivideOperand(num1, num2);
                     break;
                 case "sq":
-                    result = _engine.SquareRootOperand(num1);
+                    result = Engine.SquareRootOperand(num1);
                     break;
                 case "si":
-                    result = _engine.SinOperand(num1);
+                    result = Engine.SinOperand(num1);
                     break;
                 case "c":
-                    result = _engine.CosOperand(num1);
+                    result = Engine.CosOperand(num1);
                     break;
                 case "t":
-                    result = _engine.TanOperand(num1);
+                    result = Engine.TanOperand(num1);
                     break;
                 case "p":
-                    result =  _engine.PowerOfTen(num1);
+                    result =  Engine.PowerOfTen(num1);
                     break;
             }
             
