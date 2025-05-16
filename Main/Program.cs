@@ -21,7 +21,7 @@ while (!endApp)
     Console.Write("Type a number");
     if (calculator.HasLastOperation())
     {
-        Console.Write($", or type \"last\" to use last number ({calculator.GetLast():0.##})");
+        Console.Write($", or type \"last\" to use last number ({calculator.GetLastOperation():0.##})");
     }
     Console.Write(", and then press Enter:");
     numInput1 = Console.ReadLine();
@@ -29,7 +29,7 @@ while (!endApp)
 
     if (numInput1 == "last" && calculator.HasLastOperation())
     {
-        cleanNum1 = calculator.GetLast();
+        cleanNum1 = calculator.GetLastOperation();
     }
     else
     {
