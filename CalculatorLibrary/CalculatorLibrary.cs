@@ -5,6 +5,9 @@ namespace CalculatorLibrary
     public class Calculator
     {
         JsonWriter writer;
+
+        private static readonly List<string> calculationList = new List<string>();
+
         public Calculator()
         {
             StreamWriter logFile = File.CreateText("calculatorlog.json");
@@ -19,6 +22,7 @@ namespace CalculatorLibrary
         public double Calculate(double num1, double num2, string operation)
         {
             double result = double.NaN;
+
             writer.WriteStartObject();
             writer.WritePropertyName("Operand1");
             writer.WriteValue(num1);
@@ -48,8 +52,8 @@ namespace CalculatorLibrary
                     }
                     writer.WriteValue("Divide");
                     break;
-                // Return text for an incorrect option entry.
                 default:
+                    Console.WriteLine("Invalid operation. Please try again.");
                     break;
             }
             writer.WritePropertyName("Result");
@@ -65,6 +69,26 @@ namespace CalculatorLibrary
             writer.WriteEndArray();
             writer.WriteEndObject();
             writer.Close();
+        }
+
+        public static void PrintCalculation(double num1, double num2, string operation, double result)
+        {
+            Console.WriteLine($"\t The result of {num1} {operation} {num2} is: {result}\n");
+        }
+
+        public static void AddToCalculationList(string calculation)
+        {
+            calculationList.Add(calculation);
+        }
+
+        public static void PrintCalculationList()
+        {
+            Console.WriteLine("----------------------------------------------------\n");
+            Console.WriteLine("\t Calculation History:\n");
+            foreach (var calculation in calculationList)
+            {
+                Console.WriteLine($"\t {calculation}");
+            }
         }
     }
 }

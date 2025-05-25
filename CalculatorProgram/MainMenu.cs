@@ -8,6 +8,7 @@ public class MainMenu
     internal void ShowMenu()
     {
         bool isGameOn = true;
+        int calculationCount = 0;
 
         Console.WriteLine("----------------------------------------------------");
         Console.WriteLine("Console Calculator");
@@ -55,25 +56,44 @@ public class MainMenu
             }
             else
             {
+                string operation = choice switch
+                {
+                    "a" => "+",
+                    "s" => "-",
+                    "m" => "*",
+                    "d" => "/",
+                    _ => throw new InvalidOperationException("Invalid operation")
+                };
+
                 try
                 {
+                    Console.Clear();
                     result = calculator.Calculate(cleanNum1, cleanNum2, choice);
                     if (double.IsNaN(result))
                     {
                         Console.WriteLine("This operation will result in a mathematical error.\n");
                     }
-                    else Console.WriteLine("Your result: {0:0.##}\n", result);
+                    else
+                    {
+                        Console.WriteLine("----------------------------------------------------\n");
+                        Calculator.PrintCalculation(cleanNum1,cleanNum2,operation,result);
+                        calculationCount++;
+                        Console.WriteLine("----------------------------------------------------\n");
+                        Console.WriteLine($"\t You have performed {calculationCount} calculations.\n");
+                        Calculator.AddToCalculationList($"Calculation {calculationCount}: {cleanNum1} {operation} {cleanNum2} = {result}");
+                    }
                 }
                 catch (Exception e)
                 {
                     Console.WriteLine("Oh no! An exception occurred trying to do the math.\n - Details: " + e.Message);
                 }
-            }
+            }           
+
+            Calculator.PrintCalculationList();
 
             Console.WriteLine("----------------------------------------------------\n");
             Console.Write("Press 'n' and Enter to close the app, or press any other key and Enter to continue: ");
             if (Console.ReadLine() == "n") isGameOn = false;
-            Console.WriteLine("\n");
         }
 
         calculator.Finish();
