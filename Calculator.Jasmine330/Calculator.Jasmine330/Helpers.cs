@@ -16,6 +16,11 @@ namespace Calculator.Jasmine330
             return cleanNum;
         }
 
+        internal static bool IsValidOperator(string? op)
+        {
+            return op != null && Regex.IsMatch(op, "^(a|s|m|d|sqrt|pow|10x|trig)$");
+        }
+
         internal static void ValidateResult(double result)
         {
             if (double.IsNaN(result))
@@ -25,7 +30,7 @@ namespace Calculator.Jasmine330
             else Console.WriteLine("Your result: {0:0.##}\n", result);
         }
 
-        internal static double[] GetInputs(string? op) // Change return type to double[] to match the returned value
+        internal static double[] GetInputs(string? op) 
         {
             double[] numbers = new double[2];
             switch (op)
