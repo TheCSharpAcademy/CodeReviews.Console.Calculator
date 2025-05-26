@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using CalculatorLibrary.Models;
+using Newtonsoft.Json;
 
 namespace CalculatorLibrary
 {
@@ -71,9 +72,31 @@ namespace CalculatorLibrary
             writer.Close();
         }
 
-        public static void PrintCalculation(double num1, double num2, string operation, double result)
+        public static string GetOperator(string choice)
         {
-            Console.WriteLine($"\t The result of {num1} {operation} {num2} is: {result}\n");
+            return choice switch
+            {
+                "a" => "+",
+                "s" => "-",
+                "m" => "*",
+                "d" => "/",
+                "e" => "^",
+                "r" => "√",
+                "f" => "!",
+                "l" => "log",
+                "n" => "sin",
+                "c" => "cos",
+                "t" => "tan",
+                "cot" => "cot",
+                "sec" => "sec",
+                "csc" => "csc",
+            };
+        }
+
+        public static void PrintCalculation(double num1, double num2, string operationType, double result)
+        {
+
+            Console.WriteLine($"\t The result of {num1} {operationType} {num2} is: {result}\n");
         }
 
         public static void AddToCalculationList(string calculation)
@@ -83,11 +106,19 @@ namespace CalculatorLibrary
 
         public static void PrintCalculationList()
         {
-            Console.WriteLine("----------------------------------------------------\n");
-            Console.WriteLine("\t Calculation History:\n");
-            foreach (var calculation in calculationList)
+            if (calculationList.Count == 0)
             {
-                Console.WriteLine($"\t {calculation}");
+                Console.WriteLine("No calculations have been performed yet.");
+                return;
+            }
+            else
+            {
+                Console.WriteLine("----------------------------------------------------\n");
+                Console.WriteLine("\t Calculation History:\n");
+                foreach (var calculation in calculationList)
+                {
+                    Console.WriteLine($"\t {calculation}");
+                }
             }
         }
     }
