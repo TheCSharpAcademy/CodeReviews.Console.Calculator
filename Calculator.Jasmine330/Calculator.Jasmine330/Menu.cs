@@ -98,7 +98,7 @@ namespace Calculator.Jasmine330
 
         private bool ShouldEndApplication()
         {
-            Console.Write("Press 'n' and Enter to close the app to conitnue: ");
+            Console.Write("Press 'n' and Enter to close the app. To continue just press Enter: ");
             return Console.ReadLine()?.TrimEnd().ToLower() == "n";
         }
 

@@ -17,6 +17,7 @@ namespace CalculatorLibrary
             writer.WritePropertyName("Operations");
             writer.WriteStartArray();
         }
+
         public double DoOperation(double num1, double num2, string op)
         { 
             double result = double.NaN;
