@@ -1,140 +1,278 @@
-﻿using Newtonsoft.Json;
+﻿using CalculatorLibrary.Models;
+using Newtonsoft.Json;
 
 namespace CalculatorLibrary
 {
     public class Calculator
     {
-        public List<double> Results;
-        public int Counter;
+        JsonWriter writer;
 
+        public static List<string> calculationList = new List<string>();
         public Calculator()
         {
-            Results = new List<double>();
+            StreamWriter logFile = File.CreateText("calculatorlog.json");
+            logFile.AutoFlush = true;
+            writer = new JsonTextWriter(logFile);
+            writer.Formatting = Formatting.Indented;
+            writer.WriteStartObject();
+            writer.WritePropertyName("Operations");
+            writer.WriteStartArray();
         }
 
-        public double DoOperation(double num1, double num2, string op)
+        public static void PrintWelcomeMessage()
         {
-            double result = double.NaN; // Default value is "not-a-number" if an operation, such as division, could result in an error.
+            Console.WriteLine("\t [V] View History");
+            Console.WriteLine("\t [A] Add Numbers");
+            Console.WriteLine("\t [S] Subtract Numbers");
+            Console.WriteLine("\t [M] Multiply Numbers");
+            Console.WriteLine("\t [D] Divide Numbers");
+            Console.WriteLine("\t [pow] Exponentiate Numbers");
+            Console.WriteLine("\t [sqrt] Square Root");
+            Console.WriteLine("\t [sin] Sine");
+            Console.WriteLine("\t [cos] Cosine");
+            Console.WriteLine("\t [tan] Tangent");
+            Console.WriteLine("For the square root and trigonometry operations, only one number will be used.\n");
+            Console.WriteLine("What do you want to do?");
+        }
 
-            switch (op)
+        public double CalculateTwoNumbers(double num1, double num2, string operation)
+        {
+            double result = double.NaN;
+
+            writer.WriteStartObject();
+            writer.WritePropertyName("Operand1");
+            writer.WriteValue(num1);
+            writer.WritePropertyName("Operand2");
+            writer.WriteValue(num2);
+            writer.WritePropertyName("Operation");
+
+            switch (operation)
             {
                 case "a":
                     result = num1 + num2;
+                    writer.WriteValue("Add");
                     break;
-
                 case "s":
                     result = num1 - num2;
+                    writer.WriteValue("Subtract");
                     break;
-
                 case "m":
                     result = num1 * num2;
+                    writer.WriteValue("Multiply");
                     break;
-
                 case "d":
                     // Ask the user to enter a non-zero divisor.
-                    if (num2 != 0) result = num1 / num2;
-                    break;
-
-                case "v":
-                    result = (num1 + num2) / 2;
-                    break;
-
-                case "w":
-                    if (num1 < 0 && num2 % 1 != 0)
+                    if (num2 != 0)
                     {
-                        Console.WriteLine("Cannot calculate the power of a negative base with a fractional exponent.");
+                        result = num1 / num2;
                     }
-                    else
-                    {
-                        result = Math.Pow(num1, num2);
-                    }
+                    writer.WriteValue("Divide");
                     break;
+                case "pow":
+                    result = Math.Pow(num1, num2);
+                    writer.WriteValue("Power");
+                    break;
+                default:
+                    Console.WriteLine("Invalid operation. Please try again.");
+                    break;
+            }
+            writer.WritePropertyName("Result");
+            writer.WriteValue(result);
+            writer.WriteEndObject();
 
-                case "r":
-                    if (num1 >= 0)
+            return result;
+        }
+
+        public double CalculateOneNumber(double num, string operation)
+        {
+            double result = double.NaN;
+
+            writer.WriteStartObject();
+            writer.WritePropertyName("Operand1");
+            writer.WriteValue(num);
+            writer.WritePropertyName("Operand2");
+            writer.WriteValue(num);
+            writer.WritePropertyName("Operation");
+
+            switch (operation)
+            {
+                case "sqrt":
+                    if (num >= 0)
                     {
-                        result = Math.Sqrt(num1);
+                        result = Math.Sqrt(num);
+                        writer.WriteValue("SquareRoot");
                     }
                     else
                     {
                         Console.WriteLine("Cannot calculate the square root of a negative number.");
                     }
                     break;
-
-                case "n":
-                    result = Math.Sin(num1);
+                case "sin":
+                    result = Math.Sin(num);
+                    writer.WriteValue("Sin");
                     break;
-
-                case "c":
-                    result = Math.Cos(num1);
+                case "cos":
+                    result = Math.Cos(num);
+                    writer.WriteValue("Cos");
                     break;
-
-                case "t":
-                    result = Math.Tan(num1);
+                case "tan":
+                    result = Math.Tan(num);
+                    writer.WriteValue("Tan");
                     break;
-
-                case "l":
-                    if (num1 > 0)
-                    {
-                        result = Math.Log(num1);
-                    }
-                    else
-                    {
-                        Console.WriteLine("Cannot calculate the logarithm of a non-positive number.");
-                    }
-                    break;
-
-                case "h":
-                    result = Math.Log10(num1);
-                    break;
-
-
                 default:
-                    Console.WriteLine("Invalid operation.");
+                    Console.WriteLine("Invalid operation. Please try again.");
                     break;
             }
-            // Log the operation to the JSON file
-            LogOperation(num1, num2, op, result);
+            writer.WritePropertyName("Result");
+            writer.WriteValue(result);
+            writer.WriteEndObject();
 
-            Counter++;
-            Results.Add(result);
             return result;
         }
 
-        private void LogOperation(double num1, double num2, string op, double result)
+        public static string GetOperator(string choice)
         {
-            var newOperation = new OperationInfo
+            return choice switch
             {
-                Operand1 = num1,
-                Operand2 = num2,
-                Operation = op,
-                Result = result
+                "a" => "+",
+                "s" => "-",
+                "m" => "*",
+                "d" => "/",
+                "pow" => "^",
+                "sqrt" => "√",
+                "sin" => "sin",
+                "cos" => "cos",
+                "tan" => "tan",
             };
+        }
 
-            // Write to the JSON file
-            string filePath = "calculatorlog.json";
-            CalculatorLog log;
+        public static void PrintCalculation(double num1, double num2, string operationType, double result)
+        {
 
-            if (File.Exists(filePath))
+            Console.WriteLine($"\t The result of {num1} {operationType} {num2} is: {result}\n");
+        }
+
+        public static void PrintAdvancedCalculation(double num, string operationType, double result)
+        {
+
+            Console.WriteLine($"\t The result of {operationType} {num} is: {result}\n");
+        }
+
+        public static string AddToCalculationList(string calculation)
+        {
+            calculationList.Add(calculation);
+            return calculation;
+        }
+
+        public static double GetPreviousResult(List<double> previousResults)
+        {
+            Console.WriteLine("Type the index of the previous result:");
+
+            for (int index = 1; index < previousResults.Count; index++)
             {
-                try
-                {
-                    string json = File.ReadAllText(filePath);
-                    log = JsonConvert.DeserializeObject<CalculatorLog>(json) ?? new CalculatorLog { Operations = new List<OperationInfo>() };
-                }
-                catch (JsonException)
-                {
-                    Console.WriteLine("Error reading history: JSON corrupted. Starting new history.");
-                    log = new CalculatorLog { Operations = new List<OperationInfo>() };
-                }
+                double result = previousResults[index - 1];
+                Console.WriteLine($"{index}: {result}");
+            }
+
+            var userChoice = Console.ReadLine();
+
+            return previousResults[int.Parse(userChoice) - 1];
+        }
+
+        public static void PrintCalculationList()
+        {
+            Console.Clear();
+            if (calculationList.Count == 0)
+            {
+                Console.WriteLine("No calculations have been performed yet.");
+                return;
             }
             else
             {
-                log = new CalculatorLog { Operations = new List<OperationInfo>() };
+                Console.WriteLine("----------------------------------------------------\n");
+                Console.WriteLine("\t Calculation History:\n");
+                foreach (var calculation in calculationList)
+                {
+                    Console.WriteLine($"\t {calculation}");
+                }
             }
 
-            log.Operations.Add(newOperation);
-            File.WriteAllText(filePath, JsonConvert.SerializeObject(log, Formatting.Indented));
+            DeleteCalculationList();
+        }
+
+        public static void DeleteCalculationList()
+        {
+            Console.WriteLine("\n----------------------------------------------------\n");
+            Console.WriteLine("Would you like to clear the history? (y/n)");
+            string? clearHistory = Console.ReadLine()?.Trim().ToLower();
+            if (clearHistory == "y")
+            {
+                calculationList.Clear();
+                Console.WriteLine("Calculation history cleared.");
+            }
+            else if (clearHistory == "n")
+            {
+                Console.WriteLine("Calculation history retained.");
+            }
+            else
+            {
+                Console.WriteLine("Invalid input. Calculation history retained.");
+            }
+        }
+
+        public static double[] GetTwoNumbers()
+        {
+            string input1 = "";
+            string input2 = "";
+            var result = new double[2];
+
+            Console.WriteLine("Enter your first number: ");
+            input1 = Console.ReadLine();
+
+            double cleanNum1 = 0;
+            while (!double.TryParse(input1, out cleanNum1))
+            {
+                Console.Write("Invalid input. Please enter a numeric value: ");
+                input1 = Console.ReadLine();
+            }
+
+            Console.WriteLine("Enter your second number: ");
+            input2 = Console.ReadLine();
+
+            double cleanNum2 = 0;
+            while (!double.TryParse(input2, out cleanNum2))
+            {
+                Console.Write("Invalid input. Please enter a numeric value: ");
+                input2 = Console.ReadLine();
+            }
+
+            result[0] = cleanNum1;
+            result[1] = cleanNum2;
+            return result;
+        }
+
+        public static double GetSingleNumber()
+        {
+            string input = "";
+            double cleanNum = 0;
+
+            Console.WriteLine("Enter your number: ");
+            input = Console.ReadLine();
+
+            while (!double.TryParse(input, out cleanNum))
+            {
+                Console.Write("Invalid input. Please enter a numeric value: ");
+                input = Console.ReadLine();
+            }
+            return cleanNum;
+        }
+
+        // Closes the JSON object and array and outputs the log file to bin/debug.
+        public void Finish()
+        {
+            writer.WriteEndArray();
+            writer.WriteEndObject();
+            writer.Close();
         }
     }
 }
