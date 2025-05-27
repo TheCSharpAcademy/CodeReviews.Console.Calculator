@@ -1,6 +1,5 @@
 ﻿using System.Text.RegularExpressions;
 using CalculatorLibrary;
-using CalculatorLibrary.Models;
 
 namespace CalculatorProgram;
 
@@ -10,6 +9,7 @@ public class MainMenu
     {
         bool isGameOn = true;
         int calculationCount = 0;
+        double result;
 
         Console.WriteLine("----------------------------------------------------");
         Console.WriteLine("Console Calculator");
@@ -18,62 +18,57 @@ public class MainMenu
 
         while (isGameOn)
         {
-            Console.WriteLine("What do you want to do?");
-            Console.WriteLine("\t [V]iew History");
-            Console.WriteLine("\t [A]dd Numbers");
-            Console.WriteLine("\t [S]ubtract Numbers");
-            Console.WriteLine("\t [M]ultiply Numbers");
-            Console.WriteLine("\t [D]ivide Numbers");
+            Calculator.PrintWelcomeMessage();
 
-            string? choice = Console.ReadLine().Trim().ToLower();
+            string choice = Console.ReadLine().Trim().ToLower();
 
-            if (choice == null || !Regex.IsMatch(choice, "[v|a|s|m|d]"))
+            if (choice == null || !Regex.IsMatch(choice, "[v|a|s|m|d|pow|sqrt|sin|cos|tan]"))
             {
                 Console.WriteLine("Invalid choice. Please try again.");
             }
             else if (choice == "v")
             {
-                Console.Clear();
                 Calculator.PrintCalculationList();
-                Console.WriteLine("----------------------------------------------------\n");
+            }
+            else if (choice == "sqrt" || choice == "sin" || choice == "cos" || choice == "tan")
+            {
+                var cleanNum = Calculator.GetSingleNumber();
+
+                Console.Clear();
+                result = calculator.CalculateOneNumber(cleanNum, choice);
+
+                if (double.IsNaN(result))
+                {
+                    Console.WriteLine("This operation will result in a mathematical error.\n");
+                }
+                else
+                {
+                    var operationType = Calculator.GetOperator(choice);
+                    Console.WriteLine("----------------------------------------------------\n");
+                    Calculator.PrintAdvancedCalculation(cleanNum, operationType, result);
+                    calculationCount++;
+                    Console.WriteLine("----------------------------------------------------\n");
+                    Console.WriteLine($"\t You have performed {calculationCount} calculations.\n");
+                    Calculator.AddToCalculationList($"Calculation {calculationCount}: {operationType} {cleanNum} = {result}");
+                }
             }
             else
             {
                 try
                 {
-                    string? input1 = "";
-                    string? input2 = "";
-                    double result = 0;
-
-                    Console.WriteLine("Enter your first number: ");
-                    input1 = Console.ReadLine();
-
-                    double cleanNum1 = 0;
-                    while (!double.TryParse(input1, out cleanNum1))
-                    {
-                        Console.Write("Invalid input. Please enter a numeric value: ");
-                        input1 = Console.ReadLine();
-                    }
-
-                    Console.WriteLine("Enter your second number: ");
-                    input2 = Console.ReadLine();
-
-                    double cleanNum2 = 0;
-                    while (!double.TryParse(input2, out cleanNum2))
-                    {
-                        Console.Write("Invalid input. Please enter a numeric value: ");
-                        input2 = Console.ReadLine();
-                    }
+                    var twoNumbers = Calculator.GetTwoNumbers();
+                    double cleanNum1 = twoNumbers[0];
+                    double cleanNum2 = twoNumbers[1];
 
                     Console.Clear();
-                    result = calculator.Calculate(cleanNum1, cleanNum2, choice);
+                    result = calculator.CalculateTwoNumbers(cleanNum1, cleanNum2, choice);
 
                     if (double.IsNaN(result))
                     {
                         Console.WriteLine("This operation will result in a mathematical error.\n");
                     }
                     else
-                    {                   
+                    {
                         var operationType = Calculator.GetOperator(choice);
                         Console.WriteLine("----------------------------------------------------\n");
                         Calculator.PrintCalculation(cleanNum1, cleanNum2, operationType, result);
