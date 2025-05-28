@@ -1,140 +1,166 @@
 ﻿using Newtonsoft.Json;
+using System.ComponentModel;
 
 namespace CalculatorLibrary
 {
     public class Calculator
     {
-        public List<double> Results;
-        public int Counter;
+
+        JsonWriter writer;
 
         public Calculator()
         {
-            Results = new List<double>();
+            StreamWriter logFile = File.CreateText("calculatorlog.json");
+            logFile.AutoFlush = true;
+            writer = new JsonTextWriter(logFile);
+            writer.Formatting = Formatting.Indented;
+            writer.WriteStartObject();
+            writer.WritePropertyName("Operations");
+            writer.WriteStartArray();
         }
+
+        public class ExpressionsHistory
+        {
+            public required string Expression {  get; set; }
+            public required double Result { get; set; }
+        }
+
+        public List<ExpressionsHistory> History { get; set; } = new();
+
+        public int CountExpressions { get; set; } = 0;
 
         public double DoOperation(double num1, double num2, string op)
         {
             double result = double.NaN; // Default value is "not-a-number" if an operation, such as division, could result in an error.
-
+            writer.WriteStartObject();
+            writer.WritePropertyName("Operand1");
+            writer.WriteValue(num1);
+            writer.WritePropertyName("Operand2");
+            writer.WriteValue(num2);
+            writer.WritePropertyName("Operation");
+            // Use a switch statement to do the math.
             switch (op)
             {
                 case "a":
                     result = num1 + num2;
+                    CountExpressions++;
+                    History.Add(new ExpressionsHistory
+                    {   
+                        Expression = $"{num1} + {num2}",
+                        Result = result
+                    });
+                    writer.WriteValue("Add");
                     break;
-
                 case "s":
                     result = num1 - num2;
+                    CountExpressions++;
+                    History.Add(new ExpressionsHistory
+                    {
+                        Expression = $"{num1} - {num2}",
+                        Result = result
+                    });
+                    writer.WriteValue("Subtract");
                     break;
-
                 case "m":
                     result = num1 * num2;
+                    CountExpressions++;
+                    History.Add(new ExpressionsHistory
+                    {
+                        Expression = $"{num1} * {num2}",
+                        Result = result
+                    });
+                    writer.WriteValue("Multiply");
                     break;
-
                 case "d":
                     // Ask the user to enter a non-zero divisor.
-                    if (num2 != 0) result = num1 / num2;
-                    break;
-
-                case "v":
-                    result = (num1 + num2) / 2;
-                    break;
-
-                case "w":
-                    if (num1 < 0 && num2 % 1 != 0)
+                    if (num2 != 0)
                     {
-                        Console.WriteLine("Cannot calculate the power of a negative base with a fractional exponent.");
+                        result = num1 / num2;
+                        CountExpressions++;
+                        History.Add(new ExpressionsHistory
+                        {
+                            Expression = $"{num1} / {num2}",
+                            Result = result
+                        });
                     }
-                    else
-                    {
-                        result = Math.Pow(num1, num2);
-                    }
+                    writer.WriteValue("Divide");
                     break;
-
-                case "r":
-                    if (num1 >= 0)
+                case "sqrt":
+                    result = Math.Sqrt(num1);
+                    CountExpressions++;
+                    History.Add(new ExpressionsHistory
                     {
-                        result = Math.Sqrt(num1);
-                    }
-                    else
-                    {
-                        Console.WriteLine("Cannot calculate the square root of a negative number.");
-                    }
+                        Expression = $"√{num1}",
+                        Result = result
+                    });
+                    writer.WriteValue("Square Root");
                     break;
-
-                case "n":
+                case "pow":
+                    result = Math.Pow(num1, num2);
+                    CountExpressions++;
+                    History.Add(new ExpressionsHistory
+                    {
+                        Expression = $"{num1}^{num2}",
+                        Result = result
+                    });
+                    writer.WriteValue("Taking the Power");
+                    break;
+                case "10x":
+                    result = num1 * 10;
+                    CountExpressions++;
+                    History.Add(new ExpressionsHistory
+                    {
+                        Expression = $"{num1} * 10x",
+                        Result = result
+                    });
+                    writer.WriteValue("10x");
+                    break;
+                case "sin":
                     result = Math.Sin(num1);
+                    CountExpressions++;
+                    History.Add(new ExpressionsHistory
+                    {
+                        Expression = $"sin{num1}",
+                        Result = result
+                    });
+                    writer.WriteValue("Sine");
                     break;
-
-                case "c":
+                case "cos":
                     result = Math.Cos(num1);
+                    CountExpressions++;
+                    History.Add(new ExpressionsHistory
+                    {
+                        Expression = $"cos{num1}",
+                        Result = result
+                    });
+                    writer.WriteValue("Cosine");
                     break;
-
-                case "t":
+                case "tg":
                     result = Math.Tan(num1);
-                    break;
-
-                case "l":
-                    if (num1 > 0)
+                    CountExpressions++;
+                    History.Add(new ExpressionsHistory
                     {
-                        result = Math.Log(num1);
-                    }
-                    else
-                    {
-                        Console.WriteLine("Cannot calculate the logarithm of a non-positive number.");
-                    }
+                        Expression = $"tg{num1}",
+                        Result = result
+                    });
+                    writer.WriteValue("Tangent");
                     break;
-
-                case "h":
-                    result = Math.Log10(num1);
-                    break;
-
-
+                // Return text for an incorrect option entry.
                 default:
-                    Console.WriteLine("Invalid operation.");
                     break;
             }
-            // Log the operation to the JSON file
-            LogOperation(num1, num2, op, result);
+            writer.WritePropertyName("Result");
+            writer.WriteValue(result);
+            writer.WriteEndObject();
 
-            Counter++;
-            Results.Add(result);
             return result;
         }
 
-        private void LogOperation(double num1, double num2, string op, double result)
+        public void Finish()
         {
-            var newOperation = new OperationInfo
-            {
-                Operand1 = num1,
-                Operand2 = num2,
-                Operation = op,
-                Result = result
-            };
-
-            // Write to the JSON file
-            string filePath = "calculatorlog.json";
-            CalculatorLog log;
-
-            if (File.Exists(filePath))
-            {
-                try
-                {
-                    string json = File.ReadAllText(filePath);
-                    log = JsonConvert.DeserializeObject<CalculatorLog>(json) ?? new CalculatorLog { Operations = new List<OperationInfo>() };
-                }
-                catch (JsonException)
-                {
-                    Console.WriteLine("Error reading history: JSON corrupted. Starting new history.");
-                    log = new CalculatorLog { Operations = new List<OperationInfo>() };
-                }
-            }
-            else
-            {
-                log = new CalculatorLog { Operations = new List<OperationInfo>() };
-            }
-
-            log.Operations.Add(newOperation);
-            File.WriteAllText(filePath, JsonConvert.SerializeObject(log, Formatting.Indented));
+            writer.WriteEndArray();
+            writer.WriteEndObject();
+            writer.Close();
         }
     }
 }
