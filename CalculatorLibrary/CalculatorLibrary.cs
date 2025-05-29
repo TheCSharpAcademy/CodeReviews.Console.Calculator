@@ -1,5 +1,4 @@
 ﻿using Newtonsoft.Json;
-using System.ComponentModel;
 
 namespace CalculatorLibrary
 {
@@ -27,7 +26,6 @@ namespace CalculatorLibrary
 
         public List<ExpressionsHistory> History { get; set; } = new();
 
-        public int CountExpressions { get; set; } = 0;
 
         public double DoOperation(double num1, double num2, string op)
         {
