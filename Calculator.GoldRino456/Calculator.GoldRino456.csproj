@@ -8,7 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\CalculatorLibrary\CalculatorLibrary.csproj" />
+    <ProjectReference Include="..\CalculatorLibrary.GoldRino456\CalculatorLibrary.GoldRino456.csproj" />
   </ItemGroup>
 
 </Project>

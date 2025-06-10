@@ -1,0 +1,28 @@
+{
+  "Operations": [
+    {
+      "Operand1": 3.0,
+      "Operand2": 5.0,
+      "Operation": "Multiply",
+      "Result": 15.0
+    },
+    {
+      "Operand1": 57.0,
+      "Operand2": 45.0,
+      "Operation": "Subtract",
+      "Result": 12.0
+    },
+    {
+      "Operand1": 12.0,
+      "Operand2": 3.0,
+      "Operation": "Exponential",
+      "Result": 1728.0
+    },
+    {
+      "Operand1": 1728.0,
+      "Operand2": 12.0,
+      "Operation": "Subtract",
+      "Result": 1716.0
+    }
+  ]
+}
