@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36127.28 d17.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Calculator.GoldRino456", "Calculator.GoldRino456.csproj", "{B75C87CF-A53E-4C41-8E96-915D03EA94DE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CalculatorLibrary.GoldRino456", "..\CalculatorLibrary.GoldRino456\CalculatorLibrary.GoldRino456.csproj", "{BBD5E68F-F02B-4E6B-B1F9-09128C0CE329}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B75C87CF-A53E-4C41-8E96-915D03EA94DE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B75C87CF-A53E-4C41-8E96-915D03EA94DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B75C87CF-A53E-4C41-8E96-915D03EA94DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B75C87CF-A53E-4C41-8E96-915D03EA94DE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BBD5E68F-F02B-4E6B-B1F9-09128C0CE329}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BBD5E68F-F02B-4E6B-B1F9-09128C0CE329}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BBD5E68F-F02B-4E6B-B1F9-09128C0CE329}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BBD5E68F-F02B-4E6B-B1F9-09128C0CE329}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {AAB9CF40-3EAF-450F-8301-39DE32C169D7}
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,13 @@
+E:\Projects\CSAcademy\CodeReviews.Console.Calculator\CalculatorLibrary.GoldRino456\bin\Debug\net8.0\CalculatorLibrary.GoldRino456.deps.json
+E:\Projects\CSAcademy\CodeReviews.Console.Calculator\CalculatorLibrary.GoldRino456\bin\Debug\net8.0\CalculatorLibrary.GoldRino456.dll
+E:\Projects\CSAcademy\CodeReviews.Console.Calculator\CalculatorLibrary.GoldRino456\bin\Debug\net8.0\CalculatorLibrary.GoldRino456.pdb
+E:\Projects\CSAcademy\CodeReviews.Console.Calculator\CalculatorLibrary.GoldRino456\obj\Debug\net8.0\CalculatorLibrary.GoldRino456.csproj.AssemblyReference.cache
+E:\Projects\CSAcademy\CodeReviews.Console.Calculator\CalculatorLibrary.GoldRino456\obj\Debug\net8.0\CalculatorLibrary.GoldRino456.GeneratedMSBuildEditorConfig.editorconfig
+E:\Projects\CSAcademy\CodeReviews.Console.Calculator\CalculatorLibrary.GoldRino456\obj\Debug\net8.0\CalculatorLibrary.GoldRino456.AssemblyInfoInputs.cache
+E:\Projects\CSAcademy\CodeReviews.Console.Calculator\CalculatorLibrary.GoldRino456\obj\Debug\net8.0\CalculatorLibrary.GoldRino456.AssemblyInfo.cs
+E:\Projects\CSAcademy\CodeReviews.Console.Calculator\CalculatorLibrary.GoldRino456\obj\Debug\net8.0\CalculatorLibrary.GoldRino456.csproj.CoreCompileInputs.cache
+E:\Projects\CSAcademy\CodeReviews.Console.Calculator\CalculatorLibrary.GoldRino456\obj\Debug\net8.0\CalculatorLibrary.GoldRino456.sourcelink.json
+E:\Projects\CSAcademy\CodeReviews.Console.Calculator\CalculatorLibrary.GoldRino456\obj\Debug\net8.0\CalculatorLibrary.GoldRino456.dll
+E:\Projects\CSAcademy\CodeReviews.Console.Calculator\CalculatorLibrary.GoldRino456\obj\Debug\net8.0\refint\CalculatorLibrary.GoldRino456.dll
+E:\Projects\CSAcademy\CodeReviews.Console.Calculator\CalculatorLibrary.GoldRino456\obj\Debug\net8.0\CalculatorLibrary.GoldRino456.pdb
+E:\Projects\CSAcademy\CodeReviews.Console.Calculator\CalculatorLibrary.GoldRino456\obj\Debug\net8.0\ref\CalculatorLibrary.GoldRino456.dll
