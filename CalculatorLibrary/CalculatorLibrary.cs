@@ -1,140 +1,243 @@
-﻿using Newtonsoft.Json;
-
-namespace CalculatorLibrary
+﻿namespace CalculatorLibrary
 {
     public class Calculator
     {
-        public List<double> Results;
-        public int Counter;
-
-        public Calculator()
+        private readonly Logger _logger;
+        public Calculator(Logger logger)
+        {  
+            _logger = logger; 
+        }
+        public struct Calculation
         {
-            Results = new List<double>();
+            public double num1 { get; set; }
+            public double? num2 { get; set; }
+            public double result { get; set; }
+            public string operation { get; set; }
         }
 
-        public double DoOperation(double num1, double num2, string op)
+        Calculation[] _calculationHistory = new Calculation[10];
+        int _historyCount = 0;
+        public void AddToHistory(Calculation newCalculation)
+        {
+            if (_historyCount < _calculationHistory.Length)
+            {
+                _calculationHistory[_historyCount] = newCalculation;
+                _historyCount++;
+            }
+            else
+            {
+                // we start from the first (1) index rather than 0 to shift everything appropriately
+                for (int i = 1; i < _calculationHistory.Length; i++)
+                {
+                    _calculationHistory[i - 1] = _calculationHistory[i];
+                }
+
+                _calculationHistory[_calculationHistory.Length - 1] = newCalculation;
+            }
+        }
+
+        public bool IsHistoryEmpty()
+        {
+            return _historyCount == 0;
+        }
+
+        public string GetOperand(string op)
+        {
+            ////a|s|m|d|sqrt|pow|10x|sin|cos|tan
+            switch (op)
+            {
+                case "a": return "+";
+                case "s": return "-";
+                case "m": return "*";
+                case "d": return "/";
+                case "sqrt": return "√";
+                case "pow": return "^";
+                case "l": return "Log";
+                case "sin": return "Sin";
+                case "cos": return "Cos";
+                case "tan": return "Tan";
+                default:
+                    return "";
+            }
+        }
+
+        public void ShowHistory()
+        {
+            for (int i = 0; i < _historyCount; i++)
+            {
+                Calculation tempCalc = _calculationHistory[i];
+                Console.WriteLine($"{i + 1}. {GetFormattedString(tempCalc)}");
+            }
+        }
+
+        public bool GetCalculation(int index, out Calculation calc)
+        {
+            if (index >= 0 && index < _historyCount)
+            {
+                calc = _calculationHistory[index];
+                return true;
+            }
+            else
+            {
+                calc = default;
+                return false;
+            }
+        }
+
+        public string GetFormattedString(Calculation calc)
+        {
+            string ret = "";
+            if (calc.num2 != null)
+            {
+                ret = $"{calc.num1}{GetOperand(calc.operation)}{calc.num2} = {calc.result}";
+            }
+            else
+            {
+                ret = $"{GetOperand(calc.operation)}({calc.num1}) = {calc.result}";
+            }
+
+            return ret;
+        }
+
+        public void ParseOption(string? op, out bool usingCalculator, out bool endApp, out bool reuseCalculation)
+        {
+            usingCalculator = false;
+            endApp = false;
+            reuseCalculation = false;
+            // Validate input is not null, and matches the pattern
+            var validOptions = new HashSet<string> { "e", "c", "h", "dh", "r" };
+            while (op == null || !validOptions.Contains(op))
+            {
+                Console.WriteLine("Error: Unrecognized input.");
+                op = Console.ReadLine();
+            }
+
+            switch (op)
+            {
+                case "h":
+                    if (_historyCount == 0)
+                    {
+                        Console.WriteLine("History is currently empty. Perform some calculations first.");
+                    }
+                    else
+                    {
+                        ShowHistory();
+                    }
+                    break;
+                case "c":
+                    usingCalculator = true;
+                    break;
+                case "dh":
+                    _calculationHistory = new Calculation[10];
+                    _historyCount = 0;
+                    Console.WriteLine("Local history has been wiped.");
+                    break;
+                case "r":
+                    reuseCalculation = true;
+                    break;
+                case "e":
+                    endApp = true;
+                    break;
+                default:
+                    break;
+            }
+        }
+        public Calculation DoOperation(double num1, double num2, string op)
         {
             double result = double.NaN; // Default value is "not-a-number" if an operation, such as division, could result in an error.
-
+            Calculation calculation = new Calculation();
+            calculation.num1 = num1;
+            var binaryOperations = new HashSet<string> { "a", "s", "m", "d", "pow" };
+            if (binaryOperations.Contains(op))
+            {
+                calculation.num2 = num2;
+            }
+            calculation.operation = op;
+            // Use a switch statement to do the math.
+            //a|s|m|d|sqrt|pow|10x|sin|cos|tan
+            string operationName = "";
             switch (op)
             {
                 case "a":
                     result = num1 + num2;
+                    calculation.result = result;
+                    operationName = "Addition";
                     break;
-
                 case "s":
                     result = num1 - num2;
+                    calculation.result = result;
+                    operationName = "Subtraction";
                     break;
-
                 case "m":
                     result = num1 * num2;
+                    calculation.result = result;
+                    operationName = "Multiplication";
                     break;
-
                 case "d":
                     // Ask the user to enter a non-zero divisor.
-                    if (num2 != 0) result = num1 / num2;
-                    break;
-
-                case "v":
-                    result = (num1 + num2) / 2;
-                    break;
-
-                case "w":
-                    if (num1 < 0 && num2 % 1 != 0)
+                    if (num2 != 0)
                     {
-                        Console.WriteLine("Cannot calculate the power of a negative base with a fractional exponent.");
-                    }
-                    else
-                    {
-                        result = Math.Pow(num1, num2);
+                        result = num1 / num2;
+                        operationName = "Division";
+                        calculation.result = result;
                     }
                     break;
-
-                case "r":
+                case "sqrt":
                     if (num1 >= 0)
                     {
                         result = Math.Sqrt(num1);
+                        calculation.result = result;
+                        operationName = "Square Root";
+                        calculation.num2 = null; // second number isn't used in square root
                     }
                     else
                     {
-                        Console.WriteLine("Cannot calculate the square root of a negative number.");
+                        Console.WriteLine("Cannot calculate square root of a negative number.");
                     }
                     break;
-
-                case "n":
-                    result = Math.Sin(num1);
+                case "pow":
+                    result = Math.Pow(num2, num1);
+                    operationName = "Power";
+                    calculation.result = result;
                     break;
-
-                case "c":
-                    result = Math.Cos(num1);
-                    break;
-
-                case "t":
-                    result = Math.Tan(num1);
-                    break;
-
                 case "l":
-                    if (num1 > 0)
+                    if (num1 >= 0)
                     {
+                        operationName = "Logarithm";
                         result = Math.Log(num1);
+                        calculation.result = result;
                     }
                     else
                     {
-                        Console.WriteLine("Cannot calculate the logarithm of a non-positive number.");
+                        Console.WriteLine("Cannot calculate logarithm of a negative number.");
                     }
+                    calculation.num2 = null;
                     break;
-
-                case "h":
-                    result = Math.Log10(num1);
+                case "sin":
+                    result = Math.Sin(num1 * (Math.PI / 180));
+                    calculation.result = result;
+                    operationName = "Sine";
+                    calculation.num2 = null;
                     break;
-
-
+                case "cos":
+                    result = Math.Cos(num1 * (Math.PI / 180));
+                    calculation.result = result;
+                    operationName = "Cosine";
+                    calculation.num2 = null;
+                    break;
+                case "tan":
+                    result = Math.Tan(num1 * (Math.PI / 180));
+                    calculation.result = result;
+                    operationName = "Tangent";
+                    calculation.num2 = null;
+                    break;
                 default:
-                    Console.WriteLine("Invalid operation.");
                     break;
             }
-            // Log the operation to the JSON file
-            LogOperation(num1, num2, op, result);
+            _logger.LogOperation(num1, binaryOperations.Contains(op) ? num2 : null, op, operationName, result);
+            AddToHistory(calculation);
 
-            Counter++;
-            Results.Add(result);
-            return result;
-        }
-
-        private void LogOperation(double num1, double num2, string op, double result)
-        {
-            var newOperation = new OperationInfo
-            {
-                Operand1 = num1,
-                Operand2 = num2,
-                Operation = op,
-                Result = result
-            };
-
-            // Write to the JSON file
-            string filePath = "calculatorlog.json";
-            CalculatorLog log;
-
-            if (File.Exists(filePath))
-            {
-                try
-                {
-                    string json = File.ReadAllText(filePath);
-                    log = JsonConvert.DeserializeObject<CalculatorLog>(json) ?? new CalculatorLog { Operations = new List<OperationInfo>() };
-                }
-                catch (JsonException)
-                {
-                    Console.WriteLine("Error reading history: JSON corrupted. Starting new history.");
-                    log = new CalculatorLog { Operations = new List<OperationInfo>() };
-                }
-            }
-            else
-            {
-                log = new CalculatorLog { Operations = new List<OperationInfo>() };
-            }
-
-            log.Operations.Add(newOperation);
-            File.WriteAllText(filePath, JsonConvert.SerializeObject(log, Formatting.Indented));
+            return calculation;
         }
     }
 }
