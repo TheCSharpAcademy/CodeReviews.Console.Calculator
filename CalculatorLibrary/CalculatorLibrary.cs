@@ -9,14 +9,14 @@
         }
         public struct Calculation
         {
-            public double num1 { get; set; }
-            public double? num2 { get; set; }
-            public double result { get; set; }
-            public string operation { get; set; }
+            public double Num1 { get; set; }
+            public double? Num2 { get; set; }
+            public double Result { get; set; }
+            public string Operation { get; set; }
         }
 
         Calculation[] _calculationHistory = new Calculation[10];
-        int _historyCount = 0;
+        int _historyCount;
         public void AddToHistory(Calculation newCalculation)
         {
             if (_historyCount < _calculationHistory.Length)
@@ -87,13 +87,13 @@
         public string GetFormattedString(Calculation calc)
         {
             string ret = "";
-            if (calc.num2 != null)
+            if (calc.Num2 != null)
             {
-                ret = $"{calc.num1}{GetOperand(calc.operation)}{calc.num2} = {calc.result}";
+                ret = $"{calc.Num1}{GetOperand(calc.Operation)}{calc.Num2} = {calc.Result}";
             }
             else
             {
-                ret = $"{GetOperand(calc.operation)}({calc.num1}) = {calc.result}";
+                ret = $"{GetOperand(calc.Operation)}({calc.Num1}) = {calc.Result}";
             }
 
             return ret;
@@ -146,13 +146,13 @@
         {
             double result = double.NaN; // Default value is "not-a-number" if an operation, such as division, could result in an error.
             Calculation calculation = new Calculation();
-            calculation.num1 = num1;
+            calculation.Num1 = num1;
             var binaryOperations = new HashSet<string> { "a", "s", "m", "d", "pow" };
             if (binaryOperations.Contains(op))
             {
-                calculation.num2 = num2;
+                calculation.Num2 = num2;
             }
-            calculation.operation = op;
+            calculation.Operation = op;
             // Use a switch statement to do the math.
             //a|s|m|d|sqrt|pow|10x|sin|cos|tan
             string operationName = "";
@@ -160,17 +160,17 @@
             {
                 case "a":
                     result = num1 + num2;
-                    calculation.result = result;
+                    calculation.Result = result;
                     operationName = "Addition";
                     break;
                 case "s":
                     result = num1 - num2;
-                    calculation.result = result;
+                    calculation.Result = result;
                     operationName = "Subtraction";
                     break;
                 case "m":
                     result = num1 * num2;
-                    calculation.result = result;
+                    calculation.Result = result;
                     operationName = "Multiplication";
                     break;
                 case "d":
@@ -179,16 +179,16 @@
                     {
                         result = num1 / num2;
                         operationName = "Division";
-                        calculation.result = result;
+                        calculation.Result = result;
                     }
                     break;
                 case "sqrt":
                     if (num1 >= 0)
                     {
                         result = Math.Sqrt(num1);
-                        calculation.result = result;
+                        calculation.Result = result;
                         operationName = "Square Root";
-                        calculation.num2 = null; // second number isn't used in square root
+                        calculation.Num2 = null; // second number isn't used in square root
                     }
                     else
                     {
@@ -198,38 +198,38 @@
                 case "pow":
                     result = Math.Pow(num2, num1);
                     operationName = "Power";
-                    calculation.result = result;
+                    calculation.Result = result;
                     break;
                 case "l":
                     if (num1 >= 0)
                     {
                         operationName = "Logarithm";
                         result = Math.Log(num1);
-                        calculation.result = result;
+                        calculation.Result = result;
                     }
                     else
                     {
                         Console.WriteLine("Cannot calculate logarithm of a negative number.");
                     }
-                    calculation.num2 = null;
+                    calculation.Num2 = null;
                     break;
                 case "sin":
                     result = Math.Sin(num1 * (Math.PI / 180));
-                    calculation.result = result;
+                    calculation.Result = result;
                     operationName = "Sine";
-                    calculation.num2 = null;
+                    calculation.Num2 = null;
                     break;
                 case "cos":
                     result = Math.Cos(num1 * (Math.PI / 180));
-                    calculation.result = result;
+                    calculation.Result = result;
                     operationName = "Cosine";
-                    calculation.num2 = null;
+                    calculation.Num2 = null;
                     break;
                 case "tan":
                     result = Math.Tan(num1 * (Math.PI / 180));
-                    calculation.result = result;
+                    calculation.Result = result;
                     operationName = "Tangent";
-                    calculation.num2 = null;
+                    calculation.Num2 = null;
                     break;
                 default:
                     break;

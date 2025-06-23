@@ -53,7 +53,7 @@ namespace CalculatorProgram
                             string? newNum1 = Console.ReadLine();
                             if (!string.IsNullOrWhiteSpace(newNum1) && double.TryParse(newNum1, out double parsed1))
                             {
-                                calc.num1 = parsed1;
+                                calc.Num1 = parsed1;
                             }
 
                             Console.Write("Enter new value for num2 (or press Enter to keep it): ");
@@ -62,17 +62,17 @@ namespace CalculatorProgram
                             string? newNum2 = Console.ReadLine();
                             if (!string.IsNullOrWhiteSpace(newNum2) && double.TryParse(newNum2, out double parsed2))
                             {
-                                calc.num2 = parsed2;
+                                calc.Num2 = parsed2;
                             }
 
                             Console.Write("Enter new operation (a|s|m|d|sqrt|pow|10x|sin|cos|tan) or press Enter to keep it: ");
                             string? newOp = Console.ReadLine();
                             if (!string.IsNullOrWhiteSpace(newOp))
                             {
-                                calc.operation = newOp;
+                                calc.Operation = newOp;
                             }
 
-                            Calculator.Calculation newCalc = calculator.DoOperation(calc.num1, calc.num2 ?? 0, calc.operation);
+                            Calculator.Calculation newCalc = calculator.DoOperation(calc.Num1, calc.Num2 ?? 0, calc.Operation);
 
                             Console.WriteLine($"Updated result: {calculator.GetFormattedString(newCalc)}");
                             reuseCalculation = false;
@@ -153,11 +153,11 @@ namespace CalculatorProgram
                     try
                     {
                         Calculator.Calculation calc = calculator.DoOperation(cleanNum1, cleanNum2, op);
-                        if (double.IsNaN(calc.result))
+                        if (double.IsNaN(calc.Result))
                         {
                             Console.WriteLine("This operation will result in a mathematical error.\n");
                         }
-                        else Console.WriteLine($"Your result: {calc.result}\n");
+                        else Console.WriteLine($"Your result: {calc.Result}\n");
 
                         // only add to usedItems if we've received a result
                         usedTimes++;
