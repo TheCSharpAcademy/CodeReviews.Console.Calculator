@@ -25,7 +25,7 @@ namespace CalculatorLibrary
         }
 
         public List<ExpressionsHistory> History { get; set; } = new();
-        public int CountExpressions { get; set; } = 0;
+        public int CountExpressions { get; set; };
 
         public double DoOperation(double num1, double num2, string op)
         {
