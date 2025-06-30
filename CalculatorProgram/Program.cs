@@ -1,5 +1,5 @@
 ﻿using CalculatorProgram;
 
-MainMenu menu = new MainMenu();
+var menu = new Menu();
 
 menu.ShowMenu();
