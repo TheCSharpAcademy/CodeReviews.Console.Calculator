@@ -61,20 +61,17 @@ class Program
     private static void Calculate(ref Calculator calculator)
     {
         // Declare variables and set to empty.
-        // Use Nullable types (with ?) to match type of System.Console.ReadLine
-        //string? numInput1 = "";
-        //string? numInput2 = "";
         double result = 0;
 
         // Ask the user to type the first number.
         Console.WriteLine("Type a number, and then press Enter: ");
         Console.WriteLine("(Type 'list' to retreive a number from your last calculations)");
-        double cleanNum1 = selectOperand(ref calculator);
+        double cleanNum1 = SelectOperand(ref calculator);
 
         // Ask the user to type the second number.
         Console.WriteLine("Type another number, and then press Enter: ");
         Console.WriteLine("(Type 'list' to retreive a number from your last calculations)");
-        double cleanNum2 = selectOperand(ref calculator);
+        double cleanNum2 = SelectOperand(ref calculator);
 
         // Ask the user to choose an operator.
         Console.WriteLine("Choose an operator from the following list:");
@@ -96,7 +93,7 @@ class Program
         {
             try
             {
-                result = calculator.DoOperation((double)cleanNum1, (double)cleanNum2, op);
+                result = calculator.DoOperation(cleanNum1, cleanNum2, op);
                 if (double.IsNaN(result))
                 {
                     Console.WriteLine("This operation will result in a mathematical error.\n");
@@ -112,7 +109,7 @@ class Program
     // supports either reading a number or selecting from the list
     // (motivation: user loses the 'selecting from a list' functionality if
     // he provided an invalid input the first time (i.e input = "lisr")
-    private static double selectOperand(ref Calculator calculator)
+    private static double SelectOperand(ref Calculator calculator)
     {
         string? numInput;
         double? num = null;
@@ -120,7 +117,7 @@ class Program
         {
             numInput = Console.ReadLine();
             if ("list".Equals(numInput))
-                num = selectFromList(ref calculator);
+                num = SelectFromList(ref calculator);
             else if (double.TryParse(numInput, out double clean))
                 num = clean;
             else
@@ -131,10 +128,10 @@ class Program
         return (double)num;
     }
     // Returns null if the number is not in the list (i.e list is empty)
-    private static double? selectFromList(ref Calculator calculator)
+    private static double? SelectFromList(ref Calculator calculator)
     {
         calculator.ShowList();
-        int? choice = Input.readInt(1, calculator.calculations.Count);
+        int? choice = Input.ReadInt(1, calculator.calculations.Count);
         return (choice == null) ? null :
         calculator.calculations.ElementAt((int)choice - 1).result;
     }

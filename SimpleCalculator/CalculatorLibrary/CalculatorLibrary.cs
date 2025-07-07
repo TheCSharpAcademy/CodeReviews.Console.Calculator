@@ -1,5 +1,4 @@
-﻿using System.Diagnostics;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
 namespace CalculatorLibrary
 {
@@ -7,7 +6,7 @@ namespace CalculatorLibrary
     {
         // CalculatorLibrary.cs
         JsonWriter writer;
-        public int timesUsed { get; private set; } = 0;
+        public int TimesUsed { get; private set; }
         public List<Calculation> calculations = [];
 
         public Calculator()
@@ -70,7 +69,7 @@ namespace CalculatorLibrary
             writer.WriteEndObject();
 
             AddToList(num1, num2, Symbol(op), result);
-            ++timesUsed;
+            ++TimesUsed;
             return result;
         }
         private void AddToList(double num1, double num2, string op, double result)
@@ -101,11 +100,11 @@ namespace CalculatorLibrary
         {
             writer.WriteEndArray();
             writer.WritePropertyName("Times used");
-            writer.WriteValue(timesUsed);
+            writer.WriteValue(TimesUsed);
             writer.WriteEndObject();
             writer.Close();
 
-            Console.WriteLine($"The calculator was used {timesUsed} times.");
+            Console.WriteLine($"The calculator was used {TimesUsed} times.");
         }
     }
 
@@ -118,7 +117,7 @@ namespace CalculatorLibrary
     public class Input
     {
         // Returns null if the range is invalid (e.g. low > high)
-        public static int? readInt(int low, int high)
+        public static int? ReadInt(int low, int high)
         {
             if (low > high) return null;
             int cleanNum;
@@ -129,7 +128,7 @@ namespace CalculatorLibrary
             return cleanNum;
         }
 
-        public static double readDouble()
+        public static double ReadDouble()
         {
             string? input = Console.ReadLine();
 
@@ -142,7 +141,7 @@ namespace CalculatorLibrary
             return cleanNum;
         }
 
-        public static double readDouble(string? input)
+        public static double ReadDouble(string? input)
         {
             double cleanNum;
             while (!double.TryParse(input, out cleanNum))
