@@ -7,7 +7,8 @@ namespace CalculatorLibrary
     public class Calculator
     {
         JsonWriter writer;
-        internal static int calculatorUses;
+        private static int calculatorUses;
+        private List<Calculation> calculations = new(); 
 
         public Calculator()
         {
@@ -23,6 +24,7 @@ namespace CalculatorLibrary
         public double DoOperation(double num1, double num2, string op)
         {
             double result = double.NaN; // Default value is "not-a-number" if an operation, such as division, could result in an error.
+            string operation = "";
             writer.WriteStartObject();
             writer.WritePropertyName("Operand1");
             writer.WriteValue(num1);
@@ -36,16 +38,19 @@ namespace CalculatorLibrary
                     result = num1 + num2;
                     writer.WriteValue("Add");
                     calculatorUses++;
+                    operation = "+";
                     break;
                 case "s":
                     result = num1 - num2;
                     writer.WriteValue("Subtract");
                     calculatorUses++;
+                    operation = "-";
                     break;
                 case "m":
                     result = num1 * num2;
                     writer.WriteValue("Multiply");
                     calculatorUses++;
+                    operation = "*";
                     break;
                 case "d":
                     // Ask the user to enter a non-zero divisor.
@@ -54,6 +59,11 @@ namespace CalculatorLibrary
                         result = num1 / num2;
                         writer.WriteValue("Divide");
                         calculatorUses++;
+                        operation = "/";
+                    }
+                    else
+                    {
+                        writer.WriteValue("Divide by zero attempt");
                     }
                     break;
                 // Return text for an incorrect option entry.
@@ -64,6 +74,8 @@ namespace CalculatorLibrary
             writer.WriteValue(result);
             writer.WriteEndObject();
 
+            Calculation calculation = new(num1, num2, operation, result);
+            calculations.Add(calculation);
             return result;
         }
         public void Finish()
@@ -73,6 +85,54 @@ namespace CalculatorLibrary
             writer.WriteValue(calculatorUses);
             writer.WriteEndObject();
             writer.Close();
+        }
+
+        public void ShowHistory()
+        {
+            Console.Clear();
+            if (calculations.Count == 0)
+            {
+                Console.WriteLine("No calculations yet.");
+            }
+            else
+            {
+                int i = 1;
+                Console.WriteLine("Calculation History:\n");
+                foreach (var calc in calculations)
+                {
+                    Console.WriteLine($"{i}.\t({calc})");
+                    i++;
+                }
+                Console.Write("\nPress any key to go back...");
+                Console.ReadLine();
+            }
+        }
+
+        public void ClearHistory()
+        {
+            calculations.Clear();
+        }
+
+    }
+
+    public class Calculation
+    {
+        public double Operand1 { get; set; }
+        public double Operand2 { get; set; }
+        public string Operation { get; set; }
+        public double Result { get; set; }
+
+        public Calculation(double operand1, double operand2, string operation, double result)
+        {
+            Operand1 = operand1;
+            Operand2 = operand2;
+            Result = result;
+            Operation = operation;
+        }
+
+        public override string ToString()
+        {
+            return $"{Operand1} {Operation} {Operand2} = {Result} ";
         }
     }
 }
