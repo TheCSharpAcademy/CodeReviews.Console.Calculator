@@ -7,6 +7,8 @@ namespace CalculatorLibrary
     public class Calculator
     {
         JsonWriter writer;
+        internal static int calculatorUses;
+
         public Calculator()
         {
             StreamWriter logFile = File.CreateText("calculatorlog.json");
@@ -33,22 +35,26 @@ namespace CalculatorLibrary
                 case "a":
                     result = num1 + num2;
                     writer.WriteValue("Add");
+                    calculatorUses++;
                     break;
                 case "s":
                     result = num1 - num2;
                     writer.WriteValue("Subtract");
+                    calculatorUses++;
                     break;
                 case "m":
                     result = num1 * num2;
                     writer.WriteValue("Multiply");
+                    calculatorUses++;
                     break;
                 case "d":
                     // Ask the user to enter a non-zero divisor.
                     if (num2 != 0)
                     {
                         result = num1 / num2;
+                        writer.WriteValue("Divide");
+                        calculatorUses++;
                     }
-                    writer.WriteValue("Divide");
                     break;
                 // Return text for an incorrect option entry.
                 default:
@@ -63,6 +69,8 @@ namespace CalculatorLibrary
         public void Finish()
         {
             writer.WriteEndArray();
+            writer.WritePropertyName("Calculator uses");
+            writer.WriteValue(calculatorUses);
             writer.WriteEndObject();
             writer.Close();
         }
