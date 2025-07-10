@@ -1,6 +1,5 @@
 ﻿namespace CalculatorLibrary.TheNigerianNerd
 {
-    using System.Diagnostics;
     using Newtonsoft.Json;
     public class Calculator
     {
