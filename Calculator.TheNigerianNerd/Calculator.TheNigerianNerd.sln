@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Calculator.TheNigerianNerd"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CalculatorLibrary.TheNigerianNerd", "..\CalculatorLibrary.TheNigerianNerd\CalculatorLibrary.TheNigerianNerd.csproj", "{34944AC3-1B4E-430D-8B1E-CCA0B0E00334}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ConsoleCalculator.TheNigerianNerd", "ConsoleCalculator.TheNigerianNerd", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,6 +26,10 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{9827AE05-C100-4969-8D12-50695064C5CF} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{34944AC3-1B4E-430D-8B1E-CCA0B0E00334} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {0D4B7B0F-E3EC-401D-A8ED-09D437D8EA64}
