@@ -14,7 +14,6 @@ class Program
         while (!endApp)
         {
             // Declare variables and set to empty.
-            // Use Nullable types (with ?) to match type of System.Console.ReadLine
             string? numInput1 = "";
             string? numInput2 = "";
             double result = 0;
