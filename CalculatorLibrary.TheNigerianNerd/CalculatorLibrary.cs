@@ -4,7 +4,7 @@
     public class Calculator
     {
         JsonWriter writer;
-        int operationCount = 0; // This variable is not used in the current code but can be useful for tracking the number of operations performed.
+        
         List<Operation> operations = new List<Operation>(); // This list is not used in the current code but can be useful for storing operations if needed.
         public Calculator()
         {
@@ -67,7 +67,6 @@
 
             // Store the operation in the list for potential future use.
             operations.Add(new Operation(num1, num2, operationType, result));
-            operationCount = operations.Count; // Increment the operation count each time an operation is performed.
 
             return result;
         }
@@ -118,9 +117,9 @@
             Console.WriteLine("\nEnter the number of the operation you want to delete:");
             int index = 0;
 
-            while (!int.TryParse(Console.ReadLine(), out index) || index < 1 || index > operationCount)
+            while (!int.TryParse(Console.ReadLine(), out index) || index < 1 || index > operations.Count)
             {
-                Console.WriteLine($"Invalid input. Please enter a valid number within 1 and {operationCount}:");
+                Console.WriteLine($"Invalid input. Please enter a valid number within 1 and {operations.Count}:");
             }
             // Delete the operation at the specified index.
             Delete(index);
