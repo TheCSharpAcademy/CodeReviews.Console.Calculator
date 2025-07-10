@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36212.18 d17.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Calculator.TheNigerianNerd", "Calculator.TheNigerianNerd.csproj", "{9827AE05-C100-4969-8D12-50695064C5CF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CalculatorLibrary.TheNigerianNerd", "..\CalculatorLibrary.TheNigerianNerd\CalculatorLibrary.TheNigerianNerd.csproj", "{34944AC3-1B4E-430D-8B1E-CCA0B0E00334}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9827AE05-C100-4969-8D12-50695064C5CF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9827AE05-C100-4969-8D12-50695064C5CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9827AE05-C100-4969-8D12-50695064C5CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9827AE05-C100-4969-8D12-50695064C5CF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{34944AC3-1B4E-430D-8B1E-CCA0B0E00334}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{34944AC3-1B4E-430D-8B1E-CCA0B0E00334}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{34944AC3-1B4E-430D-8B1E-CCA0B0E00334}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{34944AC3-1B4E-430D-8B1E-CCA0B0E00334}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {0D4B7B0F-E3EC-401D-A8ED-09D437D8EA64}
+	EndGlobalSection
+EndGlobal
