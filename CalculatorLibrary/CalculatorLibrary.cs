@@ -1,54 +1,32 @@
-﻿// CalculatorLibrary.cs
-using System.Diagnostics;
-using Newtonsoft.Json;
+﻿using System.ComponentModel.Design;
 
 namespace CalculatorLibrary;
 public class Calculator
 {
-    JsonWriter writer;
     private static int calculatorUses;
     private List<Calculation> calculations = new();
     private int nextId = 1;
 
-    public Calculator()
-    {
-        StreamWriter logFile = File.CreateText("calculatorlog.json");
-        logFile.AutoFlush = true;
-        writer = new JsonTextWriter(logFile);
-        writer.Formatting = Formatting.Indented;
-        writer.WriteStartObject();
-        writer.WritePropertyName("Operations");
-        writer.WriteStartArray();
-    }
-
     public double DoOperation(double num1, double num2, string op)
     {
         double result = double.NaN; // Default value is "not-a-number" if an operation, such as division, could result in an error.
+        double? secondResult = null;
         string operation = "";
-        writer.WriteStartObject();
-        writer.WritePropertyName("Operand1");
-        writer.WriteValue(num1);
-        writer.WritePropertyName("Operand2");
-        writer.WriteValue(num2);
-        writer.WritePropertyName("Operation");
         // Use a switch statement to do the math.
         switch (op)
         {
             case "a":
                 result = num1 + num2;
-                writer.WriteValue("Add");
                 calculatorUses++;
                 operation = "+";
                 break;
             case "s":
                 result = num1 - num2;
-                writer.WriteValue("Subtract");
                 calculatorUses++;
                 operation = "-";
                 break;
             case "m":
                 result = num1 * num2;
-                writer.WriteValue("Multiply");
                 calculatorUses++;
                 operation = "*";
                 break;
@@ -57,35 +35,38 @@ public class Calculator
                 if (num2 != 0)
                 {
                     result = num1 / num2;
-                    writer.WriteValue("Divide");
                     calculatorUses++;
                     operation = "/";
                 }
-                else
-                {
-                    writer.WriteValue("Divide by zero attempt");
-                }
                 break;
-            // Return text for an incorrect option entry.
-            default:
+            case "r":
+                result = Math.Sqrt(num1);
+                operation = "√";
+                break;
+            case "p":
+                result = Math.Pow(num1, num2);
+                operation = $"^{num2}";
+                break;
+            case "t":
+                result = Math.Pow(10, num1);
+                operation = "10^";
+                break;
+            case "sin":
+                result = Math.Sin(num1);
+                operation = "sin";
+                break;
+            case "cos":
+                result = Math.Cos(num1);
+                operation = "cos";
+                break;
+            case "tan":
+                result = Math.Tan(num1);
+                operation = "tan";
                 break;
         }
-        writer.WritePropertyName("Result");
-        writer.WriteValue(result);
-        writer.WriteEndObject();
 
-        Calculation calculation = new(nextId, num1, num2, operation, result);
-        nextId++;
-        calculations.Add(calculation);
+        calculations.Add(new Calculation(nextId++, num1, num2, operation, result));
         return result;
-    }
-    public void Finish()
-    {
-        writer.WriteEndArray();
-        writer.WritePropertyName("Calculator uses");
-        writer.WriteValue(calculatorUses);
-        writer.WriteEndObject();
-        writer.Close();
     }
 
     public void ShowHistory()
@@ -141,7 +122,12 @@ public class Calculation
 
     public override string ToString()
     {
-        return $"{Operand1} {Operation} {Operand2} = {Result} ";
+        if (Operation == "sin" || Operation == "cos" || Operation == "tan" || Operation == "√" || Operation == "10^")
+            return $"{Operation}({Operand1}) = {Result}";
+        if (Operation.StartsWith("^"))
+            return $"{Operand1}^{Operand2} = {Result}";
+        return $"{Operand1} {Operation} {Operand2} = {Result}";
     }
+
 }
 

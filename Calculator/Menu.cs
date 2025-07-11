@@ -33,42 +33,37 @@ internal class Menu
                     double cleanNum1 = 0;
                     double cleanNum2 = 0;
 
-                    double result = 0;
-
                     Console.Write("Do you want to use previous calculations? (y/n): ");
-                    var previousCalc = Console.ReadLine();
+                    string? previousCalc = Console.ReadLine();
 
                     if (previousCalc.ToLower() == "y")
-                    {
                         cleanNum1 = SetFirstNumber(calculator, ref numInput1);
-                    }
                     else
-                    {
-                        AskFirstNumber(out numInput1, out cleanNum1);
-                    }
+                        AskNumber("Type a number, and then press Enter: ",out numInput1, out cleanNum1);
 
-                    // Ask the user to type the second number.
-                    Console.Write("Type another number, and then press Enter: ");
-                    numInput2 = Console.ReadLine();
-
-                    while (!double.TryParse(numInput2, out cleanNum2))
-                    {
-                        Console.Write("This is not valid input. Please enter a numeric value: ");
-                        numInput2 = Console.ReadLine();
-                    }
-
-                    // Ask the user to choose an operator.
                     Console.WriteLine("Choose an operator from the following list:\n");
                     Console.WriteLine("\ta - Add");
                     Console.WriteLine("\ts - Subtract");
                     Console.WriteLine("\tm - Multiply");
                     Console.WriteLine("\td - Divide");
+                    Console.WriteLine("\tp - Power (a^b)");
+                    Console.WriteLine("\tr - Square root");
+                    Console.WriteLine("\tt - 10^a");
+                    Console.WriteLine("\tsin - Sine");
+                    Console.WriteLine("\tcos - Cosine");
+                    Console.WriteLine("\ttan - Tangent");
                     Console.Write("\nYour option? ");
 
                     string? op = Console.ReadLine();
 
-                    // Validate input is not null, and matches the pattern
-                    if (op == null || !Regex.IsMatch(op, "^[asmd]$"))
+                    bool isSingleOperand = op == "r" || op == "t" || op == "sin" || op == "cos" || op == "tan";
+
+                    if (!isSingleOperand)
+                    {
+                        AskNumber("Type another number, and then press Enter: ", out numInput2, out cleanNum2);
+                    }
+
+                    if (op == null || !Regex.IsMatch(op, @"^(a|s|m|d|p|r|t|sin|cos|tan)$"))
                     {
                         Console.WriteLine("Error: Unrecognized input.");
                     }
@@ -76,26 +71,28 @@ internal class Menu
                     {
                         try
                         {
-                            result = calculator.DoOperation(cleanNum1, cleanNum2, op);
+                            var result = calculator.DoOperation(cleanNum1, cleanNum2, op);
+
                             if (double.IsNaN(result))
                             {
-                                Console.WriteLine("This operation will result in a mathematical error.\n");
+                                Console.WriteLine("This operation resulted in a mathematical error.\n");
                             }
-                            else Console.WriteLine("\nYour result: {0:0.##}\n", result);
+                            else
+                            {
+                                Console.WriteLine($"\nYour result: {result:0.##}\n");
+                            }
                         }
                         catch (Exception e)
                         {
-                            Console.WriteLine("Oh no! An exception occurred trying to do the math.\n - Details: " + e.Message);
+                            Console.WriteLine("Oh no! An exception occurred: " + e.Message);
                         }
                     }
                     Console.WriteLine("------------------------\n");
 
-                    // Wait for the user to respond before closing.
                     Console.Write("Press any key to continue...");
-                    if (Console.ReadLine() == "n") continue;
-
-                    Console.WriteLine("\n"); // Friendly linespacing.
+                    Console.ReadKey();
                     break;
+
                 case "2":
                     calculator.ShowHistory();
                     Console.Write("\nPress any key to return to menu...");
@@ -115,8 +112,6 @@ internal class Menu
                     break;
             }
         }
-        // Add call to close the JSON writer before return
-        calculator.Finish();
         return;
     }
 
@@ -126,13 +121,13 @@ internal class Menu
         if (!calculator.HasHistory())
         {
             Console.WriteLine("There aren't previous calculations");
-            AskFirstNumber(out numInput1, out cleanNum1);
+            AskNumber("Type a number, and then press Enter: ",out numInput1, out cleanNum1);
         }
         else
         {
             calculator.ShowHistory();
             Console.WriteLine("\nSelect the calculation by its ID: ");
-            var inputId = Console.ReadLine();
+            string? inputId = Console.ReadLine();
             int id;
 
             while (!int.TryParse(inputId, out id))
@@ -145,7 +140,7 @@ internal class Menu
             if (calculation == null)
             {
                 Console.WriteLine("No calculation found with that ID.");
-                AskFirstNumber(out numInput1, out cleanNum1);
+                AskNumber("Type a number, and then press Enter: " ,out numInput1, out cleanNum1);
             }
             else
             {
@@ -157,10 +152,10 @@ internal class Menu
         return cleanNum1;
     }
 
-    private static void AskFirstNumber(out string? numInput1, out double cleanNum1)
+    private static void AskNumber(string message,out string? numInput1, out double cleanNum1)
     {
         // Ask the user to type the first number.
-        Console.Write("Type a number, and then press Enter: ");
+        Console.Write(message);
         numInput1 = Console.ReadLine();
 
         while (!double.TryParse(numInput1, out cleanNum1))
