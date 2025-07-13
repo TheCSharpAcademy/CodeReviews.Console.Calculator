@@ -178,7 +178,7 @@ namespace CalculatorProgram
 
                     Console.WriteLine("\n"); // Friendly linespacing.
                 }
-                
+
             }
             logger.Dispose();
             return;

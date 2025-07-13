@@ -4,8 +4,8 @@
     {
         private readonly Logger _logger;
         public Calculator(Logger logger)
-        {  
-            _logger = logger; 
+        {
+            _logger = logger;
         }
         public struct Calculation
         {
